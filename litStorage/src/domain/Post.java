@@ -6,7 +6,16 @@ public class Post {
 	private String content;
 	private String hashTag;
 	private Member writer;
+	private Board board;
 	
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
 	public String getId() {
 		return id;
 	}
