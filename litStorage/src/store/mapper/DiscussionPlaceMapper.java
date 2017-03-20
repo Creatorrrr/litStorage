@@ -1,10 +1,10 @@
-package store;
+package store.mapper;
 
 import java.util.List;
 
 import domain.DiscussionPlace;
 
-public interface DiscussionPlaceStore {
+public interface DiscussionPlaceMapper {
 
 	public boolean insertDiscussionPlace(DiscussionPlace discussionPlace);
 	public DiscussionPlace selectDiscussionPlaceById(String id);
