@@ -1,8 +1,8 @@
 package domain;
 
-public class MemberLiteratureStorage {
+public class MemberLitStorage {
 	private Member member;
-	private LiteratureStorage literatureStorage;
+	private LitStorage literatureStorage;
 	
 	public Member getMember() {
 		return member;
@@ -12,11 +12,11 @@ public class MemberLiteratureStorage {
 		this.member = member;
 	}
 	
-	public LiteratureStorage getLiteratureStorage() {
+	public LitStorage getLiteratureStorage() {
 		return literatureStorage;
 	}
 	
-	public void setLiteratureStorage(LiteratureStorage literatureStorage) {
+	public void setLiteratureStorage(LitStorage literatureStorage) {
 		this.literatureStorage = literatureStorage;
 	}
 }

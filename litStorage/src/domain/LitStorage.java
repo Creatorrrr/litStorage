@@ -2,7 +2,7 @@ package domain;
 
 import java.util.List;
 
-public class LiteratureStorage {
+public class LitStorage {
 	private String id;
 	private String name;
 	private String introduce;

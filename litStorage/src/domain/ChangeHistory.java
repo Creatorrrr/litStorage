@@ -2,7 +2,7 @@ package domain;
 
 import java.sql.Date;
 
-public class EpisodeChangeHistory {
+public class ChangeHistory {
 	private String id;
 	private Member editor;
 	private String content;

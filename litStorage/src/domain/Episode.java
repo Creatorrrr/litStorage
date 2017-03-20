@@ -8,7 +8,7 @@ public class Episode {
 	private String content;
 	private Member writer;
 	private String bound;
-	private List<EpisodeChangeHistory> histories;
+	private List<ChangeHistory> histories;
 	
 	public String getId() {
 		return id;
@@ -50,11 +50,11 @@ public class Episode {
 		this.bound = bound;
 	}
 	
-	public List<EpisodeChangeHistory> getHistories() {
+	public List<ChangeHistory> getHistories() {
 		return histories;
 	}
 	
-	public void setHistories(List<EpisodeChangeHistory> histories) {
+	public void setHistories(List<ChangeHistory> histories) {
 		this.histories = histories;
 	}
 	
