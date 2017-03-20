@@ -1,10 +1,10 @@
-package store;
+package store.mapper;
 
 import java.util.List;
 
 import domain.Episode;
 
-public interface EpisodeStore {
+public interface EpisodeMapper {
 
 	public boolean insertEpisode(Episode episode);
 	public boolean updateEpisode(Episode episode);
