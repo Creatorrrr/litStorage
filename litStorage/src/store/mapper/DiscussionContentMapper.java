@@ -5,7 +5,7 @@ import java.util.List;
 import domain.DiscussionContent;
 
 public interface DiscussionContentMapper {
-	boolean insertDiscussionContent(DiscussionContent discussionContent);
+	int insertDiscussionContent(DiscussionContent discussionContent);
 	List<DiscussionContent> selectDiscussionContentsByDiscussionPlaceId(String id);
-	boolean deleteDiscussionContent(String id);
+	int deleteDiscussionContent(String id);
 }

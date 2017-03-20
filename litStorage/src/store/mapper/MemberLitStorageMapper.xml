@@ -15,18 +15,18 @@
 			javaType="LitStorage" jdbcType="VARCHAR"/>
   	</resultMap>
   	
-  	<insert id="insertMemberLitStorage" parameterType="boolean">
+  	<insert id="insertMemberLitStorage" parameterType="MemberLitStorage">
   		INSERT INTO memberlitstorage(memberid, litstorageid, jointime)
   		VALUES(#{member.id}, #{litStorage.id}, #{joinTime})
   	</insert>
   	
-  	<select id="selectMemberLitStoragesByLitStorageId" parameterType="memberLitStorageMap">
+  	<select id="selectMemberLitStoragesByLitStorageId" resultMap="MemberLitStorage">
   		SELECT memberid, litstorageid, jointime
   		FROM memberlitstorage
   		WHERE litstorageid = #{litStorage.id}
   	</select>
   	
-  	<select id="selectMemberLitStoragesByMemberId" parameterType="memberLitStorageMap">
+  	<select id="selectMemberLitStoragesByMemberId" resultMap="memberLitStorageMap">
   		SELECT memberid, litstorageid, jointime
   		FROM memberlitstorage
   		WHERE memberid = #{member.id}

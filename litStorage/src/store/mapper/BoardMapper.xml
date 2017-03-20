@@ -13,17 +13,17 @@
 			jdbcType="VARCHAR" />
 	</resultMap>
 	<insert id="insertBoard" parameterType="Board">
-		<selectKey keyProperty="seqId" resultType="String" order="BEFORE">
+		<selectKey keyProperty="id" resultType="String" order="BEFORE">
 			select BOARD_SEQ.nextval FROM DUAL
 		</selectKey>
 		INSERT INTO board(id, name)
-		VALUES(#{seqId},#{title})
+		VALUES(#{id},#{title})
 	</insert>
 	<delete id="deleteBoard" parameterType="String">
 		DELETE FROM board
 		WHERE id = #{id}
 	</delete>
-	<select id="selectAll" parameterType="map" resultMap="boardMap">
+	<select id="selectAll" resultMap="boardMap">
 		SELECT id, name
 		FROM board
 	</select>
