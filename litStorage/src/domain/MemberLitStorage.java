@@ -1,9 +1,12 @@
 package domain;
 
+import java.sql.Date;
+
 public class MemberLitStorage {
 	private Member member;
-	private LitStorage literatureStorage;
-	
+	private LitStorage litStorage;
+	private Date joinTime;
+
 	public Member getMember() {
 		return member;
 	}
@@ -12,11 +15,19 @@ public class MemberLitStorage {
 		this.member = member;
 	}
 	
-	public LitStorage getLiteratureStorage() {
-		return literatureStorage;
+	public LitStorage getLitStorage() {
+		return litStorage;
 	}
 	
-	public void setLiteratureStorage(LitStorage literatureStorage) {
-		this.literatureStorage = literatureStorage;
+	public void setLitStorage(LitStorage litStorage) {
+		this.litStorage = litStorage;
+	}
+	
+	public Date getJoinTime() {
+		return joinTime;
+	}
+
+	public void setJoinTime(Date joinTime) {
+		this.joinTime = joinTime;
 	}
 }
