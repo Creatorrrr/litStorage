@@ -7,28 +7,52 @@
   
     <resultMap type="MemberLitStorage" id="memberLitStorageMap">
 		<result property="joinTime" column="jointime"/>
-  		<association property="member" column="memberid" 
+		<association property="member" javaType="Member">
+		    <id property="id" column="memberid"/>
+		</association>
+		<association property="litStorage" javaType="LitStorage">
+		    <id property="id" column="litstorageid"/>
+		</association>
+  		<!-- <association property="member" column="memberid" 
 			select="store.mapper.MemberMapper.selectMemberById" 
 			javaType="Member" jdbcType="VARCHAR"/>
 		<association property="litStorage" column="litstorageid" 
 			select="store.mapper.LitStorageMapper.selectLitStorageById" 
-			javaType="LitStorage" jdbcType="VARCHAR"/>
+			javaType="LitStorage" jdbcType="VARCHAR"/> -->
   	</resultMap>
   	
-  	<insert id="insertMemberLitStorage" parameterType="boolean">
-  		INSERT INTO memberlitstorage(memberid, litstorageid, jointime)
-  		VALUES(#{member.id}, #{litStorage.id}, #{joinTime})
+  	<resultMap type="Member" id="memberMap">
+  		<association property="member" column="memberid"
+			select="store.mapper.MemberMapper.selectMemberById" 
+			javaType="Member" jdbcType="VARCHAR"/>
+  		<!-- <association property="member" column="memberid" 
+			select="store.mapper.MemberMapper.selectMemberById" 
+			javaType="Member" jdbcType="VARCHAR"/>
+		<association property="litStorage" column="litstorageid" 
+			select="store.mapper.LitStorageMapper.selectLitStorageById" 
+			javaType="LitStorage" jdbcType="VARCHAR"/> -->
+  	</resultMap>
+  	
+  	<insert id="insertMemberLitStorage" parameterType="MemberLitStorage">
+  		INSERT INTO memberlitstoragetest(memberid, litstorageid, jointime)
+  		VALUES(#{member.id}, #{litStorage.id}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'))
   	</insert>
   	
-  	<select id="selectMemberLitStoragesByLitStorageId" parameterType="memberLitStorageMap">
+  	<select id="selectMemberLitStoragesByLitStorageId" parameterType="String" resultMap="memberLitStorageMap">
   		SELECT memberid, litstorageid, jointime
-  		FROM memberlitstorage
-  		WHERE litstorageid = #{litStorage.id}
+  		FROM memberlitstoragetest
+  		WHERE litstorageid = #{id}
   	</select>
   	
-  	<select id="selectMemberLitStoragesByMemberId" parameterType="memberLitStorageMap">
+  	<select id="selectMemberLitStoragesByMemberId" parameterType="String" resultMap="memberLitStorageMap">
   		SELECT memberid, litstorageid, jointime
-  		FROM memberlitstorage
-  		WHERE memberid = #{member.id}
+  		FROM memberlitstoragetest
+  		WHERE memberid = #{id}
+  	</select>
+  	
+    <select id="selectMembersByLitStorageId" parameterType="String" resultMap="memberLitStorageMap">
+  		SELECT memberid
+  		FROM memberlitstoragetest
+  		WHERE litstorageid = #{id}
   	</select>
   </mapper>

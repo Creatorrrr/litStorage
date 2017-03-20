@@ -12,25 +12,47 @@
   		<association property="creator" column="writer" 
 			select="store.mapper.MemberMapper.selectMemberById" 
 			javaType="Member" jdbcType="VARCHAR"/>
+		<association property="literatures" column="id" 
+			select="store.mapper.LiteratureMapper.selectLiteraturesByLitStorageId" 
+			javaType="ArrayList" jdbcType="VARCHAR"/>
+		<association property="discussionPlaces" column="id" 
+			select="store.mapper.DiscussionPlaceMapper.selectDiscussionPlacesByLitStorageId"
+			javaType="ArrayList" jdbcType="VARCHAR"/>
 		<collection property="participants" column="id" ofType="Member"
 			select="store.mapper.MemberLitStorageMapper.selectMemberLitStoragesByLitStorageId"
 			javaType="ArrayList" jdbcType="VARCHAR"/>
   	</resultMap>
   	
-  	<insert id="insertMemberLitStorage" parameterType="boolean">
-  		INSERT INTO memberlitstorage(memberid, litstorageid, jointime)
-  		VALUES(#{member.id}, #{litStorage.id}, #{joinTime})
+  	<insert id="insertLitStorage" parameterType="LitStorage">
+  		INSERT INTO litstorage(id, introduce, name, writer)
+  		VALUES(#{member.id}, #{litStorage.id}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'))
   	</insert>
   	
-  	<select id="selectMemberLitStoragesByLitStorageId" parameterType="memberLitStorageMap">
-  		SELECT memberid, litstorageid, jointime
-  		FROM memberlitstorage
-  		WHERE litstorageid = #{litStorage.id}
+  	<delete id="deleteLitStorage" parameterType="String">
+  		DELETE FROM litstorage
+  		WHERE id = #{id}
+  	</delete>
+  	
+  	<select id="selectLitStorageById" parameterType="String" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer
+  		FROM litstorage
+  		WHERE id = #{id}
   	</select>
   	
-  	<select id="selectMemberLitStoragesByMemberId" parameterType="memberLitStorageMap">
-  		SELECT memberid, litstorageid, jointime
-  		FROM memberlitstorage
-  		WHERE memberid = #{member.id}
+  	<select id="selectLitStoragesByMemberId" parameterType="String" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer
+  		FROM litstorage
+  		WHERE writer = #{id}
+  	</select>
+  	
+  	<select id="selectLitStoragesByName" parameterType="String" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer
+  		FROM litstorage
+  		WHERE name LIKE '%${name}%'
+  	</select>
+  	
+  	<select id="selectAll" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer
+  		FROM litstorage
   	</select>
   </mapper>

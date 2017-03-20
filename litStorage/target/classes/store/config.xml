@@ -30,7 +30,9 @@
   	</environment>
   </environments>
   <mappers>
-  	<mapper resource="store/mapper/MemberLitStorageMapper.xml"/>
+  	<mapper resource="store/mapper/BoardMapper.xml"/>
+  	<mapper resource="store/mapper/ChangeHistoryMapper.xml"/>
+  	<mapper resource="store/mapper/DiscussionContentMapper.xml"/>
   </mappers>
 
   </configuration>
