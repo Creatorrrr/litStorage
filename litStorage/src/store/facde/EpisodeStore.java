@@ -1,4 +1,4 @@
-package store;
+package store.facde;
 
 public interface EpisodeStore {
 
