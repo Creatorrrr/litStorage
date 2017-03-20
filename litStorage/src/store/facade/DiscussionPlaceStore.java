@@ -1,4 +1,4 @@
-package store;
+package store.facade;
 
 import java.util.List;
 
