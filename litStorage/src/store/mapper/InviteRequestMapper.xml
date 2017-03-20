@@ -5,7 +5,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="store.mapper.InviteRequestMapper">
+
 	<resultMap type="InviteRequest" id="inviteRequestMap">
+
 	<result property="message" column="message"/>
 	<result property="form" column="form"/>
 	<association property="sender" column="sender"
@@ -14,6 +16,7 @@
 	<association property="receiver" column="receiver"
 	select="store.mapper.InviteRequest." javaType="Member"
 	jdbcType="VARCHAR"/>
+
 	</resultMap>
 </mapper>
   

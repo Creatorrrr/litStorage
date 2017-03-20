@@ -44,5 +44,4 @@
   	<mapper resource="store/mapper/PostMapper.xml"/> -->
 
   </mappers>
-
   </configuration>
