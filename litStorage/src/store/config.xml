@@ -34,5 +34,5 @@
   	<mapper resource="store/mapper/ChangeHistoryMapper.xml"/>
   	<mapper resource="store/mapper/DiscussionContentMapper.xml"/>
   </mappers>
-  
+
   </configuration>
