@@ -11,7 +11,16 @@ public class Literature {
 	private Member creator;
 	private int hits;
 	private List<Episode> episodes;
+	private LitStorage litStorage;
 	
+	public LitStorage getLitStorage() {
+		return litStorage;
+	}
+
+	public void setLitStorage(LitStorage litStorage) {
+		this.litStorage = litStorage;
+	}
+
 	public String getId() {
 		return id;
 	}

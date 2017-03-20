@@ -4,6 +4,7 @@ public class DiscussionContent {
 	private String id;
 	private Member writer;
 	private String content;
+	private DiscussionPlace discussionPlace;
 	
 	public String getId() {
 		return id;
@@ -27,5 +28,13 @@ public class DiscussionContent {
 	
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public DiscussionPlace getDiscussionPlace() {
+		return discussionPlace;
+	}
+
+	public void setDiscussionPlace(DiscussionPlace discussionPlace) {
+		this.discussionPlace = discussionPlace;
 	}
 }

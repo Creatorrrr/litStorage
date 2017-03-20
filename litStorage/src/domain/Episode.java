@@ -9,7 +9,16 @@ public class Episode {
 	private Member writer;
 	private String bound;
 	private List<ChangeHistory> histories;
+	private Literature literature;
 	
+	public Literature getLiterature() {
+		return literature;
+	}
+
+	public void setLiterature(Literature literature) {
+		this.literature = literature;
+	}
+
 	public String getId() {
 		return id;
 	}

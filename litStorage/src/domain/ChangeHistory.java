@@ -8,7 +8,16 @@ public class ChangeHistory {
 	private String content;
 	private Date changeTime;
 	private String message;
+	private Episode episode;
 	
+	public Episode getEpisode() {
+		return episode;
+	}
+
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
+	}
+
 	public String getId() {
 		return id;
 	}
