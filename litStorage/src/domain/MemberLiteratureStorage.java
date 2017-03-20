@@ -2,7 +2,7 @@ package domain;
 
 public class MemberLiteratureStorage {
 	private Member member;
-	private LiteratureStorage literatureStorage;
+	private LiteratureStorage litStorage;
 	
 	public Member getMember() {
 		return member;
@@ -12,11 +12,11 @@ public class MemberLiteratureStorage {
 		this.member = member;
 	}
 	
-	public LiteratureStorage getLiteratureStorage() {
-		return literatureStorage;
+	public LiteratureStorage getLitStorage() {
+		return litStorage;
 	}
 	
-	public void setLiteratureStorage(LiteratureStorage literatureStorage) {
-		this.literatureStorage = literatureStorage;
+	public void setLiteratureStorage(LiteratureStorage litStorage) {
+		this.litStorage = litStorage;
 	}
 }
