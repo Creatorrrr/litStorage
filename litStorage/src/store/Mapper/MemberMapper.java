@@ -1,4 +1,4 @@
-package store.Mapper;
+package store.mapper;
 
 import java.util.List;
 

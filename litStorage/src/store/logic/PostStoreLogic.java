@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import domain.Post;
-import store.Mapper.PostMapper;
+import store.mapper.PostMapper;
 import store.facade.PostStore;
 
 public class PostStoreLogic implements PostStore{
@@ -72,7 +72,7 @@ public class PostStoreLogic implements PostStore{
 	}
 
 	@Override
-	public List<Post> selectPostsByBoardId(String boardId) {         //아직
+	public List<Post> selectPostsByBoardId(String boardId) {         //�븘吏�
 		SqlSession session = factory.openSession();
 		List<Post> list = null;
 		

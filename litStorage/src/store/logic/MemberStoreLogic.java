@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import domain.Member;
-import store.Mapper.MemberMapper;
+import store.mapper.MemberMapper;
 import store.facade.MemberStore;
 
 public class MemberStoreLogic implements MemberStore{
