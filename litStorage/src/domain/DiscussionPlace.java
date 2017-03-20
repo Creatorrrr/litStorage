@@ -7,7 +7,16 @@ public class DiscussionPlace {
 	private String title;
 	private Member creator;
 	private List<DiscussionContent> discussionContents;
+	private LitStorage litStorage;
 	
+	public LitStorage getLitStorage() {
+		return litStorage;
+	}
+
+	public void setLitStorage(LitStorage litStorage) {
+		this.litStorage = litStorage;
+	}
+
 	public String getId() {
 		return id;
 	}

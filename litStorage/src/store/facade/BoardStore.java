@@ -1,5 +1,11 @@
 package store.facade;
 
-public interface BoardStore {
+import java.util.List;
 
+import domain.Board;
+
+public interface BoardStore {
+	boolean insertBoard(Board board);
+	boolean deleteBoard(String id);
+	List<Board> selectAll();
 }
