@@ -12,21 +12,23 @@
   		<association property="creator" column="writer" 
 			select="store.mapper.MemberMapper.selectMemberById" 
 			javaType="Member" jdbcType="VARCHAR"/>
-		<association property="literatures" column="id" 
+		<!-- <collection property="literatures" column="id" 
 			select="store.mapper.LiteratureMapper.selectLiteraturesByLitStorageId" 
 			javaType="ArrayList" jdbcType="VARCHAR"/>
-		<association property="discussionPlaces" column="id" 
+		<collection property="discussionPlaces" column="id" 
 			select="store.mapper.DiscussionPlaceMapper.selectDiscussionPlacesByLitStorageId"
 			javaType="ArrayList" jdbcType="VARCHAR"/>
 		<collection property="participants" column="id" ofType="Member"
-			select="store.mapper.MemberLitStorageMapper.selectMemberLitStoragesByLitStorageId"
-			javaType="ArrayList" jdbcType="VARCHAR"/>
+			select="store.mapper.MemberLitStorageMapper.selectMembersByLitStorageId"
+			javaType="ArrayList" jdbcType="VARCHAR"/> -->
   	</resultMap>
   	
   	<insert id="insertLitStorage" parameterType="LitStorage">
-
+  		<selectKey keyProperty="id" resultType="String" order="BEFORE">
+    		SELECT litstorage_seq.NEXTVAL FROM dual
+ 		</selectKey>
   		INSERT INTO litstorage(id, introduce, name, writer)
-  		VALUES(#{member.id}, #{litStorage.id}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'))
+  		VALUES(#{id}, #{introduce}, #{name}, #{creator.id})
   	</insert>
   	
   	<delete id="deleteLitStorage" parameterType="String">
@@ -49,7 +51,7 @@
   	<select id="selectLitStoragesByName" parameterType="String" resultMap="litStorageMap">
   		SELECT id, introduce, name, writer
   		FROM litstorage
-  		WHERE name LIKE '%${name}%'
+  		WHERE name LIKE '%${value}%'
   	</select>
   	
   	<select id="selectAll" resultMap="litStorageMap">

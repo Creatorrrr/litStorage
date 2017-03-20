@@ -2,46 +2,47 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-  
-  <configuration>
-  <properties resource="store/datasource.properties"></properties>
- 	<typeAliases>
- 		<typeAlias type="domain.Board" alias="Board"/>
- 		<typeAlias type="domain.DiscussionContent" alias="DiscussionContent"/>
- 		<typeAlias type="domain.DiscussionPlace" alias="DiscussionPlace"/>
- 		<typeAlias type="domain.Episode" alias="Episode"/>
- 		<typeAlias type="domain.ChangeHistory" alias="ChangeHistory"/>
- 		<typeAlias type="domain.InviteRequest" alias="InviteRequest"/>
- 		<typeAlias type="domain.Literature" alias="Literature"/>
- 		<typeAlias type="domain.LitStorage" alias="LitStorage"/>
- 		<typeAlias type="domain.Member" alias="Member"/>
- 		<typeAlias type="domain.MemberLitStorage" alias="MemberLitStorage"/>
- 		<typeAlias type="domain.Post" alias="Post"/>
- 	</typeAliases>
-  <environments default="development">
-  	<environment id="development">
-  		<transactionManager type="JDBC"/>
-  		<dataSource type="POOLED">
-  			<property name="driver" value="${driver}"/>
-  			<property name="url" value="${url}"/>
-  			<property name="username" value="${username}"/>
-  			<property name="password" value="${password}"/>
-  		</dataSource>
-  	</environment>
-  </environments>
-  <mappers>
 
-  	<mapper resource="store/mapper/BoardMapper.xml"/>
-  	<mapper resource="store/mapper/ChangeHistoryMapper.xml"/>
-  	<mapper resource="store/mapper/DiscussionContentMapper.xml"/>
-  	<!-- <mapper resource="store/mapper/DiscussionPlaceMapper.xml"/>
-  	<mapper resource="store/mapper/EpisodeMapper.xml"/>
-  	<mapper resource="store/mapper/InviteRequestMapper.xml"/>
-  	<mapper resource="store/mapper/LiteratureMapper.xml"/>
-  	<mapper resource="store/mapper/LitStorageMapper.xml"/>
-  	<mapper resource="store/mapper/MemberLitStorageMapper.xml"/>
-  	<mapper resource="store/mapper/MemberMapper.xml"/>
-  	<mapper resource="store/mapper/PostMapper.xml"/> -->
-
-  </mappers>
-  </configuration>
+<configuration>
+	<properties resource="store/datasource.properties"></properties>
+	
+	<typeAliases>
+		<typeAlias type="domain.Board" alias="Board"/>
+		<typeAlias type="domain.DiscussionContent" alias="DiscussionContent"/>
+		<typeAlias type="domain.DiscussionPlace" alias="DiscussionPlace"/>
+		<typeAlias type="domain.Episode" alias="Episode"/>
+		<typeAlias type="domain.ChangeHistory" alias="ChangeHistory"/>
+		<typeAlias type="domain.InviteRequest" alias="InviteRequest"/>
+		<typeAlias type="domain.Literature" alias="Literature"/>
+		<typeAlias type="domain.LitStorage" alias="LitStorage"/>
+		<typeAlias type="domain.Member" alias="Member"/>
+		<typeAlias type="domain.MemberLitStorage" alias="MemberLitStorage"/>
+		<typeAlias type="domain.Post" alias="Post"/>
+	</typeAliases>
+	
+	<environments default="development">
+	  	<environment id="development">
+	  		<transactionManager type="JDBC"/>
+	  		<dataSource type="POOLED">
+	  			<property name="driver" value="${driver}"/>
+	  			<property name="url" value="${url}"/>
+	  			<property name="username" value="${username}"/>
+	  			<property name="password" value="${password}"/>
+	  		</dataSource>
+	  	</environment>
+	</environments>
+	
+	<mappers>
+	 	<!-- <mapper resource="store/mapper/BoardMapper.xml"/>
+	 	<mapper resource="store/mapper/ChangeHistoryMapper.xml"/>
+	 	<mapper resource="store/mapper/DiscussionContentMapper.xml"/>
+	 	<mapper resource="store/mapper/DiscussionPlaceMapper.xml"/>
+	 	<mapper resource="store/mapper/EpisodeMapper.xml"/>
+	 	<mapper resource="store/mapper/InviteRequestMapper.xml"/>
+	 	<mapper resource="store/mapper/LiteratureMapper.xml"/> -->
+	 	<mapper resource="store/mapper/LitStorageMapper.xml"/>
+	 	<!-- <mapper resource="store/mapper/MemberLitStorageMapper.xml"/> -->
+	 	<mapper resource="store/mapper/MemberMapper.xml"/>
+	 	<!--  <mapper resource="store/mapper/PostMapper.xml"/> -->
+	</mappers>
+</configuration>

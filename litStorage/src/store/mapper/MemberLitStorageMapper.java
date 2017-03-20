@@ -6,7 +6,7 @@ import domain.Member;
 import domain.MemberLitStorage;
 
 public interface MemberLitStorageMapper {
-	public boolean insertMemberLitStorage(MemberLitStorage memberLitStorage);
+	public int insertMemberLitStorage(MemberLitStorage memberLitStorage);
 	
 	public List<MemberLitStorage> selectMemberLitStoragesByLitStorageId(String id);
 	

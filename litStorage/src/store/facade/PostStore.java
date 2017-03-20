@@ -5,7 +5,6 @@ import java.util.List;
 import domain.Post;
 
 public interface PostStore {
-	
 	boolean insertPost(Post post);
 	boolean updatePost(Post post);
 	boolean deletePost(String id);
@@ -13,5 +12,4 @@ public interface PostStore {
 	Post selectPostById(String id);
 	List<Post>selectPostsByContent(String content);
 	List<Post>selectPostsByHashtag(String hashtag);
-	
 }

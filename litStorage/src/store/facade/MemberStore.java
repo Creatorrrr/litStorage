@@ -5,7 +5,6 @@ import java.util.List;
 import domain.Member;
 
 public interface MemberStore {
-	
 	boolean insertMember(Member member);
 	Member selectMemberById(String id);
 	boolean updateMember(Member member);

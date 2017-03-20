@@ -18,11 +18,11 @@
 	</sql>	
 	
 	<insert id="insertMember" parameterType="Member">
-		INSERT INTO Member{id,name,password,email)
+		INSERT INTO Member(id,name,password,email)
 		VALUES (#{id},#{name},#{password},#{email})
 	</insert>
 
-	<select id="findAuthor" parameterType="string" resultMap="memberMap">
+	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
 		<include refid="selectMember"/>
 		WHERE id=#{id}
 	</select>

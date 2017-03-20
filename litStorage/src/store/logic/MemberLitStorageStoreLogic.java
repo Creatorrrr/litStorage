@@ -25,8 +25,11 @@ public class MemberLitStorageStoreLogic implements MemberLitStorageStore {
 
 		try {
 			MemberLitStorageMapper mapper = session.getMapper(MemberLitStorageMapper.class);
-			result = mapper.insertMemberLitStorage(memberLitStorage);
-			session.commit();
+			if(result = mapper.insertMemberLitStorage(memberLitStorage) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
 		} finally {
 			session.close();
 		}
