@@ -34,11 +34,7 @@
 		WHERE receiver = #{receiver}
 	</select>
 
-<<<<<<< HEAD
 	<insert id="insertInviteRequest" parameterType="inviterequest">
-=======
-	<insert id="insertInviteRequest">
->>>>>>> refs/remotes/origin/zun
 		INSERT INTO inviterequest(sender, receiver, sendTime, form,
 		message)
 		VALUES (#{sender.id},#{receiver.id},TO_DATE(sysdate,'yyyy/mm/dd hh24:mi:ss'),#{form},#{message})

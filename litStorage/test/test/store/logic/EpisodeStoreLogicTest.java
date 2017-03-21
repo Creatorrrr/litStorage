@@ -76,7 +76,9 @@ public class EpisodeStoreLogicTest {
 //		Episode e=store.selectEpisodeByid("8");
 //		System.out.println(e.getId());//8
 //		System.out.println(e.getTitle());//aaa
-//		
+//		System.out.println(e.getWriter().getId());
+//		System.out.println(e.getLiterature().getName());
+//		//System.out.println(e.getHistories().size());
 //	}
 
 //	@Test

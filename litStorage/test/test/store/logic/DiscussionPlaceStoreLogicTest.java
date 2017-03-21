@@ -25,7 +25,6 @@ public class DiscussionPlaceStoreLogicTest {
 //	@Test
 //	public void testInsertDiscussionPlace() {
 //		DiscussionPlace d = new DiscussionPlace();
-//		d.setId("111");
 //		d.setTitle("tttttttt");
 //		
 //		Member u= new Member();
@@ -45,8 +44,9 @@ public class DiscussionPlaceStoreLogicTest {
 //		DiscussionPlace d=store.selectDiscussionPlaceById("4");
 //		assertEquals("4", d.getId());
 //		assertEquals("tttttttt", d.getTitle());
-//		//assertEquals("test", d.getCreator().getId());
-//		
+//		System.out.println( d.getCreator().getId());
+//		System.out.println(d.getLitStorage().getId());
+//		System.out.println(d.getDiscussionContents().size());
 //	}
 //
 //	@Test
@@ -54,14 +54,16 @@ public class DiscussionPlaceStoreLogicTest {
 //		List<DiscussionPlace> list= store.selectDiscussionPlaceByLitStorageId("333");
 //		System.out.println(list.get(0).getId());//4
 //		System.out.println(list.get(0).getTitle());//tttttttt
+//		System.out.println(list.get(0).getDiscussionContents().size());
 //	}
 
 //	@Test
 //	public void testSelectDiscussionPlaceByName() {
 //		//--------???
-//		List<DiscussionPlace> list=store.selectDiscussionPlaceByName("tttttttt");
+//		List<DiscussionPlace> list=store.selectDiscussionPlaceByName("ttttt");
 //		System.out.println(list.get(0).getId());//4
 //		System.out.println(list.get(0).getTitle());//tttttttt
+//		System.out.println(list.get(0).getDiscussionContents().size());
 //	}
 //
 //	@Test

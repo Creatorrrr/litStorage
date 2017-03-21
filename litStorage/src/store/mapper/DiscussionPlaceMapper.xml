@@ -9,20 +9,20 @@
 			<id property="id" column="id"/>
 			<result property="title" column="name"/>
 			
-			<!-- 
+			
 	  		<association property="creator" column="writer" 
 				select="store.mapper.MemberMapper.selectMemberById" 
 				javaType="Member" jdbcType="VARCHAR"/>
 				
 			<association property="litStorage" column="litStorageId" 
-				select="store.mapper.litStorageMapper.selectLitStorageById" 
+				select="store.mapper.LitStorageMapper.selectLitStorageById" 
 				javaType="LitStorage" jdbcType="VARCHAR"/>
 				
 			
-			<collection property="discussionContents" column="litstorageId" 
+			<collection property="discussionContents" column="id" 
 				select="store.mapper.DiscussionContentMapper.selectDiscussionContentsByDiscussionPlaceId"
 				javaType="ArrayList" jdbcType="VARCHAR"/>
-			 -->
+			
 	  	</resultMap>
     
     
@@ -50,13 +50,13 @@
     	<select id="selectDiscussionPlaceByName" parameterType="string" resultMap="DiscussionPlaceMap">
     		SELECT id, name, writer, litstorageId 
     		FROM discussionPlace 
-    		WHERE name LIKE '%#{title}%'
+    		WHERE name LIKE '%${value}%'
     	</select>
     
     	<select id="selectDiscussionPlaceByMemberId" parameterType="string" resultMap="DiscussionPlaceMap">
     		SELECT id, name, writer, litstorageId 
     		FROM discussionPlace 
-    		WHERE writer = #{memberId}
+    		WHERE writer LIKE '%${value}%'
     	</select>
     
     
