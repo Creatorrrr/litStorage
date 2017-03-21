@@ -127,5 +127,19 @@ public class PostStoreLogic implements PostStore{
 		}
 		return list;
 	}
+	
+	@Override
+	public List<Post> selectPostsByTitle(String title) {
+		SqlSession session = factory.openSession();
+		List<Post> list = null;
+		
+		try{
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			list=mapper.selectPostsByTitle(title);
+		}finally{
+			session.close();
+		}
+		return list;
+	}
 
 }

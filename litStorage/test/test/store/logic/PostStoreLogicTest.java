@@ -96,5 +96,13 @@ public class PostStoreLogicTest {
 		
 		assertEquals("길동이", postList.get(0).getHashTag());
 	}
+	
+	@Test
+	public void testSelectPostsByTitle() {
+		List<Post> postList = logic.selectPostsByTitle("22");
+		
+		assertEquals("22", postList.get(0).getBoard().getId());
+		assertEquals("4", postList.get(1).getBoard().getId());
+	}
 
 }
