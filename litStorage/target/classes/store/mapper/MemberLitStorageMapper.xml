@@ -7,18 +7,12 @@
   
     <resultMap type="MemberLitStorage" id="memberLitStorageMap">
 		<result property="joinTime" column="jointime"/>
-		<association property="member" javaType="Member">
-		    <id property="id" column="memberid"/>
-		</association>
-		<association property="litStorage" javaType="LitStorage">
-		    <id property="id" column="litstorageid"/>
-		</association>
-  		<!-- <association property="member" column="memberid" 
+  		<association property="member" column="memberid" 
 			select="store.mapper.MemberMapper.selectMemberById" 
 			javaType="Member" jdbcType="VARCHAR"/>
 		<association property="litStorage" column="litstorageid" 
 			select="store.mapper.LitStorageMapper.selectLitStorageById" 
-			javaType="LitStorage" jdbcType="VARCHAR"/> -->
+			javaType="LitStorage" jdbcType="VARCHAR"/>
   	</resultMap>
   	
   	<resultMap type="Member" id="memberMap">
@@ -38,7 +32,6 @@
   		FROM memberlitstorage
   		WHERE litstorageid = #{id}
   	</select>
-  	
 
   	<select id="selectMemberLitStoragesByMemberId" parameterType="String" resultMap="memberLitStorageMap">
   		SELECT memberid, litstorageid, jointime
@@ -47,8 +40,8 @@
   	</select>
   	
     <select id="selectMembersByLitStorageId" parameterType="String" resultMap="memberMap">
-  		SELECT m.id, m.name, m.password, m.email
-  		FROM member as m INNER JOIN memberlitstorage as ml ON m.id = ml.memberid
+  		SELECT m.id as id, m.name as name, m.password as password, m.email as email
+  		FROM member m INNER JOIN memberlitstorage ml ON m.id = ml.memberid
   		WHERE ml.litstorageid = #{id}
   	</select>
   </mapper>

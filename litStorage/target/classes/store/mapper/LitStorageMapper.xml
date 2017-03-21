@@ -12,7 +12,7 @@
   		<association property="creator" column="writer" 
 			select="store.mapper.MemberMapper.selectMemberById" 
 			javaType="Member" jdbcType="VARCHAR"/>
-		<!-- <collection property="literatures" column="id" 
+		<collection property="literatures" column="id" 
 			select="store.mapper.LiteratureMapper.selectLiteraturesByLitStorageId" 
 			javaType="ArrayList" jdbcType="VARCHAR"/>
 		<collection property="discussionPlaces" column="id" 
@@ -20,7 +20,7 @@
 			javaType="ArrayList" jdbcType="VARCHAR"/>
 		<collection property="participants" column="id" ofType="Member"
 			select="store.mapper.MemberLitStorageMapper.selectMembersByLitStorageId"
-			javaType="ArrayList" jdbcType="VARCHAR"/> -->
+			javaType="ArrayList" jdbcType="VARCHAR"/>
   	</resultMap>
   	
   	<insert id="insertLitStorage" parameterType="LitStorage">

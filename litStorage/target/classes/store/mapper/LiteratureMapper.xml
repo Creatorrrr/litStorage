@@ -24,8 +24,7 @@
 	</resultMap>
 
 	<sql id="selectLiterature">
-		SELECT id, name, genre, imagepath, introduce, writer, hits,
-		litstorageid
+		SELECT id, name, genre, imagepath, introduce, writer, hits, litstorageid
 		FROM literature
 	</sql>
 

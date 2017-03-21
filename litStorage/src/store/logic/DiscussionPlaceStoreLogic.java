@@ -51,12 +51,12 @@ public class DiscussionPlaceStoreLogic implements DiscussionPlaceStore {
 	}
 
 	@Override
-	public List<DiscussionPlace> selectDiscussionPlaceByLitStorageId(String litStorageId) {
+	public List<DiscussionPlace> selectDiscussionPlacesByLitStorageId(String litStorageId) {
 		SqlSession session = factory.openSession();
 		List<DiscussionPlace> list=new ArrayList<>();
 		try {
 			DiscussionPlaceMapper mapper = session.getMapper(DiscussionPlaceMapper.class);
-			list = mapper.selectDiscussionPlaceByLitStorageId(litStorageId);
+			list = mapper.selectDiscussionPlacesByLitStorageId(litStorageId);
 		}finally {
 			session.close();
 		}
@@ -64,12 +64,12 @@ public class DiscussionPlaceStoreLogic implements DiscussionPlaceStore {
 	}
 
 	@Override
-	public List<DiscussionPlace> selectDiscussionPlaceByName(String title) {
+	public List<DiscussionPlace> selectDiscussionPlacesByName(String title) {
 		SqlSession session = factory.openSession();
 		List<DiscussionPlace> list=new ArrayList<>();
 		try {
 			DiscussionPlaceMapper mapper = session.getMapper(DiscussionPlaceMapper.class);
-			list = mapper.selectDiscussionPlaceByName(title);
+			list = mapper.selectDiscussionPlacesByName(title);
 		}finally {
 			session.close();
 		}
@@ -77,12 +77,12 @@ public class DiscussionPlaceStoreLogic implements DiscussionPlaceStore {
 	}
 
 	@Override
-	public List<DiscussionPlace> selectDiscussionPlaceByMemberId(String memberId) {
+	public List<DiscussionPlace> selectDiscussionPlacesByMemberId(String memberId) {
 		SqlSession session = factory.openSession();
 		List<DiscussionPlace> list=new ArrayList<>();
 		try {
 			DiscussionPlaceMapper mapper = session.getMapper(DiscussionPlaceMapper.class);
-			list = mapper.selectDiscussionPlaceByMemberId(memberId);
+			list = mapper.selectDiscussionPlacesByMemberId(memberId);
 		}finally {
 			session.close();
 		}
