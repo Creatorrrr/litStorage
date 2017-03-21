@@ -5,9 +5,9 @@ import java.util.List;
 import domain.InviteRequest;
 
 public interface InviteRequestMapper {
-	public boolean insertInviteRequest(InviteRequest inviteRequest);
+	public int insertInviteRequest(InviteRequest inviteRequest);
 
-	public boolean deleteInviteRequest(String senderId, String receiverId);
+	public int deleteInviteRequest(String senderId, String receiverId);
 
 	public List<InviteRequest> selectInviteRequestBySenderId(String senderId);
 

@@ -20,29 +20,29 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	@Override
 	public boolean insertLiterature(Literature literature) {
 		SqlSession session = factory.openSession();
-		
+		int check;
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			mapper.insertLiterature(literature);
+			check = mapper.insertLiterature(literature);
 			session.commit();
 		} finally {
 			session.close();
 		}
-		return false;
+		return check>0;
 	}
 
 	@Override
 	public boolean deleteLiterature(String literatureId) {
 		SqlSession session = factory.openSession();
-		
+		int check;
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			mapper.deleteLiterature(literatureId);
+			check = mapper.deleteLiterature(literatureId);
 			session.commit();
 		} finally {
 			session.close();
 		}
-		return false;
+		return check>0;
 	}
 
 	@Override
@@ -91,13 +91,13 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	}
 
 	@Override
-	public List<Literature> selectLiteraturesByGenreOrderByHits(String hits) {
+	public List<Literature> selectLiteraturesByGenreOrderByHits() {
 		SqlSession session = factory.openSession();
 		List<Literature> list = null;
 		
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			list = mapper.selectLiteraturesByGenreOrderByHits(hits);
+			list = mapper.selectLiteraturesByGenreOrderByHits();
 			session.commit();
 		} finally {
 			session.close();
