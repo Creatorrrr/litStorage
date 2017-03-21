@@ -13,12 +13,9 @@
 		<association property="writer" column="writer" 
 			select="store.mapper.MemberMapper.selectMemberById" 
 			javaType="Member" jdbcType="VARCHAR"/>
-		<association property="board" javaType="Board">
-		    <id property="id" column="boardid"/>
-		</association>
-		<!-- <association property="writer" column="boardid" 
+		<association property="board" column="boardid" 
 			select="store.mapper.BoardMapper.selectBoardByPostId"
-			javaType="Board" jdbcType="VARCHAR"/> -->
+			javaType="Board" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<sql id="selectPost">

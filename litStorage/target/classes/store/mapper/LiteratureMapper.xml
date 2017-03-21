@@ -5,6 +5,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="store.mapper.LiteratureMapper">
+<<<<<<< HEAD
 
 	<resultMap type="Literature" id="literatureMap">
 		<id property="id" column="id" />
@@ -80,4 +81,40 @@
 		literature WHERE id = #{id}
 
 	</delete>
+=======
+	
+	<resultMap type="Literature" id="literatureMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="genre" column="genre" />
+		<result property="imagePath" column="imagepath" />
+		<result property="introduce" column="introduce" />
+		<result property="hits" column="hits" jdbcType="NUMERIC" />
+		<association property="creator" column="writer"
+			select="store.mapper.MemberMapper.selectMemberById" javaType="Member"
+			jdbcType="VARCHAR" />
+		<association property="litStorage" column="litstorageid"
+			select="store.mapper.LitStorageMapper.selectLitStorageById" javaType="LitStorage"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="selectLiterature">
+		SELECT id, name, genre, imagepath, introduce, writer, hits,
+		litstorageid
+		FROM literature
+	</sql>
+	<select id="">
+	
+	
+	</select>
+
+	<insert id="insertLiterature" parameterType="literature">
+	<selectKey keyProperty="id" resultType="int" order="BEFORE">
+		SELECT LITERATURE_SEQ.nextval FROM dual
+	</selectKey>
+		INSERT INTO
+		literature(id, name, genre, imagepath, introduce, writer, hits, litstorageid)
+		VALUES (#{id}, #{name}, #{genre}, #{imagePath}, #{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
+	</insert>
+>>>>>>> refs/remotes/origin/zun
 </mapper>
