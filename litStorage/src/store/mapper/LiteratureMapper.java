@@ -5,9 +5,9 @@ import java.util.List;
 import domain.Literature;
 
 public interface LiteratureMapper {
-	public boolean insertLiterature(Literature literature);
+	public int insertLiterature(Literature literature);
 
-	public boolean deleteLiterature(String literatureId);
+	public int deleteLiterature(String literatureId);
 
 	public Literature selectLiteraturesById(String literatureId);
 
@@ -15,7 +15,9 @@ public interface LiteratureMapper {
 
 	public List<Literature> selectLiteraturesByName(String name);
 
-	public List<Literature> selectLiteraturesByGenreOrderByHits(String hits);
+	public List<Literature> selectLiteraturesByGenreOrderByHits();
+
+	public List<Literature> selectLiteratureByGenreOrderById(String memberId);
 
 	public List<Literature> selectLiteraturesByMemberId(String memberId);
 }

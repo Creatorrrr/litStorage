@@ -21,32 +21,34 @@ public class InviteRequestStoreLogic implements InviteRequestStore {
 	@Override
 	public boolean insertInviteRequest(InviteRequest inviteRequest) {
 		SqlSession session = factory.openSession();
+		int check;
 
 		try {
 			InviteRequestMapper mapper = session.getMapper(InviteRequestMapper.class);
-			mapper.insertInviteRequest(inviteRequest);
+			check = mapper.insertInviteRequest(inviteRequest);
 			session.commit();
 		} finally {
 			session.close();
 		}
-		return false;
+		return check > 0;
 	}
 
 	@Override
 	public boolean deleteInviteRequest(String sender, String receiver) {
 		SqlSession session = factory.openSession();
+		int check;
 		HashMap<String, String> map = new HashMap<>();
 		map.put("sender", sender);
 		map.put("receiver", receiver);
 
 		try {
-			session.delete("deleteInviteRequest", map);
+			check = session.delete("deleteInviteRequest", map);
 			session.commit();
 			
 		} finally {
 			session.close();
 		}
-		return false;
+		return check > 0;
 	}
 
 	@Override
