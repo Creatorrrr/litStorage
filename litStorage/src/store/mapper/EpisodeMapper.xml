@@ -18,7 +18,7 @@
 			<collection property="histories" column="id" 
 				select="store.mapper.ChangeHistoryMapper.selectChangeHistoriesByEpisodeId"
 				javaType="ArrayList" jdbcType="VARCHAR"/>
-			-->
+			  -->
 			<association property="literature" column="literature" 
 				select="store.mapper.LiteratureMapper.selectLiteraturesById" 
 				javaType="Literature" jdbcType="VARCHAR"/>
@@ -42,7 +42,7 @@
     	</delete>
     
     
-    	<select id="selectEpisodeByid" resultMap="EpisodeMap">
+    	<select id="selectEpisodeById" resultMap="EpisodeMap">
     		select id, name, content, writer, bound, literature from episode where id = #{id}
     	</select>
     

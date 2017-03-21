@@ -45,10 +45,10 @@ public class DiscussionPlaceStoreLogicTest {
 //		assertEquals("4", d.getId());
 //		assertEquals("tttttttt", d.getTitle());
 //		System.out.println( d.getCreator().getId());
-//		System.out.println(d.getLitStorage().getId());
+//		System.out.println(d.getLitStorage().getId());//
 //		System.out.println(d.getDiscussionContents().size());
 //	}
-//
+
 //	@Test
 //	public void testSelectDiscussionPlaceByLitStorageId() {
 //		List<DiscussionPlace> list= store.selectDiscussionPlaceByLitStorageId("333");
@@ -59,7 +59,6 @@ public class DiscussionPlaceStoreLogicTest {
 
 //	@Test
 //	public void testSelectDiscussionPlaceByName() {
-//		//--------???
 //		List<DiscussionPlace> list=store.selectDiscussionPlaceByName("ttttt");
 //		System.out.println(list.get(0).getId());//4
 //		System.out.println(list.get(0).getTitle());//tttttttt

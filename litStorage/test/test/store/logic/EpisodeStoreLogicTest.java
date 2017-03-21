@@ -71,15 +71,15 @@ public class EpisodeStoreLogicTest {
 //		
 //	}
 //
-//	@Test
-//	public void testSelectEpisodeByid() {
-//		Episode e=store.selectEpisodeByid("8");
-//		System.out.println(e.getId());//8
-//		System.out.println(e.getTitle());//aaa
-//		System.out.println(e.getWriter().getId());
-//		System.out.println(e.getLiterature().getName());
-//		//System.out.println(e.getHistories().size());
-//	}
+	@Test
+	public void testSelectEpisodeByid() {
+		Episode e=store.selectEpisodeById("8");
+		System.out.println(e.getId());//8
+		System.out.println(e.getTitle());//aaa
+		System.out.println(e.getWriter().getId());
+		System.out.println(e.getLiterature().getName());
+		//System.out.println(e.getHistories().size());
+	}
 
 //	@Test
 //	public void testSelectEpisodesByLiteratureId() {

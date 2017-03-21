@@ -8,7 +8,7 @@ public interface EpisodeStore {
 	public boolean insertEpisode(Episode episode);
 	public boolean updateEpisode(Episode episode);
 	public boolean deleteEpisode(Episode episode);
-	public Episode selectEpisodeByid(String id);
+	public Episode selectEpisodeById(String id);
 	public List<Episode> selectEpisodesByLiteratureId(String literatureId);
 	public boolean updateBound(String bound);
 }

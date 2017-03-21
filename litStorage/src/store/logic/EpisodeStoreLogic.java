@@ -67,12 +67,12 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	}
 
 	@Override
-	public Episode selectEpisodeByid(String id) {
+	public Episode selectEpisodeById(String id) {
 		SqlSession session = factory.openSession();
 		Episode episode = null;
 		try {
 			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
-			episode = mapper.selectEpisodeByid(id);
+			episode = mapper.selectEpisodeById(id);
 
 		} finally {
 			session.close();
