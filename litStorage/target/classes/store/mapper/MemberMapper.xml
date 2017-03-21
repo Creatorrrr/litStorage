@@ -17,6 +17,7 @@
 		FROM Member
 	</sql>	
 	
+	
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO Member(id,name,password,email)
 		VALUES (#{id},#{name},#{password},#{email})
@@ -27,6 +28,11 @@
 		WHERE id=#{id}
 	</select>
 
+	<select id="selectMembersByName" parameterType="string" resultMap="memberMap">
+		<include refid="selectMember"/>
+		WHERE name=#{name}
+	</select>
+		
 	<update id="updateMember" parameterType="Member">
 		UPDATE Member
 		SET id=#{id}, name=#{name}, password=#{password}, email=#{email}
@@ -34,7 +40,7 @@
 	</update>
 	
 	<delete id="deleteMember" parameterType="string">
-		DELETE Member
+		DELETE FROM Member
 		WHERE id = #{id}
 	</delete>
 	
