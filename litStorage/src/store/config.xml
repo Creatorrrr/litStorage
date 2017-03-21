@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	<properties resource="store/datasource.properties"></properties>
+	<properties resource="store/dataSource.properties"></properties>
 	
 	<typeAliases>
 		<typeAlias type="domain.Board" alias="Board"/>
