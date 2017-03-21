@@ -1,4 +1,4 @@
-package test;
+package test.store.logic;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +22,7 @@ public class BoardStoreLogicTest {
 	public void testInsertBoard() {
 		Board b = new Board();
 		b.setId("1");
-		b.setTitle("¹«Çù");
+		b.setTitle("asdf");
 		boolean flag = logic.insertBoard(b);
 		assertEquals(true,flag);
 	}
@@ -36,11 +36,11 @@ public class BoardStoreLogicTest {
 	@Test
 	public void testSelectAll() {
 		Board b = new Board();
-		b.setId("2");
-		b.setTitle("ÆÇÅ¸Áö");
+		b.setTitle("qwer");
 		boolean flag = logic.insertBoard(b);
 		List<Board> list = logic.selectAll();
 		assertEquals(true, flag);
+		assertNotNull(list.get(0));
 	}
 
 }

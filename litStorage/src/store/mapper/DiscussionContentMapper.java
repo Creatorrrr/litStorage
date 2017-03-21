@@ -7,5 +7,5 @@ import domain.DiscussionContent;
 public interface DiscussionContentMapper {
 	int insertDiscussionContent(DiscussionContent discussionContent);
 	List<DiscussionContent> selectDiscussionContentsByDiscussionPlaceId(String id);
-	int deleteDiscussionContent(String id);
+	int deleteDiscussionContentById(String id);
 }

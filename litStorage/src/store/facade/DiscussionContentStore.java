@@ -7,5 +7,5 @@ import domain.DiscussionContent;
 public interface DiscussionContentStore {
 	boolean insertDiscussionContent(DiscussionContent discussionContent);
 	List<DiscussionContent> selectDiscussionContentsByDiscussionPlaceId(String id);
-	boolean deleteDiscussionContent(String id);
+	boolean deleteDiscussionContentById(String id);
 }

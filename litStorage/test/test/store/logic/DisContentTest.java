@@ -1,4 +1,4 @@
-package test;
+package test.store.logic;
 
 import static org.junit.Assert.*;
 import org.apache.log4j.Logger; 
@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import domain.DiscussionContent;
 import domain.DiscussionPlace;
+import domain.Member;
 import store.logic.DiscussionContentStoreLogic;
 
 public class DisContentTest {
@@ -19,7 +20,6 @@ public class DisContentTest {
 	@Before
 	public void setup() {
 		logic = new DiscussionContentStoreLogic();
-		BasicConfigurator.configure(); 
 	}
 
 	@Test
@@ -27,7 +27,9 @@ public class DisContentTest {
 		DiscussionContent con = new DiscussionContent();
 		DiscussionPlace dp = new DiscussionPlace();
 		dp.setId("123");
-		con.setId("11");
+		Member member = new Member();
+		member.setId("33");
+		con.setWriter(member);
 		con.setContent("dqwdqw");
 		con.setDiscussionPlace(dp);
 		boolean flag = logic.insertDiscussionContent(con);
@@ -42,7 +44,7 @@ public class DisContentTest {
 
 	@Test
 	public void testDeleteDiscussionContent() {
-		boolean flag = logic.deleteDiscussionContent("11");
+		boolean flag = logic.deleteDiscussionContentById("2");
 		assertEquals(true, flag);
 	}
 

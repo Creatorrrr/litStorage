@@ -25,7 +25,11 @@ public class PostStoreLogic implements PostStore{
 		
 		try{
 			PostMapper mapper=session.getMapper(PostMapper.class);
-			result=mapper.insertPost(post);
+			if(result = mapper.insertPost(post) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
 		}finally{
 			session.close();
 		}
@@ -40,8 +44,7 @@ public class PostStoreLogic implements PostStore{
 		
 		try{
 			PostMapper mapper= session.getMapper(PostMapper.class);
-			result=mapper.updatePost(post);
-			if(result != false){
+			if(result = mapper.updatePost(post) > 0){
 				session.commit();
 			}else{
 				session.rollback();
@@ -59,8 +62,7 @@ public class PostStoreLogic implements PostStore{
 		
 		try{
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			result = mapper.deletePost(id);
-			if (result != false){
+			if (result = mapper.deletePost(id) > 0){
 				session.commit();
 			}else{
 				session.rollback();

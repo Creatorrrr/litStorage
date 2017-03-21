@@ -36,32 +36,32 @@ public class MemberLitStorageStoreLogicTest {
 		
 		assertTrue(result);
 	}
-//
-//	@Test
-//	public void testSelectMemberLitStoragesByLitStorageId() {
-//		List<MemberLitStorage> list = null;
-//		
-//		list = store.selectMemberLitStoragesByLitStorageId("22");
-//
-//		assertEquals("22", list.get(0).getLitStorage().getId());
-//	}
-//
-//	@Test
-//	public void testSelectMemberLitStoragesByMemberId() {
-//		List<MemberLitStorage> list = null;
-//		
-//		list = store.selectMemberLitStoragesByMemberId("22");
-//	
-//		assertEquals("11", list.get(0).getMember().getId());
-//	}
-//	
-//	@Test
-//	public void testSelectMembersByLitStorageId() {
-//		List<MemberLitStorage> list = null;
-//		
-//		list = store.selectMemberLitStoragesByMemberId("22");
-//	
-//		assertEquals("11", list.get(0).getMember().getId());
-//	}
+
+	@Test
+	public void testSelectMemberLitStoragesByLitStorageId() {
+		List<MemberLitStorage> list = null;
+		
+		list = store.selectMemberLitStoragesByLitStorageId("22");
+
+		assertEquals("22", list.get(0).getLitStorage().getId());
+	}
+
+	@Test
+	public void testSelectMemberLitStoragesByMemberId() {
+		List<MemberLitStorage> list = null;
+		
+		list = store.selectMemberLitStoragesByMemberId("22");
+	
+		assertEquals("11", list.get(0).getMember().getId());
+	}
+	
+	@Test
+	public void testSelectMembersByLitStorageId() {
+		List<MemberLitStorage> list = null;
+		
+		list = store.selectMemberLitStoragesByMemberId("22");
+	
+		assertEquals("11", list.get(0).getMember().getId());
+	}
 
 }

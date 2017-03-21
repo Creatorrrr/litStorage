@@ -12,6 +12,7 @@
 			select="store.mapper.PostMapper.selectPostsByBoardId" javaType="ArrayList"
 			jdbcType="VARCHAR" />
 	</resultMap>
+	
 	<insert id="insertBoard" parameterType="Board">
 		<selectKey keyProperty="id" resultType="String" order="BEFORE">
 			select BOARD_SEQ.nextval FROM DUAL
@@ -19,10 +20,12 @@
 		INSERT INTO board(id, name)
 		VALUES(#{id},#{title})
 	</insert>
+	
 	<delete id="deleteBoard" parameterType="String">
 		DELETE FROM board
 		WHERE id = #{id}
 	</delete>
+	
 	<select id="selectAll" resultMap="boardMap">
 		SELECT id, name
 		FROM board

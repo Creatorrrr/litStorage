@@ -46,12 +46,12 @@ public class DiscussionContentStoreLogic implements DiscussionContentStore{
 	}
 
 	@Override
-	public boolean deleteDiscussionContent(String id) {
+	public boolean deleteDiscussionContentById(String id) {
 		SqlSession session = factory.openSession();
 		int check;
 		try {
 			DiscussionContentMapper mapper = session.getMapper(DiscussionContentMapper.class);
-			check = mapper.deleteDiscussionContent(id);
+			check = mapper.deleteDiscussionContentById(id);
 			if(check>0){
 				session.commit();
 			}
