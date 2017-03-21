@@ -33,15 +33,15 @@
 	</environments>
 	
 	<mappers>
-	 	<mapper resource="store/mapper/BoardMapper.xml"/>
+		<mapper resource="store/mapper/BoardMapper.xml"/>
 	 	<mapper resource="store/mapper/ChangeHistoryMapper.xml"/>
 	 	<mapper resource="store/mapper/DiscussionContentMapper.xml"/>
-	 	<!--  <mapper resource="store/mapper/DiscussionPlaceMapper.xml"/>
+	 	<mapper resource="store/mapper/DiscussionPlaceMapper.xml"/>
 	 	<mapper resource="store/mapper/EpisodeMapper.xml"/>
 	 	<mapper resource="store/mapper/InviteRequestMapper.xml"/>
 	 	<mapper resource="store/mapper/LiteratureMapper.xml"/>
 	 	<mapper resource="store/mapper/LitStorageMapper.xml"/>
-	 	<mapper resource="store/mapper/MemberLitStorageMapper.xml"/> -->
+	 	<mapper resource="store/mapper/MemberLitStorageMapper.xml"/>
 	 	<mapper resource="store/mapper/MemberMapper.xml"/>
 	 	<mapper resource="store/mapper/PostMapper.xml"/>
 	</mappers>
