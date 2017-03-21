@@ -20,50 +20,55 @@ public class LitStorageStoreLogicTest {
 		store = new LitStorageStoreLogic();
 	}
 	
-	@Test
-	public void testInsertLitStorage() {
-		LitStorage litStorage = new LitStorage();
-		Member member = new Member();
-		member.setId("11");
-		
-		litStorage.setName("asdf");
-		litStorage.setIntroduce("ffff");
-		litStorage.setCreator(member);
-		
-		assertTrue(store.insertLitStorage(litStorage));
-	}
-
-	@Test
-	public void testDeleteLitStorage() {
-		assertTrue(store.deleteLitStorage("5"));
-	}
-
+//	@Test
+//	public void testInsertLitStorage() {
+//		LitStorage litStorage = new LitStorage();
+//		Member member = new Member();
+//		member.setId("33");
+//		
+//		litStorage.setName("asdf");
+//		litStorage.setIntroduce("ffff");
+//		litStorage.setCreator(member);
+//		
+//		assertTrue(store.insertLitStorage(litStorage));
+//	}
+//
+//	@Test
+//	public void testDeleteLitStorage() {
+//		assertTrue(store.deleteLitStorage("1"));
+//	}
+//
 	@Test
 	public void testSelectLitStorageById() {
-		LitStorage litStorage = store.selectLitStorageById("6");
+		LitStorage litStorage = store.selectLitStorageById("1");
+		
 		System.out.println(litStorage.getCreator().getId());
-		assertEquals("6", litStorage.getId());
+		System.out.println(litStorage.getLiteratures().get(0).getGenre());
+		System.out.println(litStorage.getParticipants().get(0).getEmail());
+		System.out.println(litStorage.getDiscussionPlaces().get(0).getTitle());
+		
+		assertEquals("1", litStorage.getId());
 	}
-
-	@Test
-	public void testSelectLitStoragesByMemberId() {
-		List<LitStorage> litStorageList = store.selectLitStoragesByMemberId("11");
-		System.out.println(litStorageList.get(0).getCreator().getId());
-		assertEquals("6", litStorageList.get(0).getId());
-	}
-
-	@Test
-	public void testSelectLitStoragesByName() {
-		List<LitStorage> litStorageList = store.selectLitStoragesByName("sd");
-		System.out.println(litStorageList.get(0).getCreator().getId());
-		assertEquals("6", litStorageList.get(0).getId());
-	}
-
-	@Test
-	public void testSelectAll() {
-		List<LitStorage> litStorageList = store.selectAll();
-		System.out.println(litStorageList.get(0).getCreator().getId());
-		assertEquals("6", litStorageList.get(0).getId());
-	}
+//
+//	@Test
+//	public void testSelectLitStoragesByMemberId() {
+//		List<LitStorage> litStorageList = store.selectLitStoragesByMemberId("11");
+//		System.out.println(litStorageList.get(0).getCreator().getId());
+//		assertEquals("6", litStorageList.get(0).getId());
+//	}
+//
+//	@Test
+//	public void testSelectLitStoragesByName() {
+//		List<LitStorage> litStorageList = store.selectLitStoragesByName("sd");
+//		System.out.println(litStorageList.get(0).getCreator().getId());
+//		assertEquals("6", litStorageList.get(0).getId());
+//	}
+//
+//	@Test
+//	public void testSelectAll() {
+//		List<LitStorage> litStorageList = store.selectAll();
+//		System.out.println(litStorageList.get(0).getCreator().getId());
+//		assertEquals("6", litStorageList.get(0).getId());
+//	}
 
 }

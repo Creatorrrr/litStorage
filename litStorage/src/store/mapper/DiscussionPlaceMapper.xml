@@ -5,28 +5,21 @@
   
     <mapper namespace="store.mapper.DiscussionPlaceMapper">
     
-	     <resultMap type="DiscussionPlace" id="DiscussionPlaceMap">
+	     <resultMap type="DiscussionPlace" id="discussionPlaceMap">
 			<id property="id" column="id"/>
 			<result property="title" column="name"/>
-			
-			<!-- 
-	  		<association property="creator" column="writer" 
+			<association property="creator" column="writer" 
 				select="store.mapper.MemberMapper.selectMemberById" 
 				javaType="Member" jdbcType="VARCHAR"/>
-				
 			<association property="litStorage" column="litStorageId" 
 				select="store.mapper.litStorageMapper.selectLitStorageById" 
 				javaType="LitStorage" jdbcType="VARCHAR"/>
-				
-			
 			<collection property="discussionContents" column="litstorageId" 
 				select="store.mapper.DiscussionContentMapper.selectDiscussionContentsByDiscussionPlaceId"
 				javaType="ArrayList" jdbcType="VARCHAR"/>
-			 -->
 	  	</resultMap>
-    
-    
-    	<insert id="insertDiscussionPlace" parameterType="DiscussionPlace">
+	  	
+    	<insert id="insertDiscussionPlace" parameterType="discussionPlace">
 	    	<selectKey keyProperty="id" resultType="string" order="BEFORE">
 				select DISCUSSION_PLACE_SEQ.nextval FROM DUAL
 			</selectKey>
@@ -34,31 +27,28 @@
     		VALUES(#{id}, #{title}, #{creator.id}, #{litStorage.id})
     	</insert>
     
-    	<select id="selectDiscussionPlaceById" resultMap="DiscussionPlaceMap">
+    	<select id="selectDiscussionPlaceById" resultMap="discussionPlaceMap">
     		SELECT id, name, writer, litstorageId 
     		FROM discussionPlace 
     		WHERE id= #{id}
     	</select>
     
-    	<select id="selectDiscussionPlaceByLitStorageId" parameterType="string" resultMap="DiscussionPlaceMap">
+    	<select id="selectDiscussionPlacesByLitStorageId" parameterType="String" resultMap="discussionPlaceMap">
     		SELECT id, name, writer, litstorageId 
     		FROM discussionPlace 
     		WHERE litstorageId = #{litStorageId}
     	</select>
     	
     	
-    	<select id="selectDiscussionPlaceByName" parameterType="string" resultMap="DiscussionPlaceMap">
+    	<select id="selectDiscussionPlacesByName" parameterType="String" resultMap="discussionPlaceMap">
     		SELECT id, name, writer, litstorageId 
     		FROM discussionPlace 
-    		WHERE name LIKE '%#{title}%'
+    		WHERE name LIKE '%${value}%'
     	</select>
     
-    	<select id="selectDiscussionPlaceByMemberId" parameterType="string" resultMap="DiscussionPlaceMap">
+    	<select id="selectDiscussionPlacesByMemberId" parameterType="String" resultMap="discussionPlaceMap">
     		SELECT id, name, writer, litstorageId 
     		FROM discussionPlace 
-    		WHERE writer = #{memberId}
+    		WHERE writer LIKE '%${value}%'
     	</select>
-    
-    
-    
     </mapper>
