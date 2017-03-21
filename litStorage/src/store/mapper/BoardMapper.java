@@ -8,4 +8,5 @@ public interface BoardMapper {
 	int insertBoard(Board board);
 	int deleteBoard(String id);
 	List<Board> selectAll();
+	Board selectBoardById(String id);
 }

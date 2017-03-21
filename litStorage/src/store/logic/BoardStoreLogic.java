@@ -61,4 +61,17 @@ public class BoardStoreLogic implements BoardStore{
 		}
 		return list;
 	}
+	
+	@Override
+	public Board selectBoardById(String id){
+		SqlSession session = factory.openSession();
+		Board board=null;
+		try{
+			BoardMapper mapper =session.getMapper(BoardMapper.class);
+			board=mapper.selectBoardById(id);
+		}finally{
+			session.close();
+		}
+		return board;
+	}
 }

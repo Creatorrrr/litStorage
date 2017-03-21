@@ -13,13 +13,13 @@
 		<association property="writer" column="writer" 
 			select="store.mapper.MemberMapper.selectMemberById" 
 			javaType="Member" jdbcType="VARCHAR"/>
-		<association property="board" column="boardid" 
-			select="store.mapper.BoardMapper.selectBoardByPostId"
+		<association property="board" column="boardid"
+			select="store.mapper.BoardMapper.selectBoardById"
 			javaType="Board" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<sql id="selectPost">
-  		SELECT id, name, content, hashTag, writer, boardid
+  		SELECT id, name, content, hashTag, writer, boardid <!--db에 있는 컬럼이름  -->
 		FROM Post
 	</sql>	
 	
@@ -32,19 +32,19 @@
 	</insert>
 
 	<update id="updatePost" parameterType="Post">
-		UPDATE post
+		UPDATE Post
 		SET name = #{title}, content = #{content}, hashTag = #{hashTag}
 		WHERE id = #{id}
 	</update>
 	
 	<delete id="deletePost" parameterType="String">
-		DELETE FROM post
+		DELETE FROM Post
 		WHERE id = #{id}
 	</delete>
 	
 	<select id="selectPostsByBoardId" parameterType="String" resultMap="postMap">
 		<include refid="selectPost"/>
-		WHERE boardid = #{boardid}
+		WHERE boardId = #{board}
 	</select>
 	
 	<select id="selectPostById" parameterType="String" resultMap="postMap">

@@ -29,9 +29,9 @@ public class MemberStoreLogicTest {
 //		member.setEmail("test@gamil.com");
 //		member.setPassword("1234");
 //		
-//		boolean b=logic.insertMember(member);
-//		assertEquals(b,true);
-////		assertEquals(1, logic.insertMember(m));
+////		boolean b=logic.insertMember(member);
+////		assertEquals(b,true);
+//		assertTrue(logic.insertMember(member));
 //
 //	}
 //
@@ -45,7 +45,7 @@ public class MemberStoreLogicTest {
 //		m.setPassword("1234");
 //		m.setEmail("test@gamail.com");
 //
-//		assertEquals(true, logic.updateMember(m));
+//		assertTrue(logic.updateMember(m));
 //
 //	}
 
@@ -61,7 +61,6 @@ public class MemberStoreLogicTest {
 //	@Test
 //	public void testSelectMemberById() {
 //		
-//		
 //		Member member = logic.selectMemberById("test");
 //		assertNotNull(member);
 //		assertEquals("test",member.getId());
@@ -70,9 +69,9 @@ public class MemberStoreLogicTest {
 //	@Test
 //	public void testSelectMembersByName() {
 //	
-//		List<Member> list = logic.selectMembersByName("테스트");
+//		List<Member> list = logic.selectMembersByName("1테스트");
 //		assertNotNull(list);
-//		assertEquals("테스트",list.get(0).getName());
+//		assertEquals("1테스트",list.get(0).getName());
 //	
 //	}
 }

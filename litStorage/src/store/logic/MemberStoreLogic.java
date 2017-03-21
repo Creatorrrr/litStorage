@@ -21,12 +21,12 @@ public class MemberStoreLogic implements MemberStore{
 	public boolean insertMember(Member member) {
 		
 		SqlSession session = factory.openSession();
-		boolean result = false;
+		boolean result ;
 		
 		try{
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
-			result=mapper.insertMember(member);
-			if(result != false) {
+			
+			if(result=mapper.insertMember(member)>0) {
 				session.commit();
 			} else {
 				session.rollback();
@@ -54,12 +54,12 @@ public class MemberStoreLogic implements MemberStore{
 	@Override
 	public boolean updateMember(Member member){
 		SqlSession session = factory.openSession();
-		boolean result = false;
+		boolean result;
 		
 		try{
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
-			result=mapper.updateMember(member);
-			if (result!=false){
+		
+			if (result=mapper.updateMember(member)>0){
 				session.commit();
 			}else{
 				session.rollback();
@@ -78,8 +78,8 @@ public class MemberStoreLogic implements MemberStore{
 		
 		try{
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
-			result = mapper.deleteMember(id);
-			if (result != false){
+			
+			if (result = mapper.deleteMember(id) > 0){
 				session.commit();
 			}else{
 				session.rollback();

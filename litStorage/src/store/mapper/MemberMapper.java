@@ -5,9 +5,9 @@ import java.util.List;
 import domain.Member;
 
 public interface MemberMapper {
-	boolean insertMember(Member member);
+	int insertMember(Member member);
 	Member selectMemberById(String id);
-	boolean updateMember(Member member);
-	boolean deleteMember(String id);
+	int updateMember(Member member);
+	int deleteMember(String id);
 	List<Member> selectMembersByName(String name);
 }
