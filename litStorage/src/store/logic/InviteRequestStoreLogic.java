@@ -1,6 +1,6 @@
 package store.logic;
 
-
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import domain.InviteRequest;
 import store.facade.InviteRequestStore;
 import store.mapper.InviteRequestMapper;
-
 
 public class InviteRequestStoreLogic implements InviteRequestStore {
 
@@ -34,18 +33,20 @@ public class InviteRequestStoreLogic implements InviteRequestStore {
 	}
 
 	@Override
-	public InviteRequest deleteInviteRequest(String senderId, String receiverId) {
+	public boolean deleteInviteRequest(String sender, String receiver) {
 		SqlSession session = factory.openSession();
-		InviteRequest inviteRequest = null;
+		HashMap<String, String> map = new HashMap<>();
+		map.put("sender", sender);
+		map.put("receiver", receiver);
 
 		try {
-			InviteRequestMapper mapper = session.getMapper(InviteRequestMapper.class);
-			inviteRequest = mapper.deleteInviteRequest(senderId, receiverId);
+			session.delete("deleteInviteRequest", map);
 			session.commit();
+			
 		} finally {
 			session.close();
 		}
-		return inviteRequest;
+		return false;
 	}
 
 	@Override

@@ -6,9 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import domain.Literature;
-
 import store.facade.LiteratureStore;
-
 import store.mapper.LiteratureMapper;
 
 public class LiteratureStoreLogic implements LiteratureStore{
@@ -18,7 +16,6 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	public LiteratureStoreLogic() {
 		factory = SqlSessionFactoryProvider.getSqlSessionFactory();
 	}
-
 
 	@Override
 	public boolean insertLiterature(Literature literature) {
@@ -101,6 +98,21 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			list = mapper.selectLiteraturesByGenreOrderByHits(hits);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Literature> selectLiteratureByGenreOrderById(String memberId) {
+		SqlSession session = factory.openSession();
+		List<Literature> list = null;
+		
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			list = mapper.selectLiteraturesByMemberId(memberId);
 			session.commit();
 		} finally {
 			session.close();

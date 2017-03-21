@@ -11,5 +11,6 @@ public interface LiteratureStore {
 	public List<Literature> selectLiteraturesByLitStorageId(String litstorageId);
 	public List<Literature> selectLiteraturesByName(String name);
 	public List<Literature> selectLiteraturesByGenreOrderByHits(String hits);
+	public List<Literature> selectLiteratureByGenreOrderById(String memberId);
 	public List<Literature> selectLiteraturesByMemberId(String memberId);
 }
