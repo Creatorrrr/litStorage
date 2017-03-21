@@ -62,4 +62,8 @@
 		WHERE hashtag LIKE '%${value}%'
 	</select>	
 	
+	<select id="selectPostsByTitle" parameterType="String" resultMap="postMap">
+		<include refid="selectPost"/>
+		WHERE name LIKE '%${value}%'
+	</select>	
   </mapper>

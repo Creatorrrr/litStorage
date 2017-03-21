@@ -13,4 +13,5 @@ public interface PostMapper {
 	Post selectPostById(String id);
 	List<Post>selectPostsByContent(String content);
 	List<Post>selectPostsByHashtag(String hashtag);
+	List<Post> selectPostsByTitle(String title);
 }
