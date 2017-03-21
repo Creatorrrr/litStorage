@@ -106,13 +106,13 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	}
 
 	@Override
-	public List<Literature> selectLiteratureByGenreOrderById(String memberId) {
+	public List<Literature> selectLiteratureByGenreOrderById(String Id) {
 		SqlSession session = factory.openSession();
 		List<Literature> list = null;
 		
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			list = mapper.selectLiteraturesByMemberId(memberId);
+			list = mapper.selectLiteratureByGenreOrderById(Id);
 			session.commit();
 		} finally {
 			session.close();

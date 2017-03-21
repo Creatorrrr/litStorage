@@ -93,7 +93,7 @@ public class LiteratureLogicTest {
 		List<Literature> li = store.selectLiteratureByGenreOrderById("6");
 		
 		assertNotNull(li);
-		assertEquals("segeg", li.get(0).getGenre());
+		assertEquals(0, li.get(0).getIntroduce());
 	}
 //
 //	@Test

@@ -55,7 +55,7 @@
 
 	<select id="selectLiteratureByGenreOrderById" resultMap="literatureMap">
 		<include refid="selectLiterature" />
-		WHERE id = #{id}
+		WHERE id = #{id} ORDER BY id DESC
 	</select>
 
 	<select id="selectLiteraturesByMemberId" parameterType="string"
