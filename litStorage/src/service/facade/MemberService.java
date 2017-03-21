@@ -1,4 +1,4 @@
-package service;
+package service.facade;
 
 public interface MemberService {
 
