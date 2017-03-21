@@ -1,4 +1,4 @@
-package service;
+package service.facade;
 
 import java.util.List;
 
