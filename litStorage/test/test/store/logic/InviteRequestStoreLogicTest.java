@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import domain.InviteRequest;
 import domain.Member;
 import store.facade.InviteRequestStore;
@@ -19,40 +21,49 @@ public class InviteRequestStoreLogicTest {
 		store = new InviteRequestStoreLogic();
 	}
 
-	@Test
-	public void testInsertInviteRequest() {
-		Member sender = new Member();
-		Member receiver = new Member();
-		
-		sender.setId("cccc");
-		receiver.setId("dddd");
-		String message = "cccccccccc";
-		String form = "dddd";
-		
-		InviteRequest ir = new InviteRequest();
-		
-		ir.setSender(sender);
-		ir.setReceiver(receiver);
-		ir.setMessage(message);
-		ir.setForm(form);
-		
-		store.insertInviteRequest(ir);
-	}
+//	@Test
+//	public void testInsertInviteRequest() {
+//		Member sender = new Member();
+//		Member receiver = new Member();
+//		
+//		sender.setId("ccEfQw");
+//		receiver.setId("dqdEWedd");
+//		String message = "cdcqEEcccccccc";
+//		String form = "ddqAa";
+//		
+//		InviteRequest ir = new InviteRequest();
+//		
+//		ir.setSender(sender);
+//		ir.setReceiver(receiver);
+//		ir.setMessage(message);
+//		ir.setForm(form);
+//		
+//		boolean a = store.insertInviteRequest(ir);
+//		
+//		assertEquals(true, a);
+//	}
 
 //	@Test
 //	public void testDeleteInviteRequest() {
-//		store.deleteInviteRequest("aaaa", "bbbb");
+//		boolean a = store.deleteInviteRequest("cccc", "dddd");
+//		assertEquals(true, a);
 //	}
 //
 //	@Test
 //	public void testSelectInviteRequestBySenderId() {
-//		store.selectInviteRequestBySenderId("aaaa");
-//		assertEquals(expected, actual);
+//		List<InviteRequest> a = store.selectInviteRequestBySenderId("cccc");
+//		
+//		assertNotNull(a);
+//		assertEquals(1, a.size());
 //	}
 //
-	@Test
-	public void testSelectInviteRequestByReceiverId() {
-		store.selectInviteRequestByReceiverId("bbbb");
-	}
+//	@Test
+//	public void testSelectInviteRequestByReceiverId() {
+//		List<InviteRequest> a = store.selectInviteRequestByReceiverId("ddEdd");
+//		
+//		assertNotNull(a);
+//		assertEquals(1, a.size());
+//		System.out.println(a.get(0).getSendTime().toString());
+//	}
 
 }
