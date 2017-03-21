@@ -74,7 +74,7 @@ public class PostStoreLogic implements PostStore{
 	}
 
 	@Override
-	public List<Post> selectPostsByBoardId(String boardId) {         //�븘吏�
+	public List<Post> selectPostsByBoardId(String boardId) {         
 		SqlSession session = factory.openSession();
 		List<Post> list = null;
 		
@@ -91,7 +91,6 @@ public class PostStoreLogic implements PostStore{
 	public Post selectPostById(String id) {
 		SqlSession session = factory.openSession();
 		Post post= null;
-		
 		try{
 			PostMapper mapper = session.getMapper(PostMapper.class);
 			post=mapper.selectPostById(id);

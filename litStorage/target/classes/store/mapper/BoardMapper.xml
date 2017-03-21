@@ -13,6 +13,11 @@
 			jdbcType="VARCHAR" />
 	</resultMap>
 	
+	<sql id="selectBoard">
+  		SELECT id, name
+		FROM Board
+	</sql>
+	
 	<insert id="insertBoard" parameterType="Board">
 		<selectKey keyProperty="id" resultType="String" order="BEFORE">
 			select BOARD_SEQ.nextval FROM DUAL
@@ -27,7 +32,11 @@
 	</delete>
 	
 	<select id="selectAll" resultMap="boardMap">
-		SELECT id, name
-		FROM board
+		<include refid="selectBoard"/>
+	</select>
+	
+	<select id="selectBoardById" parameterType="String" resultMap="boardMap">
+		<include refid="selectBoard"/>
+		WHERE id=#{id}
 	</select>
   </mapper>

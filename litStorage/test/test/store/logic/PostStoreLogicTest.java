@@ -14,80 +14,88 @@ import store.logic.PostStoreLogic;
 
 public class PostStoreLogicTest {
 
-	private PostStoreLogic store;
+	private PostStoreLogic logic;
 	
 	@Before
 	public void setUp() {
-		store = new PostStoreLogic();
+		logic = new PostStoreLogic();
 	}
 
-	@Test
-	public void testInsertPost() {
-		Post post = new Post();
-		Member member = new Member();
-		member.setId("55");
-		Board board = new Board();
-		board.setId("22");
-		
-		post.setId("11");
-		post.setTitle("22");
-		post.setContent("33");
-		post.setHashTag("44");
-		post.setWriter(member);
-		post.setBoard(board);
-		
-		assertTrue(store.insertPost(post));
-	}
+//	@Test  
+//	public void testInsertPost() {
+//		Post post = new Post();
+//		
+//		Member member = new Member();
+//		member.setId("Mtest");
+//		
+//		Board board = new Board();
+//		board.setId("Btest");
+//		
+//		post.setTitle("홍길동전");
+//		post.setContent("동에번쩍");
+//		post.setHashTag("길동이");
+//		post.setWriter(member);
+//		post.setBoard(board);
+//		
+//		assertTrue(logic.insertPost(post));
+//	}
 
-	@Test
-	public void testUpdatePost() {
-		Post post = new Post();
-		Member member = new Member();
-		member.setId("44");
-		Board board = new Board();
-		board.setId("55");
-		
-		post.setId("9");
-		post.setTitle("33");
-		post.setContent("6666");
-		post.setHashTag("1111");
-		post.setWriter(member);
-		post.setBoard(board);
-		
-		assertTrue(store.updatePost(post));
-	}
+//	@Test   
+//	public void testUpdatePost() {
+//		Post post = new Post();
+//		
+//		Member member = new Member();
+//		member.setId("Mtest");
+//		
+//		Board board = new Board();
+//		board.setId("Btest");
+//		
+//		post.setId("4");
+//		post.setTitle("홍길동전 1화");
+//		post.setContent("동에번쩍");
+//		post.setHashTag("길동이");
+//		post.setWriter(member);
+//		post.setBoard(board);
+//		assertTrue(logic.updatePost(post));
+//	}
 
-	@Test
-	public void testDeletePost() {
-		assertTrue(store.deletePost("9"));
-	}
+//	@Test      
+//	public void testDeletePost() {
+//		Post post = new Post();
+//		post.setId("4");
+//		assertEquals(true,logic.deletePost("4"));
+//		
+//	}
 
-	@Test
-	public void testSelectPostsByBoardId() {
-		List<Post> postList = store.selectPostsByBoardId("22");
-		
-		assertEquals("22", postList.get(0).getBoard().getId());
-	}
+//	@Test
+//	public void testSelectPostsByBoardId() {
+//		List<Post> list = logic.selectPostsByBoardId("1");
+//		
+//		assertNotNull(list);
+//		assertEquals("1", list.get(0).getBoard().getId());
+//
+//	}
 
-	@Test
-	public void testSelectPostById() {
-		Post post = store.selectPostById("10");
-	
-		assertEquals("10", post.getId());
-	}
+//	@Test  
+//	public void testSelectPostById() {
+//		Post post = logic.selectPostById("4");
+//		
+//		assertEquals("4",post.getId());
+//	}
 
-	@Test
-	public void testSelectPostsByContent() {
-		List<Post> postList = store.selectPostsByContent("3");
-		
-		assertEquals("10", postList.get(0).getId());
-	}
+//	@Test    
+//	public void testSelectPostsByContent() {
+//		List<Post> postList = logic.selectPostsByContent("동에번쩍");
+//	
+//		assertEquals(1,postList.size());
+//		assertEquals("동에번쩍",postList.get(0).getContent());
+//	}
 
-	@Test
-	public void testSelectPostsByHashtag() {
-		List<Post> postList = store.selectPostsByHashtag("4");
-		
-		assertEquals("10", postList.get(0).getId());
-	}
+//	@Test
+//	public void testSelectPostsByHashtag() {
+//		List<Post> postList = logic.selectPostsByHashtag("길동이");
+//		
+//		assertEquals("길동이", postList.get(0).getHashTag());
+//	}
 
 }
