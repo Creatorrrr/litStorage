@@ -19,6 +19,9 @@
 <a href="${ctx }/litStorage/myList.do">내 작품 저장소!</a><br>
 <a href="${ctx }/litStorage/memberList.do?id=4">작품 저장소 참가 회원</a>
 <a href="${ctx }/board/freeBoard.do">자유 게시판</a>
+<a href="${ctx }/litStorage/allList.do">작품 저장소 목록</a>
+
+<a href="${ctx }/discussionPlace/list.do">토론장 목록</a><br>
 
 </body>
 </html>
