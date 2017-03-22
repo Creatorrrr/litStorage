@@ -25,7 +25,7 @@ public class JoinedMemberListController extends HttpServlet {
 		
 		request.setAttribute("litStorage", ls);
 		
-		request.getRequestDispatcher("/views/joinedMemberList.jsp");
+		request.getRequestDispatcher("/views/joinedMemberList.jsp").forward(request, response);
 	}
 
 }

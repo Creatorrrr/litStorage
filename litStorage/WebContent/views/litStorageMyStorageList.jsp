@@ -7,7 +7,7 @@
 	<head>
 	<title>내 작품 저장소</title>
 	<meta charset="utf-8">
-	<link href="resources/css/bootstrap_modify.css" rel="stylesheet">
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet">
 	<link href="resources/css/layout.css" rel="stylesheet">
 	<script src="resources/js/jquery-2.1.3.js"></script>
 	<style>

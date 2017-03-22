@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.LitStorage;
 import service.facade.LitStorageService;
 import service.logic.LitStorageServiceLogic;
 
@@ -21,6 +22,9 @@ public class LitStorageProfileController extends HttpServlet {
 		String id = request.getParameter("id");
 		LitStorageService service = new LitStorageServiceLogic();
 		
+		LitStorage ls = service.findLitStorageById(id);
+		request.setAttribute("litStorage", ls);
+		request.getRequestDispatcher("/views/litStorageProfile.jsp").forward(request, response);
 	}
 
 }

@@ -11,11 +11,12 @@
 <body>
 	<!--  Main member table start-->
 	<table class="table table-hover table-condensed">
+		<caption>메인 작가</caption>
 		<colgroup>
 			<col width="80" align="center">
 			<col width="*">
 		</colgroup>
-		<caption>메인 작가</caption>
+
 		<tr>
 			<td>아이디</td>
 			<td>${litStorage.creator.id }</td>
@@ -32,24 +33,24 @@
 	<!-- Main member table over -->
 	<!-- Sub member table start-->
 	<table class="table table-hover table-condensed">
+		<caption>참여 작가</caption>
 		<colgroup>
 			<col width="80" align="center">
 			<col width="*">
 		</colgroup>
-		<caption>참여 작가</caption>
 		<c:forEach items="${ litStorage.participants}" var="member">
-		<tr>
-			<td>아이디</td>
-			<td>${member.id }</td>
-		</tr>
-		<tr>
-			<td>이름</td>
-			<td>${member.name }</td>
-		</tr>
-		<tr>
-			<td>이메일</td>
-			<td>${member.email }</td>
-		</tr>
+			<tr>
+				<td>아이디</td>
+				<td>${member.id }</td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td>${member.name }</td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td>${member.email }</td>
+			</tr>
 		</c:forEach>
 	</table>
 	<!-- sub member table over -->
