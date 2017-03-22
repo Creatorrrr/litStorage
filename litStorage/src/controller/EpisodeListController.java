@@ -1,12 +1,16 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.LitStorage;
+import domain.Literature;
 import service.facade.LitStorageService;
 import service.facade.LiteratureService;
 import service.logic.LitStorageServiceLogic;
@@ -18,16 +22,29 @@ public class EpisodeListController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		// 1. 작품 상세 내용을 보여 준다
-		// 2. 연재 글 목록을 보여 준다.
+		// 1. Show the contents and artist name.
+		// 2. Show list of serials.
 		
 		LiteratureService service = new LiteratureServiceLogic();
 		
-		service.findLiteratureById("");
+//		String id = request.getParameter("LiteratureId");
+		String name = "물";
+		
+		//find Literature By Name
+		List<Literature> literature = service.findLiteratureByName(name);
+		request.setAttribute("literatures", literature);
+		
+		request.getRequestDispatcher("../views/episodeList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		//select(writerName,writerId,MemberName)
+		//search contents
+		String select = request.getParameter("select");
+		String searchContents = request.getParameter("searchContents");
+		
+		
 	}
 
 }
