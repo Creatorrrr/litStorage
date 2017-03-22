@@ -10,8 +10,14 @@
 <link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ctx }/resources/css/bootstrap-theme.min.css"
 	rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+function deleteLitFunction() {
+	var deleteLit = confirm("삭제하시겠습니까");
+	 
+}
+</script>
+
 <style type="text/css">
 div {
 	border: 1px solid #ccc;
@@ -73,6 +79,9 @@ div {
 				<c:forEach items="${literatures }" var="literature">
 					<div class="col-xs-12 col-md-8">
 						<h1>연재 글 목록</h1>
+						<div class="text-right">
+						<button onclick="deleteLitFunction()">작품 삭제</button>
+						</div>
 						<div class="panel panel-default">
 							<div class="row">
 								<div class="col-md-3">

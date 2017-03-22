@@ -20,34 +20,44 @@ import service.logic.LiteratureServiceLogic;
 public class EpisodeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	private LiteratureService service;
+
+	public EpisodeListController() {
+		service = new LiteratureServiceLogic();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// 1. Show the contents and artist name.
 		// 2. Show list of serials.
-		
-		LiteratureService service = new LiteratureServiceLogic();
-		
-//		String id = request.getParameter("LiteratureId");
+
+		// String id = request.getParameter("LiteratureId");
 		String name = "물";
-		
-		//find Literature By Name
+
+		// find Literature By Name
 		List<Literature> literature = service.findLiteratureByName(name);
 		request.setAttribute("literatures", literature);
-		
+
 		request.getRequestDispatcher("../views/episodeList.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//select(writerName,writerId,MemberName)
-		//search contents
-		//select(openLitstorage,openAll)
+		// 1. select(writerName,writerId,MemberName)
+		// 2. search contents
+		// 3. select(openLitstorage,openAll)
 		String selectContents = request.getParameter("selectContents");
 		String searchContents = request.getParameter("searchContents");
 		String openSelect = request.getParameter("openSelect");
-		System.out.println(openSelect);
-		
-		
+
+//		if (selectContents.equals("writerName")) {
+//
+//		} else if (searchContents.equals("writerId")) {
+//
+//		} else if (searchContents.equals("MemberName")) {
+//
+//		}
+
 	}
 
 }

@@ -12,6 +12,7 @@
 <body>
 <%@ include file="header.jspf"%>
 <h1>이 밑에서 버튼 만들어서 기능구현 테스트 해주세요~</h1>
-<a href="${ctx }/litStorage/allList.do">작품 저장소 목록</a>
+<a href="${ctx }/litStorage/allList.do">작품 저장소 목록</a><br>
+<a href="${ctx }/episode/list.do">연재글 목록</a>
 </body>
 </html>
