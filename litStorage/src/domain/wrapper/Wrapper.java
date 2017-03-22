@@ -1,0 +1,28 @@
+package domain.wrapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlAnyElement;
+
+public class Wrapper<T> {
+	private List<T> items;
+	
+	public Wrapper(){
+		items = new ArrayList<T>();
+	}
+	
+	public Wrapper(List<T> items){
+		this.items = items;
+	}
+	
+	public Wrapper(Object item){
+		items = new ArrayList<T>();
+		this.items.add((T)item);
+	}
+	
+	@XmlAnyElement(lax = true)
+	public List<T> getItems(){
+		return items;
+	}
+}

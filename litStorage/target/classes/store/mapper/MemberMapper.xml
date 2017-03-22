@@ -30,7 +30,7 @@
 
 	<select id="selectMembersByName" parameterType="string" resultMap="memberMap">
 		<include refid="selectMember"/>
-		WHERE name=#{name}
+		WHERE name LIKE '%#{name}%'
 	</select>
 		
 	<update id="updateMember" parameterType="Member">

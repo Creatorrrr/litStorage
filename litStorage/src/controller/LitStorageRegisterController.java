@@ -43,8 +43,8 @@ public class LitStorageRegisterController extends HttpServlet {
 		if(!service.registerLitStorage(litStorage)) {
 			throw new RuntimeException("LitStorage register failed");
 		}
-		
-		response.sendRedirect(request.getContextPath() + "/views/litStorageMyStorageList.jsp");
+		// go to controller for loading LitStorage info
+		response.sendRedirect(request.getContextPath() + "/litStorage/myList.do");
 	}
 
 }
