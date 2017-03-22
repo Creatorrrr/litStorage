@@ -7,6 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.DiscussionPlace;
+import domain.LitStorage;
+import domain.Member;
+import service.facade.DiscussionPlaceService;
+import service.logic.DiscussionPlaceServiceLogic;
+
 
 @WebServlet("/discussionPlace/register.do")
 public class DiscussionPlaceRegisterController extends HttpServlet {
@@ -16,12 +22,30 @@ public class DiscussionPlaceRegisterController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String title = request.getParameter("title");
+		String litStorageId = request.getParameter("litStorageId");
+		DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
+		
+		DiscussionPlace d = new DiscussionPlace();
+		d.setTitle(title);
+		
+		Member u= new Member();
+		u.setId("test");
+		d.setCreator(u);
+		
+		LitStorage l= new LitStorage();
+		l.setId(litStorageId);
+		//l.setId("333");
+		d.setLitStorage(l);
 
-//			(토론장 생성에 성공한 경우)
-//				5. 입력한 제목으로 토론장을 생성한다.
-//				6. 생성한 토론장 내용 화면을 표시한다.
-//			(토론장 생성에 실패한 경우)
-//				5. 토론장 생성 오류 메시지를 표시한다
+		boolean check = service.registerDiscussionPlace(d);
+		//if(check){
+			//load list page
+			response.sendRedirect(request.getContextPath() + "/discussionPlace/list.do");
+		//}else{
+			//load error page
+		//}
+
+
 
 		
 		

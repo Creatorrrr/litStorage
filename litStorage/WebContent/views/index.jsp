@@ -13,5 +13,11 @@
 <%@ include file="header.jspf"%>
 <h1>이 밑에서 버튼 만들어서 기능구현 테스트 해주세요~</h1>
 <a href="${ctx }/litStorage/allList.do">작품 저장소 목록</a>
+
+
+<br><br>
+
+<a href="${ctx }/discussionPlace/list.do">토론장 목록</a><br>
+
 </body>
 </html>
