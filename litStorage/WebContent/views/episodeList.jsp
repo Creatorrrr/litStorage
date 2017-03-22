@@ -13,9 +13,17 @@
 <script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 function deleteLitFunction() {
-	var deleteLit = confirm("삭제하시겠습니까");
-	 
+	var Y/N;
+	var deleteLit = confirm("삭제하시겠습니까?");
+	
+	if (deleteLit == true) {
+		/* location.replace(); */
+		document.getElementById("deleteY").submit();
+	}else{
+		document.getElementById("deleteN").submit();
+	}
 }
+
 </script>
 
 <style type="text/css">
@@ -25,7 +33,8 @@ div {
 </style>
 </head>
 <body>
-
+<input id="deleteY" type="hidden" value="Y">
+<input id="deleteN" type="hidden" value="N">
 	<div class="container">
 
 		<div class="row">
@@ -42,7 +51,7 @@ div {
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<a href="javascript:;">자유게시판</a> <a href="javascript:;">직품 저장소</a>
+						<a href="javascript:;">자유게시판</a> <a href="${ctx }/litStorage/allList.do;">직품 저장소</a>
 						<a href="javascript:;">작품 목록</a>
 					</div>
 					<form action="../episode/list.do" method="post">
@@ -64,14 +73,14 @@ div {
 			<div class="col-xs-6 col-md-4">
 				<h1>작품이름</h1>
 				<div>
-					<pl>
-					<li><a href="javascript:;">프로필</a></li>
-					<li><a href="javascript:;">작품 목록</a></li>
-					<li><a href="javascript:;">토론장</a></li>
-					<li><a href="javascript:;">참가 회원 목록</a></li>
-					<li><a href="javascript:;">회원 초대</a></li>
+					
+					<a href="javascript:;">프로필</a>
+					<a href="javascript:;">작품 목록</a>
+					<a href="javascript:;">토론장</a>
+					<a href="javascript:;">참가 회원 목록</a>
+					<a href="javascript:;">회원 초대</a>
 
-					</pl>
+					
 				</div>
 
 			</div>

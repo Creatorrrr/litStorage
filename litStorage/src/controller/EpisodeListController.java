@@ -32,7 +32,7 @@ public class EpisodeListController extends HttpServlet {
 		// 2. Show list of serials.
 
 		// String id = request.getParameter("LiteratureId");
-		String name = "물";
+		String name = "불";
 
 		// find Literature By Name
 		List<Literature> literature = service.findLiteratureByName(name);

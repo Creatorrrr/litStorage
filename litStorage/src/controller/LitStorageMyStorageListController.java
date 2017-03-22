@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,21 +13,26 @@ import domain.LitStorage;
 import service.facade.LitStorageService;
 import service.logic.LitStorageServiceLogic;
 
-@WebServlet("/litStorage/memberList.do")
-public class JoinedMemberListController extends HttpServlet {
+@WebServlet("/litStorage/myList.do")
+public class LitStorageMyStorageListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		LitStorageService service = new LitStorageServiceLogic();
+		//get loginId from session
+		String id = (String)request.getSession().getAttribute("loginId");
 		
-		/*if we call this memberlist method then method type is get and must contain
-		 * parameter named "id", which represent litStorage */
-		LitStorage ls = service.findLitStorageById(request.getParameter("id"));
+		if(id == null){
+			// if not logined, send to loginPage
+			response.sendRedirect(request.getContextPath()+"/views/login.jsp");
+		}else{
+		//find LitStorage by login Id
+		List<LitStorage> list = service.findLitStoragesByMemberId(id);
+		request.setAttribute("litStorages", list);
 		
-		request.setAttribute("litStorage", ls);
-		
-		request.getRequestDispatcher("/views/joinedMemberList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/litStorageMyStorageList.jsp").forward(request, response);
+		}
 	}
 
 }
