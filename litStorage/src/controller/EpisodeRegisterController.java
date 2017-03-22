@@ -29,9 +29,9 @@ public class EpisodeRegisterController extends HttpServlet {
 		
 		Episode episode = new Episode();
 		
-		episode.setTitle(literatureName);
+//		episode.setTitle(literatureName);
 		
-		service.registerEpisode(episode)
+//		service.registerEpisode(episode)
 
 	}
 

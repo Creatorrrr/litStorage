@@ -7,7 +7,10 @@
 		<a href="${ctx }/login.do">로그인</a> | <a href="${ctx }/views/memberRegister.jsp">회원가입</a>
 	</c:when>
 	<c:otherwise>
-		<b>${loginId }</b>님!! 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
+
+		<b>${loginId}</b>님!! 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
+		<a href="${ctx}/memberModify.do">회원정보수정</a>
+		<a href="${ctx}/memberInviteList.do">초대 온 목록</a>
 	</c:otherwise>
 </c:choose>
 
