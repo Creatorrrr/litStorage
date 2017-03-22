@@ -10,8 +10,22 @@
 <link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ctx }/resources/css/bootstrap-theme.min.css"
 	rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+function deleteLitFunction() {
+	var Y/N;
+	var deleteLit = confirm("삭제하시겠습니까?");
+	
+	if (deleteLit == true) {
+		/* location.replace(); */
+		document.getElementById("deleteY").submit();
+	}else{
+		document.getElementById("deleteN").submit();
+	}
+}
+
+</script>
+
 <style type="text/css">
 div {
 	border: 1px solid #ccc;
@@ -19,7 +33,8 @@ div {
 </style>
 </head>
 <body>
-
+<input id="deleteY" type="hidden" value="Y">
+<input id="deleteN" type="hidden" value="N">
 	<div class="container">
 
 		<div class="row">
@@ -36,7 +51,7 @@ div {
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<a href="javascript:;">자유게시판</a> <a href="javascript:;">직품 저장소</a>
+						<a href="javascript:;">자유게시판</a> <a href="${ctx }/litStorage/allList.do;">직품 저장소</a>
 						<a href="javascript:;">작품 목록</a>
 					</div>
 					<form action="../episode/list.do" method="post">
@@ -58,65 +73,68 @@ div {
 			<div class="col-xs-6 col-md-4">
 				<h1>작품이름</h1>
 				<div>
-					<pl>
-					<li><a href="javascript:;">프로필</a></li>
-					<li><a href="javascript:;">작품 목록</a></li>
-					<li><a href="javascript:;">토론장</a></li>
-					<li><a href="javascript:;">참가 회원 목록</a></li>
-					<li><a href="javascript:;">회원 초대</a></li>
+					
+					<a href="javascript:;">프로필</a>
+					<a href="javascript:;">작품 목록</a>
+					<a href="javascript:;">토론장</a>
+					<a href="javascript:;">참가 회원 목록</a>
+					<a href="javascript:;">회원 초대</a>
 
-					</pl>
+					
 				</div>
 
 			</div>
 			<form action="../episode/list.do" method="post">
-			<c:forEach items="${literatures }" var="literature">
-				<div class="col-xs-12 col-md-8">
-					<h1>연재 글 목록</h1>
-					<div class="panel panel-default">
-						<div class="row">
-							<div class="col-md-3">
-
-								<h4>${literature.genre }</h4>
-								<h4>${literature.name }</h4>
-								<h4>${literature.introduce }</h4>
-							</div>
-							<div class="text-middle">
-								<h4>${literature.creator.name }</h4>
-								<h4>${literature.creator.id }</h4>
-								<h4>${literature.creator.email }</h4>
-							</div>
-
-						</div>
+				<c:forEach items="${literatures }" var="literature">
+					<div class="col-xs-12 col-md-8">
+						<h1>연재 글 목록</h1>
 						<div class="text-right">
-							<button>연재글 등록</button>
+						<button onclick="deleteLitFunction()">작품 삭제</button>
 						</div>
-						<table class="table table-striped">
-							<tr>
-								<td>제목</td>
-								<td>작성자</td>
-								<td>공개 범위</td>
-							</tr>
-							
-							<c:forEach items="${literature.episodes }" var="episode">
-								<c:if test="${episode ne null }">
-									<tr>
-										<td>${episode.title }</td>
-										<td>${episode.writer.name }</td>
-										
-										<td><select>
-												<option>저장소 공개</option>
-												<option>모두 공개</option>
-										</select></td>
-									</tr>
-								</c:if>
-							</c:forEach>
+						<div class="panel panel-default">
+							<div class="row">
+								<div class="col-md-3">
+
+									<h4>${literature.genre }</h4>
+									<h4>${literature.name }</h4>
+									<h4>${literature.introduce }</h4>
+								</div>
+								<div class="text-middle">
+									<h4>${literature.creator.name }</h4>
+									<h4>${literature.creator.id }</h4>
+									<h4>${literature.creator.email }</h4>
+								</div>
+
+							</div>
+							<div class="text-right">
+								<button type="submit">연재글 등록</button>
+							</div>
+							<table class="table table-striped">
+								<tr>
+									<td>제목</td>
+									<td>작성자</td>
+									<td>공개 범위</td>
+								</tr>
+
+								<c:forEach items="${literature.episodes }" var="episode">
+									<c:if test="${episode ne null }">
+										<tr>
+											<td>${episode.title }</td>
+											<td>${episode.writer.name }</td>
+
+											<td><select name="openSelect">
+													<option value="OpenLitStorage">저장소 공개</option>
+													<option value="OpenAll">모두 공개</option>
+											</select></td>
+										</tr>
+									</c:if>
+								</c:forEach>
 
 
-						</table>
+							</table>
+						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
 			</form>
 		</div>
 
