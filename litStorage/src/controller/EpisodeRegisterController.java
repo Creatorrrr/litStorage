@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Episode;
+import domain.Literature;
 import service.facade.LiteratureService;
 import service.logic.LiteratureServiceLogic;
 
@@ -24,14 +25,26 @@ public class EpisodeRegisterController extends HttpServlet {
 		LiteratureService service = new LiteratureServiceLogic();
 
 		String selectGenre = request.getParameter("selectGenre");
-		String epiName = request.getParameter("literatureName");
-		String literatureContents = request.getParameter("literatureContents");
+		String episodeName = request.getParameter("episodeName");
+		String episodeContents = request.getParameter("episodeContents");
+		
+		System.out.println(selectGenre);
+		System.out.println(episodeName);
+		System.out.println(episodeContents);
 		
 		Episode episode = new Episode();
+		// Genre literature
+		Literature literature = new Literature();
+		literature.setGenre(selectGenre);
+		episode.setLiterature(literature);
+		episode.setTitle(episodeName);
+		episode.setContent(episodeContents);
 		
-		episode.setTitle(literatureName);
+		boolean check = service.registerEpisode(episode);
 		
-		service.registerEpisode(episode)
+		if(check){
+			response.sendRedirect(request.getContextPath()+"../epsode/list.do");
+		}
 
 	}
 
