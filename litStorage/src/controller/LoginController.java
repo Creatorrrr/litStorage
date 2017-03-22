@@ -26,14 +26,13 @@ public class LoginController extends HttpServlet {
 		
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
-		response.sendRedirect(request.getContextPath()+"/views/index.jsp");
 		
 
 		if("1234".equals(password)){
 				HttpSession session = request.getSession();
 				session.setAttribute("loginId", loginId);
 			
-				response.sendRedirect(request.getContextPath()+"/views/main.jsp");
+				response.sendRedirect(request.getContextPath()+"/views/index.jsp");
 				
 			}else {
 				response.sendRedirect(request.getContextPath()+"/views/login.jsp");
