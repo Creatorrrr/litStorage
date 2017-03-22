@@ -1,5 +1,6 @@
 package service.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import domain.ChangeHistory;
@@ -9,16 +10,18 @@ import service.facade.LiteratureService;
 import store.facade.ChangeHistoryStore;
 import store.facade.EpisodeStore;
 import store.facade.LiteratureStore;
+import store.facade.MemberStore;
 import store.logic.ChangeHistoryStoreLogic;
 import store.logic.EpisodeStoreLogic;
 import store.logic.LiteratureStoreLogic;
+import store.logic.MemberStoreLogic;
 
-public class LiteratureServiceLogic implements LiteratureService{
-	
+public class LiteratureServiceLogic implements LiteratureService {
+
 	private LiteratureStore lStore;
 	private EpisodeStore epStore;
 	private ChangeHistoryStore chStore;
-	
+
 	public LiteratureServiceLogic() {
 		lStore = new LiteratureStoreLogic();
 		epStore = new EpisodeStoreLogic();
@@ -42,7 +45,14 @@ public class LiteratureServiceLogic implements LiteratureService{
 
 	@Override
 	public List<Literature> findLiteratureByName(String name) {
-		return lStore.selectLiteraturesByName(name);
+
+		List<Literature> literatures = lStore.selectLiteraturesByName(name);
+		for (Literature literature : literatures) {
+
+			literature.setEpisodes(epStore.selectEpisodesByLiteratureId(literature.getId()));
+		}
+
+		return literatures;
 	}
 
 	@Override

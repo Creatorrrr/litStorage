@@ -1,12 +1,16 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.LitStorage;
+import domain.Literature;
 import service.facade.LitStorageService;
 import service.facade.LiteratureService;
 import service.logic.LitStorageServiceLogic;
@@ -16,18 +20,44 @@ import service.logic.LiteratureServiceLogic;
 public class EpisodeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		// 1. 작품 상세 내용을 보여 준다
-		// 2. 연재 글 목록을 보여 준다.
-		
-		LiteratureService service = new LiteratureServiceLogic();
-		
-		service.findLiteratureById("");
+	private LiteratureService service;
+
+	public EpisodeListController() {
+		service = new LiteratureServiceLogic();
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// 1. Show the contents and artist name.
+		// 2. Show list of serials.
+
+		// String id = request.getParameter("LiteratureId");
+		String name = "불";
+
+		// find Literature By Name
+		List<Literature> literature = service.findLiteratureByName(name);
+		request.setAttribute("literatures", literature);
+
+		request.getRequestDispatcher("../views/episodeList.jsp").forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 1. select(writerName,writerId,MemberName)
+		// 2. search contents
+		// 3. select(openLitstorage,openAll)
+		String selectContents = request.getParameter("selectContents");
+		String searchContents = request.getParameter("searchContents");
+		String openSelect = request.getParameter("openSelect");
+
+//		if (selectContents.equals("writerName")) {
+//
+//		} else if (searchContents.equals("writerId")) {
+//
+//		} else if (searchContents.equals("MemberName")) {
+//
+//		}
+
 	}
 
 }

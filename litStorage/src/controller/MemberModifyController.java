@@ -11,7 +11,7 @@ import domain.Member;
 import service.facade.MemberService;
 import service.logic.MemberServiceLogic;
 
-@WebServlet("/modify.do")
+@WebServlet("/memberModify.do")
 public class MemberModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -22,15 +22,27 @@ public class MemberModifyController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String id = request.getParameter("id");
-		Member member = service.modifyMember(member.getId());
+		//String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		
+		Member member = new Member();
+		//member.setId(id);
+		member.setName(name);
+		member.setPassword(password);
+		member.setEmail(email);
+		
+		service.modifyMember(member);
+		
 		request.setAttribute("member", member);
-		request.getRequestDispatcher("memberModify.jsp").forward(request, response);
+
+		request.getRequestDispatcher("memberDetail.jsp").forward(request, response);
 		
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	/*protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	}
+	}*/
 
 }

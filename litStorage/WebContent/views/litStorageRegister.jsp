@@ -18,6 +18,7 @@
 	</head>
 	<body>
 		<form action="${ctx }/litStorage/register.do" method="post">
+		<input type="hidden" name="userId" value="${loginId }">
 			<table>
 				<tr>
 					<td>이름</td>

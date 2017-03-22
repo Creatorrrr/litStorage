@@ -15,6 +15,11 @@ import service.logic.LitStorageServiceLogic;
 @WebServlet("/litStorage/register.do")
 public class LitStorageRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.sendRedirect(request.getContextPath()+"/views/litStorageRegister.jsp");
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LitStorageService service = new LitStorageServiceLogic();
@@ -29,9 +34,8 @@ public class LitStorageRegisterController extends HttpServlet {
 		LitStorage litStorage = new LitStorage();
 		
 		Member creator = new Member();
-//		creator.setId((String)request.getSession().getAttribute("userId"));	// Must be logined
-		creator.setId("dd");	// Temporary ID for test
-		
+		creator.setId((String)request.getSession().getAttribute("loginId"));	// Must be logined
+//		creator.setId((String)request.getParameter("userId"));
 		litStorage.setCreator(creator);
 		litStorage.setName(name);
 		litStorage.setIntroduce(introduce);

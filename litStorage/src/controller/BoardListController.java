@@ -6,18 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet("/logout.do")
-public class LogoutController extends HttpServlet {
+import service.facade.BoardService;
+import service.logic.BoardServiceLogic;
+
+@WebServlet("/board/freeBoard.do")
+public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.invalidate();
+		BoardService service = new BoardServiceLogic();
 		
-		response.sendRedirect(request.getContextPath());
+		request.setAttribute("boards", service.findAllBoards());
+		request.getRequestDispatcher("/views/boardList.jsp").forward(request, response);
+	
 	}
 
 }

@@ -7,7 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.Board;
 import domain.Post;
+
+import service.facade.BoardService;
+import service.logic.BoardServiceLogic;
 
 
 @WebServlet("/postRegister.do")
@@ -16,18 +20,45 @@ public class PostRegisterController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+//		String lectureName = request.getParameter("lectureName");
+//		String instructorName= request.getParameter("instructorName");
+//		String lectureIntroduce =request.getParameter("lectureIntroduce");
+//		
+//		Lecture lecture = new Lecture(lectureName, instructorName, lectureIntroduce);
+//		
+//		LectureService service = new LectureServiceLogic();
+//		
+//		service.register(lecture);
+//		
+//		response.sendRedirect("list.do");
 		
-		String PostName = request.getParameter("PostName");
-		String PostContent= request.getParameter("PostContent");
-		String HashTag =request.getParameter("HashTag");
+		
+		String postTitle = request.getParameter("postTitle");
+		String postContent= request.getParameter("postContent");
+		String hashtag =request.getParameter("hashtag");
+		
+		Board board = new Board();
+		Post post = new Post(); 
+		
+		BoardService service = new BoardServiceLogic();
+		
+//		post.setId((String)request.getSession().getAttribute("id"));  // Must be logined
+		
+		post.setTitle(postTitle);
+		post.setContent(postContent);
+		post.setHashTag(hashtag);
+		
+		if(!service.registerPost(post)) {        //if the registration failed
+			throw new RuntimeException("post register failed");
+		}
 		
 //		Post post = new Post(PostName, PostContent, HashTag);
 //		
 //		PostService service = new PostServiceLogic();
 //		
-//		service.register(lecture);
+		service.registerPost(post);
 		
-		response.sendRedirect("list.do");
+		response.sendRedirect(request.getContextPath()+"/board/freeBoard.do");
 	
 	
 	}
