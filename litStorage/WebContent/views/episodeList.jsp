@@ -70,53 +70,53 @@ div {
 
 			</div>
 			<form action="../episode/list.do" method="post">
-			<c:forEach items="${literatures }" var="literature">
-				<div class="col-xs-12 col-md-8">
-					<h1>연재 글 목록</h1>
-					<div class="panel panel-default">
-						<div class="row">
-							<div class="col-md-3">
+				<c:forEach items="${literatures }" var="literature">
+					<div class="col-xs-12 col-md-8">
+						<h1>연재 글 목록</h1>
+						<div class="panel panel-default">
+							<div class="row">
+								<div class="col-md-3">
 
-								<h4>${literature.genre }</h4>
-								<h4>${literature.name }</h4>
-								<h4>${literature.introduce }</h4>
+									<h4>${literature.genre }</h4>
+									<h4>${literature.name }</h4>
+									<h4>${literature.introduce }</h4>
+								</div>
+								<div class="text-middle">
+									<h4>${literature.creator.name }</h4>
+									<h4>${literature.creator.id }</h4>
+									<h4>${literature.creator.email }</h4>
+								</div>
+
 							</div>
-							<div class="text-middle">
-								<h4>${literature.creator.name }</h4>
-								<h4>${literature.creator.id }</h4>
-								<h4>${literature.creator.email }</h4>
+							<div class="text-right">
+								<button type="submit">연재글 등록</button>
 							</div>
+							<table class="table table-striped">
+								<tr>
+									<td>제목</td>
+									<td>작성자</td>
+									<td>공개 범위</td>
+								</tr>
 
+								<c:forEach items="${literature.episodes }" var="episode">
+									<c:if test="${episode ne null }">
+										<tr>
+											<td>${episode.title }</td>
+											<td>${episode.writer.name }</td>
+
+											<td><select name="openSelect">
+													<option value="OpenLitStorage">저장소 공개</option>
+													<option value="OpenAll">모두 공개</option>
+											</select></td>
+										</tr>
+									</c:if>
+								</c:forEach>
+
+
+							</table>
 						</div>
-						<div class="text-right">
-							<button>연재글 등록</button>
-						</div>
-						<table class="table table-striped">
-							<tr>
-								<td>제목</td>
-								<td>작성자</td>
-								<td>공개 범위</td>
-							</tr>
-							
-							<c:forEach items="${literature.episodes }" var="episode">
-								<c:if test="${episode ne null }">
-									<tr>
-										<td>${episode.title }</td>
-										<td>${episode.writer.name }</td>
-										
-										<td><select>
-												<option>저장소 공개</option>
-												<option>모두 공개</option>
-										</select></td>
-									</tr>
-								</c:if>
-							</c:forEach>
-
-
-						</table>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
 			</form>
 		</div>
 

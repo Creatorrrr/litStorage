@@ -22,7 +22,6 @@ public class LoginController extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		session.setAttribute("loginedUser", loginId); 
 		
-		response.sendRedirect(request.getContextPath()+"memberRegister.do");
 	}
 
 }

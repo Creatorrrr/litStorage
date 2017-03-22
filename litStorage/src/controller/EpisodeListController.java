@@ -41,8 +41,11 @@ public class EpisodeListController extends HttpServlet {
 			throws ServletException, IOException {
 		//select(writerName,writerId,MemberName)
 		//search contents
-		String select = request.getParameter("select");
+		//select(openLitstorage,openAll)
+		String selectContents = request.getParameter("selectContents");
 		String searchContents = request.getParameter("searchContents");
+		String openSelect = request.getParameter("openSelect");
+		System.out.println(openSelect);
 		
 		
 	}
