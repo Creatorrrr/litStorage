@@ -13,7 +13,10 @@ import javax.servlet.http.HttpSession;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+		resp.sendRedirect(req.getContextPath()+"/views/login.jsp");
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -22,7 +25,7 @@ public class LoginController extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		session.setAttribute("loginedUser", loginId); 
 		
-		response.sendRedirect(request.getContextPath()+"memberRegister.do");
+		response.sendRedirect(request.getContextPath()+"/views/index.jsp");
 	}
 
 }

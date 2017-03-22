@@ -21,7 +21,7 @@ public class MemberRegisterController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		response.sendRedirect("memberRegister.jsp");
+		response.sendRedirect(request.getContextPath()+"/views/memberRegister.jsp");
 	}
 
 	
