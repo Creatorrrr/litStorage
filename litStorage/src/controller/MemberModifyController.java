@@ -23,8 +23,8 @@ public class MemberModifyController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-		Member member = service.modifyMember(member.getId());
-		request.setAttribute("member", member);
+//		Member member = service.modifyMember(member.getId());
+//		request.setAttribute("member", member);
 		request.getRequestDispatcher("memberModify.jsp").forward(request, response);
 		
 	}
