@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="store.mapper.PostMapper">
+
+	<resultMap type="Post" id="postMap">
+		<id column="id" property="id"/>      
+		<result column="name" property="title"/>
+		<result column="content" property="content"/>
+		<result column="hashtag" property="hashTag"/>
+		<result column="writer" property="writer"/>
+		<result column="" property="boardId"/>
+	</resultMap>
+	
+	<sql id="selectPost">
+  		SELECT id, name, content, hashTag, writer
+		FROM Post
+	</sql>	
+	
+	<insert id="insertPost" parameterType="Post">
+		INSERT INTO Member{id,name,content,hashTag,writer)
+		VALUES (#{id},#{name},#{content},#{hashTag},#{writer})
+	</insert>
+
+	<update id="updatePost" parameterType="Post">
+		UPDATE Post
+		SET id=#{id}, name=#{name}, content=#{content}, hashTag=#{hashTag}
+		WHERE id=#{id}
+	</update>
+	
+	<delete id="deletePost" parameterType="string">
+		DELETE Post
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- <select id="selectPostById" parameterType="string" resultMap="PostMap">
+		<include refid="selectPost"/>
+		WHERE id=#{id}
+	</select> -->
+	
+	<select id="selectPostById" parameterType="string" resultMap="PostMap">
+		<include refid="selectPost"/>
+		WHERE id=#{id}
+	</select>
+	
+	<select id="selectPostsByContent" parameterType="string" resultMap="PostMap">
+		<include refid="selectPost"/>
+		WHERE content=#{content}
+	</select>
+	
+	<select id="selectPostsByHashtag" parameterType="string" resultMap="PostMap">
+		<include refid="selectPost"/>
+		WHERE hashTag=#{hashTag}
+	</select>	
+	
+  </mapper>

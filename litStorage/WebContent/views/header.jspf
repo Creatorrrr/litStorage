@@ -9,5 +9,5 @@
 	<c:otherwise>
 		<b>${loginedUser }</b>님!! 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
 	</c:otherwise>
-	
 </c:choose>
+
