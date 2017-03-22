@@ -6,27 +6,29 @@ import domain.LitStorage;
 import domain.Literature;
 import domain.MemberLitStorage;
 import service.facade.LitStorageService;
+import store.facade.EpisodeStore;
 import store.facade.LitStorageStore;
 import store.facade.LiteratureStore;
 import store.facade.MemberLitStorageStore;
+import store.logic.EpisodeStoreLogic;
 import store.logic.LitStorageStoreLogic;
 import store.logic.LiteratureStoreLogic;
 import store.logic.MemberLitStorageStoreLogic;
 
 public class LitStorageServiceLogic implements LitStorageService {
-	
+
 	private LitStorageStore lsStore;
 	private MemberLitStorageStore mlsStore;
-//	private MemberStore mStore;
+	// private MemberStore mStore;
 	private LiteratureStore lStore;
-//	private DiscussionPlaceStore dpStore;
-	
+	// private DiscussionPlaceStore dpStore;
+
 	public LitStorageServiceLogic() {
 		lsStore = new LitStorageStoreLogic();
 		mlsStore = new MemberLitStorageStoreLogic();
-//		mStore = new MemberStoreLogic();
+		// mStore = new MemberStoreLogic();
 		lStore = new LiteratureStoreLogic();
-//		dpStore = new DiscussionPlaceStoreLogic();
+		// dpStore = new DiscussionPlaceStoreLogic();
 	}
 
 	@Override
