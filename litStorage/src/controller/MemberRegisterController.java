@@ -15,46 +15,50 @@ import service.facade.MemberService;
 import service.logic.MemberServiceLogic;
 
 
-@WebServlet("/memberRegister.do")
+@WebServlet("/join.do")
 public class MemberRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		response.sendRedirect("memberRegister.jsp");
-	}
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+//			throws ServletException, IOException {
+//		response.sendRedirect("memberRegister.jsp");
+//	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 	
 		MemberService service = new MemberServiceLogic();
-		HttpSession session = request.getSession(); 
-		
+
 		Member member = new Member();
 		
 		member.setId(request.getParameter("id"));
-		member.setPassword(request.getParameter("pwd"));
-		member.setPassword(request.getParameter("pwd2"));
+		member.setPassword(request.getParameter("password"));
+	//	member.setPassword(request.getParameter("pwd2"));
 		member.setName(request.getParameter("name"));
 		member.setEmail(request.getParameter("email"));
 		
 		service.registerMember(member);
 
 		String id = request.getParameter("id");
-		String pwd = request.getParameter("pwd");
-		String pwd2 = request.getParameter("pwd2");
+		String pwd = request.getParameter("password");
+	//	String pwd2 = request.getParameter("pwd2");
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		
-		session.setAttribute("login", id);
-		session.setAttribute("login", pwd);
-		session.setAttribute("login", pwd2);
-		session.setAttribute("login", name);
-		session.setAttribute("login", email);
+
+		response.sendRedirect(request.getContextPath()+"/views/main.jsp");
+	
+//		HttpSession session = request.getSession(); 
+//		session.setAttribute("login", id);
+//		session.setAttribute("login", pwd);
+//		session.setAttribute("login", pwd2);
+//		session.setAttribute("login", name);
+//		session.setAttribute("login", email);      로그인에서만 필요
 		
-		response.sendRedirect("main.do");
+		
+		//response.sendRedirect("/views/main.jsp");
 	}
 
-
+	
 }
