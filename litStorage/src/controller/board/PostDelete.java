@@ -22,7 +22,7 @@ public class PostDelete extends HttpServlet {
 		String id = request.getParameter("id");
 		//service.removeBoard(id);
 		service.removePost(id);
-		response.sendRedirect(request.getContextPath()+"/views/boardList.jsp");
+		response.sendRedirect(request.getContextPath()+"/views/postList.jsp");
 	}
 
 }

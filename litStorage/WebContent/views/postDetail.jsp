@@ -38,7 +38,7 @@
         <br>
 		 <div align="center">
 		<input class="btn"  value="삭제" type="button" onclick="javascript:window.location='${ctx }/postDelete.do?id=${post.id}'"> 
-		<input class="btn" type="submit" value="수정">
+		<input class="btn" type="button" value="수정" onclick="javascript:window.location='${ctx}/postModify.do?id=${post.id }'" >
 		<!-- <input class="btn btn-success" type="submit" value="등록하기"></div> --> 
 		</div> 
 	<br>
