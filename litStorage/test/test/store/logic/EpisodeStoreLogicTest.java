@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import domain.Episode;
+import domain.LitStorage;
 import domain.Literature;
 import domain.Member;
 import store.logic.EpisodeStoreLogic;
@@ -25,17 +26,24 @@ public class EpisodeStoreLogicTest {
 	public void testInsertEpisode() {
 		
 		Episode e = new Episode();
+		e.setId("1");
 		e.setTitle("aaa");
-		e.setContent("cccc");
+		e.setContent("아아\r\ndddd");
 		
 		Member m = new Member();
 		m.setId("test");
+		
 		e.setWriter(m);
 		
 		e.setBound("0001");
 		
 		Literature l= new Literature();
 		l.setId("22");
+		
+		LitStorage ls = new LitStorage();
+		ls.setId("11");
+		l.setLitStorage(ls);
+		
 		e.setLiterature(l);
 		
 		assertTrue(store.insertEpisode(e));
