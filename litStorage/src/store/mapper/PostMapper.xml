@@ -19,7 +19,7 @@
 	</resultMap>
 	
 	<sql id="selectPost">
-  		SELECT id, name, content, hashTag, writer, boardid <!--db에 있는 컬럼이름  -->
+  		SELECT id, name, content, hashTag, writer, boardid
 		FROM Post
 	</sql>	
 	
@@ -27,8 +27,10 @@
 		<selectKey keyProperty="id" resultType="String" order="BEFORE">
     		SELECT post_seq.NEXTVAL FROM dual
  		</selectKey>
-		INSERT INTO post(id, name, content, hashTag, writer, boardid)
-		VALUES (#{id}, #{title}, #{content}, #{hashTag}, #{writer.id}, #{board.id})
+		INSERT INTO post(name, content, hashTag)
+		VALUES (#{title}, #{content}, #{hashTag})
+	<!--INSERT INTO post(id, name, content, hashTag, writer, boardid)
+		VALUES (#{id}, #{title}, #{content}, #{hashTag}, #{writer.id}, #{board.id}) -->
 	</insert>
 
 	<update id="updatePost" parameterType="Post">

@@ -16,6 +16,17 @@ import service.logic.LiteratureServiceLogic;
 @WebServlet("/episode/register.do")
 public class EpisodeRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 1. receive LiteratureId
+		
+		String LiteratureId = req.getParameter("literatureId"); 
+		req.setAttribute("LiteratureId", LiteratureId);
+		System.out.println(LiteratureId);
+		
+		req.getRequestDispatcher("../views/episodeRegister.jsp").forward(req, resp);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -24,18 +35,17 @@ public class EpisodeRegisterController extends HttpServlet {
 
 		LiteratureService service = new LiteratureServiceLogic();
 
+		String LiteratureId = request.getParameter("literatureId");
 		String selectGenre = request.getParameter("selectGenre");
 		String episodeName = request.getParameter("episodeName");
 		String episodeContents = request.getParameter("episodeContents");
 		
-		System.out.println(selectGenre);
-		System.out.println(episodeName);
-		System.out.println(episodeContents);
 		
 		Episode episode = new Episode();
 		// Genre literature
 		Literature literature = new Literature();
 		literature.setGenre(selectGenre);
+		literature.setId(LiteratureId);
 		episode.setLiterature(literature);
 		episode.setTitle(episodeName);
 		episode.setContent(episodeContents);
@@ -43,7 +53,7 @@ public class EpisodeRegisterController extends HttpServlet {
 		boolean check = service.registerEpisode(episode);
 		
 		if(check){
-			response.sendRedirect(request.getContextPath()+"../epsode/list.do");
+			response.sendRedirect(request.getContextPath()+"/episode/list.do");
 		}
 
 	}

@@ -14,8 +14,6 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <style>
-
-
 h2 {
 	margin-left: 65px;
 	text-shadow: 1px 0px 3px gray;
@@ -107,41 +105,46 @@ textarea {
 <title>Insert title here</title>
 </head>
 <body>
+<form method="post" action="#{ctx }/member/search.do">
+<select>
+	<option value="id">아이디</option>
+	<option value="name">이름</option>
+</select>
+</form>
 	<table class="table table-hover table-condensed">
 		<colgroup>
 			<col width="80" align="center">
-			<col width="*">
+			<col width="80">
+			<col width="100">
+			<col width="80">
 		</colgroup>
-
+		<thead>
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>이메일</th>
+			</tr>
+		</thead>
+		<tbody>
 		<tr>
-			<td>작품 저장소 이름</td>
-			<td>${litStorage.name }</td>
+			<td>아이디</td>
+			<td>이름</td>
+			<td>이메일</td>
 		</tr>
-		<tr>
-			<td>생성 회원 아이디</td>
-			<td>${litStorage.creator.id }</td>
-		</tr>
-		<tr>
-			<td>이메일 주소</td>
-			<td>${litStorage.creator.email }</td>
-		</tr>
-		<tr>
-			<td>작품 저장소 소개</td>
-			<td>${litStorage.introduce }</td>
-		</tr>
+		</tbody>
 	</table>
-	<c:if test="${isNotJoined}">
-	<button id="onclick" type="button">참가 요청</button>
-	</c:if>
 	
-	
+
+
 	<!-- request popup form div start-->
 	<div id="sendRequest">
-		<form class="form" action="${ctx }/litStorage/request.do" id="send" method="post">
-		<input type="hidden" name="receiverId" value="${litStorage.creator.id }">
-		<input type="hidden" name="litStorageId" value="${litStorage.id }">
-		
-			<h3>요청 메시지 작성</h3>
+		<form class="form" action="${ctx }/litStorage/invite.do" id="send"
+			method="post">
+			<input type="hidden" name="receiverId"
+				value="${litStorage.creator.id }"> <input type="hidden"
+				name="litStorageId" value="${litStorage.id }">
+
+			<h3>초대 메시지 작성</h3>
 			<hr />
 			<br /> <label>보내는 사람 : ${loginId }</label> <br /> <br /> <label>요청
 				메시지 :</label> <br /> <input type="text" id="message" name="message"
@@ -160,18 +163,25 @@ textarea {
 
 	<script>
 		$(document).ready(function() {
-			
+
 			$("#send #cancel").click(function() {
 				$(this).parent().parent().hide();
 			});
 			$("#onclick").click(function() {
 				$("#sendRequest").css("display", "block");
 			});
+			// Contact form popup send-button click event.
+			$("#send").click(function() {
+
+			});
 			// Login form popup login-button click event.
 			$("#submit").click(function() {
-				alert("요청 완료!");
+				alert("초대 완료!");
 			});
 		});
+	</script>
+	<script>
+	
 	</script>
 </body>
 </html>

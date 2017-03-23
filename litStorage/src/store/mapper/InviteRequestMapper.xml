@@ -9,7 +9,6 @@
 		<result property="message" column="message" />
 		<result property="form" column="form"  />
 		<result property="sendTime" column="sendtime" />
-		
 		<association property="sender" column="sender"
 			select="store.mapper.MemberMapper.selectMemberById" javaType="Member"
 			jdbcType="VARCHAR" />
@@ -19,29 +18,24 @@
 	</resultMap>
 	<sql id="selectInviteRequest"> 
 		SELECT sender, receiver, sendtime, form, message
-		FROM
-		inviterequest
+		FROM inviterequest
 	</sql>
 
-	<select id="selectInviteRequestBySenderId" parameterType="string"
-		resultMap="inviteRequestMap">
+	<select id="selectInviteRequestBySenderId" parameterType="string" resultMap="inviteRequestMap">
 		<include refid="selectInviteRequest" />
 		WHERE sender = #{sender}
 	</select>
-	<select id="selectInviteRequestByReceiverId" parameterType="string"
-		resultMap="inviteRequestMap">
+	<select id="selectInviteRequestByReceiverId" parameterType="string" resultMap="inviteRequestMap">
 		<include refid="selectInviteRequest" />
 		WHERE receiver = #{receiver}
 	</select>
 
 	<insert id="insertInviteRequest" parameterType="inviterequest">
-		INSERT INTO inviterequest(sender, receiver, sendTime, form,
-		message)
+		INSERT INTO inviterequest(sender, receiver, sendTime, form, message)
 		VALUES (#{sender.id},#{receiver.id},TO_DATE(sysdate,'yyyy/mm/dd hh24:mi:ss '),#{form},#{message})
 	</insert>
 	<delete id="deleteInviteRequest" parameterType="map">
-		DELETE FROM
-		inviterequest
+		DELETE FROM inviterequest
 		WHERE sender = #{sender} AND receiver = #{receiver}
 	</delete>
 </mapper>

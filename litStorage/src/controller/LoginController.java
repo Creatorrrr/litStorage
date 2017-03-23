@@ -1,4 +1,4 @@
-package controller;
+	package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,20 +26,14 @@ public class LoginController extends HttpServlet {
 		
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
-		
-
 
 		if("1234".equals(password)){
-				HttpSession session = request.getSession();
-				session.setAttribute("loginId", loginId);
-			
-				response.sendRedirect(request.getContextPath()+"/views/index.jsp");
-				
-			}else {
-				response.sendRedirect(request.getContextPath()+"/views/index.jsp");
-				
-			}
-	
+			HttpSession session = request.getSession();
+			session.setAttribute("loginId", loginId);
+			response.sendRedirect(request.getContextPath()+"/views/index.jsp");
+		}else {
+			response.sendRedirect(request.getContextPath()+"/views/index.jsp");
+		}
 	/*	session.setAttribute("loginedUser", loginId); 
 		session.setAttribute("isAdmin", isAdminUser(loginId));
 		
