@@ -58,8 +58,7 @@ div{border: 1px solid #ccc; }
 							<th>제목</th>
 							<th>작성자</th>
 							<%-- <c:if test = "${isAdmin }">    <!-- login했을 때만 보여지게 함 -->
-								<th>UPDATE</th>
-								<th>DELETE</th>
+								<th>게시물 등록</th>
 							</c:if> --%>
 						</tr>
 					</thead>

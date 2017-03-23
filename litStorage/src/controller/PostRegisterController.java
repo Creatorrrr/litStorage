@@ -31,6 +31,7 @@ public class PostRegisterController extends HttpServlet {
 		req.getRequestDispatcher("/views/postRegister.jsp").forward(req, resp);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -63,8 +64,8 @@ public class PostRegisterController extends HttpServlet {
 	//	List<Post>list = service.findPostsByWriterId(writerId);
 	//	response.sendRedirect(request.getContextPath()+"/post/postDetail.do");
 		
-		request.setAttribute("id",post.getId());
-		request.getRequestDispatcher("/post/postDetail.do").forward(request, response);
+		request.setAttribute("post",service.findPostById(post.getId()));
+		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
 
 
 	}
