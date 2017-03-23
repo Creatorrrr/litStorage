@@ -1,4 +1,4 @@
-package controller.literature;
+package controller.board;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -20,9 +20,9 @@ public class PostDelete extends HttpServlet {
 		
 		BoardService service = new BoardServiceLogic();
 		String id = request.getParameter("id");
-		service.removeBoard(id);
+		//service.removeBoard(id);
 		service.removePost(id);
-		response.sendRedirect(request.getContextPath()+"/views/boardList.jsp");
+		response.sendRedirect(request.getContextPath()+"/views/postList.jsp");
 	}
 
 }

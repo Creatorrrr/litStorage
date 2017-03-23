@@ -14,11 +14,15 @@
 
 
 <link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
+<link href="${ctx }/resources/css/bootstrap-theme.min.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="${ctx }/resources/js/bootstrap.min.js"></script>
 <style type="text/css">
-div{border: 1px solid #ccc; }
-</style> 
+div {
+	border: 1px solid #ccc;
+}
+</style>
 
 
 </head>
@@ -81,13 +85,27 @@ div{border: 1px solid #ccc; }
 											<td><a href="remove.do?id=${lecture.id }"class="btn btn-xs btn-danger">DELETE</a></td>
 										</c:if> --%>
 									</tr>
-								</c:forEach>
+
+									<c:forEach items="${board.posts }" var="post">
+										<tr>
+											<%-- <td>${status.count }</td> --%>
+											<td><a href="${ctx }/post/postDetail.do?id=${post.id }">${post.title }</a></td>
+											<td>${post.id}</td>
+											<%-- <c:if test = "${isAdmin }"> 
+											<td><a href="modify.do?id=${lecture.id }"class="btn btn-xs btn-warning">UPDATE</a></td>
+											<td><a href="remove.do?id=${lecture.id }"class="btn btn-xs btn-danger">DELETE</a></td>
+										</c:if> --%>
+										</tr>
+										</c:forEach>
+									</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</tbody>
 				</table>
 				<%-- <c:if test = "${isAdmin }">  --%>
-				<td><a class="btn btn-sm btn-success" href="${ctx}/views/postRegister.jsp?boardId=${board.id}">게시물 등록</a></td>
+				<td><a class="btn btn-sm btn-success"
+					href="${ctx}/views/postRegister.jsp?boardId=${board.id}">게시물
+						등록</a></td>
 				<%-- </c:if>	 --%>
 			</div>
 		</div>
