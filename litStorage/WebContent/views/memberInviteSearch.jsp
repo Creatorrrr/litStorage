@@ -105,11 +105,13 @@ textarea {
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post" action="#{ctx }/member/search.do">
+<form method="post">
 <select>
 	<option value="id">아이디</option>
 	<option value="name">이름</option>
 </select>
+	<input type="text" name="keyword">
+	<input type="submit" id="btn">
 </form>
 	<table class="table table-hover table-condensed">
 		<colgroup>
@@ -177,6 +179,33 @@ textarea {
 			// Login form popup login-button click event.
 			$("#submit").click(function() {
 				alert("초대 완료!");
+			});
+			
+			/* search ajax */
+			
+			$("#btn").click(function(){
+				$.ajax({
+					url:"${ctx}/member/search.do",
+					type:"post",
+					dataType:"xml",
+					success:function(xml){
+						
+						var xmlData = $(xml).find("customer");
+						var listLength = xmlData.length;
+						if(listLength){
+							$("#result").empty();
+							var contentStr = "";
+							$(xmlData).each(function(){
+								contentStr += $(this).find("id").text() + "<br>"
+								+ $(this).find("name").text() + "<br>"
+								+ $(this).find("address").text() + "<hr>";
+								
+								
+							});
+							$("#result").append(contentStr);
+						}
+					}
+				});
 			});
 		});
 	</script>

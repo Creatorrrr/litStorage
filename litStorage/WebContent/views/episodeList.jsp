@@ -13,15 +13,8 @@
 <script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 function deleteLitFunction() {
-	var Y/N;
 	var deleteLit = confirm("삭제하시겠습니까?");
 	
-	if (deleteLit == true) {
-		/* location.replace(); */
-		document.getElementById("deleteY").submit();
-	}else{
-		document.getElementById("deleteN").submit();
-	}
 }
 
 </script>
@@ -33,8 +26,6 @@ div {
 </style>
 </head>
 <body>
-<input id="deleteY" type="hidden" value="Y">
-<input id="deleteN" type="hidden" value="N">
 	<div class="container">
 
 		<div class="row">
@@ -107,7 +98,7 @@ div {
 
 							</div>
 							<div class="text-right">
-								<button type="submit">연재글 등록</button>
+								<button type="button" onclick="location.href='../episode/register.do?literatureId=${literature.id}' ">연재글 등록</button>
 							</div>
 							<table class="table table-striped">
 								<tr>

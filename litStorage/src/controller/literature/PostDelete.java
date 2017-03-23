@@ -1,4 +1,4 @@
-package controller;
+package controller.literature;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
 
-@WebServlet("/board/freeBoard.do")
-public class BoardListController extends HttpServlet {
+@WebServlet("/postDelete.do")
+public class PostDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		BoardService service = new BoardServiceLogic();
 		
-		request.setAttribute("boards", service.findAllBoards());
-		request.getRequestDispatcher("/views/boardList.jsp").forward(request, response);
-	
+		
+		BoardService service = new BoardServiceLogic();
+		String id = request.getParameter("id");
+		service.removeBoard(id);
+		service.removePost(id);
+		response.sendRedirect(request.getContextPath()+"/views/boardList.jsp");
 	}
 
 }

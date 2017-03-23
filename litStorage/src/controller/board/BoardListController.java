@@ -1,4 +1,4 @@
-package controller;
+package controller.board;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,14 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/postDetail.do")
-public class PostDetailController extends HttpServlet {
+import service.facade.BoardService;
+import service.logic.BoardServiceLogic;
+
+@WebServlet("/board/freeBoard.do")
+public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		BoardService service = new BoardServiceLogic();
+		
+		request.setAttribute("boards", service.findAllBoards());
+		request.getRequestDispatcher("/views/boardList.jsp").forward(request, response);
+	
 	}
 
 }

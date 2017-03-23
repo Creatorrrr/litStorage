@@ -27,10 +27,10 @@
 		<selectKey keyProperty="id" resultType="String" order="BEFORE">
     		SELECT post_seq.NEXTVAL FROM dual
  		</selectKey>
-		INSERT INTO post(name, content, hashTag)
-		VALUES (#{title}, #{content}, #{hashTag})
-	<!--INSERT INTO post(id, name, content, hashTag, writer, boardid)
-		VALUES (#{id}, #{title}, #{content}, #{hashTag}, #{writer.id}, #{board.id}) -->
+		<!-- INSERT INTO post(id,name, content, hashTag)
+		VALUES (#{id},#{title}, #{content}, #{hashTag})  -->
+		INSERT INTO post(id, name, content, hashTag, writer, boardid)
+		VALUES (#{id}, #{title}, #{content}, #{hashTag}, #{writer.id}, #{board.id}) 
 	</insert>
 
 	<update id="updatePost" parameterType="Post">
@@ -50,7 +50,8 @@
 	</select>
 	
 	<select id="selectPostById" parameterType="String" resultMap="postMap">
-		<include refid="selectPost"/>
+		SELECT id,name,content,hashtag
+		FROM post
 		WHERE id=#{id}
 	</select>
 	
