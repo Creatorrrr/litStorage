@@ -14,12 +14,10 @@ public class BoardServiceLogic implements BoardService {
 	
 	private BoardStore bStore;
 	private PostStore pStore;
-//	private MemberStore mStore;
 	
 	public BoardServiceLogic() {
 		bStore = new BoardStoreLogic();
 		pStore = new PostStoreLogic();
-//		mStore = new MemberStoreLogic();
 	}
 
 	@Override
@@ -76,5 +74,6 @@ public class BoardServiceLogic implements BoardService {
 	public List<Post> findPostsByHashTag(String hashTag) {
 		return pStore.selectPostsByHashtag(hashTag);
 	}
+	
 
 }

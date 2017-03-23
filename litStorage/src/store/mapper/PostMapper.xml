@@ -50,6 +50,7 @@
 	</select>
 	
 	<select id="selectPostById" parameterType="String" resultMap="postMap">
+		<!-- <include refid="selectPost"/> -->
 		SELECT id,name,content,hashtag
 		FROM post
 		WHERE id=#{id}
@@ -69,4 +70,5 @@
 		<include refid="selectPost"/>
 		WHERE name LIKE '%${value}%'
 	</select>	
+	
   </mapper>
