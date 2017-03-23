@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="store.mapper.MemberLitStorageMapper">
+  
+    <resultMap type="MemberLitStorage" id="memberLitStorageMap">
+		<result property="joinTime" column="jointime"/>
+  		<association property="member" column="memberid" 
+			select="store.mapper.MemberMapper.selectMemberById" 
+			javaType="Member" jdbcType="VARCHAR"/>
+		<association property="litStorage" column="litstorageid" 
+			select="store.mapper.LitStorageMapper.selectLitStorageById" 
+			javaType="LitStorage" jdbcType="VARCHAR"/>
+  	</resultMap>
+  	
+  	<resultMap type="Member" id="memberMap">
+  		<id property="id" column="id"/>
+  		<result property="name" column="name"/>
+  		<result property="password" column="password"/>
+  		<result property="email" column="email"/>
+  	</resultMap>
+  	
+  	<insert id="insertMemberLitStorage" parameterType="MemberLitStorage">
+  		INSERT INTO memberlitstorage(memberid, litstorageid, jointime)
+  		VALUES(#{member.id}, #{litStorage.id}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'))
+  	</insert>
+  	
+  	<select id="selectMemberLitStoragesByLitStorageId" parameterType="String" resultMap="memberLitStorageMap">
+  		SELECT memberid, litstorageid, jointime
+  		FROM memberlitstorage
+  		WHERE litstorageid = #{id}
+  	</select>
+
+  	<select id="selectMemberLitStoragesByMemberId" parameterType="String" resultMap="memberLitStorageMap">
+  		SELECT memberid, litstorageid, jointime
+  		FROM memberlitstorage
+  		WHERE memberid = #{id}
+  	</select>
+  	
+    <select id="selectMembersByLitStorageId" parameterType="String" resultMap="memberMap">
+  		SELECT m.id as id, m.name as name, m.password as password, m.email as email
+  		FROM member m INNER JOIN memberlitstorage ml ON m.id = ml.memberid
+  		WHERE ml.litstorageid = #{id}
+  	</select>
+  </mapper>

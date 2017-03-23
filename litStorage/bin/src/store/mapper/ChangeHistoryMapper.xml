@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.mapper.ChangeHistoryMapper">
+	<resultMap type="ChangeHistory" id="changeHistoryMap">
+		<id column="id" property="id" />
+		<result property="content" column="content" />
+		<result property="changeTime" column="changeTime" />
+		<result property="message" column="message" />
+		<association property="editor" column="editor"
+			select="store.mapper.MemberMapper.selectMemberById" javaType="Member"
+			jdbcType="VARCHAR" />
+		<association property="episode" javaType="Episode">
+		    <id property="id" column="episodeId"/>
+		</association>
+		<!-- <association property="episode" column="episodeId"
+			select="store.mapper.EpisodeMapper.selectEpisodeById" javaType="Episode"
+			jdbcType="VARCHAR" /> -->
+	</resultMap>
+
+	<insert id="insertChangeHistory" parameterType="ChangeHistory">
+		<selectKey keyProperty="id" resultType="String" order="BEFORE">
+			SELECT change_history_seq.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO changeHistory(id, editor, content, changeTime, message, episodeId)
+		VALUES(#{id}, #{editor.id}, #{content}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'), #{message}, #{episode.id})
+	</insert>
+	<select id="selectChangeHistoriesByEpisodeId"
+		parameterType="String" resultMap="changeHistoryMap">
+		SELECT id, editor, content, changeTime, message, episodeId
+		FROM changehistory
+		WHERE episodeId = #{id}
+	</select>
+	<select id="selectChangeHistoryById"
+		parameterType="String" resultMap="changeHistoryMap">
+		SELECT id, editor, content, changeTime, message, episodeId
+		FROM changehistory
+		WHERE id = #{id}
+	</select>
+	
+</mapper>

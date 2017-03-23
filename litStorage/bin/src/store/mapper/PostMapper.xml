@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="store.mapper.PostMapper">
+
+	<resultMap type="Post" id="postMap">
+		<id column="id" property="id"/>      
+		<result column="name" property="title"/>
+		<result column="content" property="content"/>
+		<result column="hashtag" property="hashTag"/>
+		<association property="writer" column="writer" 
+			select="store.mapper.MemberMapper.selectMemberById" 
+			javaType="Member" jdbcType="VARCHAR"/>
+		<association property="board" column="boardid"
+			select="store.mapper.BoardMapper.selectBoardById"
+			javaType="Board" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="selectPost">
+  		SELECT id, name, content, hashTag, writer, boardid
+		FROM Post
+	</sql>	
+	
+	<insert id="insertPost" parameterType="Post">
+		<selectKey keyProperty="id" resultType="String" order="BEFORE">
+    		SELECT post_seq.NEXTVAL FROM dual
+ 		</selectKey>
+		<!-- INSERT INTO post(id,name, content, hashTag)
+		VALUES (#{id},#{title}, #{content}, #{hashTag})  -->
+		INSERT INTO post(id, name, content, hashTag, writer, boardid)
+		VALUES (#{id}, #{title}, #{content}, #{hashTag}, #{writer.id}, #{board.id}) 
+	</insert>
+
+	<update id="updatePost" parameterType="Post">
+		UPDATE Post
+		SET name = #{title}, content = #{content}, hashTag = #{hashTag}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deletePost" parameterType="String">
+		DELETE FROM Post
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="selectPostsByBoardId" parameterType="String" resultMap="postMap">
+		<include refid="selectPost"/>
+		WHERE boardId = #{board}
+	</select>
+	
+	<select id="selectPostById" parameterType="String" resultMap="postMap">
+		<!-- <include refid="selectPost"/> -->
+		SELECT id,name,content,hashtag
+		FROM post
+		WHERE id=#{id}
+	</select>
+	
+	<select id="selectPostsByContent" parameterType="String" resultMap="postMap">
+		<include refid="selectPost"/>
+		WHERE content LIKE '%${value}%'
+	</select>
+	
+	<select id="selectPostsByHashtag" parameterType="String" resultMap="postMap">
+		<include refid="selectPost"/>
+		WHERE hashtag LIKE '%${value}%'
+	</select>	
+	
+	<select id="selectPostsByTitle" parameterType="String" resultMap="postMap">
+		<include refid="selectPost"/>
+		WHERE name LIKE '%${value}%'
+	</select>	
+	
+  </mapper>

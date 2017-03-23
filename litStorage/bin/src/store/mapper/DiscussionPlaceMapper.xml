@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+    <mapper namespace="store.mapper.DiscussionPlaceMapper">
+    
+	     <resultMap type="DiscussionPlace" id="discussionPlaceMap">
+			<id property="id" column="id"/>
+			<result property="title" column="name"/>
+	  		<association property="creator" column="writer"
+				select="store.mapper.MemberMapper.selectMemberById" 
+				javaType="Member" jdbcType="VARCHAR"/>
+			<association property="litStorage" column="litStorageId" 
+				select="store.mapper.LitStorageMapper.selectLitStorageById" 
+				javaType="LitStorage" jdbcType="VARCHAR"/>
+			<collection property="discussionContents" column="id"
+				select="store.mapper.DiscussionContentMapper.selectDiscussionContentsByDiscussionPlaceId"
+				javaType="ArrayList" jdbcType="VARCHAR"/>
+	  	</resultMap>
+	  	
+    	<insert id="insertDiscussionPlace" parameterType="discussionPlace">
+	    	<selectKey keyProperty="id" resultType="string" order="BEFORE">
+				select DISCUSSION_PLACE_SEQ.nextval FROM DUAL
+			</selectKey>
+    		INSERT INTO discussionPlace(id, name, writer, litstorageId) 
+    		VALUES(#{id}, #{title}, #{creator.id}, #{litStorage.id})
+    	</insert>
+    
+    	<select id="selectDiscussionPlaceById" resultMap="discussionPlaceMap">
+    		SELECT id, name, writer, litstorageId 
+    		FROM discussionPlace 
+    		WHERE id= #{id}
+    	</select>
+    
+    	<select id="selectDiscussionPlacesByLitStorageId" parameterType="String" resultMap="discussionPlaceMap">
+    		SELECT id, name, writer, litstorageId 
+    		FROM discussionPlace 
+    		WHERE litstorageId = #{litStorageId}
+    	</select>
+    	
+    	
+    	<select id="selectDiscussionPlacesByName" parameterType="String" resultMap="discussionPlaceMap">
+    		SELECT id, name, writer, litstorageId 
+    		FROM discussionPlace 
+    		WHERE name LIKE '%${value}%'
+    	</select>
+    
+    	<select id="selectDiscussionPlacesByMemberId" parameterType="String" resultMap="discussionPlaceMap">
+    		SELECT id, name, writer, litstorageId 
+    		FROM discussionPlace 
+    		WHERE writer LIKE '%${value}%'
+    	</select>
+    </mapper>
