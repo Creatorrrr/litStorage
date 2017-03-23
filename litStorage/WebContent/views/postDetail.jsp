@@ -14,7 +14,7 @@
 </head>
 <body>
 
-	<a href="${ctx }/views/postList.jsp">게시글 목록</a>
+	<a href="${ctx }/post/postList.do">게시글 목록</a>
 	<h3>게시글 상세</h3>
 	<br>
 		<table class="table">

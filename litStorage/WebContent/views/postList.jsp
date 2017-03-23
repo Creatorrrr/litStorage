@@ -74,6 +74,8 @@ div {
 									<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
 								</tr>
 							</c:when>
+							
+							
 							<c:otherwise>
 								<c:forEach items="${boards }" var="board" varStatus="status">
 									<tr>
@@ -86,18 +88,15 @@ div {
 										</c:if> --%>
 									</tr>
 
-									<c:forEach items="${board.posts }" var="post">
+									<c:forEach items="${board.posts }" var="post" varStatus="status">
 										<tr>
-											<%-- <td>${status.count }</td> --%>
+											<td>${status.count }</td>
 											<td><a href="${ctx }/post/postDetail.do?id=${post.id }">${post.title }</a></td>
-											<td>${post.id}</td>
-											<%-- <c:if test = "${isAdmin }"> 
-											<td><a href="modify.do?id=${lecture.id }"class="btn btn-xs btn-warning">UPDATE</a></td>
-											<td><a href="remove.do?id=${lecture.id }"class="btn btn-xs btn-danger">DELETE</a></td>
-										</c:if> --%>
+											<td>${post.writer.id}</td>
 										</tr>
-										</c:forEach>
 									</c:forEach>
+									
+								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</tbody>

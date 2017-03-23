@@ -11,7 +11,7 @@
 <body>
 
 	
-	<a href="${ctx }/views/postList.jsp">게시글 목록</a>
+	<a href="${ctx }/post/postList.do">게시글 목록</a>
 	<h3>게시글 등록</h3>
 	
 	<br>
@@ -38,7 +38,7 @@
 		</table>
         <br>
 		<div align="center">
-		<input class="btn" type="reset" value="취소하기"> 
+		<input class="btn" type="reset" value="취소하기" onclick="javascript:window.location='${ctx }/post/postList.do'"> 
 		<input class="btn" type="submit" value="등록하기">
 <!-- 		<input class="btn btn-success" type="submit" value="등록하기"></div> -->
 		</div>

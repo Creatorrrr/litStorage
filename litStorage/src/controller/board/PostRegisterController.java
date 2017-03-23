@@ -26,7 +26,12 @@ public class PostRegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
+
 		String boardId = req.getParameter("boardId");
+		
+//		BoardService service =new BoardServiceLogic();
+//		Post post = service.findPostById(boardId);
+		
 		req.setAttribute("boardId", boardId);
 		req.getRequestDispatcher("/views/postRegister.jsp").forward(req, resp);
 	}
@@ -59,10 +64,6 @@ public class PostRegisterController extends HttpServlet {
 		if (!service.registerPost(post)) { // if the registration failed
 			throw new RuntimeException("post register failed");
 		}
-		
-	//	System.out.println(post.getId()+"/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-	//	List<Post>list = service.findPostsByWriterId(writerId);
-	//	response.sendRedirect(request.getContextPath()+"/post/postDetail.do");
 		
 		request.setAttribute("post",service.findPostById(post.getId()));
 		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
