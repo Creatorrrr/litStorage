@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.Episode;
 import service.facade.LiteratureService;
 import service.logic.LitStorageServiceLogic;
 import service.logic.LiteratureServiceLogic;
@@ -23,8 +24,10 @@ public class EpisodeDeleteController extends HttpServlet {
 		LiteratureService service = new LiteratureServiceLogic();
 		
 		String episodeId = request.getParameter("episodeId");
-		System.out.println(episodeId);
-		boolean check = service.removeEpisode(episodeId);
+		
+		Episode episode = service.findEpisodeById(episodeId);
+		
+		boolean check = service.removeEpisode(episode);
 		
 		if(check){
 			response.sendRedirect(request.getContextPath()+"/cc/cc");

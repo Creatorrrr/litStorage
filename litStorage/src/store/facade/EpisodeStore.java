@@ -9,7 +9,7 @@ public interface EpisodeStore {
 
 	public boolean updateEpisode(Episode episode);
 
-	public boolean deleteEpisode(String episodeId);
+	public boolean deleteEpisode(Episode episodeId);
 
 	public Episode selectEpisodeById(String id);
 

@@ -1,6 +1,6 @@
 package store.utils;
 
-public class JdbcUtils {
+public class AutoCloser {
 
 	public static void close(AutoCloseable...autoCloseables) {
 		for (AutoCloseable autoCloseable : autoCloseables) {
