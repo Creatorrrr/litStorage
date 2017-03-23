@@ -29,7 +29,7 @@ public class LiteratureDeleteController extends HttpServlet {
 		
 		response.sendRedirect(request.getContextPath()+"/episode/do");
 		System.out.println(request.getContextPath()+"/litStorage/allList.do");
-//		request.getRequestDispatcher("../litStorage/allList.do").forward(request, response);
+		request.getRequestDispatcher("/allList.do").forward(request, response);
 	}
 
 }
