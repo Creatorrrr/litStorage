@@ -1,4 +1,4 @@
-package store.utils;
+package utils;
 
 public class AutoCloser {
 

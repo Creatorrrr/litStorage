@@ -10,7 +10,7 @@ public interface EpisodeMapper {
 
 	public boolean updateEpisode(Episode episode);
 
-	public boolean deleteEpisode(Episode episode);
+	public boolean deleteEpisode(String episodeId);
 
 	public Episode selectEpisodeById(String id);
 

@@ -36,7 +36,7 @@
     		update episode set name=#{title}, content='${literature.id}/${id}.txt', writer=#{writer.id}, bound=#{bound,jdbcType=CHAR}, literature=#{literature.id} where id=#{id}
     	</update>
     
-    	<delete id="deleteEpisode" parameterType="Episode">
+    	<delete id="deleteEpisode" parameterType="String">
     		delete from episode where id=#{id}
     	</delete>
     

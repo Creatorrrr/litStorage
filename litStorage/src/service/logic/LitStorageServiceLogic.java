@@ -6,11 +6,9 @@ import domain.LitStorage;
 import domain.Literature;
 import domain.MemberLitStorage;
 import service.facade.LitStorageService;
-import store.facade.EpisodeStore;
 import store.facade.LitStorageStore;
 import store.facade.LiteratureStore;
 import store.facade.MemberLitStorageStore;
-import store.logic.EpisodeStoreLogic;
 import store.logic.LitStorageStoreLogic;
 import store.logic.LiteratureStoreLogic;
 import store.logic.MemberLitStorageStoreLogic;
@@ -37,8 +35,8 @@ public class LitStorageServiceLogic implements LitStorageService {
 	}
 
 	@Override
-	public boolean removeLitStorage(String id) {
-		return lsStore.deleteLitStorage(id);
+	public boolean removeLitStorage(LitStorage litStorage) {
+		return lsStore.deleteLitStorage(litStorage.getId());
 	}
 
 	@Override
