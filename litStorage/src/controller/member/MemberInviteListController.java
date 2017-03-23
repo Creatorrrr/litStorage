@@ -14,7 +14,7 @@ import domain.Member;
 import service.facade.MemberService;
 import service.logic.MemberServiceLogic;
 
-@WebServlet("/memberInviteList.do")
+@WebServlet("/member/inviteList.do")
 public class MemberInviteListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -11,7 +11,7 @@ import domain.Member;
 import service.facade.MemberService;
 import service.logic.MemberServiceLogic;
 
-@WebServlet("/memberModify.do")
+@WebServlet("/member/modify.do")
 public class MemberModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

@@ -68,33 +68,33 @@ public class jsonTest {
 	@Test
 	public void test() {
 		
-		DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
-		DiscussionPlace dp=service.findDiscussionPlaceById("4");
-		
-		try {
-			Map map = objectToMap(dp);
-
-			JSONObject obj = new JSONObject();
-			obj.putAll(map);
-			//obj.put("id", dp.getId());
-			System.out.print(obj);
-		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+//		DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
+//		DiscussionPlace dp=service.findDiscussionPlaceById("4");
+//		
+//		try {
+//			Map map = objectToMap(dp);
+//
+//			JSONObject obj = new JSONObject();
+//			obj.putAll(map);
+//			//obj.put("id", dp.getId());
+//			System.out.print(obj);
+//		
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
 
 		
 		//-------------encode
-//		 JSONObject obj = new JSONObject();
-//
-//	      obj.put("name", "foo");
-//	      obj.put("num", new Integer(100));
-//	      obj.put("balance", new Double(1000.21));
-//	      obj.put("is_vip", new Boolean(true));
-//	      
-//	      //--1
-//	      System.out.print(obj);
+		 JSONObject obj = new JSONObject();
+
+	      obj.put("name", "foo");
+	      obj.put("num", new Integer(100));
+	      obj.put("balance", new Double(1000.21));
+	      obj.put("is_vip", new Boolean(true));
+	      
+	      //--1
+	      System.out.print(obj);
 //	      
 //		  //--2
 //	      StringWriter out = new StringWriter();
