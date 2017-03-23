@@ -13,15 +13,8 @@
 <script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 function deleteLitFunction() {
-	var Y/N;
 	var deleteLit = confirm("삭제하시겠습니까?");
 	
-	if (deleteLit == true) {
-		/* location.replace(); */
-		document.getElementById("deleteY").submit();
-	}else{
-		document.getElementById("deleteN").submit();
-	}
 }
 
 </script>
@@ -33,8 +26,6 @@ div {
 </style>
 </head>
 <body>
-<input id="deleteY" type="hidden" value="Y">
-<input id="deleteN" type="hidden" value="N">
 	<div class="container">
 
 		<div class="row">
@@ -89,7 +80,8 @@ div {
 					<div class="col-xs-12 col-md-8">
 						<h1>연재 글 목록</h1>
 						<div class="text-right">
-						<button onclick="deleteLitFunction()">작품 삭제</button>
+						<!-- LiteratureDeleteController -->
+						<a href="${ctx}/literature/delete.do?deleteLiteratureId=${literature.id}">작품 삭제</a>
 						</div>
 						<div class="panel panel-default">
 							<div class="row">
@@ -107,7 +99,7 @@ div {
 
 							</div>
 							<div class="text-right">
-								<button type="submit">연재글 등록</button>
+								<button type="button" onclick="location.href='../episode/register.do?literatureId=${literature.id}' ">연재글 등록</button>
 							</div>
 							<table class="table table-striped">
 								<tr>
@@ -123,8 +115,8 @@ div {
 											<td>${episode.writer.name }</td>
 
 											<td><select name="openSelect">
-													<option value="OpenLitStorage">저장소 공개</option>
-													<option value="OpenAll">모두 공개</option>
+													<option value="M">저장소 협업 작가만 공개</option>
+													<option value="A">모두 공개</option>
 											</select></td>
 										</tr>
 									</c:if>

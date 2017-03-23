@@ -8,7 +8,16 @@ public class InviteRequest {
 	private Date sendTime;
 	private String message;
 	private String form;
-	
+	private LitStorage litStorage;
+
+	public LitStorage getLitStorage() {
+		return litStorage;
+	}
+
+	public void setLitStorage(LitStorage litStorage) {
+		this.litStorage = litStorage;
+	}
+
 	public Member getSender() {
 		return sender;
 	}

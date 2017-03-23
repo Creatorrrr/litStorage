@@ -61,4 +61,9 @@ public class MemberServiceLogic implements MemberService{
 		return iStore.selectInviteRequestByReceiverId(receiverId);
 	}
 
+	@Override
+	public List<Member> findMemberByName(String name) {
+		return mStore.selectMembersByName(name);
+	}
+
 }

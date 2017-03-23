@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="store.mapper.LitStorageMapper">
+  
+    <resultMap type="LitStorage" id="litStorageMap">
+		<id property="id" column="id"/>
+		<result property="introduce" column="introduce"/>
+		<result property="name" column="name"/>
+  		<association property="creator" column="writer" 
+			select="store.mapper.MemberMapper.selectMemberById" 
+			javaType="Member" jdbcType="VARCHAR"/>
+		<collection property="literatures" column="id" 
+			select="store.mapper.LiteratureMapper.selectLiteraturesByLitStorageId" 
+			javaType="ArrayList" jdbcType="VARCHAR"/>
+		<collection property="discussionPlaces" column="id" 
+			select="store.mapper.DiscussionPlaceMapper.selectDiscussionPlacesByLitStorageId"
+			javaType="ArrayList" jdbcType="VARCHAR"/>
+		<collection property="participants" column="id" ofType="Member"
+			select="store.mapper.MemberLitStorageMapper.selectMembersByLitStorageId"
+			javaType="ArrayList" jdbcType="VARCHAR"/>
+  	</resultMap>
+  	
+  	<insert id="insertLitStorage" parameterType="LitStorage">
+  		<selectKey keyProperty="id" resultType="String" order="BEFORE">
+    		SELECT litstorage_seq.NEXTVAL FROM dual
+ 		</selectKey>
+  		INSERT INTO litstorage(id, introduce, name, writer)
+  		VALUES(#{id}, #{introduce}, #{name}, #{creator.id})
+  	</insert>
+  	
+  	<delete id="deleteLitStorage" parameterType="String">
+  		DELETE FROM litstorage
+  		WHERE id = #{id}
+  	</delete>
+  	
+  	<select id="selectLitStorageById" parameterType="String" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer
+  		FROM litstorage
+  		WHERE id = #{id}
+  	</select>
+  	
+  	<select id="selectLitStoragesByMemberId" parameterType="String" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer
+  		FROM litstorage
+  		WHERE writer = #{id}
+  	</select>
+  	
+  	<select id="selectLitStoragesByName" parameterType="String" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer
+  		FROM litstorage
+  		WHERE name LIKE '%${value}%'
+  	</select>
+  	
+  	<select id="selectAll" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer
+  		FROM litstorage
+  	</select>
+  </mapper>
