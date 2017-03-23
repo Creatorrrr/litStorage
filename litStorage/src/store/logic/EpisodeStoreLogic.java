@@ -233,13 +233,14 @@ public class EpisodeStoreLogic implements EpisodeStore {
 
 			git = Git.open(repoDir);	// open repository
 			DirCache index = git.rm().addFilepattern(episodeFileName).call();	// remove from index
-	        
+	        System.out.println(index.getEntryCount());
 	        if (index.getEntryCount() > 0) {
 	        	System.out.println(episode.getWriter().getId());
 	        	System.out.println(episode.getId());
 				git.commit().setMessage("'" + episode.getWriter().getId() + "' deleted episode file '" + episode.getId() + ".txt'").call();
 				return true;
 	        } else {
+	        	System.out.println("Asdf");
 				return false;
 			}
 		} catch (IOException e) {

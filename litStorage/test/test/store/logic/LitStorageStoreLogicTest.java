@@ -24,13 +24,14 @@ public class LitStorageStoreLogicTest {
 //	public void testInsertLitStorage() {
 //		LitStorage litStorage = new LitStorage();
 //		Member member = new Member();
-//		member.setId("33");
+//		member.setId("11");
 //		
 //		litStorage.setName("asdf");
 //		litStorage.setIntroduce("ffff");
 //		litStorage.setCreator(member);
 //		
 //		assertTrue(store.insertLitStorage(litStorage));
+//		assertTrue(store.insertLitStorageToGit(litStorage));
 //	}
 //
 //	@Test

@@ -22,37 +22,38 @@ public class EpisodeStoreLogicTest {
 		store = new EpisodeStoreLogic();
 	}
 
-//	@Test
-//	public void testInsertEpisode() {
-//		Episode e = new Episode();
-//		e.setTitle("aaa");
-//		e.setContent("아아\r\ndddd");
-//		
-//		Member m = new Member();
-//		m.setId("test");
-//		
-//		e.setWriter(m);
-//		
-//		e.setBound("0001");
-//		
-//		Literature l= new Literature();
-//		l.setId("22");
-//		
-//		LitStorage ls = new LitStorage();
-//		ls.setId("11");
-//		l.setLitStorage(ls);
-//		
-//		e.setLiterature(l);
-//		
-//		assertTrue(store.insertEpisode(e));
-//	}
+	@Test
+	public void testInsertEpisode() {
+		Episode e = new Episode();
+		e.setTitle("aaa");
+		e.setContent("아아\r\ndddd");
+		
+		Member m = new Member();
+		m.setId("test");
+		
+		e.setWriter(m);
+		
+		e.setBound("0001");
+		
+		Literature l= new Literature();
+		l.setId("4");
+		
+		LitStorage ls = new LitStorage();
+		ls.setId("10");
+		l.setLitStorage(ls);
+		
+		e.setLiterature(l);
+		
+		assertTrue(store.insertEpisode(e));
+		assertTrue(store.insertEpisodeToGit(e));
+	}
 //
 //	@Test
 //	public void testUpdateEpisode() {
 //		Episode e = new Episode();
-//		e.setId("16");
-//		e.setTitle("ㅁㅁ");
-//		e.setContent("오오옹\r\n앙다아아댜야ㅗㅎ");
+//		e.setId("2");
+//		e.setTitle("ss");
+//		e.setContent("ㄻㄴㄻㄴㅇㄻdghddㄴㅇ\r\n아아");
 //		
 //		Member m = new Member();
 //		m.setId("test");
@@ -62,31 +63,34 @@ public class EpisodeStoreLogicTest {
 //		e.setBound("0001");
 //		
 //		Literature l= new Literature();
-//		l.setId("22");
+//		l.setId("4");
 //		
 //		LitStorage ls = new LitStorage();
-//		ls.setId("11");
+//		ls.setId("10");
 //		l.setLitStorage(ls);
 //		
 //		e.setLiterature(l);
 //		
 //		assertTrue(store.updateEpisode(e));
+//		assertTrue(store.updateEpisodeToGit(e));
 //	}
 //
 //	@Test
 //	public void testDeleteEpisode() {
 //		Episode e = new Episode();
-//		e.setId("23");
+//		e.setId("5");
 //		Member writer = new Member();
 //		writer.setId("asfd");
 //		e.setWriter(writer);
 //		Literature literature = new Literature();
-//		literature.setId("22");
+//		literature.setId("4");
 //		LitStorage litStorage = new LitStorage();
-//		litStorage.setId("11");
+//		litStorage.setId("10");
 //		literature.setLitStorage(litStorage);
 //		e.setLiterature(literature);
-//		assertTrue(store.deleteEpisode(e));
+//		
+//		assertTrue(store.deleteEpisode(e.getId()));
+//		assertTrue(store.deleteEpisodeToGit(e));
 //	}
 //
 //	@Test

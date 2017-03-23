@@ -49,11 +49,7 @@ public class LiteratureStoreLogic implements LiteratureStore{
 			return false;
 		}
 		
-		try {
-			literatureDir.createNewFile();
-		} catch (IOException e) {
-			throw new RuntimeException("create literature folder failed");
-		}
+		literatureDir.mkdir();
 		
 		return true;
 	}
