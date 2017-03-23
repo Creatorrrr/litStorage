@@ -24,9 +24,7 @@ public class EpisodeStoreLogicTest {
 
 	@Test
 	public void testInsertEpisode() {
-		
 		Episode e = new Episode();
-		e.setId("1");
 		e.setTitle("aaa");
 		e.setContent("아아\r\ndddd");
 		
@@ -47,25 +45,29 @@ public class EpisodeStoreLogicTest {
 		e.setLiterature(l);
 		
 		assertTrue(store.insertEpisode(e));
-		
 	}
-//
+
 //	@Test
 //	public void testUpdateEpisode() {
-//		
 //		Episode e = new Episode();
-//		e.setId("7");
-//		e.setTitle("bb");
-//		e.setContent("ddd");
+//		e.setId("15");
+//		e.setTitle("ㅁㅁ");
+//		e.setContent("오오옹\r\n앙다아아댜야ㅗㅎ");
 //		
 //		Member m = new Member();
 //		m.setId("test");
+//		
 //		e.setWriter(m);
 //		
-//		e.setBound("0003");
+//		e.setBound("0001");
 //		
 //		Literature l= new Literature();
-//		l.setId("33");
+//		l.setId("22");
+//		
+//		LitStorage ls = new LitStorage();
+//		ls.setId("11");
+//		l.setLitStorage(ls);
+//		
 //		e.setLiterature(l);
 //		
 //		assertTrue(store.updateEpisode(e));
