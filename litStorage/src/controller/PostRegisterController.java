@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.reflection.SystemMetaObject;
+
 import domain.Board;
 import domain.Post;
 
@@ -48,6 +50,10 @@ public class PostRegisterController extends HttpServlet {
 		post.setContent(postContent);
 		post.setHashTag(hashtag);
 		
+		board.setTitle(postTitle);
+		System.out.println("1111111"+board.getTitle());
+		
+		
 		if(!service.registerPost(post)) {        //if the registration failed
 			throw new RuntimeException("post register failed");
 		}
@@ -57,6 +63,9 @@ public class PostRegisterController extends HttpServlet {
 //		PostService service = new PostServiceLogic();
 //		
 		service.registerPost(post);
+		service.registerBoard(board);
+		
+		
 		
 		response.sendRedirect(request.getContextPath()+"/board/freeBoard.do");
 	

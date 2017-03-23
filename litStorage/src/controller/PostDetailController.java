@@ -7,14 +7,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/postDetail.do")
+import domain.Post;
+import service.facade.BoardService;
+import service.logic.BoardServiceLogic;
+
+@WebServlet("/post/postDetail.do")
 public class PostDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		BoardService service = new BoardServiceLogic();
+		
+		String postId = request.getParameter("id");
+		System.out.println("111"+postId);
+		
+		service.findPostById(postId);
+	
+		System.out.println(service.findPostById(postId));
+		request.setAttribute("postDetail",service.findPostById(postId));
+		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
+//	response.sendRedirect(request.getContextPath()+"/views/postDetail.jsp");
+	
 	}
 
 }
