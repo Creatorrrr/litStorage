@@ -16,10 +16,6 @@ public class Wrapper<T> {
 		this.items = items;
 	}
 	
-	public Wrapper(Object item){
-		items = new ArrayList<T>();
-		this.items.add((T)item);
-	}
 	
 	@XmlAnyElement(lax = true)
 	public List<T> getItems(){

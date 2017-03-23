@@ -115,3 +115,4 @@ create sequence EPISODE_SEQ START WITH 1 INCREMENT BY 1;
 create sequence LITERATURE_SEQ START WITH 1 INCREMENT BY 1;
 create sequence POST_SEQ START WITH 1 INCREMENT BY 1;
 create sequence LITSTORAGE_SEQ START WITH 1 INCREMENT BY 1;
+alter table inviterequest add(litstorageId varchar2(50));
