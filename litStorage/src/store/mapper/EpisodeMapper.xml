@@ -34,10 +34,10 @@
     	</insert>
     	
     	<update id="updateEpisode">
-    		update episode set name=#{title}, content=#{content}, writer=#{writer.id}, bound=#{bound}, literature=#{literature.id} where id=#{id}
+    		update episode set name=#{title}, content=#{content}, writer=#{writer.id}, bound=#{bound,jdbcType=CHAR}, literature=#{literature.id} where id=#{id}
     	</update>
     
-    	<delete id="deleteEpisode">
+    	<delete id="deleteEpisode" parameterType="string">
     		delete from episode where id=#{id}
     	</delete>
     

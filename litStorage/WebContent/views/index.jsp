@@ -16,6 +16,9 @@
 <a href="${ctx }/episode/list.do">연재글 목록</a><br>
 <a href="${ctx }/views/episodeRegister.jsp">연재글 등록</a><br>
 <a href="${ctx }/episode/detail.do">연재글 상세</a><br>
+
+<%-- <a href="${ctx }/episode/modify.do">연재글 수정</a><br> --%>
+
 <a href="${ctx }/litStorage/register.do">작품 저장소 등록</a><br>
 <a href="${ctx }/litStorage/myList.do">내 작품 저장소!</a><br>
 <a href="${ctx }/litStorage/memberList.do?id=4">작품 저장소 참가 회원</a><br>

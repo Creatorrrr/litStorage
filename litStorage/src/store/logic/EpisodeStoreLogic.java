@@ -51,12 +51,12 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	}
 
 	@Override
-	public boolean deleteEpisode(Episode episode) {
+	public boolean deleteEpisode(String episodeId) {
 		SqlSession session = factory.openSession();
 		boolean check = false;
 		try {
 			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
-			check = mapper.deleteEpisode(episode);
+			check = mapper.deleteEpisode(episodeId);
 			if (check) {
 				session.commit();
 			}

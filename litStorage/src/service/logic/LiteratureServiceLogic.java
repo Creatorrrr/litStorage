@@ -81,8 +81,8 @@ public class LiteratureServiceLogic implements LiteratureService {
 	}
 
 	@Override
-	public boolean removeEpisode(Episode episode) {
-		return epStore.deleteEpisode(episode);
+	public boolean removeEpisode(String episodeId) {
+		return epStore.deleteEpisode(episodeId);
 	}
 
 	@Override
