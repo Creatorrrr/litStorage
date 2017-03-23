@@ -81,7 +81,7 @@ div {
 						<h1>연재 글 목록</h1>
 						<div class="text-right">
 						<!-- LiteratureDeleteController -->
-						<button onclick="location.href='../literature/delete.do?deleteLiteratureId=${literature.id}'">작품 삭제</button>
+						<a href="${ctx}/literature/delete.do?deleteLiteratureId=${literature.id}">작품 삭제</a>
 						</div>
 						<div class="panel panel-default">
 							<div class="row">
