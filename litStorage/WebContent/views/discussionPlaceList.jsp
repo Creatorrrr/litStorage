@@ -6,8 +6,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>토론장 목록</title>
-<!--  <script type="text/javascript" src="${ctx }/resources/js/jquery-3.2.0.min.js"></script>-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx }/resources/js/jquery-3.2.0.min.js"></script>
+
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+<script type="text/javascript">
+	$(function () {
+		
+		//$('button,a').addClass('btn btn-success');
+		//$('input').addClass('form-control');
+		
+	});
+
+
+</script>
+
+
 </head>
 <body>
 
@@ -34,8 +51,8 @@
 				제목:<input type="text" name="title">
 				
 				
-				<input type="hidden" name="litStorageId" value="333">
-				<button type="button" id="registerBtn">토론장 생성</button>
+				<input type="hidden" name="litStorageId" value="333" class="form-control">
+				<button type="button" id="registerBtn" class="btn btn-success">토론장 생성</button>
 			</form>
 		</div>
 			<script type="text/javascript">
