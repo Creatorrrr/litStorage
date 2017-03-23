@@ -25,12 +25,12 @@
 			
 	  	</resultMap>
     
-    	<insert id="insertEpisode">
+    	<insert id="insertEpisode" parameterType="Episode">
     		<selectKey keyProperty="id" resultType="string" order="BEFORE">
 				select EPISODE_SEQ.nextval FROM DUAL
 			</selectKey>
     		insert into episode(id, name, content, writer, bound, literature )
-			values(#{id},#{title},#{content},#{writer.id},#{bound},#{literature.id})
+			values(#{id},#{title},#{content},#{writer.id, jdbcType=VARCHAR},#{bound,jdbcType=CHAR},#{literature.id})
     	</insert>
     	
     	<update id="updateEpisode">

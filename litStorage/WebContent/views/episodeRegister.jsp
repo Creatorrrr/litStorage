@@ -23,8 +23,6 @@ div {
 </style>
 </head>
 <body>
-	<input id="deleteY" type="hidden" value="Y">
-	<input id="deleteN" type="hidden" value="N">
 	<div class="container">
 
 		<div class="row">
@@ -35,7 +33,7 @@ div {
 						<h1>제목</h1>
 					</div>
 					<div class="text-right">
-						<button>로그아웃</button>
+						<button>로그인</button>
 						<button>회원 정보 수정</button>
 					</div>
 				</div>
@@ -78,7 +76,8 @@ div {
 				<div class="text-right"></div>
 				<div class="panel panel-default">
 					<div class="row">
-					<form action="../episode/register.do">
+					<form action="../episode/register.do" method="post">
+					<input type="hidden" name="literatureId" value="${LiteratureId }">
 						<div class="col-md-3">
 							<div>
 								<h4>장르</h4>
@@ -90,11 +89,11 @@ div {
 							</div>
 							<div>
 								<h4>제목</h4>
-								<textarea rows="1" cols="75" name="literatureName"></textarea>
+								<textarea rows="1" cols="75" name="episodeName"></textarea>
 							</div>
 							<div>
 								<h4>내용</h4>
-								<textarea rows="10" cols="75" name="literatureContents"></textarea>
+								<textarea rows="10" cols="75" name="episodeContents"></textarea>
 							</div>
 
 						</div>

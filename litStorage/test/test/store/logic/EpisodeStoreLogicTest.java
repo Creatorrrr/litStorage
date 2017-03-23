@@ -21,26 +21,26 @@ public class EpisodeStoreLogicTest {
 		store = new EpisodeStoreLogic();
 	}
 
-//	@Test
-//	public void testInsertEpisode() {
-//		
-//		Episode e = new Episode();
-//		e.setTitle("aaa");
-//		e.setContent("cccc");
-//		
-//		Member m = new Member();
-//		m.setId("test");
-//		e.setWriter(m);
-//		
-//		e.setBound("0001");
-//		
-//		Literature l= new Literature();
-//		l.setId("22");
-//		e.setLiterature(l);
-//		
-//		assertTrue(store.insertEpisode(e));
-//		
-//	}
+	@Test
+	public void testInsertEpisode() {
+		
+		Episode e = new Episode();
+		e.setTitle("aaa");
+		e.setContent("cccc");
+		
+		Member m = new Member();
+		m.setId("test");
+		e.setWriter(m);
+		
+		e.setBound("0001");
+		
+		Literature l= new Literature();
+		l.setId("22");
+		e.setLiterature(l);
+		
+		assertTrue(store.insertEpisode(e));
+		
+	}
 //
 //	@Test
 //	public void testUpdateEpisode() {
@@ -71,15 +71,15 @@ public class EpisodeStoreLogicTest {
 //		
 //	}
 //
-	@Test
-	public void testSelectEpisodeByid() {
-		Episode e=store.selectEpisodeById("8");
-		System.out.println(e.getId());//8
-		System.out.println(e.getTitle());//aaa
-		System.out.println(e.getWriter().getId());
-		System.out.println(e.getLiterature().getName());
-		//System.out.println(e.getHistories().size());
-	}
+//	@Test
+//	public void testSelectEpisodeByid() {
+//		Episode e=store.selectEpisodeById("8");
+//		System.out.println(e.getId());//8
+//		System.out.println(e.getTitle());//aaa
+//		System.out.println(e.getWriter().getId());
+//		System.out.println(e.getLiterature().getName());
+//		//System.out.println(e.getHistories().size());
+//	}
 
 //	@Test
 //	public void testSelectEpisodesByLiteratureId() {
