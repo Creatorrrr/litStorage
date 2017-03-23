@@ -106,7 +106,7 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		File tempFile = null;
 		
 		try {
-			tempFile = new File(episodeFile.getName().substring(0, episodeFile.getName().lastIndexOf(".")) + ".tmp");	// filename.tmp 생성
+			tempFile = new File(episodeFile.getCanonicalPath().substring(0, episodeFile.getName().lastIndexOf(".")) + ".tmp");	// filename.tmp 생성
 			
 			bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
 			
