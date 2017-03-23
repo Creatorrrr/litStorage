@@ -15,9 +15,12 @@
 		<association property="receiver" column="receiver"
 			select="store.mapper.MemberMapper.selectMemberById" javaType="Member"
 			jdbcType="VARCHAR" />
+		<association property="litStorage" column="litStorageId"
+			select="store.mapper.LitStorageMapper.selectLitStorageById" javaType="LitStorage"
+			jdbcType="VARCHAR"/>
 	</resultMap>
 	<sql id="selectInviteRequest"> 
-		SELECT sender, receiver, sendtime, form, message
+		SELECT sender, receiver, sendtime, form, message, litStorageId
 		FROM inviterequest
 	</sql>
 
@@ -31,12 +34,12 @@
 	</select>
 
 	<insert id="insertInviteRequest" parameterType="inviterequest">
-		INSERT INTO inviterequest(sender, receiver, sendTime, form, message)
-		VALUES (#{sender.id},#{receiver.id},TO_DATE(sysdate,'yyyy/mm/dd hh24:mi:ss '),#{form},#{message})
+		INSERT INTO inviterequest(sender, receiver, sendTime, form, message, litStorageId)
+		VALUES (#{sender.id},#{receiver.id},TO_DATE(sysdate,'yyyy/mm/dd hh24:mi:ss'),#{form},#{message},#{litStorage.id})
 	</insert>
 	<delete id="deleteInviteRequest" parameterType="map">
 		DELETE FROM inviterequest
-		WHERE sender = #{sender} AND receiver = #{receiver}
+		WHERE sender = #{sender} AND receiver = #{receiver} AND litStorageId = #{litStorage.id}
 	</delete>
 </mapper>
   

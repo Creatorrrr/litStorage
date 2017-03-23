@@ -16,9 +16,12 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 
+import domain.LitStorage;
 import domain.Member;
 import domain.wrapper.Wrapper;
+import service.facade.LitStorageService;
 import service.facade.MemberService;
+import service.logic.LitStorageServiceLogic;
 import service.logic.MemberServiceLogic;
 
 @WebServlet("/member/search.do")
@@ -26,7 +29,20 @@ public class MemberSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath()+"/views/memberInviteSearch.jsp");
+		String litStorageId = request.getParameter("litStorageId");
+		LitStorageService lsService = new LitStorageServiceLogic();
+		
+		/* find litStorage info from prev page. if litStorageId exist, set LitStorage
+		 * to inviteMemberSearch Page. if don't contain LitStorge info then go to 
+		 * member search page for admin user.
+		 * */
+		if(litStorageId != null){
+			LitStorage ls = lsService.findLitStorageById(litStorageId);
+			request.setAttribute("litStorage", ls);
+			request.getRequestDispatcher("/views/memberInviteSearch.jsp").forward(request, response);
+		}else{
+			// this tab is for admin user. if you made search page for admin, write code for redirect.
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,7 +75,6 @@ public class MemberSearchController extends HttpServlet {
 			Wrapper<Member> wrapper = new Wrapper<>(list);
 			JAXBElement<Wrapper> element = new JAXBElement<Wrapper>(qname,Wrapper.class,wrapper);
 			m.marshal(element, out);
-			System.out.println("¼º°ø!");
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

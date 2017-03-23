@@ -143,6 +143,7 @@ textarea {
 	<div id="sendRequest">
 		<form class="form" action="${ctx }/litStorage/invite.do" id="send"
 			method="post">
+			<input type="hidden" name="litStorageId" value="${litStorage.id }">
 			<h3>초대 메시지 작성</h3>
 			<hr/>
 			<br /> <label>보내는 사람 : ${loginId }</label> <br /> <br /> <label>요청
@@ -181,7 +182,8 @@ textarea {
 			url :"${ctx }/litStorage/invite.do",
 			type:"post",
 			data:{ receiverId:$("input[name='receiverId']").val(),
-					message:$("input[name='message']").val()
+					message:$("input[name='message']").val(),
+					litStorageId:$("input[name='litStorageId']").val()
 			}
 		});
 	});
@@ -205,7 +207,7 @@ textarea {
 							contentStr += "<tr><td>"+ $(this).find("id").text() + "</td><td>"
 								+ $(this).find("name").text() + "</td><td>"
 								+ $(this).find("email").text() + "</td>"
-								+ "<td>" + "<button onclick='addReceiver(\"" + $(this).find("id").text() + "\")' id='pop' type='button'>참가 요청</button>" + "</td></tr>";
+								+ "<td>" + "<button onclick='addReceiver(\"" + $(this).find("id").text() + "\")' id='pop' type='button'>초대하기</button>" + "</td></tr>";
 						});
 						$("#result > tbody").append(contentStr);
 					}
