@@ -23,11 +23,11 @@ public class EpisodeDeleteController extends HttpServlet {
 		LiteratureService service = new LiteratureServiceLogic();
 		
 		String episodeId = request.getParameter("episodeId");
-		
+		System.out.println(episodeId);
 		boolean check = service.removeEpisode(episodeId);
 		
 		if(check){
-			
+			response.sendRedirect(request.getContextPath()+"/cc/cc");
 		}
 	}
 
