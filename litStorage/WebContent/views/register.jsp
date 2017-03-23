@@ -18,15 +18,16 @@ function validate() {
     
  		var frm = document.forms['frm'];
       
+ 	   ;
+ 		
+ 		if(!chk(/[0-9]/, id, "아이디는 숫자 하나 이상 포함해주세요."))
+             return false;
+ 		
+ 		if(!chk(/^[a-z][a-z\d]{3,11}$/, id, "비밀번호 첫글자는 영문 소문자, 4~12자 입력해주세요."))
+            return false;
+  		
         if(!chk(/^[\w]{4,}@[\w]+(\.[\w-]+){1,3}$/, email, "이메일 형식에 어긋납니다."))
                return false;
-       
-     
-        if(!chk(/^[a-z][a-z\d]{3,11}$/, id, "비밀번호 첫글자는 영문 소문자, 4~12자 입력해주세요."))
-               return false;
-        if(!chk(/[0-9]/, id, "아이디는 숫자 하나 이상 포함해주세요."))
-               return false;
- 
        
         if(password.value!=password2.value) {
                alert("비밀번호가 일치하지 않습니다.");
@@ -54,8 +55,6 @@ function validate() {
 </head>
 <body>
  
-        
-       
         <h1>회원가입 유효성 체크</h1>
        
         <form name="frm" action="${ctx }/join.do" method="post">       <!-- 제출시 행동 -->

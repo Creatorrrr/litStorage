@@ -29,9 +29,9 @@
 		WHERE id=#{id}
 	</select>
 
-	<select id="selectMembersByName" parameterType="string" resultMap="memberMap">
+	<select id="selectMembersByName" parameterType="String" resultMap="memberMap">
 		<include refid="selectMember"/>
-		WHERE name LIKE '%#{name}%'
+		WHERE name LIKE '%'||#{name}||'%'
 	</select>
 		
 	<update id="updateMember" parameterType="Member">

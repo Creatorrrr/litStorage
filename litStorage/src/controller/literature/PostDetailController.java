@@ -19,16 +19,12 @@ public class PostDetailController extends HttpServlet {
 			throws ServletException, IOException {
 
 		BoardService service = new BoardServiceLogic();
-		
+	//	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		String postId = request.getParameter("id");
-		System.out.println("111"+postId);
-		
-		service.findPostById(postId);
 	
-		System.out.println(service.findPostById(postId));
-		request.setAttribute("postDetail",service.findPostById(postId));
+		request.setAttribute("post",service.findPostById(postId));
 		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
-//	response.sendRedirect(request.getContextPath()+"/views/postDetail.jsp");
+	//	response.sendRedirect(request.getContextPath()+"/views/postDetail.jsp");
 	
 	}
 

@@ -43,17 +43,15 @@
 			</tr>
 			<tr>
 				<td width="200">비밀번호</td>
-				<td width="400"><input type="password" name="password" size="10"maxlength="10" value="${member.passwd}"></td>
+				<td width="400"><input type="password" name="password" size="10"maxlength="10" value="${member.password}"></td>
 			</tr>
 			<tr>
 				<td width="200">이름</td>
-				<td width="400"><input type="text" name="name" size="15"
-					maxlength="10" value="${member.name}"></td>
+				<td width="400"><input type="text" name="name" size="15" maxlength="10" value="${member.name}"></td>
 			</tr>
 			<tr>
 				<td width="200">E-Mail</td>
-				<td width="400"><input type="text" name="email" size="40"
-					maxlength="30" value="${member.email}"></td>
+				<td width="400"><input type="text" name="email" size="40" maxlength="30" value="${member.email}"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
