@@ -18,8 +18,10 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.NoFilepatternException;
 import org.eclipse.jgit.dircache.DirCache;
 
+import domain.ChangeHistory;
 import domain.Episode;
 import store.facade.EpisodeStore;
+import store.mapper.ChangeHistoryMapper;
 import store.mapper.EpisodeMapper;
 import utils.AutoCloser;
 import utils.PathBuilder;
@@ -54,7 +56,7 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	}
 	
 	@Override
-	public boolean insertEpisodeToGit(Episode episode) {
+	public String insertEpisodeToGit(Episode episode, String message) {
 		Git git = null;
 		
 		File repoDir = new File(PathBuilder.buildLitStoragePath(episode.getLiterature().getLitStorage()));
@@ -78,12 +80,12 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			DirCache index = git.add().addFilepattern(episodeFileName).call();	// add to index
 	        
 	        if (index.getEntryCount() > 0) {
-				git.commit().setMessage("'" + episode.getWriter().getId() + "' created episode file '" + episode.getId() + ".txt'").call();
-				return true;
+				git.commit().setMessage(message).call();
+				return git.getRepository().resolve("HEAD^{tree}").getName();	// return HEAD's SHA-1 hash
 	        } else {
 				git.rm().addFilepattern(episodeFileName).setCached(true).call();	// if checkDb is false then remove file from index
 				episodeFile.delete();
-				return false;
+				return null;
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Can not open Git Repository");
@@ -153,7 +155,7 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	}
 	
 	@Override
-	public boolean updateEpisodeToGit(Episode episode) {
+	public String updateEpisodeToGit(Episode episode, String message) {
 		Git git = null;
 		
 		File repoDir = new File(PathBuilder.buildLitStoragePath(episode.getLiterature().getLitStorage()));
@@ -173,12 +175,12 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			DirCache index = git.add().addFilepattern(episodeFileName).call();	// add to index
 	        
 	        if (index.getEntryCount() > 0) {
-				git.commit().setMessage("'" + episode.getWriter().getId() + "' modified episode file '" + episode.getId() + ".txt'").call();
-				return true;
+				git.commit().setMessage(message).call();
+				return git.getRepository().resolve("HEAD^{tree}").getName();	// return HEAD's SHA-1 hash
 	        } else {
 				git.rm().addFilepattern(episodeFileName).setCached(true).call();	// if checkDb is false then remove file from index
 				episodeFile.delete();
-				return false;
+				return null;
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Can not open Git Repository");
@@ -213,7 +215,7 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	}
 	
 	@Override
-	public boolean deleteEpisodeToGit(Episode episode) {
+	public String deleteEpisodeToGit(Episode episode, String message) {
 		Git git = null;
 		
 		File repoDir = new File(PathBuilder.buildLitStoragePath(episode.getLiterature().getLitStorage()));
@@ -228,21 +230,13 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		
 		try {
 			if(!episodeFile.delete()) {
-				return false;
+				return null;
 			}
 
 			git = Git.open(repoDir);	// open repository
-			DirCache index = git.rm().addFilepattern(episodeFileName).call();	// remove from index
-	        System.out.println(index.getEntryCount());
-	        if (index.getEntryCount() > 0) {
-	        	System.out.println(episode.getWriter().getId());
-	        	System.out.println(episode.getId());
-				git.commit().setMessage("'" + episode.getWriter().getId() + "' deleted episode file '" + episode.getId() + ".txt'").call();
-				return true;
-	        } else {
-	        	System.out.println("Asdf");
-				return false;
-			}
+			git.rm().addFilepattern(episodeFileName).call();	// remove from index
+			git.commit().setMessage(message).call();
+			return git.getRepository().resolve("HEAD^{tree}").getName();	// return HEAD's SHA-1 hash
 		} catch (IOException e) {
 			throw new RuntimeException("Can not open Git Repository");
 		} catch (NoFilepatternException e) {
@@ -293,6 +287,25 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		} finally {
 			session.close();
 		}
+		return check;
+	}
+	
+	@Override
+	public boolean insertChangeHistory(ChangeHistory history) {
+		SqlSession session = factory.openSession();
+		
+		boolean check = false;
+		
+		try {
+			ChangeHistoryMapper mapper = session.getMapper(ChangeHistoryMapper.class);
+			
+			if (check = mapper.insertChangeHistory(history) > 0) {
+				session.commit();
+			}
+		} finally {
+			session.close();
+		}
+		
 		return check;
 	}
 }

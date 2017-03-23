@@ -13,15 +13,12 @@
 			<association property="writer" column="writer"
 				select="store.mapper.MemberMapper.selectMemberById"
 				javaType="Member" jdbcType="VARCHAR"/>
-			<!--
-			<collection property="histories" column="id" 
-				select="store.mapper.ChangeHistoryMapper.selectChangeHistoriesByEpisodeId"
-				javaType="ArrayList" jdbcType="VARCHAR"/>
-			  -->
 			<association property="literature" column="literature" 
 				select="store.mapper.LiteratureMapper.selectLiteraturesById" 
 				javaType="Literature" jdbcType="VARCHAR"/>
-			
+			<collection property="histories" column="id" 
+				select="store.mapper.ChangeHistoryMapper.selectChangeHistoriesByEpisodeId"
+				javaType="ArrayList" jdbcType="VARCHAR"/>
 	  	</resultMap>
     
     	<insert id="insertEpisode" parameterType="Episode">

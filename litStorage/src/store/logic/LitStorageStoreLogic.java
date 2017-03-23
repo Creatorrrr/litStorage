@@ -104,7 +104,7 @@ public class LitStorageStoreLogic implements LitStorageStore {
 		
 		File[] tempFile = file.listFiles();
 		
-		if(tempFile.length >0){
+		if(tempFile.length > 0){
 			for (int i = 0; i < tempFile.length; i++){ 
 				if(tempFile[i].isFile()){ 
 					tempFile[i].delete(); 

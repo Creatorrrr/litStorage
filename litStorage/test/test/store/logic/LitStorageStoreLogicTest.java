@@ -10,6 +10,7 @@ import org.junit.Test;
 import domain.LitStorage;
 import domain.Member;
 import store.logic.LitStorageStoreLogic;
+import utils.PathBuilder;
 
 public class LitStorageStoreLogicTest {
 	
@@ -34,13 +35,20 @@ public class LitStorageStoreLogicTest {
 //		assertTrue(store.insertLitStorageToGit(litStorage));
 //	}
 //
-//	@Test
-//	public void testDeleteLitStorage() {
-//		LitStorage litStorage = new LitStorage();
-//		litStorage.setId("9");
-//		
-//		assertTrue(store.deleteLitStorage(litStorage));
-//	}
+	@Test
+	public void testDeleteLitStorage() {
+		LitStorage litStorage = new LitStorage();
+		Member member = new Member();
+		member.setId("11");
+		
+		litStorage.setId("1");
+		litStorage.setName("asdf");
+		litStorage.setIntroduce("ffff");
+		litStorage.setCreator(member);
+		
+		assertTrue(store.deleteLitStorage("1"));
+		assertTrue(store.deleteLitStorageFromGit(PathBuilder.buildLitStoragePath(litStorage)));
+	}
 //
 //	@Test
 //	public void testSelectLitStorageById() {

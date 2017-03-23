@@ -36,22 +36,22 @@ public class EpisodeStoreLogicTest {
 		e.setBound("0001");
 		
 		Literature l= new Literature();
-		l.setId("4");
+		l.setId("11");
 		
 		LitStorage ls = new LitStorage();
-		ls.setId("10");
+		ls.setId("1");
 		l.setLitStorage(ls);
 		
 		e.setLiterature(l);
 		
 		assertTrue(store.insertEpisode(e));
-		assertTrue(store.insertEpisodeToGit(e));
+		System.out.println(store.insertEpisodeToGit(e, "message"));
 	}
 //
 //	@Test
 //	public void testUpdateEpisode() {
 //		Episode e = new Episode();
-//		e.setId("2");
+//		e.setId("1");
 //		e.setTitle("ss");
 //		e.setContent("ㄻㄴㄻㄴㅇㄻdghddㄴㅇ\r\n아아");
 //		
@@ -63,10 +63,10 @@ public class EpisodeStoreLogicTest {
 //		e.setBound("0001");
 //		
 //		Literature l= new Literature();
-//		l.setId("4");
+//		l.setId("1");
 //		
 //		LitStorage ls = new LitStorage();
-//		ls.setId("10");
+//		ls.setId("1");
 //		l.setLitStorage(ls);
 //		
 //		e.setLiterature(l);
@@ -78,14 +78,14 @@ public class EpisodeStoreLogicTest {
 //	@Test
 //	public void testDeleteEpisode() {
 //		Episode e = new Episode();
-//		e.setId("5");
+//		e.setId("2");
 //		Member writer = new Member();
 //		writer.setId("asfd");
 //		e.setWriter(writer);
 //		Literature literature = new Literature();
-//		literature.setId("4");
+//		literature.setId("1");
 //		LitStorage litStorage = new LitStorage();
-//		litStorage.setId("10");
+//		litStorage.setId("1");
 //		literature.setLitStorage(litStorage);
 //		e.setLiterature(literature);
 //		
@@ -95,14 +95,16 @@ public class EpisodeStoreLogicTest {
 //
 //	@Test
 //	public void testSelectEpisodeById() {
-//		Episode e=store.selectEpisodeById("8");
+//		Episode e = store.selectEpisodeById("1");
 //		System.out.println(e.getId());//8
 //		System.out.println(e.getTitle());//aaa
 //		System.out.println(e.getWriter().getId());
 //		System.out.println(e.getLiterature().getName());
 //		System.out.println(e.getLiterature().getLitStorage().getIntroduce());
 //		System.out.println(e.getContent());
-//		//System.out.println(e.getHistories().size());
+//		System.out.println(e.getContentFromGit());
+//		System.out.println(e.getHistories().size());
+//		System.out.println(e.getHistories().get(0).getEpisode().getId());
 //	}
 //
 //	@Test
