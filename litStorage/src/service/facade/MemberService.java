@@ -8,6 +8,7 @@ import domain.Member;
 public interface MemberService {
 	public boolean registerMember(Member member); 
 	public Member findMemberById(String id);
+	public List<Member> findMemberByName(String name);
 	public boolean modifyMember(Member member);
 	public boolean removeMember(String id);
 	public boolean registerInviteRequest(InviteRequest inviteRequest);

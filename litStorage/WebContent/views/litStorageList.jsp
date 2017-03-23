@@ -33,7 +33,7 @@
 						<table border="1">
 							<tr>
 								<td>이름</td>
-								<td>${litStorage.name }</td>
+								<td><a href="${ctx}/litStorage/profile.do?id=${litStorage.id}">${litStorage.name }</a></td>
 							</tr>
 							<tr>
 								<td>소개</td>

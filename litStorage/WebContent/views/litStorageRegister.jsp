@@ -10,9 +10,15 @@
 	<link href="resources/css/bootstrap_modify.css" rel="stylesheet">
 	<link href="resources/css/layout.css" rel="stylesheet">
 	<script src="resources/js/jquery-2.1.3.js"></script>
+	<script type="text/javascript">
+		var checkValidate = function() {
+			// name must be not empty
+		}
+	</script>
 	</head>
 	<body>
 		<form action="${ctx }/litStorage/register.do" method="post">
+		<input type="hidden" name="userId" value="${loginId }">
 			<table>
 				<tr>
 					<td>이름</td>
@@ -23,7 +29,7 @@
 					<td><input type="text" name="introduce" maxlength="300"></td>
 				</tr>
 			</table>
-			<button type="submit">등록</button>
+			<button type="submit" onclick="checkValidate();">등록</button>
 		</form>
 	</body>
 </html>

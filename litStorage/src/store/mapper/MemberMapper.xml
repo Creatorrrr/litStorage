@@ -10,6 +10,7 @@
 		<result column="name" property="name"/>
 		<result column="password" property="password"/>
 		<result column="email" property="email"/>
+	<!-- 	<result column="isout" property="email"/> -->
 	</resultMap>
 	
 	<sql id="selectMember">
@@ -28,9 +29,9 @@
 		WHERE id=#{id}
 	</select>
 
-	<select id="selectMembersByName" parameterType="string" resultMap="memberMap">
+	<select id="selectMembersByName" parameterType="String" resultMap="memberMap">
 		<include refid="selectMember"/>
-		WHERE name=#{name}
+		WHERE name LIKE '%'||#{name}||'%'
 	</select>
 		
 	<update id="updateMember" parameterType="Member">

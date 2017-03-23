@@ -6,7 +6,7 @@ import domain.LitStorage;
 
 public interface LitStorageMapper {
 	public int insertLitStorage(LitStorage litStorage);
-	public int deleteLitStorage(String id);
+	public int deleteLitStorage(String litStorageId);
 	public LitStorage selectLitStorageById(String id);
 	public List<LitStorage> selectLitStoragesByMemberId(String id);
 	public List<LitStorage> selectLitStoragesByName(String name);

@@ -13,7 +13,6 @@
 			<association property="writer" column="writer"
 				select="store.mapper.MemberMapper.selectMemberById"
 				javaType="Member" jdbcType="VARCHAR"/>
-			
 			<!--
 			<collection property="histories" column="id" 
 				select="store.mapper.ChangeHistoryMapper.selectChangeHistoriesByEpisodeId"
@@ -25,19 +24,19 @@
 			
 	  	</resultMap>
     
-    	<insert id="insertEpisode">
+    	<insert id="insertEpisode" parameterType="Episode">
     		<selectKey keyProperty="id" resultType="string" order="BEFORE">
 				select EPISODE_SEQ.nextval FROM DUAL
 			</selectKey>
     		insert into episode(id, name, content, writer, bound, literature )
-			values(#{id},#{title},#{content},#{writer.id},#{bound},#{literature.id})
+			values(#{id},#{title},'${literature.id}/${id}.txt',#{writer.id, jdbcType=VARCHAR},#{bound,jdbcType=CHAR},#{literature.id})
     	</insert>
     	
     	<update id="updateEpisode">
-    		update episode set name=#{title}, content=#{content}, writer=#{writer.id}, bound=#{bound}, literature=#{literature.id} where id=#{id}
+    		update episode set name=#{title}, content='${literature.id}/${id}.txt', writer=#{writer.id}, bound=#{bound,jdbcType=CHAR}, literature=#{literature.id} where id=#{id}
     	</update>
     
-    	<delete id="deleteEpisode">
+    	<delete id="deleteEpisode" parameterType="String">
     		delete from episode where id=#{id}
     	</delete>
     

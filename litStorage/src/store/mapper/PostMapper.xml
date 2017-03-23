@@ -19,7 +19,7 @@
 	</resultMap>
 	
 	<sql id="selectPost">
-  		SELECT id, name, content, hashTag, writer, boardid <!--db에 있는 컬럼이름  -->
+  		SELECT id, name, content, hashTag, writer, boardid
 		FROM Post
 	</sql>	
 	
@@ -27,8 +27,10 @@
 		<selectKey keyProperty="id" resultType="String" order="BEFORE">
     		SELECT post_seq.NEXTVAL FROM dual
  		</selectKey>
+		<!-- INSERT INTO post(id,name, content, hashTag)
+		VALUES (#{id},#{title}, #{content}, #{hashTag})  -->
 		INSERT INTO post(id, name, content, hashTag, writer, boardid)
-		VALUES (#{id}, #{title}, #{content}, #{hashTag}, #{writer.id}, #{board.id})
+		VALUES (#{id}, #{title}, #{content}, #{hashTag}, #{writer.id}, #{board.id}) 
 	</insert>
 
 	<update id="updatePost" parameterType="Post">
@@ -48,7 +50,9 @@
 	</select>
 	
 	<select id="selectPostById" parameterType="String" resultMap="postMap">
-		<include refid="selectPost"/>
+		<!-- <include refid="selectPost"/> -->
+		SELECT id,name,content,hashtag
+		FROM post
 		WHERE id=#{id}
 	</select>
 	
@@ -66,4 +70,5 @@
 		<include refid="selectPost"/>
 		WHERE name LIKE '%${value}%'
 	</select>	
+	
   </mapper>

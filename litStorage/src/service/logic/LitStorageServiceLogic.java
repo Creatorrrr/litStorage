@@ -14,19 +14,19 @@ import store.logic.LiteratureStoreLogic;
 import store.logic.MemberLitStorageStoreLogic;
 
 public class LitStorageServiceLogic implements LitStorageService {
-	
+
 	private LitStorageStore lsStore;
 	private MemberLitStorageStore mlsStore;
-//	private MemberStore mStore;
+	// private MemberStore mStore;
 	private LiteratureStore lStore;
-//	private DiscussionPlaceStore dpStore;
-	
+	// private DiscussionPlaceStore dpStore;
+
 	public LitStorageServiceLogic() {
 		lsStore = new LitStorageStoreLogic();
 		mlsStore = new MemberLitStorageStoreLogic();
-//		mStore = new MemberStoreLogic();
+		// mStore = new MemberStoreLogic();
 		lStore = new LiteratureStoreLogic();
-//		dpStore = new DiscussionPlaceStoreLogic();
+		// dpStore = new DiscussionPlaceStoreLogic();
 	}
 
 	@Override
@@ -35,8 +35,8 @@ public class LitStorageServiceLogic implements LitStorageService {
 	}
 
 	@Override
-	public boolean removeLitStorage(String id) {
-		return lsStore.deleteLitStorage(id);
+	public boolean removeLitStorage(LitStorage litStorage) {
+		return lsStore.deleteLitStorage(litStorage.getId());
 	}
 
 	@Override
