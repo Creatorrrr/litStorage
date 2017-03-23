@@ -28,6 +28,8 @@ div{border: 1px solid #ccc; }
 		<div class="row">
 			<div class="col-md-12">
 				<h3>자유게시판 목록</h3>
+				<a href="${ctx }/board/boardRegister.do">게시판 추가</a><br>
+				<%-- <a href="${ctx }/litStorage/myList.do">무협</a><br> --%>
 				<table class="table table-hover table-condensed">
 					<colgroup>
 						<col width="80" align="center">
@@ -86,7 +88,7 @@ div{border: 1px solid #ccc; }
 					</tbody>
 				</table>
 				<%-- <c:if test = "${isAdmin }">  --%>
-				<td><a class="btn btn-sm btn-success" href="${ctx}/views/postRegister.jsp">게시물 등록</a></td>
+				<td><a class="btn btn-sm btn-success" href="${ctx}/views/postRegister.jsp?boardId=${board.id}">게시물 등록</a></td>
 				<%-- </c:if>	 --%>
 			</div>
 		</div>
