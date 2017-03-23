@@ -15,7 +15,7 @@ import service.facade.MemberService;
 import service.logic.MemberServiceLogic;
 
 
-@WebServlet("/join.do")
+@WebServlet("/member/register.do")
 public class MemberRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

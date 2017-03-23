@@ -57,7 +57,7 @@ function validate() {
  
         <h1>회원가입 유효성 체크</h1>
        
-        <form name="frm" action="${ctx }/join.do" method="post">       <!-- 제출시 행동 -->
+        <form name="frm" action="${ctx }/member/register.do" method="post">       <!-- 제출시 행동 -->
                <label for="id">아이디</label>
                <input type="text" name="id" id="id" /><br />
                <label for="password">비밀번호</label>
