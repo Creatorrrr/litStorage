@@ -73,7 +73,7 @@ div{border: 1px solid #ccc; }
 								<c:forEach items="${boards }" var="board" varStatus="status">
 									<tr>
 										<td>${status.count }</td>
-										<td><a href="postDetail.do?id=${board.title }">${board.posts }</a></td>
+										<td><a href="${ctx }/post/postDetail.do?id=${board.id }">${board.title }</a></td>
 										<td>${board.id}</td>
 										<%-- <c:if test = "${isAdmin }"> 
 											<td><a href="modify.do?id=${lecture.id }"class="btn btn-xs btn-warning">UPDATE</a></td>

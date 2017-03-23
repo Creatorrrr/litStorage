@@ -1,4 +1,4 @@
-package controller;
+package controller.discussionPlace;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,29 +10,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.DiscussionPlace;
-import domain.LitStorage;
 import service.facade.DiscussionPlaceService;
 import service.logic.DiscussionPlaceServiceLogic;
 
 
-
-@WebServlet("/discussionPlace/list.do")
-public class DiscussionPlaceListController extends HttpServlet {
+@WebServlet("/discussionPlace/search.do")
+public class DiscussionPlaceSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//???login
+		String searchType = request.getParameter("searchType");
+		String searchText = request.getParameter("searchText");
+		List<DiscussionPlace> list = null;
+		
 		DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
-		//String litStorageId = request.getParameter("litStorageId");
-		String litStorageId = "333";//?????litStorage
-		List<DiscussionPlace> list=service.findDiscussionPlacesByLitStorageId(litStorageId);
+		
+		if("title".equals(searchType)){
+			list = service.findDiscussionPlacesByName(searchText);
+		}else if("userId".equals(searchType)){
+			list = service.findDiscussionPlacesByMemberId(searchText);
+		}
+		
 		request.setAttribute("discussionPlaces", list);
 		request.getRequestDispatcher("/views/discussionPlaceList.jsp").forward(request, response);
+		
 		
 	}
 
 
 
-	
 }

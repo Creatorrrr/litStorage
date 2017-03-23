@@ -1,4 +1,4 @@
-package controller;
+package controller.discussionPlace;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
