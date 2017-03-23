@@ -1,11 +1,20 @@
 package domain;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+import com.sun.xml.internal.txw2.annotation.XmlAttribute;
+
+@XmlRootElement(name="member")
+@XmlType(propOrder = {"id","name","email"})
 public class Member {
 	private String id;
 	private String name;
 	private String password;
 	private String email;
 	
+	@XmlAttribute
 	public String getId() {
 		return id;
 	}
@@ -21,7 +30,7 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	@XmlTransient
 	public String getPassword() {
 		return password;
 	}

@@ -10,12 +10,13 @@
 </head>
 <body>
 
-	<input id="postId" name="postId" type="hidden" value="">
-	<a href="${ctx }/views/boardList.jsp">게시글 목록</a>
+	
+	<a href="${ctx }/views/postList.jsp">게시글 목록</a>
 	<h3>게시글 등록</h3>
 	
 	<br>
 	<form action="${ctx }/postRegister.do" method="post" >
+	<input name="boardId" type="hidden" value="">
 		<table class="table">
             <colgroup>
                 <col width="150">

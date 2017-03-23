@@ -41,20 +41,11 @@ div{border: 1px solid #ccc; }
 									<tr>
 										<tr><td>발신회원</td><td>${senderId.member.id}</td></tr>
 										<tr><td>메세지</td><td>${senderId.message}</td></tr>
-										
-										<%-- <c:if test = "${isAdmin }"> 
-											<td><a href="modify.do?id=${lecture.id }"class="btn btn-xs btn-warning">UPDATE</a></td>
-											<td><a href="remove.do?id=${lecture.id }"class="btn btn-xs btn-danger">DELETE</a></td>
-										</c:if> --%>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</tbody>
-				
-				
-				
-				
 			</table>
 		</div>
 	</div>
