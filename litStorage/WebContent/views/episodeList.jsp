@@ -80,7 +80,8 @@ div {
 					<div class="col-xs-12 col-md-8">
 						<h1>연재 글 목록</h1>
 						<div class="text-right">
-						<button onclick="deleteLitFunction()">작품 삭제</button>
+						<!-- LiteratureDeleteController -->
+						<button onclick="location.href='../literature/delete.do?deleteLiteratureId=${literature.id}'">작품 삭제</button>
 						</div>
 						<div class="panel panel-default">
 							<div class="row">
@@ -114,8 +115,8 @@ div {
 											<td>${episode.writer.name }</td>
 
 											<td><select name="openSelect">
-													<option value="OpenLitStorage">저장소 공개</option>
-													<option value="OpenAll">모두 공개</option>
+													<option value="M">저장소 협업 작가만 공개</option>
+													<option value="A">모두 공개</option>
 											</select></td>
 										</tr>
 									</c:if>

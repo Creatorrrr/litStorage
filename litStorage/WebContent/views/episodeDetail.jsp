@@ -34,8 +34,7 @@ div {
 	<!-- <input type="button" id="deleteEpisode"
 		onclick="location.href='../episode/list' "> -->
 		<form action="../episode/deteil.do" method="post">
-	<input type="button" id="deleteEpisode" value="F">
-	<button id="deleteEpisode" value="F"></button>
+	<input type="hidden" id="deleteEpisode" value="F">
 		</form>
 	<div class="container">
 
@@ -90,7 +89,7 @@ div {
 				<div class="text-right">
 					<button type="button"
 						onclick="location.href='../episode/modify.do?episodeId=${episode.id}' ">수정하기</button>
-					<button onclick="deleteEpisodeFunction()">삭제하기</button>
+					<button onclick="location.href='../episode/delete.do.do?episodeId=${episode.id}' ">삭제하기</button>
 				</div>
 				<div class="panel panel-default">
 					<div class="row">
