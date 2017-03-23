@@ -1,4 +1,4 @@
-package controller.literature;
+package controller.board;
 
 import java.io.IOException;
 import java.util.List;
