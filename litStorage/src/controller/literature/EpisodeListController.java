@@ -1,7 +1,6 @@
 package controller.literature;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.Episode;
 import domain.Literature;
 import service.facade.LiteratureService;
 import service.logic.LiteratureServiceLogic;
@@ -29,26 +29,15 @@ public class EpisodeListController extends HttpServlet {
 		// 1. Show the contents and artist name.
 		// 2. Show list of serials.
 
-		String id = request.getParameter("LiteratureId");
-		String LiteratureName = request.getParameter("LiteratureName");
-		// String name = "불";
+		String literatureId = request.getParameter("LiteratureId");
 
-		List<Literature> literatures = new ArrayList<>();
+		List<Episode> episodes = service.findEpisodeByLiteratureId(literatureId);
+		Literature literature = service.findLiteratureById(literatureId);
+		
+		request.setAttribute("literature", literature);
+		request.setAttribute("episodes", episodes);
 
-		// find Literature By Name
-		if (LiteratureName != null) {
-
-			literatures = service.findLiteratureByName(LiteratureName);
-
-		} else if (id != null) {
-
-			Literature literatuer = service.findLiteratureById(id);
-
-			literatures.add(literatuer);
-		}
-		request.setAttribute("literatures", literatures);
-
-		request.getRequestDispatcher("../views/episodeList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 
 	}
 

@@ -1,6 +1,7 @@
 package controller.literature;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,12 +35,11 @@ public class EpisodeModifyController extends HttpServlet {
 		// 2. recevice episodeId
 		// 3. show modify detail
 		
-		
 		String episodeId = request.getParameter("episodeId");
 		Episode episode = Lservice.findEpisodeById(episodeId);
 		request.setAttribute("episode", episode);
 		
-		request.getRequestDispatcher("../views/episodeModify.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/episodeModify.jsp").forward(request, response);
 		
 	}
 
@@ -47,35 +47,34 @@ public class EpisodeModifyController extends HttpServlet {
 			throws ServletException, IOException {
 		String episdoeId = request.getParameter("modifyEpisodeId");
 		String literatureId = request.getParameter("modifyLiteratureId");
-		String Genre = request.getParameter("modifySelectGenre");
 		String Title = request.getParameter("modifyEpisodeTitle");
 		String Contents = request.getParameter("modifyEpisodeContents");
 		
-		Episode targetEpisode =  Lservice.findEpisodeById(episdoeId);
-		
-		Member member = Mservice.findMemberById(targetEpisode.getWriter().getId());
-		
 		Episode episode = new Episode();
-		Literature literature = new Literature();
-		
-		literature.setGenre(Genre);
-		literature.setId(literatureId);
 		episode.setId(episdoeId);
-		
-		episode.setLiterature(literature);
-		
 		episode.setTitle(Title);
 		episode.setContent(Contents);
-		episode.setWriter(member);
 		
+		Literature lit = Lservice.findLiteratureById(literatureId);
 		
-		boolean check = Lservice.modifyEpisode(episode);
+		episode.setLiterature(lit);
 		
-		if(check){
-			response.sendRedirect(request.getContextPath()+"/epsode/detail.do");
+		Member writer = new Member();
+		writer.setId((String)request.getSession().getAttribute("loginId"));
+		
+		episode.setWriter(writer);
+		
+		if(!Lservice.modifyEpisode(episode)) {
+			throw new RuntimeException("episode modify failed");
 		}
 		
+		List<Episode> episodes = Lservice.findEpisodeByLiteratureId(literatureId);
+		Literature literature = Lservice.findLiteratureById(literatureId);
 		
+		request.setAttribute("literature", literature);
+		request.setAttribute("episodes", episodes);
+		
+		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 	}
 
 }

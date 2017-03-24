@@ -94,7 +94,7 @@ div {
 							</div>
 							<div>
 								<h4>내용</h4>
-								<textarea rows="10" cols="75" name="modifyEpisodeContents">${episode.content }</textarea>
+								<textarea rows="10" cols="75" name="modifyEpisodeContents">${episode.contentFromGit }</textarea>
 							</div>
 
 						</div>
