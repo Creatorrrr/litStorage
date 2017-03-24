@@ -145,13 +145,13 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	}
 
 	@Override
-	public List<Literature> selectLiteraturesByGenreOrderByHits() {
+	public List<Literature> selectLiteraturesByGenreOrderByHits(String genre) {
 		SqlSession session = factory.openSession();
 		List<Literature> list = null;
 		
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			list = mapper.selectLiteraturesByGenreOrderByHits();
+			list = mapper.selectLiteraturesByGenreOrderByHits(genre);
 			session.commit();
 		} finally {
 			session.close();
@@ -160,13 +160,13 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	}
 
 	@Override
-	public List<Literature> selectLiteratureByGenreOrderById(String Id) {
+	public List<Literature> selectLiteraturesByGenreOrderById(String genre) {
 		SqlSession session = factory.openSession();
 		List<Literature> list = null;
 		
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			list = mapper.selectLiteratureByGenreOrderById(Id);
+			list = mapper.selectLiteraturesByGenreOrderById(genre);
 			session.commit();
 		} finally {
 			session.close();

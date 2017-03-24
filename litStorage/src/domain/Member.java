@@ -1,5 +1,6 @@
 package domain;
 
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -7,7 +8,8 @@ import javax.xml.bind.annotation.XmlType;
 import com.sun.xml.internal.txw2.annotation.XmlAttribute;
 
 @XmlRootElement(name="member")
-@XmlType(propOrder = {"id","name","email"})
+@XmlType(name="member" ,propOrder = {"id","name","email"})
+
 public class Member {
 	private String id;
 	private String name;

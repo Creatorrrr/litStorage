@@ -43,18 +43,20 @@
 	<select id="selectLiteraturesByName" parameterType="string"
 		resultMap="literatureMap">
 		<include refid="selectLiterature" />
-		WHERE name = #{name}
+		WHERE name LIKE '%'||#{name}||'%'
 	</select>
 
 	<select id="selectLiteraturesByGenreOrderByHits" parameterType="string"
 		resultMap="literatureMap">
 		<include refid="selectLiterature" />
+		WHERE genre = #{genre}
 		ORDER BY hits DESC
 	</select>
 
 	<select id="selectLiteratureByGenreOrderById" resultMap="literatureMap">
 		<include refid="selectLiterature" />
-		WHERE id = #{id} ORDER BY id DESC
+		WHERE genre = #{genre}
+		ORDER BY id DESC
 	</select>
 
 	<select id="selectLiteraturesByMemberId" parameterType="string"

@@ -25,7 +25,7 @@ public class LiteratureLIstController extends HttpServlet {
 
 		String litstorageId = request.getParameter("id");
 
-		List<Literature> literatures = service.findLiteratureByLitStorageId(litstorageId);
+		List<Literature> literatures = service.findLiteraturesByLitStorageId(litstorageId);
 
 		request.setAttribute("literatures", literatures);
 

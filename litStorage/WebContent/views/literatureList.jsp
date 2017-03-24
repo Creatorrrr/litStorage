@@ -53,7 +53,7 @@ div {
 				<div class="row">
 					<div class="col-md-6">
 						<a href="javascript:;">자유게시판</a> <a
-							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
+							href="${ctx }/litStorage/allList.do;">작품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
 					</div>
 					<form action="../episode/list.do" method="post">
