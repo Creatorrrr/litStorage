@@ -23,8 +23,8 @@ div {
 	border: 1px solid #ccc;
 }
 #boardRegisterForm {
-	display:none;
-	width:300px;
+	display: none;
+	width: 300px;
 }
 </style>
 
@@ -36,18 +36,19 @@ div {
 			<div class="col-md-12">
 				<h3>자유게시판 목록</h3>
 
-				<button class="btn" type="button" onclick="addBoard();")>게시판 추가</button>
+				<button class="btn" type="button" onclick="addBoard();")>게시판추가</button>
 				<div class="container" id="boardRegisterForm">
 					<form action="${ctx }/board/boardRegister.do" method="post">
-						<input id="boardName" name="boardName" class="form-control" type="text" value=""> 
-						<input class="btn" type="submit" value="추가">
+						<input id="boardName" name="boardName" class="form-control"
+							type="text" value=""> <input class="btn" type="submit"
+							value="추가">
 					</form>
 				</div>
 				<br>
 				<c:forEach items="${boards }" var="board">
 					<div>
-					<a class="btn btn-sm btn-success"
-						href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
+						<a class="btn btn-sm btn-success"
+							href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
 						<a class="btn" href="${ctx }/boardDelete.do?boardId=${board.id }">삭제</a>
 					</div>
 				</c:forEach>
@@ -68,8 +69,7 @@ div {
 									<option value="title">제목</option>
 									<option value="content">내용</option>
 									<option value="hashtag">해시태그</option>
-								</select>
-								<input type="text" name="search" placeholder="검색 내용을 입력해주세요.">
+								</select> <input type="text" name="search" placeholder="검색 내용을 입력해주세요.">
 								<button type="submit">검색</button>
 							</div>
 						</form>
@@ -79,9 +79,6 @@ div {
 							<th>No</th>
 							<th>제목</th>
 							<th>작성자</th>
-							<%-- <c:if test = "${isAdmin }">    <!-- login했을 때만 보여지게 함 -->
-								<th>게시물 등록</th>
-							</c:if> --%>
 						</tr>
 					</thead>
 					<tbody>
@@ -103,24 +100,22 @@ div {
 						</c:choose>
 					</tbody>
 				</table>
-				<%-- <c:if test = "${isAdmin }">  --%>
-				<td>
-					<a class="btn btn-sm btn-success"
-					href="${ctx}/postRegister.do?boardId=${boardId}">게시물등록</a>
-				</td>
-				<%-- </c:if>	 --%>
+				<%-- <c:if test="${isAdmin }"> --%>
+					<td><a class="btn btn-sm btn-success"
+						href="${ctx}/postRegister.do?boardId=${boardId}">게시물등록</a></td>
+				<%-- </c:if> --%>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		var boardFlag = false;
-		
+
 		function addBoard() {
-			if(boardFlag === false) {
-				document.getElementById("boardRegisterForm").style.display="block";
+			if (boardFlag === false) {
+				document.getElementById("boardRegisterForm").style.display = "block";
 				boardFlag = true;
 			} else {
-				document.getElementById("boardRegisterForm").style.display="none";
+				document.getElementById("boardRegisterForm").style.display = "none";
 				boardFlag = false;
 			}
 		}
