@@ -76,8 +76,8 @@ div {
 				<div class="text-right"></div>
 				<div class="panel panel-default">
 					<div class="row">
-					<form action="../episode/register.do" method="post">
-					<input type="hidden" name="literatureId" value="${LiteratureId }">
+					<form action="${ctx }/episode/register.do" method="post">
+					<input type="hidden" name="literatureId" value="${literatureId }">
 						<div class="col-md-3">
 							<div>
 								<h4>장르</h4>
