@@ -24,11 +24,13 @@ public class PostListController extends HttpServlet {
 		BoardService service = new BoardServiceLogic();
 
 		/*
-		 * String post = request.getParameter("post"); List<Post>list =
-		 * service.findPostsByBoardId(post); String board =
-		 * request.getParameter("board"); Post po = service.findPostById(post);
+		 * String post = request.getParameter("post");
+		 * List<Post>list = service.findPostsByBoardId(post);
+		 * String board = request.getParameter("board");
+		 * Post po = service.findPostById(post);
 		 * request.setAttribute("posts", list); //5줄 수정부분
 		 */
+		
 		List<Board> lists = service.findAllBoards();
 		request.setAttribute("boards", lists);
 		// request.setAttribute("boards", service.findAllBoards());

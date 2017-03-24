@@ -32,21 +32,22 @@ div {
 		<div class="row">
 			<div class="col-md-12">
 				<h3>자유게시판 목록</h3>
+				
 				<br>
 				<form action="${ctx }/board/boardRegister.do" method="post">
-					<!-- <input name="board" type="hidden" value=""> -->
+					<input name="boards" type="hidden" value=""><!--원래주석  -->
 					<a>게시판 추가</a> <br>
-					<c:forEach items="${boards }" var="board" varStatus="status">
+					<%-- <c:forEach items="${boards }" var="board" varStatus="status">
 						<tr>
 							<td>${board.title }</td>
 						</tr>
-					</c:forEach>
-					<%-- <a href="${ctx }/litStorage/myList.do">무협</a><br> --%>
-					<input id="boardName" name="boardName" class="form-control"
-						type="text" value=""> <input class="btn" type="submit"
-						value="추가">
+					</c:forEach> --%>
+					
+					<input id="boardName" name="boardName" class="form-control" type="text" value=""> 
+					<input class="btn" type="submit" value="추가">
 					<!--onclick="javascript:window.location='${ctx }/post/postList.do'"  -->
 				</form>
+				
 				<table class="table table-hover table-condensed">
 					<colgroup>
 						<col width="80" align="center">
