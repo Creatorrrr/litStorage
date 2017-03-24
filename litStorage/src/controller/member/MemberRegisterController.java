@@ -47,7 +47,7 @@ public class MemberRegisterController extends HttpServlet {
 //		session.setAttribute("login", pwd);
 //		session.setAttribute("login", pwd2);
 //		session.setAttribute("login", name);
-//		session.setAttribute("login", email);      濡쒓렇�씤�뿉�꽌留� �븘�슂
+//		session.setAttribute("login", email); 
 		
 		
 		//response.sendRedirect("/views/main.jsp");
