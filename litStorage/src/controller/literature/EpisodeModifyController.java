@@ -1,6 +1,7 @@
 package controller.literature;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -71,9 +72,12 @@ public class EpisodeModifyController extends HttpServlet {
 		
 		boolean check = Lservice.modifyEpisode(episode);
 		
-		if(check){
-			response.sendRedirect(request.getContextPath()+"/epsode/detail.do");
-		}
+		Literature literatureA = Lservice.findLiteratureById(literatureId);
+		List<Literature> literatures = Lservice.findLiteratureByLitStorageId(literatureA.getLitStorage().getId());
+		
+		request.setAttribute("literatures", literatures);
+		
+		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 		
 		
 	}
