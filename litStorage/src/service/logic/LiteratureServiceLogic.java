@@ -95,29 +95,29 @@ public class LiteratureServiceLogic implements LiteratureService {
 	@Override
 	public boolean registerEpisode(Episode episode) {
 		boolean checkEpisode = epStore.insertEpisode(episode);	// insert episode to db
-//		String message = episode.getWriter().getId() + " registered " + PathBuilder.buildEpisodeFileName(episode);	// set commit message
-//		String treeHash = epStore.insertEpisodeToGit(episode, message);	// insert episode to git
-//		ChangeHistory history = new ChangeHistory();	// set change history
-//		history.setEditor(episode.getWriter());
-//		history.setContent(treeHash);
-//		history.setEpisode(episode);
-//		history.setMessage(message);
-//		boolean checkHistory = chStore.insertChangeHistory(history);	// insert change history
-		return checkEpisode /*&& checkHistory*/;
+		String message = episode.getWriter().getId() + " registered " + PathBuilder.buildEpisodeFileName(episode);	// set commit message
+		String treeHash = epStore.insertEpisodeToGit(episode, message);	// insert episode to git
+		ChangeHistory history = new ChangeHistory();	// set change history
+		history.setEditor(episode.getWriter());
+		history.setContent(treeHash);
+		history.setEpisode(episode);
+		history.setMessage(message);
+		boolean checkHistory = chStore.insertChangeHistory(history);	// insert change history
+		return checkEpisode && checkHistory;
 	}
 
 	@Override
 	public boolean modifyEpisode(Episode episode) {
 		boolean checkEpisode = epStore.updateEpisode(episode);	// update episode to db
-//		String message = episode.getWriter().getId() + " modified " + PathBuilder.buildEpisodeFileName(episode);	// set commit message
-//		String treeHash = epStore.updateEpisodeToGit(episode, message);	// update episode to git
-//		ChangeHistory history = new ChangeHistory();	// set change history
-//		history.setEditor(episode.getWriter());
-//		history.setContent(treeHash);
-//		history.setEpisode(episode);
-//		history.setMessage(message);
-//		boolean checkHistory = chStore.insertChangeHistory(history);	// insert change history
-		return checkEpisode /*&& checkHistory*/;
+		String message = episode.getWriter().getId() + " modified " + PathBuilder.buildEpisodeFileName(episode);	// set commit message
+		String treeHash = epStore.updateEpisodeToGit(episode, message);	// update episode to git
+		ChangeHistory history = new ChangeHistory();	// set change history
+		history.setEditor(episode.getWriter());
+		history.setContent(treeHash);
+		history.setEpisode(episode);
+		history.setMessage(message);
+		boolean checkHistory = chStore.insertChangeHistory(history);	// insert change history
+		return checkEpisode && checkHistory;
 	}
 
 	@Override

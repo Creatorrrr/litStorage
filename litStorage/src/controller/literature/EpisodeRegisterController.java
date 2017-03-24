@@ -48,7 +48,6 @@ public class EpisodeRegisterController extends HttpServlet {
 		String episodeName = request.getParameter("episodeName");
 		String episodeContents = request.getParameter("episodeContents");
 		
-		
 		Episode episode = new Episode();
 		episode.setTitle(episodeName);
 		episode.setContent(episodeContents);
@@ -56,8 +55,6 @@ public class EpisodeRegisterController extends HttpServlet {
 		Literature lit = Lservice.findLiteratureById(literatureId);
 		
 		episode.setLiterature(lit);
-		
-		Lservice.findLiteratureById(literatureId);
 		
 		//episode writer
 		Member writer = new Member();

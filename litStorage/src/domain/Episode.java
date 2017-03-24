@@ -88,7 +88,8 @@ public class Episode {
 		try {
 			bReader = new BufferedReader(new InputStreamReader(new FileInputStream(episodeFile), "UTF-8"));
 			
-			strBuilder.append(bReader.readLine());
+			//strBuilder.append(bReader.readLine());	// if you want to get title then use this line
+			bReader.readLine();	// waste title line
 			while((line = bReader.readLine()) != null) {
 				strBuilder.append("\r\n");
 				strBuilder.append(line);

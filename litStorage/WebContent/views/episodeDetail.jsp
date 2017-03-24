@@ -100,7 +100,7 @@ div {
 									<h2>제목 ${episode.title }</h2>
 								</div>
 								<div>
-									<textarea rows="10" cols="75" name="episodeContents">${episode.content }</textarea>
+									<textarea rows="10" cols="75" name="episodeContents">${episode.contentFromGit }</textarea>
 								</div>
 
 							</div>
