@@ -19,6 +19,7 @@
 	</style>
 	</head>
 	<body>
+	<h1>내 작품 저장소</h1>
 		<c:choose>
 			<c:when test="${litStorages eq null || empty litStorages }">
 				<table border="1">

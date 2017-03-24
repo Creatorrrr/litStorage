@@ -15,11 +15,13 @@ public interface LiteratureService {
 
 	public List<Literature> findLiteratureByName(String name);
 
-	public List<Literature> findLiteratureByLitStorageId(String litStorageId);
+	public List<Literature> findLiteraturesByLitStorageId(String litStorageId);
+	
+	public List<Literature> findLiteraturesByMemberId(String id);
 
-	public List<Literature> findLiteratureByGenreOrderByHits();
+	public List<Literature> findLiteraturesByGenreOrderByHits(String genre);
 
-	public List<Literature> findLiteratureByGenreOrderById(String Id);
+	public List<Literature> findLiteraturesByGenreOrderById(String genre);
 
 	public boolean registerEpisode(Episode episode);
 

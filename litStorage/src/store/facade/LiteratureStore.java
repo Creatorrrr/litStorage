@@ -12,7 +12,7 @@ public interface LiteratureStore {
 	public Literature selectLiteraturesById(String literatureId);
 	public List<Literature> selectLiteraturesByLitStorageId(String litstorageId);
 	public List<Literature> selectLiteraturesByName(String name);
-	public List<Literature> selectLiteraturesByGenreOrderByHits();
-	public List<Literature> selectLiteratureByGenreOrderById(String memberId);
+	public List<Literature> selectLiteraturesByGenreOrderByHits(String genre);
+	public List<Literature> selectLiteraturesByGenreOrderById(String genre);
 	public List<Literature> selectLiteraturesByMemberId(String memberId);
 }

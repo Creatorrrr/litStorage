@@ -11,14 +11,11 @@
 
 </head>
 <body>
-<c:choose>
-	<c:when test = "${loginedUser eq null }">
-		<a href="login.jsp">로그인</a> | <a href="join.do">회원가입</a>
-	</c:when>
-	<c:otherwise>
-		<b>${loginedUser }</b>님 환영합니다. [<a href="logout.do">로그아웃</a>]
-	</c:otherwise>
-</c:choose>
+
+<%@ include file="header.jspf"%>
+	
+	
+	
 	
 	
 </body>

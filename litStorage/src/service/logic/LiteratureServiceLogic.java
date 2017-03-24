@@ -73,18 +73,23 @@ public class LiteratureServiceLogic implements LiteratureService {
 	}
 
 	@Override
-	public List<Literature> findLiteratureByLitStorageId(String litStorageId) {
+	public List<Literature> findLiteraturesByLitStorageId(String litStorageId) {
 		return lStore.selectLiteraturesByLitStorageId(litStorageId);
 	}
 
 	@Override
-	public List<Literature> findLiteratureByGenreOrderByHits() {
-		return lStore.selectLiteraturesByGenreOrderByHits();
+	public List<Literature> findLiteraturesByGenreOrderByHits(String genre) {
+		return lStore.selectLiteraturesByGenreOrderByHits(genre);
 	}
 
 	@Override
-	public List<Literature> findLiteratureByGenreOrderById(String Id) {
-		return lStore.selectLiteratureByGenreOrderById(Id);
+	public List<Literature> findLiteraturesByGenreOrderById(String genre) {
+		return lStore.selectLiteraturesByGenreOrderById(genre);
+	}
+	
+	@Override
+	public List<Literature> findLiteraturesByMemberId(String id){
+		return lStore.selectLiteraturesByMemberId(id);
 	}
 
 	@Override

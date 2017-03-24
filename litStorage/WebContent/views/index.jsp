@@ -1,40 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>플랫폼 메인 페이지</title>
+<title>AuthorWa</title>
 </head>
 <body>
-<%@ include file="header.jspf"%>
-<h1>이 밑에서 버튼 만들어서 기능구현 테스트 해주세요~</h1>
+	<%@ include file="header.jspf"%>
 
 
+	<hr>
 
-<a href="${ctx }/litStorage/register.do">작품 저장소 등록</a><br>
-<a href="${ctx }/litStorage/myList.do">내 작품 저장소!</a><br>
-
-<a href="${ctx }/litStorage/memberList.do?id=4">작품 저장소 참가 회원</a><br>
-<a href="${ctx }/post/postList.do">자유 게시판</a><br>
-<a href="${ctx }/litStorage/allList.do">작품 저장소 목록</a><br>
-<a href="${ctx }/discussionPlace/list.do">토론장 목록</a><br>
-
-<br><br>
-<!-- if you want to move member invite page, make sure that page must contain LitStorage -->
-<!-- this link is test for litStorage which have id 4 , if you want to test another litStorage,
-		just change the get parameter(litStorageId)-->
-<a href="${ctx }/member/search.do?litStorageId=4">작품 저장소 초대 회원 검색</a><br>
-<a href="${ctx }/litStorage/allList.do">작품 저장소 목록</a><br>
-<a href="${ctx }/litStorage/register.do">작품 저장소 등록</a><br>
-<a href="${ctx }/litStorage/myList.do">내 작품 저장소!</a><br><br>
-
-<a href="${ctx }/member/inviteList.do">누가 날 초대했지?</a><br>
-<a href="${ctx }/member/requestList.do">누가 내 저장소에 참가를 요청했지?</a>
-
+	<!-- 메인 페이지에서 로그인시 작품 저장소 등록 버튼이 보임 -->
+	<c:if test="${loginId ne null }">
+		<a href="${ctx }/litStorage/register.do">작품 저장소 등록</a>
+		<br>
+	</c:if>
+	<!-- 메인 페이지용 작품 검색창, 검색시 이동함 -->
+	<form method="get" action="${ctx }/literature/search.do">
+		<label for="type">작품 검색</label>
+		<select name="type" id="type">
+			<option value="id">작가 아이디</option>
+			<option value="name">작품 이름</option>
+		</select><input type="text" name="keyword"> <input type="submit"
+			name="search" id="btn" value="검색">
+	</form>
+	
+	<!-- 장르별 추천작, 장르를 select에서 선택하면 ajax로 controller 들러서 리스트 다시 뿌려줌 -->
+	<h2>장르별 추천작</h2>
+	<div id="result">
+	<c:forEach items="${literatures }" var="literature">
+	
+	</c:forEach>
+	</div>
+	
+	<!-- 장르별 신작, 추천작이랑 똑같이 동작함 -->
+	<h2>장르별 신작</h2>
 
 </body>
 </html>

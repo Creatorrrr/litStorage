@@ -44,7 +44,7 @@ public class LiteratureDeleteController extends HttpServlet {
 			}
 			Literature literature = Lservice.findLiteratureById(deleteLiteratureId);
 			Literature literatureA = new Literature();
-			literatureA.setLitStorage(literature.getLitStorage().getId());
+//			literatureA.setLitStorage(literature.getLitStorage().getId());
 			
 			// 선택한 작품 삭제
 			Lservice.removeLiterature(deleteLiteratureId);
