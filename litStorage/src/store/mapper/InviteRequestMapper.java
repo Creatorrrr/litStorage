@@ -7,7 +7,7 @@ import domain.InviteRequest;
 public interface InviteRequestMapper {
 	public int insertInviteRequest(InviteRequest inviteRequest);
 
-	public int deleteInviteRequest(String senderId, String receiverId);
+	public int deleteInviteRequest(InviteRequest inviteRequest);
 
 	public List<InviteRequest> selectInviteRequestBySenderId(String senderId);
 

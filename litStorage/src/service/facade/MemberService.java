@@ -12,7 +12,7 @@ public interface MemberService {
 	public boolean modifyMember(Member member);
 	public boolean removeMember(String id);
 	public boolean registerInviteRequest(InviteRequest inviteRequest);
-	public boolean removeInviteRequest(String senderId,String receiverId);
+	public boolean removeInviteRequest(InviteRequest inviteRequest);
 	List<InviteRequest>findInviteRequestsBySenderId(String senderId);
 	List<InviteRequest>findInviteRequestsByReceiverId(String receiverId);
 }

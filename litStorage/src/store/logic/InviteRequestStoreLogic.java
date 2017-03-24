@@ -34,12 +34,13 @@ public class InviteRequestStoreLogic implements InviteRequestStore {
 	}
 
 	@Override
-	public boolean deleteInviteRequest(String sender, String receiver) {
+	public boolean deleteInviteRequest(InviteRequest inviteRequest) {
 		SqlSession session = factory.openSession();
 		int check;
 		HashMap<String, String> map = new HashMap<>();
-		map.put("sender", sender);
-		map.put("receiver", receiver);
+		map.put("sender", inviteRequest.getSender().getId());
+		map.put("receiver", inviteRequest.getReceiver().getId());
+		map.put("litStorage", inviteRequest.getLitStorage().getId());
 
 		try {
 			check = session.delete("deleteInviteRequest", map);
