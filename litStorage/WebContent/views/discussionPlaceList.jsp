@@ -88,6 +88,7 @@
 				<td>번호</td>
 				<td>제목</td>
 				<td>생성 회원ID</td>
+		
 			</tr>
 			<c:forEach items="${ discussionPlaces}" var="discussionPlace"
 				varStatus="status">
@@ -96,6 +97,7 @@
 					<td><a
 						href="${ctx }/discussionPlace/detail.do?id=${discussionPlace.id }">${discussionPlace.title }</a></td>
 					<td>${ discussionPlace.creator.id}(${discussionPlace.creator.name })</td>
+			
 				</tr>
 			</c:forEach>
 		</table>

@@ -27,7 +27,7 @@ public interface LiteratureService {
 
 	public boolean modifyEpisode(Episode episode);
 
-	public boolean removeEpisode(Episode episodeId);
+	public boolean removeEpisode(String episodeId);
 
 	public Episode findEpisodeById(String Id);
 

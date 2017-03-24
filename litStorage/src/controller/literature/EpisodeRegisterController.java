@@ -1,6 +1,8 @@
 package controller.literature;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +36,6 @@ public class EpisodeRegisterController extends HttpServlet {
 		// 1. receive LiteratureId
 		
 		String LiteratureId = req.getParameter("literatureId"); 
-		System.out.println(LiteratureId+"aaaaa");
 		req.setAttribute("LiteratureId", LiteratureId);
 		
 		req.getRequestDispatcher("../views/episodeRegister.jsp").forward(req, resp);
@@ -56,7 +57,6 @@ public class EpisodeRegisterController extends HttpServlet {
 		Episode episode = new Episode();
 		// Genre literature
 		Literature literature = Lservice.findLiteratureById(LiteratureId);
-		System.out.println(LiteratureId+"aaaaaaaaaaa");
 		
 		literature.setId(LiteratureId);
 		literature.setGenre(selectGenre);
@@ -69,7 +69,6 @@ public class EpisodeRegisterController extends HttpServlet {
 		
 		//episode writer
 		Member writer = Mservice.findMemberById(literature.getCreator().getId());
-		System.out.println(literature.getCreator().getName());
 		episode.setWriter(writer);
 		
 		//private on register Member
@@ -78,7 +77,15 @@ public class EpisodeRegisterController extends HttpServlet {
 		boolean check = service.registerEpisode(episode);
 		
 		if(check){
-			response.sendRedirect(request.getContextPath()+"/episode/list.do");
+			List<Literature> literatures = new ArrayList<>();
+			
+			Literature literatureA = service.findLiteratureById(LiteratureId);
+
+			literatures.add(literature);
+			request.setAttribute("literature", literatureA);
+			request.setAttribute("literatures", literatures);
+
+			request.getRequestDispatcher("../views/episodeList.jsp").forward(request, response);
 		}
 
 	}

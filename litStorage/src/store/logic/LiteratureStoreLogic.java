@@ -94,6 +94,8 @@ public class LiteratureStoreLogic implements LiteratureStore{
 				tempFile[i].delete(); 
 			}
 			file.delete(); 
+		} else {
+			file.delete();
 		}
 		
 		return true;
@@ -107,7 +109,6 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			literature = mapper.selectLiteraturesById(literatureId);
-			session.commit();
 		} finally {
 			session.close();
 		}
@@ -122,7 +123,6 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			list = mapper.selectLiteraturesByLitStorageId(litstorageId);
-			session.commit();
 		} finally {
 			session.close();
 		}
@@ -137,7 +137,6 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			list = mapper.selectLiteraturesByName(name);
-			session.commit();
 		} finally {
 			session.close();
 		}
@@ -182,7 +181,6 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			list = mapper.selectLiteraturesByMemberId(memberId);
-			session.commit();
 		} finally {
 			session.close();
 		}

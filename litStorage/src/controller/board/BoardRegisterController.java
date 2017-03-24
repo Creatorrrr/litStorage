@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Board;
+import domain.Post;
 import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
 
@@ -19,37 +20,54 @@ public class BoardRegisterController extends HttpServlet {
 	
 	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 
-		String boardId = request.getParameter("boardId");
-		
-		request.setAttribute("boardId", boardId);
-		request.getRequestDispatcher("/views/boardRegister.jsp").forward(request, response);
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	
-		String boardName = request.getParameter("boardName");
-		//String boardId=request.getParameter("boardId");
+		String boardName = request.getParameter("boardName");     // boardName
 		
 		BoardService service = new BoardServiceLogic();
 		
 		Board board = new Board();
-		board.setTitle(boardName);
-	//	board.setId(boardId);
 		
-		List<Board> list = service.findAllBoards();
-		
-		if (!service.registerBoard(board)) { // if the registration failed
-			throw new RuntimeException("board register failed");
+		if(boardName != null && !boardName.isEmpty()) {
+			board.setTitle(boardName);
+			
+			if(!service.registerBoard(board)) {
+				throw new RuntimeException("failed to create board");
+			}
+		} else {
+			board.setId("1");
 		}
 		
-		request.setAttribute("board",list);
-		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);
-
+		List<Board> boardList = service.findAllBoards();
+		List<Post> postList = service.findPostsByBoardId(board.getId());
 		
+		request.setAttribute("boards", boardList);
+		request.setAttribute("posts", postList);
+		
+		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);
 	}
+	
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//	
+//		String boardName = request.getParameter("boardName");
+//		//String boardId=request.getParameter("boardId");
+//		
+//		BoardService service = new BoardServiceLogic();
+//		
+//		Board board = new Board();
+//		board.setTitle(boardName);
+//	//	board.setId(boardId);
+//		
+//		List<Board> list = service.findAllBoards();
+//		
+//		if (!service.registerBoard(board)) { // if the registration failed
+//			throw new RuntimeException("board register failed");
+//		}
+//		
+//		request.setAttribute("boardRegister",list);
+//		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);
+//	}
 
 }

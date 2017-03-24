@@ -33,30 +33,28 @@ public class LiteratureDeleteController extends HttpServlet {
 
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		String deleteLiteratureId = request.getParameter("deleteLiteratureId");
+		System.out.println(loginId);
+		System.out.println(deleteLiteratureId);
 
 		if (loginId != null && deleteLiteratureId != null) {
 			// 작품속 연재글들 삭제
 			List<Episode> episodes = Lservice.findEpisodeByLiteratureId(deleteLiteratureId);
 			for (Episode episode : episodes) {
-//				Lservice.removeEpisode(episode.getId());
+				Lservice.removeEpisode(episode.getId());
 			}
+			Literature literature = Lservice.findLiteratureById(deleteLiteratureId);
+			Literature literatureA = new Literature();
+//			literatureA.setLitStorage(literature.getLitStorage().getId());
+			
 			// 선택한 작품 삭제
 			Lservice.removeLiterature(deleteLiteratureId);
-
+			
 			// 전 작품저장소 화면 이동
-			List<MemberLitStorage> memberLitstorage = LSservice.findMemberLitStoragesByMemberId(loginId);
 
-			List<LitStorage> Litstorages = new ArrayList<>();
-			LitStorage litstorage = new LitStorage();
-
-			for (MemberLitStorage MLStorage : memberLitstorage) {
-				litstorage = LSservice.findLitStorageById(MLStorage.getLitStorage().getId());
-			}
-			Litstorages.add(litstorage);
-			request.setAttribute("litStorages", Litstorages);
+			request.setAttribute("literature", literature);
 
 			// 나의 작품저장소로 이동
-			request.getRequestDispatcher("../views/litStorageMyStorageList.jsp").forward(request, response);
+			request.getRequestDispatcher("/literature/list.do").forward(request, response);
 
 		}
 	}

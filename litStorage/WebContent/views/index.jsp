@@ -32,7 +32,11 @@
 	
 	<!-- 장르별 추천작, 장르를 select에서 선택하면 ajax로 controller 들러서 리스트 다시 뿌려줌 -->
 	<h2>장르별 추천작</h2>
+	<div id="result">
+	<c:forEach items="${literatures }" var="literature">
 	
+	</c:forEach>
+	</div>
 	
 	<!-- 장르별 신작, 추천작이랑 똑같이 동작함 -->
 	<h2>장르별 신작</h2>

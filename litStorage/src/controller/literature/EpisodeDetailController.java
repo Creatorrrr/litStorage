@@ -20,20 +20,14 @@ public class EpisodeDetailController extends HttpServlet {
 			throws ServletException, IOException {
 
 		LiteratureService service = new LiteratureServiceLogic();
-		
-		String episodeId = "82"; 
-//		String episodeId = request.getParameter("episodeId");
-		Episode episode = service.findEpisodeById(episodeId);
-		
-		request.setAttribute("episode", episode);
-		
-		request.getRequestDispatcher("../views/episodeDetail.jsp").forward(request, response);
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String delete = request.getParameter("deleteEpisode");
-		System.out.println(delete);
+		String episodeId = request.getParameter("episodeId");
+
+		Episode episode = service.findEpisodeById(episodeId);
+
+		request.setAttribute("episode", episode);
+
+		request.getRequestDispatcher("../views/episodeDetail.jsp").forward(request, response);
 	}
 
 }
