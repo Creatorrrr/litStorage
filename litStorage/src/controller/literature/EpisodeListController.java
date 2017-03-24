@@ -1,6 +1,7 @@
 package controller.literature;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,11 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.LitStorage;
 import domain.Literature;
-import service.facade.LitStorageService;
 import service.facade.LiteratureService;
-import service.logic.LitStorageServiceLogic;
 import service.logic.LiteratureServiceLogic;
 
 @WebServlet("/episode/list.do")
@@ -31,14 +29,27 @@ public class EpisodeListController extends HttpServlet {
 		// 1. Show the contents and artist name.
 		// 2. Show list of serials.
 
-		// String id = request.getParameter("LiteratureId");
-		String name = "물";
+		String id = request.getParameter("LiteratureId");
+		String LiteratureName = request.getParameter("LiteratureName");
+		// String name = "불";
+
+		List<Literature> literatures = new ArrayList<>();
 
 		// find Literature By Name
-		List<Literature> literature = service.findLiteratureByName(name);
-		request.setAttribute("literatures", literature);
+		if (LiteratureName != null) {
+
+			literatures = service.findLiteratureByName(LiteratureName);
+
+		} else if (id != null) {
+
+			Literature literatuer = service.findLiteratureById(id);
+
+			literatures.add(literatuer);
+		}
+		request.setAttribute("literatures", literatures);
 
 		request.getRequestDispatcher("../views/episodeList.jsp").forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -50,13 +61,13 @@ public class EpisodeListController extends HttpServlet {
 		String searchContents = request.getParameter("searchContents");
 		String openSelect = request.getParameter("openSelect");
 
-//		if (selectContents.equals("writerName")) {
-//
-//		} else if (searchContents.equals("writerId")) {
-//
-//		} else if (searchContents.equals("MemberName")) {
-//
-//		}
+		// if (selectContents.equals("writerName")) {
+		//
+		// } else if (searchContents.equals("writerId")) {
+		//
+		// } else if (searchContents.equals("MemberName")) {
+		//
+		// }
 
 	}
 

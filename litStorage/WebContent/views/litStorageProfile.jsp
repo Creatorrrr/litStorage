@@ -112,6 +112,8 @@ textarea {
 			<col width="80" align="center">
 			<col width="*">
 		</colgroup>
+		
+		
 
 		<tr>
 			<td>작품 저장소 이름</td>
@@ -130,6 +132,7 @@ textarea {
 			<td>${litStorage.introduce }</td>
 		</tr>
 	</table>
+	<a href="${ctx }/literature/list.do?id=${litStorage.id}">작품 목록 </a>
 	<c:if test="${isNotJoined}">
 	<button id="onclick" type="button">참가 요청</button>
 	</c:if>

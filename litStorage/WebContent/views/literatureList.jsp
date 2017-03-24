@@ -33,9 +33,9 @@ div {
 <body>
 	<!-- <input type="button" id="deleteEpisode"
 		onclick="location.href='../episode/list' "> -->
-		<form action="../episode/deteil.do" method="post">
-	<input type="hidden" id="deleteEpisode" value="F">
-		</form>
+	<form action="../episode/deteil.do" method="post">
+		<input type="hidden" id="deleteEpisode" value="F">
+	</form>
 	<div class="container">
 
 		<div class="row">
@@ -85,36 +85,27 @@ div {
 
 			</div>
 			<div class="col-xs-12 col-md-8">
-				<h1>연재 글</h1>
+				<h1>작품 목록</h1>
 				<div class="text-right">
-					<button type="button"
-						onclick="location.href='../episode/modify.do?episodeId=${episode.id}' ">수정하기</button>
-					<a href="${ctx }/episode/delete.do?episodeId=${episode.id}">삭제하기</a> 
+					<a
+						href="${ctx }/literature/register.do?literatureId=${literature.id}">작품
+						등록</a>
 				</div>
 				<div class="panel panel-default">
-					<div class="row">
-						<form action="../episode/register.do" method="post">
-							<input type="hidden" name="literatureId" value="${LiteratureId }">
-							<div class="col-md-3">
-								<div>
-									<h2>제목 ${episode.title }</h2>
-								</div>
-								<div>
-									<textarea rows="10" cols="75" name="episodeContents">${episode.content }</textarea>
-								</div>
-
-							</div>
-							<div class="panel panel-default">
-								<div>
-									<a>등록 날짜</a> <a>:아이디:</a> <a>변경이력 메시지</a>
-								</div>
-							</div>
-						</form>
-
+					<div>
+						<a>장르</a> <a>:제목:</a> <a>작성자</a>
 					</div>
+					<c:forEach items="${literatures }" var="literature">
+						<div>
+							<a>${literature.genre }</a><a
+								href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a><a>${literature.creator.name }</a>
+						</div>
+					</c:forEach>
 				</div>
+				<div class="row"></div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
