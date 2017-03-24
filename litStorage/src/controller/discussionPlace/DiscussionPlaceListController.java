@@ -22,10 +22,9 @@ public class DiscussionPlaceListController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//???login
+		
 		DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
-		//String litStorageId = request.getParameter("litStorageId");
-		String litStorageId = "333";//?????litStorage
+		String litStorageId = request.getParameter("litStorageId");
 		List<DiscussionPlace> list=service.findDiscussionPlacesByLitStorageId(litStorageId);
 		request.setAttribute("discussionPlaces", list);
 		request.getRequestDispatcher("/views/discussionPlaceList.jsp").forward(request, response);
