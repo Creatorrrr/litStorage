@@ -146,7 +146,7 @@ textarea {
 			<input type="hidden" name="litStorageId" value="${litStorage.id }">
 			<h3>초대 메시지 작성</h3>
 			<hr/>
-			<br /> <label>보내는 사람 : ${loginId }</label> <br /> <br /> <label>요청
+			<br /> <label>보내는 사람 : ${loginId }</label> <br /> <br /> <label>초대
 				메시지 :</label> <br /> <input type="text" id="message" name="message"
 				placeholder="메세지를 작성하세요" /><br /> <br /> <input type="button" name="sendMessage"
 				id="submit" value="보내기" /> <input type="button" id="cancel"

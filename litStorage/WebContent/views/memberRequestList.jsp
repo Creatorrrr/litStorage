@@ -66,6 +66,7 @@ var confirm = function(senderId, receiverId, litStorageId){
 			},
 		success:function(){
 			alert("저장소에 가입되었습니다.");
+			location.href="${ctx}/member/inviteList.do";
 			}
 		});
 	}

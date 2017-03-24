@@ -48,11 +48,13 @@ public class MemberDecisionController extends HttpServlet {
 			lsService.registerMemberLitStorage(mls);
 		}
 		//get redirect url from form data
-		if(request.getParameter("form").equals("I")){
+		/*if(request.getParameter("form").equals("I")){
 			response.sendRedirect(request.getContextPath()+"/member/inviteList.do");
+			System.out.println("move to inviteList.do");
 		}else{
 			response.sendRedirect(request.getContextPath()+"/member/requestList.do");
-		}
+			System.out.println("move to requestList.do");
+		}*/
 	}
 
 }
