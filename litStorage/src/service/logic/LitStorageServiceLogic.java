@@ -22,6 +22,7 @@ public class LitStorageServiceLogic implements LitStorageService {
 	// private MemberStore mStore;
 	private LiteratureStore lStore;
 	// private DiscussionPlaceStore dpStore;
+	private EpisodeStore epStore;
 
 	public LitStorageServiceLogic() {
 		lsStore = new LitStorageStoreLogic();
@@ -29,16 +30,26 @@ public class LitStorageServiceLogic implements LitStorageService {
 		// mStore = new MemberStoreLogic();
 		lStore = new LiteratureStoreLogic();
 		// dpStore = new DiscussionPlaceStoreLogic();
+		epStore = new EpisodeStoreLogic();
 	}
 
 	@Override
 	public boolean registerLitStorage(LitStorage litStorage) {
-		return lsStore.insertLitStorage(litStorage);
+		boolean checkLitStorage = lsStore.insertLitStorage(litStorage);	// insert litStorage to db
+		boolean checkGit = lsStore.insertLitStorageToGit(litStorage);	// insert litStorage to git
+		return checkLitStorage && checkGit;
 	}
 
 	@Override
-	public boolean removeLitStorage(String id) {
-		return lsStore.deleteLitStorage(id);
+	public boolean removeLitStorage(String litStorageId) {
+		// *****************
+//		for(Literature l : litStorage.getLiteratures()) {
+//			epStore.deleteEpisodesByLiteratureId(l.getId());
+//			lStore.deleteLiterature(l.getId());
+//		}
+//		boolean checkLitStorage = lsStore.deleteLitStorage(litStorage.getId()); // delete litStorage from db
+//		
+		return lsStore.deleteLitStorage(litStorageId);
 	}
 
 	@Override

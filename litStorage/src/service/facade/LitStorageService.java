@@ -8,7 +8,7 @@ import domain.MemberLitStorage;
 
 public interface LitStorageService {
 	boolean registerLitStorage(LitStorage litStorage);
-	boolean removeLitStorage(String id);
+	boolean removeLitStorage(String litStorageId);
 	List<LitStorage> findAll();
 	LitStorage findLitStorageById(String id);
 	List<LitStorage> findLitStoragesByMemberId(String id);

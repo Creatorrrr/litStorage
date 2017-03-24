@@ -4,16 +4,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.management.RuntimeErrorException;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -22,15 +18,15 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.NoFilepatternException;
 import org.eclipse.jgit.dircache.DirCache;
 
+import domain.ChangeHistory;
 import domain.Episode;
 import store.facade.EpisodeStore;
+import store.mapper.ChangeHistoryMapper;
 import store.mapper.EpisodeMapper;
-import store.utils.AutoCloser;
+import utils.AutoCloser;
+import utils.PathBuilder;
 
 public class EpisodeStoreLogic implements EpisodeStore {
-	
-	private static final String ROOT_PATH = "C:/Users/kosta/litStorageGit";	// need to make constants package
-
 	private SqlSessionFactory factory;
 
 	public EpisodeStoreLogic() {
@@ -41,16 +37,13 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	public boolean insertEpisode(Episode episode) {		
 		SqlSession session = factory.openSession();	// open Session
 		
-		boolean checkDb = false;
-		boolean checkGit = false;
+		boolean check = false;
 		
 		try {
 			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
-			checkDb = mapper.insertEpisode(episode);	// check insert to db
+			check = mapper.insertEpisode(episode);	// check insert to db
 			
-			checkGit = insertEpisodeToGit(episode);	// insert in to git repository
-			
-			if (checkDb && checkGit) {
+			if (check) {
 				session.commit();
 			} else {
 				session.rollback();
@@ -59,25 +52,26 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			AutoCloser.close(session);
 		}
 		
-		return checkDb && checkGit;
+		return check;
 	}
 	
-	public boolean insertEpisodeToGit(Episode episode) {
+	@Override
+	public String insertEpisodeToGit(Episode episode, String message) {
 		Git git = null;
 		
-		File repoDir = new File(buildLitStorageRepoPath(episode));
+		File repoDir = new File(PathBuilder.buildLitStoragePath(episode.getLiterature().getLitStorage()));
 		
 		if(!repoDir.exists()) {
 			throw new RuntimeException("Git repository path does not exists");
 		}
 		
-		File episodeFile = new File(buildEpisodeFilePath(episode));
+		File episodeFile = new File(PathBuilder.buildEpisodeFilePath(episode));
 		
 		if(episodeFile.exists()) {
 			throw new RuntimeException("Episode already exists in Git repository");
 		}
 		
-		String episodeFileName = buildEpisodeFileName(episode);
+		String episodeFileName = PathBuilder.buildEpisodeFileName(episode);
 		
 		try {
 			createEpisodeFile(episode, episodeFile);	// create episode file "Path : {repoDir}/{episodeId}.txt
@@ -86,12 +80,12 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			DirCache index = git.add().addFilepattern(episodeFileName).call();	// add to index
 	        
 	        if (index.getEntryCount() > 0) {
-				git.commit().setMessage("'" + episode.getWriter().getId() + "' modified episode file '" + episode.getId() + ".txt'").call();
-				return true;
+				git.commit().setMessage(message).call();
+				return git.getRepository().resolve("HEAD^{tree}").getName();	// return HEAD's SHA-1 hash
 	        } else {
 				git.rm().addFilepattern(episodeFileName).setCached(true).call();	// if checkDb is false then remove file from index
 				episodeFile.delete();
-				return false;
+				return null;
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Can not open Git Repository");
@@ -110,11 +104,12 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		File tempFile = null;
 		
 		try {
-			tempFile = new File(episodeFile.getCanonicalPath().substring(0, episodeFile.getName().lastIndexOf(".")) + ".tmp");	// filename.tmp 생성
+			tempFile = new File(episodeFile.getCanonicalPath().substring(0, episodeFile.getName().lastIndexOf(".")) + ".tmp");	// filename.tmp �깮�꽦
 			
 			bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
 			
 			bWriter.write(episode.getTitle());
+			bWriter.write("\r\n");
 			bWriter.write(episode.getContent());
 			bWriter.flush();
 			
@@ -142,16 +137,13 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	public boolean updateEpisode(Episode episode) {
 		SqlSession session = factory.openSession();	// open Session
 		
-		boolean checkDb = false;
-		boolean checkGit = false;
+		boolean check = false;
 		
 		try {
 			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
-			checkDb = mapper.updateEpisode(episode);	// check insert to db
+			check = mapper.updateEpisode(episode);	// check insert to db
 
-			checkGit = updateEpisodeToGit(episode);	// insert in to git repository
-
-			if (checkDb && checkGit) {
+			if (check) {
 				session.commit();
 			} else {
 				session.rollback();
@@ -160,21 +152,22 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			AutoCloser.close(session);
 		}
 		
-		return checkDb && checkGit;
+		return check;
 	}
 	
-	public boolean updateEpisodeToGit(Episode episode) {
+	@Override
+	public String updateEpisodeToGit(Episode episode, String message) {
 		Git git = null;
 		
-		File repoDir = new File(buildLitStorageRepoPath(episode));
+		File repoDir = new File(PathBuilder.buildLitStoragePath(episode.getLiterature().getLitStorage()));
 		
 		if(!repoDir.exists()) {
 			throw new RuntimeException("Git repository path does not exists");
 		}
 		
-		File episodeFile = new File(buildEpisodeFilePath(episode));
+		File episodeFile = new File(PathBuilder.buildEpisodeFilePath(episode));
 		
-		String episodeFileName = buildEpisodeFileName(episode);
+		String episodeFileName = PathBuilder.buildEpisodeFileName(episode);
 		
 		try {
 			createEpisodeFile(episode, episodeFile);	// create episode file "Path : {repoDir}/{episodeId}.txt
@@ -183,12 +176,12 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			DirCache index = git.add().addFilepattern(episodeFileName).call();	// add to index
 	        
 	        if (index.getEntryCount() > 0) {
-				git.commit().setMessage("'" + episode.getWriter().getId() + "' created episode file '" + episode.getId() + ".txt'").call();
-				return true;
+				git.commit().setMessage(message).call();
+				return git.getRepository().resolve("HEAD^{tree}").getName();	// return HEAD's SHA-1 hash
 	        } else {
 				git.rm().addFilepattern(episodeFileName).setCached(true).call();	// if checkDb is false then remove file from index
 				episodeFile.delete();
-				return false;
+				return null;
 			}
 		} catch (IOException e) {
 			throw new RuntimeException("Can not open Git Repository");
@@ -202,18 +195,16 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	}
 
 	@Override
-	public boolean deleteEpisode(Episode episode) {
+	public boolean deleteEpisode(String episodeId) {
 		SqlSession session = factory.openSession();
 		
-		boolean checkDb = false;
-		boolean checkGit = false;
+		boolean check = false;
 		
 		try {
 			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
-			checkDb = mapper.deleteEpisode(episode);
-			checkGit = deleteEpisodeToGit(episode);	// insert in to git repository
-			System.out.println(checkGit);
-			if (checkDb && checkGit) {
+			check = mapper.deleteEpisode(episodeId);
+			
+			if (check) {
 				session.commit();
 			} else {
 				session.rollback();
@@ -221,38 +212,32 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		} finally {
 			session.close();
 		}
-		return checkDb && checkGit;
+		return check;
 	}
 	
-	public boolean deleteEpisodeToGit(Episode episode) {
+	@Override
+	public String deleteEpisodeFromGit(Episode episode, String message) {
 		Git git = null;
 		
-		File repoDir = new File(buildLitStorageRepoPath(episode));
+		File repoDir = new File(PathBuilder.buildLitStoragePath(episode.getLiterature().getLitStorage()));
 		
 		if(!repoDir.exists()) {
 			throw new RuntimeException("Git repository path does not exists");
 		}
 		
-		File episodeFile = new File(buildEpisodeFilePath(episode));
+		File episodeFile = new File(PathBuilder.buildEpisodeFilePath(episode));
 		
-		String episodeFileName = buildEpisodeFileName(episode);
+		String episodeFileName = PathBuilder.buildEpisodeFileName(episode);
 		
 		try {
 			if(!episodeFile.delete()) {
-				return false;
+				return null;
 			}
 
 			git = Git.open(repoDir);	// open repository
-			DirCache index = git.rm().addFilepattern(episodeFileName).call();	// remove from index
-	        
-	        if (index.getEntryCount() > 0) {
-	        	System.out.println(episode.getWriter().getId());
-	        	System.out.println(episode.getId());
-				git.commit().setMessage("'" + episode.getWriter().getId() + "' deleted episode file '" + episode.getId() + ".txt'").call();
-				return true;
-	        } else {
-				return false;
-			}
+			git.rm().addFilepattern(episodeFileName).call();	// remove from index
+			git.commit().setMessage(message).call();
+			return git.getRepository().resolve("HEAD^{tree}").getName();	// return HEAD's SHA-1 hash
 		} catch (IOException e) {
 			throw new RuntimeException("Can not open Git Repository");
 		} catch (NoFilepatternException e) {
@@ -262,6 +247,27 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		} finally {
 			AutoCloser.close(git);
 		}
+	}
+	
+	@Override
+	public boolean deleteEpisodesByLiteratureId(String literatureId) {
+		SqlSession session = factory.openSession();
+		
+		boolean check = false;
+		
+		try {
+			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
+			check = mapper.deleteEpisodesByLiteratureId(literatureId);
+			
+			if (check) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return check;
 	}
 
 	@Override
@@ -271,40 +277,10 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		try {
 			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
 			episode = mapper.selectEpisodeById(id);
-			selectEpisodeFromGit(episode);	// change content field 'path' to 'real content'
 		} finally {
 			session.close();
 		}
 		return episode;
-	}
-	
-	private void selectEpisodeFromGit(Episode episode) {
-		File episodeFile = new File(buildEpisodeFilePath(episode));
-
-		StringBuilder strBuilder = new StringBuilder();
-		String line = null;
-		
-		BufferedReader bReader = null;
-		
-		try {
-			bReader = new BufferedReader(new InputStreamReader(new FileInputStream(episodeFile), "UTF-8"));
-			
-			strBuilder.append(bReader.readLine());
-			while((line = bReader.readLine()) != null) {
-				strBuilder.append("\r\n");
-				strBuilder.append(line);
-			}
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException("UnsupportedEncoding");
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException("No such File");
-		} catch (IOException e) {
-			throw new RuntimeException("IO failed");
-		} finally {
-			AutoCloser.close(bReader);
-		}
-		
-		episode.setContent(strBuilder.toString());
 	}
 
 	@Override
@@ -314,17 +290,10 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		try {
 			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
 			list = mapper.selectEpisodesByLiteratureId(literatureId);
-			selectEpisodeFromGit(list);
 		} finally {
 			session.close();
 		}
 		return list;
-	}
-	
-	private void selectEpisodeFromGit(List<Episode> episodeList) {
-		for (Episode episode : episodeList) {
-			selectEpisodeFromGit(episode);
-		}
 	}
 
 	@Override
@@ -343,47 +312,22 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		return check;
 	}
 	
-	private String buildLitStorageRepoPath(Episode episode) {
-		StringBuilder strBuilder = new StringBuilder();
+	@Override
+	public boolean insertChangeHistory(ChangeHistory history) {
+		SqlSession session = factory.openSession();
 		
-		String litStorageId = episode.getLiterature().getLitStorage().getId();
+		boolean check = false;
 		
-		strBuilder.append(ROOT_PATH);
-		strBuilder.append("/");
-		strBuilder.append(litStorageId);	// litStorage ID
+		try {
+			ChangeHistoryMapper mapper = session.getMapper(ChangeHistoryMapper.class);
+			
+			if (check = mapper.insertChangeHistory(history) > 0) {
+				session.commit();
+			}
+		} finally {
+			session.close();
+		}
 		
-		return strBuilder.toString();
+		return check;
 	}
-	
-	private String buildEpisodeFilePath(Episode episode) {
-		StringBuilder strBuilder = new StringBuilder();
-		
-		String litStorageId = episode.getLiterature().getLitStorage().getId();
-		String literatureId = episode.getLiterature().getId();
-		String episodeId = episode.getId();
-		
-		strBuilder.append(ROOT_PATH);
-		strBuilder.append("/");
-		strBuilder.append(litStorageId);	// litStorage ID
-		strBuilder.append("/");
-		strBuilder.append(literatureId);	// literatureId ID
-		strBuilder.append("/");
-		strBuilder.append(episodeId + ".txt");	// episode file name
-		
-		return strBuilder.toString();
-	}
-	
-	private String buildEpisodeFileName(Episode episode) {
-		StringBuilder strBuilder = new StringBuilder();
-		
-		String literatureId = episode.getLiterature().getId();
-		String episodeId = episode.getId();
-		
-		strBuilder.append(literatureId);	// literatureId ID
-		strBuilder.append("/");
-		strBuilder.append(episodeId + ".txt");	// episode file name
-		
-		return strBuilder.toString();
-	}
-
 }

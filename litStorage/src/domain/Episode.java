@@ -1,6 +1,16 @@
 package domain;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import utils.AutoCloser;
+import utils.PathBuilder;
 
 public class Episode {
 	private String id;
@@ -65,6 +75,35 @@ public class Episode {
 	
 	public void setHistories(List<ChangeHistory> histories) {
 		this.histories = histories;
+	}
+	
+	public String getContentFromGit() {
+		File episodeFile = new File(PathBuilder.buildEpisodeFilePath(this));
+
+		StringBuilder strBuilder = new StringBuilder();
+		String line = null;
+		
+		BufferedReader bReader = null;
+		
+		try {
+			bReader = new BufferedReader(new InputStreamReader(new FileInputStream(episodeFile), "UTF-8"));
+			
+			strBuilder.append(bReader.readLine());
+			while((line = bReader.readLine()) != null) {
+				strBuilder.append("\r\n");
+				strBuilder.append(line);
+			}
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException("UnsupportedEncoding");
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException("No such File");
+		} catch (IOException e) {
+			throw new RuntimeException("IO failed");
+		} finally {
+			AutoCloser.close(bReader);
+		}
+		
+		return strBuilder.toString();
 	}
 	
 }

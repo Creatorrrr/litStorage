@@ -13,15 +13,12 @@
 			<association property="writer" column="writer"
 				select="store.mapper.MemberMapper.selectMemberById"
 				javaType="Member" jdbcType="VARCHAR"/>
-			<!--
-			<collection property="histories" column="id" 
-				select="store.mapper.ChangeHistoryMapper.selectChangeHistoriesByEpisodeId"
-				javaType="ArrayList" jdbcType="VARCHAR"/>
-			  -->
 			<association property="literature" column="literature" 
 				select="store.mapper.LiteratureMapper.selectLiteraturesById" 
 				javaType="Literature" jdbcType="VARCHAR"/>
-			
+			<collection property="histories" column="id" 
+				select="store.mapper.ChangeHistoryMapper.selectChangeHistoriesByEpisodeId"
+				javaType="ArrayList" jdbcType="VARCHAR"/>
 	  	</resultMap>
     
     	<insert id="insertEpisode" parameterType="Episode">
@@ -36,10 +33,13 @@
     		update episode set name=#{title}, content='${literature.id}/${id}.txt', writer=#{writer.id}, bound=#{bound,jdbcType=CHAR}, literature=#{literature.id} where id=#{id}
     	</update>
     
-    	<delete id="deleteEpisode" parameterType="Episode">
+    	<delete id="deleteEpisode" parameterType="String">
     		delete from episode where id=#{id}
     	</delete>
-    
+    	
+		<delete id="deleteEpisodesByLiteratureId" parameterType="String">
+    		delete from episode where literature=#{id}
+    	</delete>
     
     	<select id="selectEpisodeById" resultMap="EpisodeMap">
     		select id, name, content, writer, bound, literature from episode where id = #{id}

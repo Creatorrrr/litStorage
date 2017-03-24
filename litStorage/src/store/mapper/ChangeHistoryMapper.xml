@@ -11,12 +11,9 @@
 		<association property="editor" column="editor"
 			select="store.mapper.MemberMapper.selectMemberById" javaType="Member"
 			jdbcType="VARCHAR" />
-		<association property="episode" javaType="Episode">
-		    <id property="id" column="episodeId"/>
-		</association>
-		<!-- <association property="episode" column="episodeId"
+		<association property="episode" column="episodeId"
 			select="store.mapper.EpisodeMapper.selectEpisodeById" javaType="Episode"
-			jdbcType="VARCHAR" /> -->
+			jdbcType="VARCHAR" />
 	</resultMap>
 
 	<insert id="insertChangeHistory" parameterType="ChangeHistory">

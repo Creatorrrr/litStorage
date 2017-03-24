@@ -1,5 +1,6 @@
 package store.logic;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import domain.Literature;
 import store.facade.LiteratureStore;
 import store.mapper.LiteratureMapper;
+import utils.PathBuilder;
 
 public class LiteratureStoreLogic implements LiteratureStore{
 	
@@ -20,29 +22,81 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	@Override
 	public boolean insertLiterature(Literature literature) {
 		SqlSession session = factory.openSession();
-		int check;
+		
+		boolean check = false;
+		
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			check = mapper.insertLiterature(literature);
-			session.commit();
+			
+			if(check = mapper.insertLiterature(literature) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
 		} finally {
 			session.close();
 		}
-		return check>0;
+		
+		return check;
+	}
+	
+	@Override
+	public boolean insertLiteratureToGit(Literature literature) {
+		File literatureDir = new File(PathBuilder.buildLiteraturePath(literature));
+		
+		if(literatureDir.exists()) {
+			return false;
+		}
+		
+		literatureDir.mkdir();
+		
+		return true;
 	}
 
 	@Override
 	public boolean deleteLiterature(String literatureId) {
 		SqlSession session = factory.openSession();
-		int check;
+		
+		boolean check = false;
+		
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			check = mapper.deleteLiterature(literatureId);
-			session.commit();
+			
+			if(check = mapper.deleteLiterature(literatureId) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
 		} finally {
 			session.close();
 		}
-		return check>0;
+		
+		return check;
+	}
+	
+	@Override
+	public boolean deleteLiteratureFromGit(String path) {
+		File file = new File(path);
+		
+		if(!file.exists()) {
+			return false;
+		}
+		
+		File[] tempFile = file.listFiles();
+		
+		if(tempFile.length > 0){
+			for (int i = 0; i < tempFile.length; i++){ 
+				if(tempFile[i].isFile()){ 
+					tempFile[i].delete(); 
+				} else {
+					deleteLiteratureFromGit(tempFile[i].getPath()); 
+				} 
+				tempFile[i].delete(); 
+			}
+			file.delete(); 
+		}
+		
+		return true;
 	}
 
 	@Override

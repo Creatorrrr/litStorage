@@ -10,12 +10,9 @@
 		<association property="writer" column="writer"
 			select="store.mapper.MemberMapper.selectMemberById" javaType="Member"
 			jdbcType="VARCHAR" />
-		<association property="discussionPlace" javaType="DiscussionPlace">
-		    <id property="id" column="discussionplaceid"/>
-		</association>
-		<!-- <association property="discussionPlace" column="discussionplaceid"
+		<association property="discussionPlace" column="discussionplaceid"
 			select="store.mapper.DiscussionPlaceMapper.selectDiscussionPlaceById"
-			javaType="DiscussionPlace" jdbcType="VARCHAR" /> -->
+			javaType="DiscussionPlace" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<insert id="insertDiscussionContent" parameterType="DiscussionContent">

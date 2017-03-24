@@ -1,6 +1,5 @@
 package service.logic;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import domain.ChangeHistory;
@@ -10,11 +9,10 @@ import service.facade.LiteratureService;
 import store.facade.ChangeHistoryStore;
 import store.facade.EpisodeStore;
 import store.facade.LiteratureStore;
-import store.facade.MemberStore;
 import store.logic.ChangeHistoryStoreLogic;
 import store.logic.EpisodeStoreLogic;
 import store.logic.LiteratureStoreLogic;
-import store.logic.MemberStoreLogic;
+import utils.PathBuilder;
 
 public class LiteratureServiceLogic implements LiteratureService {
 
@@ -30,12 +28,18 @@ public class LiteratureServiceLogic implements LiteratureService {
 
 	@Override
 	public boolean registerLiterature(Literature literature) {
-		return lStore.insertLiterature(literature);
+		boolean checkLiterature = lStore.insertLiterature(literature);	// insert literature to db
+		boolean checkGit = lStore.insertLiteratureToGit(literature);	// insert literature to git
+		return checkLiterature && checkGit;
 	}
 
 	@Override
-	public boolean removeLiterature(String Id) {
-		return lStore.deleteLiterature(Id);
+	public boolean removeLiterature(String id) {
+		epStore.deleteEpisodesByLiteratureId(id);	// delete episodes first
+		boolean checkLiterature = lStore.deleteLiterature(id);	// delete literature after delete episodes
+		Literature literature = lStore.selectLiteraturesById(id);	// select literature from db
+		boolean checkGit = lStore.deleteLiteratureFromGit(PathBuilder.buildLiteraturePath(literature));	// delete from git
+		return checkLiterature && checkGit;
 	}
 
 	@Override
@@ -72,17 +76,44 @@ public class LiteratureServiceLogic implements LiteratureService {
 
 	@Override
 	public boolean registerEpisode(Episode episode) {
-		return epStore.insertEpisode(episode);
+		boolean checkEpisode = epStore.insertEpisode(episode);	// insert episode to db
+		String message = episode.getWriter().getId() + " registered " + PathBuilder.buildEpisodeFileName(episode);	// set commit message
+		String treeHash = epStore.insertEpisodeToGit(episode, message);	// insert episode to git
+		ChangeHistory history = new ChangeHistory();	// set change history
+		history.setEditor(episode.getWriter());
+		history.setContent(treeHash);
+		history.setEpisode(episode);
+		history.setMessage(message);
+		boolean checkHistory = chStore.insertChangeHistory(history);	// insert change history
+		return checkEpisode && checkHistory;
 	}
 
 	@Override
 	public boolean modifyEpisode(Episode episode) {
-		return epStore.updateEpisode(episode);
+		boolean checkEpisode = epStore.updateEpisode(episode);	// update episode to db
+		String message = episode.getWriter().getId() + " modified " + PathBuilder.buildEpisodeFileName(episode);	// set commit message
+		String treeHash = epStore.updateEpisodeToGit(episode, message);	// update episode to git
+		ChangeHistory history = new ChangeHistory();	// set change history
+		history.setEditor(episode.getWriter());
+		history.setContent(treeHash);
+		history.setEpisode(episode);
+		history.setMessage(message);
+		boolean checkHistory = chStore.insertChangeHistory(history);	// insert change history
+		return checkEpisode && checkHistory;
 	}
 
 	@Override
 	public boolean removeEpisode(Episode episode) {
-		return epStore.deleteEpisode(episode);
+		boolean checkEpisode = epStore.deleteEpisode(episode.getId());	// remove episode from db
+		String message = episode.getWriter().getId() + " removed " + PathBuilder.buildEpisodeFileName(episode);	// set commit message
+		String treeHash = epStore.deleteEpisodeFromGit(episode, message);	// remove episode from git
+		ChangeHistory history = new ChangeHistory();	// set change history
+		history.setEditor(episode.getWriter());
+		history.setContent(treeHash);
+		history.setEpisode(episode);
+		history.setMessage(message);
+		boolean checkHistory = chStore.insertChangeHistory(history);	// insert change history
+		return checkEpisode && checkHistory;
 	}
 
 	@Override
@@ -100,10 +131,10 @@ public class LiteratureServiceLogic implements LiteratureService {
 		return epStore.updateBound(Id);
 	}
 
-	@Override
-	public boolean registerChangeHistory(ChangeHistory changeHistory) {
-		return chStore.insertChangeHistory(changeHistory);
-	}
+//	@Override
+//	public boolean registerChangeHistory(ChangeHistory changeHistory) {
+//		return chStore.insertChangeHistory(changeHistory);
+//	}
 
 	@Override
 	public List<ChangeHistory> findChangeHistoriesByEpisodeId(String episodeId) {
