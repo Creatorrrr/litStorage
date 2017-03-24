@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import domain.Member;
+import service.facade.MemberService;
+import service.logic.MemberServiceLogic;
+
 
 @WebServlet("/login.do")
 public class LoginController extends HttpServlet {
@@ -26,23 +30,26 @@ public class LoginController extends HttpServlet {
 		
 		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
+		
+		MemberService service = new MemberServiceLogic();
+		Member memberDB = service.findMemberById(loginId);
+		
 
-		if("1234".equals(password)){
+		if(memberDB != null && password.equals(memberDB.getPassword()) ){
 			HttpSession session = request.getSession();
 			session.setAttribute("loginId", loginId);
-			response.sendRedirect(request.getContextPath()+"/views/index.jsp");
+			if(loginId == "admin"){
+				session.setAttribute("isAdmin", true);
+			}
+			request.setAttribute("message", "로그인 되었습니다.");
+			request.getRequestDispatcher("/views/index.jsp").forward(request, response);
+			return ;
 		}else {
-			response.sendRedirect(request.getContextPath()+"/views/index.jsp");
+			request.setAttribute("message", "로그인 실패 하였습니다.");
+			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+			return ;
 		}
-	/*	session.setAttribute("loginedUser", loginId); 
-		session.setAttribute("isAdmin", isAdminUser(loginId));
-		
-		response.sendRedirect(request.getContextPath()+"main.do");*/
+
 	}
-	/*private boolean isAdminUser(String loginId){
-		List<String> adminUsers=new ArrayList<String>();
-		adminUsers.add("test");
-		
-		return adminUsers.contains(loginId);
-	}*/
+
 }
