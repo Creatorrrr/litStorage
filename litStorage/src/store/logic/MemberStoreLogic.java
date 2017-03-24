@@ -21,7 +21,7 @@ public class MemberStoreLogic implements MemberStore{
 	public boolean insertMember(Member member) {
 		
 		SqlSession session = factory.openSession();
-		boolean result ;
+		boolean result = false;
 		
 		try{
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
@@ -31,10 +31,10 @@ public class MemberStoreLogic implements MemberStore{
 			} else {
 				session.rollback();
 			}
-			return result;
 		}finally{
 			session.close();
 		}
+		return result;
 	}
 
 	@Override

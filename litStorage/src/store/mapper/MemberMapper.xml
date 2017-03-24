@@ -40,9 +40,8 @@
 		WHERE id=#{id}
 	</update>
 	
-	<delete id="deleteMember" parameterType="string">
-		DELETE FROM Member
-		WHERE id = #{id}
-	</delete>
+	<update id="deleteMember" parameterType="string">
+		UPDATE Member SET id=#{id}, name=null, password=null, email=null, isout='F' WHERE id = #{id}
+	</update>
 	
   </mapper>
