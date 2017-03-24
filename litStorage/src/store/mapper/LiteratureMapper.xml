@@ -53,7 +53,8 @@
 		ORDER BY hits DESC
 	</select>
 
-	<select id="selectLiteratureByGenreOrderById" resultMap="literatureMap">
+	<select id="selectLiteraturesByGenreOrderById" parameterType="string"
+	 resultMap="literatureMap">
 		<include refid="selectLiterature" />
 		WHERE genre = #{genre}
 		ORDER BY id DESC

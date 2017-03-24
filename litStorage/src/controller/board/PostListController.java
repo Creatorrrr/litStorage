@@ -48,16 +48,4 @@ public class PostListController extends HttpServlet {
 	}
 
 	
-//	//검색용
-//	@Override
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-//			throws ServletException, IOException {
-//
-//		BoardService service = new BoardServiceLogic();
-//		String name = request.getParameter("search");
-//		List<Post>list=service.findPostsByTitle(name);
-//		
-//		request.setAttribute("boards", list);
-//		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);
-//	}
 }

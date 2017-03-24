@@ -50,7 +50,7 @@ public class LiteratureSearchController extends HttpServlet {
 		OutputStream out = response.getOutputStream();
 
 		JAXBContext context;
-
+		
 		LiteratureService service = new LiteratureServiceLogic();
 
 		// check option whether selected condition is id or name

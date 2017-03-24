@@ -17,8 +17,8 @@ public class LogoutController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		request.setAttribute("message", "로그아웃 되었습니다.");
-		request.getRequestDispatcher("/views/").forward(request, response);
-		//response.sendRedirect(request.getContextPath());
+//		request.getRequestDispatcher("/views/").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/");
 	}
 
 }

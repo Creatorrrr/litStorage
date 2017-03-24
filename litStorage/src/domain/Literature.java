@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.sun.xml.internal.txw2.annotation.XmlAttribute;
 
 
-@XmlRootElement(name="litStorage")
+@XmlRootElement(name="literature")
 @XmlType(propOrder = {"id","name","genre","introduce","creator","hits"})
 @XmlSeeAlso({ArrayList.class,Member.class})
 public class Literature {
