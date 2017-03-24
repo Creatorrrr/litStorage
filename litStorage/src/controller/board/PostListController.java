@@ -31,6 +31,8 @@ public class PostListController extends HttpServlet {
 		 * request.setAttribute("posts", list); //5줄 수정부분
 		 */
 		
+		//여기서 보드 아이디 추가할지 
+		
 		List<Board> lists = service.findAllBoards();
 		request.setAttribute("boards", lists);
 		// request.setAttribute("boards", service.findAllBoards());

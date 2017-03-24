@@ -39,8 +39,7 @@ div {
 					<c:forEach items="${boardRegister }" var="board_R">
 
 						<a class="btn btn-sm btn-success"
-							href="${ctx}/post/postList.do?boardId=${board_R.id}">${board_R.title }</a>
-							<!--	href="${ctx}/views/postList.jsp?boardId=${board_R.id}">${board_R.title }</a>  -->
+							href="${ctx}/post/postList.do?boardId=${board_R.id}">${board_R.title }</a>     <!--	href="${ctx}/views/postList.jsp?boardId=${board_R.id}">${board_R.title }</a>  -->
 						<%-- <tr>
 							<td>${board_R.title }</td> 
 						</tr> --%>
