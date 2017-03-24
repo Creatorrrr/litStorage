@@ -42,6 +42,7 @@ div{border: 1px solid #ccc; }
 										<tr><td>발신회원</td><td>${invite.sender.id}</td></tr>
 										<tr><td>메시지</td><td>${invite.message}</td></tr>
 										<tr><td>저장소 이름</td><td>${invite.litStorage.name }</td></tr>
+										<td><button type="button" onclick="confirm('${invite.sender.id}','${loginId }','${invite.litStorage.id }')">요청 승인</button>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
@@ -53,6 +54,21 @@ div{border: 1px solid #ccc; }
 
 
 </div>
-
+<script type="text/javascript">
+var confirm = function(senderId, receiverId, litStorageId){
+	$.ajax({
+		url :"${ctx }/member/decision.do",
+		type:"get",
+		data:{ senderId:senderId,
+				receiverId:receiverId,
+				litStorageId:litStorageId,
+				form:"R"
+			},
+		success:function(){
+			alert("저장소에 가입되었습니다.");
+			}
+		});
+	}
+</script>
 </body>
 </html>

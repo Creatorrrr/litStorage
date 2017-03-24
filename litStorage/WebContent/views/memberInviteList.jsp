@@ -64,7 +64,11 @@ var confirm = function(senderId, receiverId, litStorageId){
 		type:"get",
 		data:{ senderId:senderId,
 				receiverId:receiverId,
-				litStorageId:litStorageId
+				litStorageId:litStorageId,
+				form:"I"
+		},
+		success:function(){
+			alert("저장소에 가입되었습니다.");
 			}
 		});
 	}
