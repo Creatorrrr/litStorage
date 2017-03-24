@@ -46,7 +46,6 @@ public class MemberRegisterController extends HttpServlet {
 				request.setAttribute("message", "이미 가입된 회원입니다.");
 				request.getRequestDispatcher("/views/register.jsp").forward(request, response);
 				return ;
-				
 			}
 			
 		} 

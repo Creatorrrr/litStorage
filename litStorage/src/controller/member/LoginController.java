@@ -34,16 +34,23 @@ public class LoginController extends HttpServlet {
 		MemberService service = new MemberServiceLogic();
 		Member memberDB = service.findMemberById(loginId);
 		
-
-		if(memberDB != null && password.equals(memberDB.getPassword()) ){
-			HttpSession session = request.getSession();
-			session.setAttribute("loginId", loginId);
-			if(loginId == "admin"){
-				session.setAttribute("isAdmin", true);
+		//탈퇴
+		if(memberDB != null && password.equals(memberDB.getPassword())){//입력한 회원이 있으며 비밀번호가 일치될떄 등록처리
+			if(memberDB.getPassword().equals("*DEL*") && memberDB.getId().equals("*DEL*")){//탈퇴한 회원일때
+				request.setAttribute("message", "탈퇴한 회원 입니다.");
+				request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+				return ;
+				
+			}else{
+				HttpSession session = request.getSession();
+				session.setAttribute("loginId", loginId);
+				if(loginId == "admin"){
+					session.setAttribute("isAdmin", true);
+				}
+				request.setAttribute("message", "로그인 되었습니다.");
+				request.getRequestDispatcher("/views/index.jsp").forward(request, response);
+				return ;
 			}
-			request.setAttribute("message", "로그인 되었습니다.");
-			request.getRequestDispatcher("/views/index.jsp").forward(request, response);
-			return ;
 		}else {
 			request.setAttribute("message", "로그인 실패 하였습니다.");
 			request.getRequestDispatcher("/views/login.jsp").forward(request, response);

@@ -41,7 +41,7 @@
 	</update>
 	
 	<update id="deleteMember" parameterType="string">
-		UPDATE Member SET id=#{id}, name=null, password=null, email=null, isout='F' WHERE id = #{id}
+		UPDATE Member SET id=#{id}, name='*DEL*', password='*DEL*', email='*DEL*' WHERE id = #{id}
 	</update>
 	
   </mapper>
