@@ -111,7 +111,7 @@ div {
 								<c:forEach items="${literature.episodes }" var="episode">
 									<c:if test="${episode ne null }">
 										<tr>
-											<td>${episode.title }</td>
+											<td><a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a></td>
 											<td>${episode.writer.name }</td>
 
 											<td><select name="openSelect">
