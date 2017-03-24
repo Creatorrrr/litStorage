@@ -77,15 +77,14 @@ public class EpisodeRegisterController extends HttpServlet {
 		boolean check = service.registerEpisode(episode);
 		
 		if(check){
-			List<Literature> literatures = new ArrayList<>();
 			
 			Literature literatureA = service.findLiteratureById(LiteratureId);
-
-			literatures.add(literature);
+			List<Literature> literatures = service.findLiteratureByLitStorageId(literatureA.getLitStorage().getId());
+			
 			request.setAttribute("literature", literatureA);
 			request.setAttribute("literatures", literatures);
 
-			request.getRequestDispatcher("../views/episodeList.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 		}
 
 	}

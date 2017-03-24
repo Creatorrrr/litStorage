@@ -29,7 +29,6 @@ public class LiteratureDeleteController extends HttpServlet {
 		// 2. delete literature
 
 		LiteratureService Lservice = new LiteratureServiceLogic();
-		LitStorageService LSservice = new LitStorageServiceLogic();
 
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		String deleteLiteratureId = request.getParameter("deleteLiteratureId");
@@ -42,19 +41,27 @@ public class LiteratureDeleteController extends HttpServlet {
 			for (Episode episode : episodes) {
 				Lservice.removeEpisode(episode.getId());
 			}
+			//literatureId로 literature를 찾는다
 			Literature literature = Lservice.findLiteratureById(deleteLiteratureId);
+			Lservice.removeLiterature(deleteLiteratureId);
+			
 			Literature literatureA = new Literature();
-			literatureA.setLitStorage(literature.getLitStorage().getId());
+			LitStorage litStorage = new LitStorage();
+			
+			//작품 저장소아이디 받아 온다.
+			litStorage.setId(literature.getLitStorage().getId());
+			//literatureA객체에 저장
+			literatureA.setLitStorage(litStorage);
+			List<Literature> literatures = Lservice.findLiteratureByLitStorageId(literatureA.getLitStorage().getId());
 			
 			// 선택한 작품 삭제
-			Lservice.removeLiterature(deleteLiteratureId);
 			
 			// 전 작품저장소 화면 이동
 
-			request.setAttribute("literature", literature);
-
+			request.setAttribute("literature", literatureA);
+			request.setAttribute("literatures", literatures);
 			// 나의 작품저장소로 이동
-			request.getRequestDispatcher("/literature/list.do").forward(request, response);
+			request.getRequestDispatcher("/views/literatureList.jsp").forward(request, response);
 
 		}
 	}

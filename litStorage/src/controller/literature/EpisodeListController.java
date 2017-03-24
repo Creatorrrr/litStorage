@@ -31,7 +31,6 @@ public class EpisodeListController extends HttpServlet {
 
 		String id = request.getParameter("LiteratureId");
 		String LiteratureName = request.getParameter("LiteratureName");
-		// String name = "불";
 
 		List<Literature> literatures = new ArrayList<>();
 
