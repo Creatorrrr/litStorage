@@ -36,7 +36,6 @@ public class EpisodeRegisterController extends HttpServlet {
 		// 1. receive LiteratureId
 		
 		String LiteratureId = req.getParameter("literatureId"); 
-		System.out.println(LiteratureId+"aaaaa");
 		req.setAttribute("LiteratureId", LiteratureId);
 		
 		req.getRequestDispatcher("../views/episodeRegister.jsp").forward(req, resp);
@@ -80,10 +79,10 @@ public class EpisodeRegisterController extends HttpServlet {
 		if(check){
 			List<Literature> literatures = new ArrayList<>();
 			
-			Literature literatuer = service.findLiteratureById(LiteratureId);
+			Literature literatureA = service.findLiteratureById(LiteratureId);
 
-			literatures.add(literatuer);
-			
+			literatures.add(literature);
+			request.setAttribute("literature", literatureA);
 			request.setAttribute("literatures", literatures);
 
 			request.getRequestDispatcher("../views/episodeList.jsp").forward(request, response);

@@ -65,7 +65,7 @@ public class LiteratureRegisterController extends HttpServlet {
 		boolean check = Lservice.registerLiterature(literature);
 		
 		List<Literature> literatures = Lservice.findLiteratureByLitStorageId(litStorageId);
-
+		request.setAttribute("literature", literature);
 		request.setAttribute("literatures", literatures);
 
 		request.getRequestDispatcher("/views/literatureList.jsp").forward(request, response);

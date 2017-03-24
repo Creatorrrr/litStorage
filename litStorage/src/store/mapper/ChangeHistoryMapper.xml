@@ -21,7 +21,7 @@
 			SELECT change_history_seq.NEXTVAL FROM dual
 		</selectKey>
 		INSERT INTO changeHistory(id, editor, content, changeTime, message, episodeId)
-		VALUES(#{id}, #{editor.id}, #{content}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'), #{message}, #{episode.id})
+		VALUES(#{id}, #{editor.id}, #{content, jdbcType=VARCHAR}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'), #{message}, #{episode.id})
 	</insert>
 	<select id="selectChangeHistoriesByEpisodeId"
 		parameterType="String" resultMap="changeHistoryMap">
