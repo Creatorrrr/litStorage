@@ -22,9 +22,14 @@ public class BoardRegisterController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 
-		String boardId = request.getParameter("boardId");
+		String boardId = request.getParameter("boards");     //boardId
 		
-		request.setAttribute("boardId", boardId);
+		BoardService service = new BoardServiceLogic();
+		List<Board> list=service.findAllBoards();
+		request.setAttribute("boards", list);
+		
+		
+		//request.setAttribute("boards", boardId);
 		request.getRequestDispatcher("/views/boardRegister.jsp").forward(request, response);
 	}
 	
@@ -46,7 +51,7 @@ public class BoardRegisterController extends HttpServlet {
 			throw new RuntimeException("board register failed");
 		}
 		
-		request.setAttribute("board",list);
+		request.setAttribute("boardRegister",list);
 		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);
 
 		

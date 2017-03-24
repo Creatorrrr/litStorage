@@ -32,8 +32,21 @@ div {
 		<div class="row">
 			<div class="col-md-12">
 				<h3>자유게시판 목록</h3>
-				<a href="${ctx }/board/boardRegister.do">게시판 추가</a><br>
-				<%-- <a href="${ctx }/litStorage/myList.do">무협</a><br> --%>
+
+				<tbody>
+					<a href="${ctx }/board/boardRegister.do">게시판 추가</a>
+					<br>
+					<c:forEach items="${boardRegister }" var="board_R">
+
+						<a class="btn btn-sm btn-success"
+							href="${ctx}/post/postList.do?boardId=${board_R.id}">${board_R.title }</a>
+							<!--	href="${ctx}/views/postList.jsp?boardId=${board_R.id}">${board_R.title }</a>  -->
+						<%-- <tr>
+							<td>${board_R.title }</td> 
+						</tr> --%>
+					</c:forEach>
+				</tbody>
+
 				<table class="table table-hover table-condensed">
 					<colgroup>
 						<col width="80" align="center">
@@ -74,8 +87,8 @@ div {
 									<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
 								</tr>
 							</c:when>
-							
-							
+
+
 							<c:otherwise>
 								<c:forEach items="${boards }" var="board" varStatus="status">
 									<tr>
@@ -95,7 +108,7 @@ div {
 											<td>${post.writer.id}</td>
 										</tr>
 									</c:forEach>
-									
+
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
