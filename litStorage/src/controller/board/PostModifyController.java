@@ -38,18 +38,22 @@ public class PostModifyController extends HttpServlet {
 	
 		BoardService service = new BoardServiceLogic();
 		
+		
 		Post post = new Post();
 		post = service.findPostById(id);
 		
 		post.setTitle(title);
 		post.setContent(content);
 		post.setHashTag(hashTag);
-		
-		boolean check = service.modifyPost(post);
-		
-		if(check){
-			response.sendRedirect(request.getContextPath()+"/post/postDetail.jsp");
-		}
+
+//		boolean check = service.modifyPost(post);
+//		
+//		if(check){
+//			response.sendRedirect(request.getContextPath()+"/post/postDetail.do");
+//		}
+		service.modifyPost(post);
+		request.setAttribute("post", post);
+		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
 	}
 
 }
