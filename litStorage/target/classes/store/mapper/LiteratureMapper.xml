@@ -19,7 +19,7 @@
 		<association property="litStorage" column="litstorageid"
 			select="store.mapper.LitStorageMapper.selectLitStorageById" javaType="LitStorage"
 			jdbcType="VARCHAR" />
-		<collection property="episodes" column="id" select="store.mapper.EpisodeMapper.selectEpisodeById" 
+		<collection property="episodes" column="id" select="store.mapper.EpisodeMapper.selectEpisodesByLiteratureId" 
 			javaType="ArrayList" jdbcType="VARCHAR" />
 	</resultMap>
 

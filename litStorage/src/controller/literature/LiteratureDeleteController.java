@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.Episode;
 import domain.LitStorage;
 import domain.Literature;
 import domain.MemberLitStorage;
@@ -26,33 +27,37 @@ public class LiteratureDeleteController extends HttpServlet {
 			throws ServletException, IOException {
 		// 1. recevice LiteratureId to episodeList.jsp
 		// 2. delete literature
-		
+
 		LiteratureService Lservice = new LiteratureServiceLogic();
 		LitStorageService LSservice = new LitStorageServiceLogic();
-		
-		String deleteLiteratureId = request.getParameter("deleteLiteratureId");
-		System.out.println(deleteLiteratureId);
-		Literature literature = Lservice.findLiteratureById(deleteLiteratureId);
-		
-//		boolean check = Lservice.removeLiterature(deleteLiteratureId);
-		//전 작품저장소 화면 이동 
-		
-		String loginedId = (String)request.getSession().getAttribute("loginId");
-		System.out.println(loginedId);
-		
-		List<MemberLitStorage> memberLitstorage = LSservice.findMemberLitStoragesByMemberId(loginedId);
-		
-		List<LitStorage> litstorage = new ArrayList<>();
-		
-		for(MemberLitStorage memberlitstorage : memberLitstorage){
-			 litstorage = LSservice.findLitStoragesByMemberId(memberlitstorage.getMember().getId());
-			
-		}
-		
-		request.setAttribute("litstorages", litstorage);
-		
-		request.getRequestDispatcher("../views/litStorageMyStorageList.jsp").forward(request, response);;
-//		response.sendRedirect(request.getContextPath()+"/episode/do");
-	}
 
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		String deleteLiteratureId = request.getParameter("deleteLiteratureId");
+
+		if (loginId != null && deleteLiteratureId != null) {
+			// 작품속 연재글들 삭제
+			List<Episode> episodes = Lservice.findEpisodeByLiteratureId(deleteLiteratureId);
+			for (Episode episode : episodes) {
+				Lservice.removeEpisode(episode.getId());
+			}
+			// 선택한 작품 삭제
+			Lservice.removeLiterature(deleteLiteratureId);
+
+			// 전 작품저장소 화면 이동
+			List<MemberLitStorage> memberLitstorage = LSservice.findMemberLitStoragesByMemberId(loginId);
+
+			List<LitStorage> Litstorages = new ArrayList<>();
+			LitStorage litstorage = new LitStorage();
+
+			for (MemberLitStorage MLStorage : memberLitstorage) {
+				litstorage = LSservice.findLitStorageById(MLStorage.getLitStorage().getId());
+			}
+			Litstorages.add(litstorage);
+			request.setAttribute("litStorages", Litstorages);
+
+			// 나의 작품저장소로 이동
+			request.getRequestDispatcher("../views/litStorageMyStorageList.jsp").forward(request, response);
+
+		}
+	}
 }
