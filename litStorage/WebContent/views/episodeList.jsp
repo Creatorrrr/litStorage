@@ -10,13 +10,13 @@
 <link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ctx }/resources/css/bootstrap-theme.min.css"
 	rel="stylesheet">
-<script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="${ctx }/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-function deleteLitFunction() {
-	var deleteLit = confirm("삭제하시겠습니까?");
-	
-}
+	function deleteLitFunction() {
+		var deleteLit = confirm("삭제하시겠습니까?");
 
+	}
 </script>
 
 <style type="text/css">
@@ -42,8 +42,9 @@ div {
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<a href="javascript:;">자유게시판</a> <a href="${ctx }/litStorage/allList.do;">직품 저장소</a>
-						<a href="javascript:;">작품 목록</a>
+						<a href="javascript:;">자유게시판</a> <a
+							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
+							href="javascript:;">작품 목록</a>
 					</div>
 					<form action="../episode/list.do" method="post">
 						<div class="text-right">
@@ -64,14 +65,12 @@ div {
 			<div class="col-xs-6 col-md-4">
 				<h1>작품이름</h1>
 				<div>
-					
-					<a href="javascript:;">프로필</a>
-					<a href="javascript:;">작품 목록</a>
-					<a href="javascript:;">토론장</a>
-					<a href="javascript:;">참가 회원 목록</a>
-					<a href="javascript:;">회원 초대</a>
 
-					
+					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
+						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
+						href="javascript:;">회원 초대</a>
+
+
 				</div>
 
 			</div>
@@ -80,11 +79,20 @@ div {
 					<div class="col-xs-12 col-md-8">
 						<h1>연재 글 목록</h1>
 						<div class="text-right">
-						<!-- LiteratureDeleteController -->
-						<a href="${ctx}/literature/delete.do?deleteLiteratureId=${literature.id}">작품 삭제</a>
+							<!-- LiteratureDeleteController -->
+							<a
+								href="${ctx}/literature/delete.do?deleteLiteratureId=${literature.id}">작품
+								삭제</a>
 						</div>
 						<div class="panel panel-default">
 							<div class="row">
+								
+									<form method="post" enctype="multipart/form-data"
+										action="imgup.jsp">
+										<input type="file" name="filename1" size=40> <input
+											type="submit" value="업로드"><br>
+										<br> 
+								
 								<div class="col-md-3">
 
 									<h4>${literature.genre }</h4>
@@ -99,7 +107,9 @@ div {
 
 							</div>
 							<div class="text-right">
-								<button type="button" onclick="location.href='../episode/register.do?literatureId=${literature.id}' ">연재글 등록</button>
+								<button type="button"
+									onclick="location.href='../episode/register.do?literatureId=${literature.id}' ">연재글
+									등록</button>
 							</div>
 							<table class="table table-striped">
 								<tr>
@@ -111,7 +121,8 @@ div {
 								<c:forEach items="${literature.episodes }" var="episode">
 									<c:if test="${episode ne null }">
 										<tr>
-											<td><a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a></td>
+											<td><a
+												href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a></td>
 											<td>${episode.writer.name }</td>
 
 											<td><select name="openSelect">
