@@ -32,21 +32,32 @@ div {
 		<div class="row">
 			<div class="col-md-12">
 				<h3>자유게시판 목록</h3>
-				
+
 				<br>
 				<form action="${ctx }/board/boardRegister.do" method="post">
 					<input name="boards" type="hidden" value=""><!--원래주석  -->
 					<a>게시판 추가</a> <br>
-					<%-- <c:forEach items="${boards }" var="board" varStatus="status">
+					 <%-- <c:forEach items="${boards }" var="board" >
 						<tr>
-							<td>${board.title }</td>
+							<td><a class="btn btn-sm btn-success" href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
+						</td>
 						</tr>
-					</c:forEach> --%>
-					
-					<input id="boardName" name="boardName" class="form-control" type="text" value=""> 
-					<input class="btn" type="submit" value="추가">
-					<!--onclick="javascript:window.location='${ctx }/post/postList.do'"  -->
+					</c:forEach>  --%>    <!-- 밑으로 뺌 -->
+
+					<input id="boardName" name="boardName" class="form-control"
+						type="text" value=""> <input class="btn" type="submit"
+						value="추가">
 				</form>
+				
+				 <c:forEach items="${boards }" var="board">
+					<tr>
+						<td><a class="btn btn-sm btn-success"
+							href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
+						</td>
+					</tr>
+				</c:forEach> 
+				
+				
 				
 				<table class="table table-hover table-condensed">
 					<colgroup>
