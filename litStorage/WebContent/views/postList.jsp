@@ -95,7 +95,7 @@ div {
 				<%-- <c:if test = "${isAdmin }">  --%>
 				<td>
 					<a class="btn btn-sm btn-success"
-					href="${ctx}/postRegister.do?boardId=${board.id}">게시물등록</a>
+					href="${ctx}/postRegister.do?boardId=${post.board.id}">게시물등록</a>
 				</td>
 				<%-- </c:if>	 --%>
 			</div>

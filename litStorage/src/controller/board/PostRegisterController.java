@@ -65,10 +65,9 @@ public class PostRegisterController extends HttpServlet {
 			throw new RuntimeException("post register failed");
 		}
 		
+		request.setAttribute("boardId", service.findPostsByBoardId(boardId));
 		request.setAttribute("post",service.findPostById(post.getId()));
 		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
-
-
 	}
 
 }

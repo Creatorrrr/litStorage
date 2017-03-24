@@ -15,7 +15,7 @@
 	<h3>게시글 등록</h3>
 	
 	<br>
-	<form action="${ctx }/postRegister.do" method="post" >
+	<form action="${ctx }/postRegister.do" method="post" ><!-- 	<form action="${ctx }/postRegister.do" method="post" > -->
 	<input name="boardId" type="hidden" value="">
 		<table class="table">
             <colgroup>
