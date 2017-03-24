@@ -114,6 +114,8 @@ public class LitStorageStoreLogic implements LitStorageStore {
 				tempFile[i].delete(); 
 			}
 			file.delete(); 
+		} else {
+			file.delete();
 		}
 		
 		return true;

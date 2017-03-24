@@ -35,10 +35,23 @@ public class LiteratureServiceLogic implements LiteratureService {
 
 	@Override
 	public boolean removeLiterature(String id) {
-		epStore.deleteEpisodesByLiteratureId(id);	// delete episodes first
-		boolean checkLiterature = lStore.deleteLiterature(id);	// delete literature after delete episodes
 		Literature literature = lStore.selectLiteraturesById(id);	// select literature from db
+		
+		epStore.deleteEpisodesByLiteratureId(id);	// delete episodes first
+		for(Episode e : literature.getEpisodes()) {
+			String message = literature.getCreator().getId() + " removed " + PathBuilder.buildEpisodeFileName(e) + " en bloc";
+			String treeHash = epStore.deleteEpisodeFromGit(e, message);
+			ChangeHistory history = new ChangeHistory();	// set change history
+			history.setEditor(literature.getCreator());
+			history.setContent(treeHash);
+			history.setEpisode(e);
+			history.setMessage(message);
+			chStore.insertChangeHistory(history);	// insert change history
+		}
+		
+		boolean checkLiterature = lStore.deleteLiterature(id);	// delete literature after delete episodes
 		boolean checkGit = lStore.deleteLiteratureFromGit(PathBuilder.buildLiteraturePath(literature));	// delete from git
+		
 		return checkLiterature && checkGit;
 	}
 
