@@ -37,21 +37,26 @@
 	<div class="literatureBox">
 		<table border="1">
 			<tr>
-				<td>작품명</td>
-				<td><a href="${ctx}/litStorage/profile.do?id=${literature.id}">${literature.name }</a></td>
-			</tr>
-			<tr>
-				<td>작가</td>
-				<td>${literature.creator.id }</td>
-			</tr>
-			<tr>
-				<td>소개</td>
-				<td>${literature.introduce }</td>
-			</tr>
-			<tr>
-				<td>조회수</td>
-				<td>${literature.hits }</td>
-			</tr>
+						<td>작품명</td>
+						<td><a
+							href="${ctx}/literature/profile.do?id=${literature.id}">${literature.name }</a></td>
+					</tr>
+					<tr>
+						<td>작가</td>
+						<td>${literature.creator.id }</td>
+					</tr>
+					<tr>
+						<td>장르</td>
+						<td>${literature.genre }</td>
+					</tr>
+					<tr>
+						<td>소개</td>
+						<td>${literature.introduce }</td>
+					</tr>
+					<tr>
+						<td>조회수</td>
+						<td>${literature.hits }</td>
+					</tr>
 		</table>
 	</div>
 	</c:forEach>
@@ -80,18 +85,21 @@
 			type : "post",
 			dataType : "xml",
 			success : function(xml) {
-					var xmlData = $(xml).find("litStorage");
+					var xmlData = $(xml).find("literature");
 					var listLength = xmlData.length;
+					alert(listLength);
 					$("#result").empty();			
 					if (listLength) {
 						var contentStr = "";
 						$(xmlData).each(function() {
 							contentStr += "<div class='literatureBox'><table border='1'><tr><td>이름</td><td><a href='${ctx}/litStorage/profile.do?id="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
-									+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
-									+"<td>소개</td><td>"+ $(this).find("introduce").text()
-									+ "</td></tr><tr><td>조회수</td><td>"+$(this).find("hits").text()+"</td></tr></table></div>";
+							+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
+							+"<td>소개</td><td>"+ $(this).find("introduce").text()
+							+"</td></tr><tr><td>장르</td><td>"+$(this).find("genre").text()
+							+ "</td></tr><tr><td>조회수</td><td>"+$(this).find("hits").text()+"</td></tr></table></div>";
 						});
 						$("#result").append(contentStr);
+						alert(contentStr);
 					}
 				}
 			});

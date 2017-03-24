@@ -42,7 +42,8 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("isAdmin", true);
 			}
 			request.setAttribute("message", "로그인 되었습니다.");
-			request.getRequestDispatcher("/views/index.jsp").forward(request, response);
+//			request.getRequestDispatcher("/").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/");
 			return ;
 		}else {
 			request.setAttribute("message", "로그인 실패 하였습니다.");
