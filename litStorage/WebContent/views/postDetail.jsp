@@ -6,11 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<c:set var="post" value="${post}" /> 
 <title>게시글 상세</title>
-<%
-		String postId =  request.getParameter("id");
-%>
 </head>
 <body>
 

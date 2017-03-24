@@ -16,7 +16,7 @@
 	
 	<br>
 	<form action="${ctx }/postRegister.do" method="post" >
-	<input name="boardId" type="hidden" value="">
+	<input name="boardId" type="hidden" value="${boardId }">
 		<table class="table">
             <colgroup>
                 <col width="150">

@@ -40,13 +40,16 @@ div {
 				<div class="container" id="boardRegisterForm">
 					<form action="${ctx }/board/boardRegister.do" method="post">
 						<input id="boardName" name="boardName" class="form-control" type="text" value=""> 
-						<input class="btn" type="submit" value="추가" onclick="eraseBoardName();">
+						<input class="btn" type="submit" value="추가">
 					</form>
 				</div>
 				<br>
 				<c:forEach items="${boards }" var="board">
+					<div>
 					<a class="btn btn-sm btn-success"
 						href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
+						<a class="btn" href="${ctx }/boardDelete.do?boardId=${board.id }">삭제</a>
+					</div>
 				</c:forEach>
 
 				<table class="table table-hover table-condensed">
@@ -82,32 +85,28 @@ div {
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${boards }" var="board">
-							<c:if test="${board.id eq boardId} ">
-								<c:choose>
-									<c:when test="${board.posts eq null || empty board.posts}">
-										<tr>
-											<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
-										</tr>
-									</c:when>
-									<c:otherwise>
-										<c:forEach items="${board.posts }" var="post" varStatus="status">
-											<tr>
-												<td>${status.count }</td>
-												<td><a href="${ctx }/post/postDetail.do?id=${post.id }">${post.title }</a></td>
-												<td>${post.writer.id}</td>
-											</tr>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-							</c:if>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${posts eq null || empty posts}">
+								<tr>
+									<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${posts }" var="post" varStatus="status">
+									<tr>
+										<td>${status.count }</td>
+										<td><a href="${ctx }/post/postDetail.do?id=${post.id }">${post.title }</a></td>
+										<td>${post.writer.id}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 				<%-- <c:if test = "${isAdmin }">  --%>
 				<td>
 					<a class="btn btn-sm btn-success"
-					href="${ctx}/postRegister.do?boardId=${board.id}">게시물등록</a>
+					href="${ctx}/postRegister.do?boardId=${boardId}">게시물등록</a>
 				</td>
 				<%-- </c:if>	 --%>
 			</div>
@@ -124,10 +123,6 @@ div {
 				document.getElementById("boardRegisterForm").style.display="none";
 				boardFlag = false;
 			}
-		}
-		
-		function eraseBoardName() {
-			document.getElementById("boardName").value="";
 		}
 	</script>
 </body>

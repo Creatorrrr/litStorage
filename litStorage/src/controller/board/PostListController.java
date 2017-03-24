@@ -32,13 +32,16 @@ public class PostListController extends HttpServlet {
 		 */
 		String boardId = request.getParameter("boardId");
 		
+		List<Board> boardList = service.findAllBoards();
+
 		if(boardId == null) {
-			boardId = "1";
+			boardId = boardList.get(0).getId();
 		}
 		
-		List<Board> listBoard = service.findAllBoards();
-		
-		request.setAttribute("boards", listBoard);
+		List<Post> postList = service.findPostsByBoardId(boardId);
+
+		request.setAttribute("boards", boardList);
+		request.setAttribute("posts", postList);
 		request.setAttribute("boardId", boardId);
 		
 		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);// /views/boardList.jsp

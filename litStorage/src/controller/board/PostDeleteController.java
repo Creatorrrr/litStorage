@@ -11,7 +11,7 @@ import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
 
 @WebServlet("/postDelete.do")
-public class PostDelete extends HttpServlet {
+public class PostDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
