@@ -52,23 +52,4 @@ public class EpisodeListController extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// 1. select(writerName,writerId,MemberName)
-		// 2. search contents
-		// 3. select(openLitstorage,openAll)
-		String selectContents = request.getParameter("selectContents");
-		String searchContents = request.getParameter("searchContents");
-		String openSelect = request.getParameter("openSelect");
-
-		// if (selectContents.equals("writerName")) {
-		//
-		// } else if (searchContents.equals("writerId")) {
-		//
-		// } else if (searchContents.equals("MemberName")) {
-		//
-		// }
-
-	}
-
 }

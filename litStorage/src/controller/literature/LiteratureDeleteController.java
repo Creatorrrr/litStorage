@@ -33,12 +33,14 @@ public class LiteratureDeleteController extends HttpServlet {
 
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		String deleteLiteratureId = request.getParameter("deleteLiteratureId");
+		System.out.println(loginId);
+		System.out.println(deleteLiteratureId);
 
 		if (loginId != null && deleteLiteratureId != null) {
 			// 작품속 연재글들 삭제
 			List<Episode> episodes = Lservice.findEpisodeByLiteratureId(deleteLiteratureId);
 			for (Episode episode : episodes) {
-//				Lservice.removeEpisode(episode.getId());
+				Lservice.removeEpisode(episode.getId());
 			}
 			// 선택한 작품 삭제
 			Lservice.removeLiterature(deleteLiteratureId);

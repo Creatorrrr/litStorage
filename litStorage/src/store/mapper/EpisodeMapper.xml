@@ -26,7 +26,7 @@
 				select EPISODE_SEQ.nextval FROM DUAL
 			</selectKey>
     		insert into episode(id, name, content, writer, bound, literature )
-			values(#{id},#{title},'${literature.id}/${id}.txt',#{writer.id, jdbcType=VARCHAR},#{bound,jdbcType=CHAR},#{literature.id})
+			values(#{id},#{title},'${literature.id}/${id}.txt',#{writer.id, jdbcType=VARCHAR},#{bound,jdbcType=CHAR},#{literature.id,jdbcType=CHAR})
     	</insert>
     	
     	<update id="updateEpisode">

@@ -22,8 +22,11 @@
 div {
 	border: 1px solid #ccc;
 }
+#boardRegisterForm {
+	display:none;
+	width:300px;
+}
 </style>
-
 
 </head>
 <body>
@@ -33,14 +36,18 @@ div {
 			<div class="col-md-12">
 				<h3>자유게시판 목록</h3>
 
-				<tbody>
-					<a href="${ctx }/board/boardRegister.do">게시판 추가</a>
-					<br>
-					<c:forEach items="${boards }" var="board">
-						<a class="btn btn-sm btn-success"
-							href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
-					</c:forEach>
-				</tbody>
+				<button class="btn" type="button" onclick="addBoard();")>게시판 추가</button>
+				<div class="container" id="boardRegisterForm">
+					<form action="${ctx }/board/boardRegister.do" method="post">
+						<input id="boardName" name="boardName" class="form-control" type="text" value=""> 
+						<input class="btn" type="submit" value="추가" onclick="eraseBoardName();">
+					</form>
+				</div>
+				<br>
+				<c:forEach items="${boards }" var="board">
+					<a class="btn btn-sm btn-success"
+						href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
+				</c:forEach>
 
 				<table class="table table-hover table-condensed">
 					<colgroup>
@@ -75,22 +82,26 @@ div {
 						</tr>
 					</thead>
 					<tbody>
-						<c:choose>
-							<c:when test="${posts eq null || empty posts}">
-								<tr>
-									<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${posts }" var="post" varStatus="status">
-									<tr>
-										<td>${status.count }</td>
-										<td><a href="${ctx }/post/postDetail.do?id=${post.id }">${post.title }</a></td>
-										<td>${post.writer.id}</td>
-									</tr>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
+						<c:forEach items="${boards }" var="board">
+							<c:if test="${board.id eq boardId} ">
+								<c:choose>
+									<c:when test="${board.posts eq null || empty board.posts}">
+										<tr>
+											<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${board.posts }" var="post" varStatus="status">
+											<tr>
+												<td>${status.count }</td>
+												<td><a href="${ctx }/post/postDetail.do?id=${post.id }">${post.title }</a></td>
+												<td>${post.writer.id}</td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+						</c:forEach>
 					</tbody>
 				</table>
 				<%-- <c:if test = "${isAdmin }">  --%>
@@ -102,5 +113,22 @@ div {
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		var boardFlag = false;
+		
+		function addBoard() {
+			if(boardFlag === false) {
+				document.getElementById("boardRegisterForm").style.display="block";
+				boardFlag = true;
+			} else {
+				document.getElementById("boardRegisterForm").style.display="none";
+				boardFlag = false;
+			}
+		}
+		
+		function eraseBoardName() {
+			document.getElementById("boardName").value="";
+		}
+	</script>
 </body>
 </html>

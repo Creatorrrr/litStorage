@@ -116,7 +116,8 @@ public class LiteratureServiceLogic implements LiteratureService {
 	}
 
 	@Override
-	public boolean removeEpisode(Episode episode) {
+	public boolean removeEpisode(String episodeId) {
+		Episode episode = epStore.selectEpisodeById(episodeId);
 		boolean checkEpisode = epStore.deleteEpisode(episode.getId());	// remove episode from db
 		String message = episode.getWriter().getId() + " removed " + PathBuilder.buildEpisodeFileName(episode);	// set commit message
 		String treeHash = epStore.deleteEpisodeFromGit(episode, message);	// remove episode from git

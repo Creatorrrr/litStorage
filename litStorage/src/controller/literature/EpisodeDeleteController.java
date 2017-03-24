@@ -30,11 +30,14 @@ public class EpisodeDeleteController extends HttpServlet {
 		LiteratureService Lservice = new LiteratureServiceLogic();
 		String episodeId = request.getParameter("episodeId");
 		String loginId = (String) request.getSession().getAttribute("loginId");
+		
+		
+		
 		if (episodeId != null && loginId != null) {
 			Episode episode = Lservice.findEpisodeById(episodeId);
 			String LiteratureId = episode.getLiterature().getId();
 			// 선택한 연재글 삭제
-//			Lservice.removeEpisode(episodeId);
+			Lservice.removeEpisode(episodeId);
 			// 전 연재글 목록으로 이동
 			Literature literature = Lservice.findLiteratureById(LiteratureId);
 			List<Literature> literatures = new ArrayList<>();

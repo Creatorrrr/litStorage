@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>연재글 상세</title>
+<title>작품 목록</title>
 <link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ctx }/resources/css/bootstrap-theme.min.css"
 	rel="stylesheet">
@@ -73,7 +73,7 @@ div {
 		<div class="col-xs-12 col-md-12">
 
 			<div class="col-xs-6 col-md-4">
-				<h1>${episode.literature.name }</h1>
+				<h1>${literature.name }</h1>
 				<div>
 
 					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
@@ -88,7 +88,7 @@ div {
 				<h1>작품 목록</h1>
 				<div class="text-right">
 					<a
-						href="${ctx }/literature/register.do?literatureId=${literature.id}">작품
+						href="${ctx }/literature/register.do?litStorageId=${literature.litStorage.id}">작품
 						등록</a>
 				</div>
 				<div class="panel panel-default">
