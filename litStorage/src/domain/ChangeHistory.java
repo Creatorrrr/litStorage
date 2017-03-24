@@ -76,6 +76,9 @@ public class ChangeHistory {
 		this.message = message;
 	}
 	
+	/*
+	 * title at first line
+	 */
 	public String getContentFromGit() {
 		Git git = null;
 		

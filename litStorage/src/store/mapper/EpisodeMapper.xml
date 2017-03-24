@@ -36,7 +36,10 @@
     	<delete id="deleteEpisode" parameterType="String">
     		delete from episode where id=#{id}
     	</delete>
-    
+    	
+		<delete id="deleteEpisodesByLiteratureId" parameterType="String">
+    		delete from episode where literature=#{id}
+    	</delete>
     
     	<select id="selectEpisodeById" resultMap="EpisodeMap">
     		select id, name, content, writer, bound, literature from episode where id = #{id}

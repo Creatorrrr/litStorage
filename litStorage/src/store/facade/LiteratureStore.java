@@ -8,7 +8,7 @@ public interface LiteratureStore {
 	public boolean insertLiterature(Literature literature);
 	public boolean insertLiteratureToGit(Literature literature);
 	public boolean deleteLiterature(String literatureId);
-	public boolean deleteLiteratureFromGit(Literature literature);
+	public boolean deleteLiteratureFromGit(String path);
 	public Literature selectLiteraturesById(String literatureId);
 	public List<Literature> selectLiteraturesByLitStorageId(String litstorageId);
 	public List<Literature> selectLiteraturesByName(String name);

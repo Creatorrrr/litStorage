@@ -1,7 +1,6 @@
 package store.logic;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -76,14 +75,26 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	}
 	
 	@Override
-	public boolean deleteLiteratureFromGit(Literature literature) {
-		File literatureDir = new File(PathBuilder.buildLiteraturePath(literature));
+	public boolean deleteLiteratureFromGit(String path) {
+		File file = new File(path);
 		
-		if(!literatureDir.exists()) {
+		if(!file.exists()) {
 			return false;
 		}
 		
-		literatureDir.delete();
+		File[] tempFile = file.listFiles();
+		
+		if(tempFile.length > 0){
+			for (int i = 0; i < tempFile.length; i++){ 
+				if(tempFile[i].isFile()){ 
+					tempFile[i].delete(); 
+				} else {
+					deleteLiteratureFromGit(tempFile[i].getPath()); 
+				} 
+				tempFile[i].delete(); 
+			}
+			file.delete(); 
+		}
 		
 		return true;
 	}
