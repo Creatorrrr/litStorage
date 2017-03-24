@@ -30,12 +30,17 @@ public class PostListController extends HttpServlet {
 		 * Post po = service.findPostById(post);
 		 * request.setAttribute("posts", list); //5줄 수정부분
 		 */
+		String boardId = request.getParameter("boardId");
 		
-		//여기서 보드 아이디 추가할지 
+		if(boardId == null) {
+			boardId = "1";
+		}            //DB board에 1이 있어야한다.
 		
-		List<Board> lists = service.findAllBoards();
-		request.setAttribute("boards", lists);
-		// request.setAttribute("boards", service.findAllBoards());
+		List<Board> listBoard = service.findAllBoards();
+		List<Post> postList = service.findPostsByBoardId(boardId);
+		
+		request.setAttribute("boards", listBoard);
+		request.setAttribute("posts", postList);
 		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);// /views/boardList.jsp
 
 	}

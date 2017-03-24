@@ -26,6 +26,8 @@ public class BoardStoreLogic implements BoardStore{
 			check = mapper.insertBoard(board);
 			if(check>0){
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		}finally {
 			session.close();
@@ -42,6 +44,8 @@ public class BoardStoreLogic implements BoardStore{
 			check = mapper.deleteBoard(id);
 			if(check>0){
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		}finally{
 			session.close();

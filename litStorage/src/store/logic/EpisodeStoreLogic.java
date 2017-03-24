@@ -305,6 +305,8 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			check = mapper.updateBound(bound);
 			if (check) {
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		} finally {
 			session.close();
@@ -323,6 +325,8 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			
 			if (check = mapper.insertChangeHistory(history) > 0) {
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		} finally {
 			session.close();
