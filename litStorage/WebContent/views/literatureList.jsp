@@ -58,17 +58,17 @@ div {
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+				<!-- 	<div class="text-right">
 						<button>로그인</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<%-- <div class="col-md-6">
 						<a href="javascript:;">자유게시판</a> <a
 							href="${ctx }/litStorage/allList.do;">작품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
-					</div>
+					</div> --%>
 					<form action="../episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
@@ -99,33 +99,17 @@ div {
 				</div>
 				<div class="panel panel-default">
 					<div>
-						<table border="1">
-							<colgroup>
-								<col width="50">
-								<col width="100">
-								<col width="500">
-								<col width="100">
-							</colgroup>
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>장르</th>
-									<th>제목</th>
-									<th>작성자</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${litStorage.literatures }" var="literature" varStatus="status">
-									<td>${status.count }</td>
-									<td>${literature.genre }</td>
-									<td>
-										<a href="${ctx}/episode/list.do?literatureId=${literature.id}">${literature.name }</a>
-									</td>
-									<td>${literature.creator.name }</td>
-								</c:forEach>
-							</tbody>
-						</table>
+						<a>장르:</a> <a>제목:</a> <a>작성자:</a>
+						
 					</div>
+					<c:forEach items="${literatures }" var="literature">
+						<div>
+							<a>${literature.genre }</a> <a
+								href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a>
+							/<a>${literature.creator.name }</a>
+							<!-- 이전 작품과 구분하기 위해 / 추가 -->
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
