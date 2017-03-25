@@ -31,6 +31,8 @@ div {
 </head>
 
 <body>
+
+<%@include file="./header.jspf" %> 
 	<!-- <input type="button" id="deleteEpisode"
 		onclick="location.href='../episode/list' "> -->
 	<form action="../episode/deteil.do" method="post">
@@ -45,17 +47,17 @@ div {
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+				<!-- 	<div class="text-right">
 						<button>로그인</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<%-- <div class="col-md-6">
 						<a href="javascript:;">자유게시판</a> <a
 							href="${ctx }/litStorage/allList.do;">작품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
-					</div>
+					</div> --%>
 					<form action="../episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
@@ -93,12 +95,15 @@ div {
 				</div>
 				<div class="panel panel-default">
 					<div>
-						<a>장르</a> <a>:제목:</a> <a>작성자</a>
+						<a>장르:</a> <a>제목:</a> <a>작성자:</a>
+						
 					</div>
 					<c:forEach items="${literatures }" var="literature">
 						<div>
-							<a>${literature.genre }</a><a
-								href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a><a>${literature.creator.name }</a>
+							<a>${literature.genre }</a> <a
+								href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a>
+							/<a>${literature.creator.name }</a>
+							<!-- 이전 작품과 구분하기 위해 / 추가 -->
 						</div>
 					</c:forEach>
 				</div>

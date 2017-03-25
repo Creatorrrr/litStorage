@@ -36,7 +36,7 @@ div {
 		<div class="row">
 			<div class="col-md-12">
 				<h3>자유게시판 목록</h3>
-				<c:if test="${ admin eq true }">       <!--"${loginId eq isAdmin }"  -->
+				<c:if test="${ loginId eq 'admin'}">       <!--"${loginId eq isAdmin }"  -->
 					<button class="btn" type="button" onclick="addBoard();")>게시판추가</button>
 					<div class="container" id="boardRegisterForm">
 						<form action="${ctx }/board/boardRegister.do" method="post">
@@ -52,7 +52,7 @@ div {
 						<div>
 							<a class="btn btn-sm btn-success"
 								href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
-						<c:if test="${isAdmin eq admin}">
+						<c:if test="${ loginId eq 'admin'}">
 							<a class="btn" href="${ctx }/boardDelete.do?boardId=${board.id }">삭제</a>
 							</c:if>
 						</div>
