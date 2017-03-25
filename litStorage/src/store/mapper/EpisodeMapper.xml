@@ -48,10 +48,4 @@
     	<select id="selectEpisodesByLiteratureId" resultMap="EpisodeMap">
     		select id, name, content, writer, bound, literature from episode where literature = #{literatureId}
     	</select>
-    	
-    	<update id="updateBound">
-    		update episode set bound=#{bound}
-    	</update>
-    
-    
     </mapper>

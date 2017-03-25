@@ -33,8 +33,6 @@ public interface LiteratureService {
 
 	public List<Episode> findEpisodeByLiteratureId(String literatureId);
 
-	public boolean modifyBoundById(String Id);
-
 //	public boolean registerChangeHistory(ChangeHistory changeHistory);
 
 	public List<ChangeHistory> findChangeHistoriesByEpisodeId(String episodeId);

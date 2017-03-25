@@ -29,14 +29,10 @@ public class BoardRegisterController extends HttpServlet {
 		
 		Board board = new Board();
 		
-		if(boardName != null && !boardName.isEmpty()) {
-			board.setTitle(boardName);
+		board.setTitle(boardName);
 			
-			if(!service.registerBoard(board)) {
-				throw new RuntimeException("failed to create board");
-			}
-		} else {
-			board.setId("1");
+		if(!service.registerBoard(board)) {
+			throw new RuntimeException("failed to create board");
 		}
 		
 		List<Board> boardList = service.findAllBoards();
@@ -44,6 +40,7 @@ public class BoardRegisterController extends HttpServlet {
 		
 		request.setAttribute("boards", boardList);
 		request.setAttribute("posts", postList);
+		request.setAttribute("boardId", board.getId());
 		
 		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);
 	}

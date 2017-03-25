@@ -1,18 +1,18 @@
 package controller.board;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.Board;
 import domain.Post;
 import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
 
-@WebServlet("/post/postDetail.do")
+@WebServlet("/post/detail.do")
 public class PostDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,16 +20,13 @@ public class PostDetailController extends HttpServlet {
 			throws ServletException, IOException {
 
 		BoardService service = new BoardServiceLogic();
-	//	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		String postId = request.getParameter("id");
-		
-		Post post = new Post();
-		post=service.findPostById(postId);
 
-		request.setAttribute("post",service.findPostById(postId));
-		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
-	//	response.sendRedirect(request.getContextPath()+"/views/postDetail.jsp");
-	
+		String postId = request.getParameter("postId");
+		
+		Post post = service.findPostById(postId);
+
+		request.setAttribute("post", post);
+		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);	
 	}
 
 }

@@ -150,11 +150,12 @@ div {
 												<td>${episode.writer.id }</td>
 												<td>
 													<form action="${ctx }/episode/bound.do" method="post">
-														<select name="openSelect">
+														<input type="hidden" name="episodeId" value="${episode.id }">
+														<select name="bound">
 															<option value="M">저장소 협업 작가만 공개</option>
 															<option value="A">모두 공개</option>
 														</select>
-														<button type="submit" onclick="location.href='${ctx}/episode/detail.do?episodeId=${episode.id }'">공개 선택</button>
+														<button type="submit">공개 선택</button>
 													</form>
 												</td>
 											</tr>

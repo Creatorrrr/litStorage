@@ -145,11 +145,6 @@ public class LiteratureServiceLogic implements LiteratureService {
 		return epStore.selectEpisodesByLiteratureId(literatureId);
 	}
 
-	@Override
-	public boolean modifyBoundById(String Id) {
-		return epStore.updateBound(Id);
-	}
-
 //	@Override
 //	public boolean registerChangeHistory(ChangeHistory changeHistory) {
 //		return chStore.insertChangeHistory(changeHistory);

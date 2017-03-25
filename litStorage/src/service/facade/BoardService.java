@@ -14,7 +14,7 @@ public interface BoardService {
 	public boolean removePost(String id);
 	public List<Post> findPostsByBoardId(String id);
 	public Post findPostById(String id);
-	public List<Post> findPostsByTitle(String title);
-	public List<Post> findPostsByContent(String content);
-	public List<Post> findPostsByHashTag(String hashTag);
+	public List<Post> findPostsByTitle(String title, String boardId);
+	public List<Post> findPostsByContent(String content, String boardId);
+	public List<Post> findPostsByHashTag(String hashTag, String boardId);
 }

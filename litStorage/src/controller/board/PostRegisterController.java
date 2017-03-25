@@ -19,7 +19,7 @@ import domain.Post;
 import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
 
-@WebServlet("/postRegister.do")
+@WebServlet("/post/register.do")
 public class PostRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
