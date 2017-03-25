@@ -48,6 +48,8 @@ public class RequestController extends HttpServlet {
 
 		mService.registerInviteRequest(ir);
 		
+		request.setAttribute("litStorage", ls);
+		
 		response.sendRedirect(request.getContextPath() + "/litStorage/profile.do?id=" + litStorageId);
 	}
 

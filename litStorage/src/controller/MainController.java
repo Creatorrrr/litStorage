@@ -28,8 +28,9 @@ public class MainController extends HttpServlet {
 		List<Board> bList = bService.findAllBoards();
 		// 게시판 제목(장르) 중 첫번째 항목 장르별로 조회수순, 신작순으로 가져옴.
 		// 만약 생성된 게시판이 없으면 바로 index.jsp로 리다이렉트
-		if (bList.get(0).getTitle() == null) {
-			response.sendRedirect(request.getContextPath() + "/views/index.jsp");
+		if (bList.size() == 0) {
+			response.sendRedirect(request.getContextPath() +"/");
+			return ;
 		}
 		List<Literature> recoList = lService.findLiteraturesByGenreOrderByHits(bList.get(0).getTitle());
 		List<Literature> newList = lService.findLiteraturesByGenreOrderById(bList.get(0).getTitle());

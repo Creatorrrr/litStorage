@@ -31,8 +31,13 @@ div {
 </head>
 
 <body>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+</jsp:include>
 	<!-- <input type="button" id="deleteEpisode"
 		onclick="location.href='../episode/list' "> -->
+		
 	<form action="../episode/deteil.do" method="post">
 		<input type="hidden" id="deleteEpisode" value="F">
 	</form>

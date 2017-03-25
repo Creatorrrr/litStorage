@@ -15,6 +15,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+</jsp:include>
 	<!--  Main member table start-->
 	<table class="table table-hover table-condensed">
 		<caption>메인 작가</caption>
