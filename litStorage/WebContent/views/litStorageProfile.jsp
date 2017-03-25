@@ -148,8 +148,7 @@ textarea {
 	<c:if test="${isNotJoined}">
 	<button id="onclick" type="button">참가 요청</button>
 	</c:if>
-	
-	
+	<a href="${ctx }/litStorage/delete.do?litStorageId="${litStorage.id }">작품 저장소 삭제</a>
 	
 	<!-- request popup form div start-->
 	<div id="sendRequest">
