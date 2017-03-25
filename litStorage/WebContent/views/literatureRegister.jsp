@@ -64,11 +64,13 @@ div {
 			<div class="col-xs-6 col-md-4">
 				<h1>작품이름</h1>
 				<div>
+
 					<a href="javascript:;">프로필</a>
 					<a href="javascript:;">작품 목록</a>
 					<a href="${ctx }/views/discussionPlaceList.jsp">토론장</a>
 					<a href="${ctx }/litStorage/memberList.do?id=">참가 회원 목록</a>
 					<a href="${ctx }/member/search.do?litStorageId=${litStorageId }">회원 초대</a>
+
 				</div>
 			</div>
 			<div class="panel panel-default">
