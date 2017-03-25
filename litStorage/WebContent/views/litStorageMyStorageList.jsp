@@ -47,7 +47,6 @@
 								<td>소개</td>
 								<td>${litStorage.introduce }</td>
 							</tr>
-							
 							<tr>
 								<td>Email : </td>
 								<td>${litStorage.creator.email }</td>

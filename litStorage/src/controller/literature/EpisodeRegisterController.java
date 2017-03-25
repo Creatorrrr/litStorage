@@ -1,7 +1,6 @@
 package controller.literature;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,15 +23,14 @@ public class EpisodeRegisterController extends HttpServlet {
 	
 	public EpisodeRegisterController() {
 		Lservice = new LiteratureServiceLogic();
-				
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 1. receive LiteratureId
 		
-		String LiteratureId = req.getParameter("literatureId"); 
-		req.setAttribute("literatureId", LiteratureId);
+		String literatureId = req.getParameter("literatureId"); 
+		req.setAttribute("literatureId", literatureId);
 		
 		req.getRequestDispatcher("/views/episodeRegister.jsp").forward(req, resp);
 	}
@@ -52,9 +50,9 @@ public class EpisodeRegisterController extends HttpServlet {
 		episode.setTitle(episodeName);
 		episode.setContent(episodeContents);
 		// Genre literature
-		Literature lit = Lservice.findLiteratureById(literatureId);
+		Literature literature = Lservice.findLiteratureById(literatureId);
 		
-		episode.setLiterature(lit);
+		episode.setLiterature(literature);
 		
 		//episode writer
 		Member writer = new Member();
@@ -69,13 +67,10 @@ public class EpisodeRegisterController extends HttpServlet {
 			throw new RuntimeException("fail to register episode");
 		}
 		
-		List<Episode> episodes = service.findEpisodeByLiteratureId(literatureId);
-		Literature literature = service.findLiteratureById(literatureId);
+		Literature registeredLiterature = service.findLiteratureById(literatureId);
 		
-		request.setAttribute("literature", literature);
-		request.setAttribute("episodes", episodes);
+		request.setAttribute("literature", registeredLiterature);
 		
 		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 	}
-
 }

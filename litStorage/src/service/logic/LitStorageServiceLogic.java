@@ -44,6 +44,13 @@ public class LitStorageServiceLogic implements LitStorageService {
 	public boolean registerLitStorage(LitStorage litStorage) {
 		boolean checkLitStorage = lsStore.insertLitStorage(litStorage);	// insert litStorage to db
 		boolean checkGit = lsStore.insertLitStorageToGit(litStorage);	// insert litStorage to git
+		
+		MemberLitStorage mls = new MemberLitStorage();
+		mls.setMember(litStorage.getCreator());
+		mls.setLitStorage(litStorage);
+		
+		mlsStore.insertMemberLitStorage(mls);	// insert memberLitStorage
+		
 		return checkLitStorage && checkGit;
 	}
 

@@ -27,7 +27,7 @@ public class EpisodeDetailController extends HttpServlet {
 
 		request.setAttribute("episode", episode);
 
-		request.getRequestDispatcher("../views/episodeDetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/episodeDetail.jsp").forward(request, response);
 	}
 
 }

@@ -1,7 +1,6 @@
 package controller.literature;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,20 +12,18 @@ import domain.Episode;
 import domain.Literature;
 import domain.Member;
 import service.facade.LiteratureService;
-import service.facade.MemberService;
 import service.logic.LiteratureServiceLogic;
-import service.logic.MemberServiceLogic;
 
 @WebServlet("/episode/modify.do")
 public class EpisodeModifyController extends HttpServlet {	
 	private static final long serialVersionUID = 1L;
 	
 	private LiteratureService Lservice;
-	private MemberService Mservice;
+	//private MemberService Mservice;
 	
 	public EpisodeModifyController() {
 		Lservice = new LiteratureServiceLogic();
-		Mservice = new MemberServiceLogic();
+		//Mservice = new MemberServiceLogic();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -45,19 +42,13 @@ public class EpisodeModifyController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		String episdoeId = request.getParameter("modifyEpisodeId");
-		String literatureId = request.getParameter("modifyLiteratureId");
-		String Title = request.getParameter("modifyEpisodeTitle");
-		String Contents = request.getParameter("modifyEpisodeContents");
+		String episodeId = request.getParameter("episodeId");
+		String title = request.getParameter("episodeTitle");
+		String content = request.getParameter("episodeContent");
 		
-		Episode episode = new Episode();
-		episode.setId(episdoeId);
-		episode.setTitle(Title);
-		episode.setContent(Contents);
-		
-		Literature lit = Lservice.findLiteratureById(literatureId);
-		
-		episode.setLiterature(lit);
+		Episode episode = Lservice.findEpisodeById(episodeId);
+		episode.setTitle(title);
+		episode.setContent(content);
 		
 		Member writer = new Member();
 		writer.setId((String)request.getSession().getAttribute("loginId"));
@@ -68,11 +59,9 @@ public class EpisodeModifyController extends HttpServlet {
 			throw new RuntimeException("episode modify failed");
 		}
 		
-		List<Episode> episodes = Lservice.findEpisodeByLiteratureId(literatureId);
-		Literature literature = Lservice.findLiteratureById(literatureId);
+		Literature literature = Lservice.findLiteratureById(episode.getLiterature().getId());
 		
 		request.setAttribute("literature", literature);
-		request.setAttribute("episodes", episodes);
 		
 		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 	}

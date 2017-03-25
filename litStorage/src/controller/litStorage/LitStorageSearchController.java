@@ -17,12 +17,9 @@ import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 
 import domain.LitStorage;
-import domain.Member;
 import domain.wrapper.Wrapper;
 import service.facade.LitStorageService;
-import service.facade.MemberService;
 import service.logic.LitStorageServiceLogic;
-import service.logic.MemberServiceLogic;
 
 @WebServlet("/litStorage/search.do")
 public class LitStorageSearchController extends HttpServlet {
