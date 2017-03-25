@@ -17,7 +17,6 @@ public class LitStorageRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		response.sendRedirect(request.getContextPath()+"/views/litStorageRegister.jsp");
 	}
 
@@ -35,7 +34,6 @@ public class LitStorageRegisterController extends HttpServlet {
 		
 		Member creator = new Member();
 		creator.setId((String)request.getSession().getAttribute("loginId"));	// Must be logined
-//		creator.setId((String)request.getParameter("userId"));
 		litStorage.setCreator(creator);
 		litStorage.setName(name);
 		litStorage.setIntroduce(introduce);
@@ -43,6 +41,7 @@ public class LitStorageRegisterController extends HttpServlet {
 		if(!service.registerLitStorage(litStorage)) {
 			throw new RuntimeException("LitStorage register failed");
 		}
+		
 		// go to controller for loading LitStorage info
 		response.sendRedirect(request.getContextPath() + "/litStorage/myList.do");
 	}
