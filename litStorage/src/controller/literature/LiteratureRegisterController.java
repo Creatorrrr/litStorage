@@ -26,7 +26,7 @@ public class LiteratureRegisterController extends HttpServlet {
 			throws ServletException, IOException {
 
 		String litStorageId = request.getParameter("litStorageId");
-		
+		System.out.println(litStorageId);
 		request.setAttribute("litStorageId", litStorageId);
 
 		request.getRequestDispatcher("/views/literatureRegister.jsp").forward(request, response);
@@ -43,7 +43,7 @@ public class LiteratureRegisterController extends HttpServlet {
 		
 		String literatureName = request.getParameter("inputName");
 		String literatureGenre = request.getParameter("selectGenre");
-		String imagePath = "/resouce/image/aa";
+		String imagePath = request.getParameter("imagePath");
 		String literatureIntroduce = request.getParameter("inputIntroduce");
 
 		String loginId = (String) request.getSession().getAttribute("loginId");
