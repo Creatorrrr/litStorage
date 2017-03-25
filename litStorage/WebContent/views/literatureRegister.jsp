@@ -27,7 +27,6 @@ div {
 </head>
 <body>
 	<div class="container">
-
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
 
@@ -61,79 +60,46 @@ div {
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-12">
-
 			<div class="col-xs-6 col-md-4">
 				<h1>작품이름</h1>
 				<div>
-
 					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
 						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
 						href="javascript:;">회원 초대</a>
-
-
 				</div>
-
 			</div>
-			<div>
-			<img  src="${imagePath }" style="width:304px;height:228px;">
-			<form action="../literature/registerImg.do" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="litStorageId" value="${litStorageId }">
-				<h4>이미지 업로드</h4>
-				제목:
-				<input type="text" name="title" placeholder="제목을 입력하세요"><br> 
-				파일1:
-				<input type="file" name="filename1"><br>
-				
-				<input type="submit" value="업로드">
-				</form>
-
-			</div>
-			<form action="${ctx }/literature/register.do" method="post"
-				enctype="multipart/form-data">
-				<input type="hidden" name="litStorageId" value="${litStorageId }">
-				<input type="hidden" name="imagePath" value="${imagePath }">
-				<div class="col-xs-12 col-md-8">
-					<h1>${litStorageId }</h1>
-					<div class="text-right">
-						<!-- LiteratureDeleteController -->
-						<a
-							href="${ctx}/literature/delete.do?deleteLiteratureId=${literature.id}">작품
-							삭제</a>
-					</div>
-					<div class="panel panel-default">
-						<div class="row">
-							<div class="col-md-3">
-								<div>
-									<h4>장르</h4>
-									<select name="selectGenre">
-										<option value="martial">무협</option>
-										<option value="romance">로맨스</option>
-										<option value="action">액션</option>
-									</select>
-								</div>
-								<div>
-									<h4>이름</h4>
-									<textarea rows="10" cols="1" name="inputName"></textarea>
-								</div>
-								<div>
-									<h4>내용</h4>
-									<textarea rows="10" cols="1" name="inputIntroduce"></textarea>
-								</div>
-							</div>
-
+			<div class="panel panel-default">
+				<div class="row">
+					<form action="${ctx }/literature/register.do" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="literatureId" value="${literatureId }">
+						<div>
+							<h4>이미지 업로드</h4>
+							<input type="file" id="image" name="image">
+						</div>
+						<div>
+							<h4>장르</h4>
+							<select name="selectGenre">
+								<option value="martial">무협</option>
+								<option value="romance">로맨스</option>
+								<option value="action">액션</option>
+							</select>
+						</div>
+						<div>
+							<h4>제목</h4>
+							<textarea rows="1" cols="75" name="name"></textarea>
+						</div>
+						<div>
+							<h4>내용</h4>
+							<textarea rows="10" cols="75" name="content"></textarea>
 						</div>
 						<div class="text-right">
-							<button type="submit">등록</button>
+							<button type="reset">취소하기</button>
+							<button type="submit">작품 등록</button>
 						</div>
-
-					</div>
+					</form>
 				</div>
-
-			</form>
+			</div>
 		</div>
-
-
 	</div>
-
 </body>
 </html>
