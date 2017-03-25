@@ -48,7 +48,7 @@
 					<tr>
 						<td>작품명</td>
 						<td><a
-							href="${ctx}/episode/list.do?Literatureid=${literature.id}">${literature.name }</a></td>
+							href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a></td>
 					</tr>
 					<tr>
 						<td>작가</td>
@@ -90,7 +90,7 @@
 					<tr>
 						<td>작품명</td>
 						<td><a
-							href="${ctx}/episode/list.do?Literatureid=${literature.id}">${literature.name }</a></td>
+							href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a></td>
 					</tr>
 					<tr>
 						<td>작가</td>
@@ -135,7 +135,7 @@
 							if (listLength) {
 								var contentStr = "";
 								$(xmlData).each(function() {
-									contentStr += "<div class='literatureBox'><table border='1'><tr><td>이름</td><td><a href='${ctx}/litStorage/profile.do?id="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
+									contentStr += "<div class='literatureBox'><table border='1'><tr><td>이름</td><td><a href='${ctx}/episode/list.do?LiteratureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
 											+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
 											+"<td>소개</td><td>"+ $(this).find("introduce").text()
 											+"</td></tr><tr><td>장르</td><td>"+$(this).find("genre").text()
@@ -160,7 +160,7 @@
 							if (listLength) {
 								var contentStr = "";
 								$(xmlData).each(function() {
-									contentStr += "<div class='literatureBox'><table border='1'><tr><td>이름</td><td><a href='${ctx}/litStorage/profile.do?id="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
+									contentStr += "<div class='literatureBox'><table border='1'><tr><td>이름</td><td><a href='${ctx}/episode/list.do?LiteratureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
 											+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
 											+"<td>소개</td><td>"+ $(this).find("introduce").text()
 											+"</td></tr><tr><td>장르</td><td>"+$(this).find("genre").text()

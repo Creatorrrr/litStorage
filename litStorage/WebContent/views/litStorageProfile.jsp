@@ -104,9 +104,13 @@ textarea {
 }
 </style>
 
-<title>Insert title here</title>
+<title>작품 저장소 프로필</title>
 </head>
 <body>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+</jsp:include>
 	<table class="table table-hover table-condensed">
 		<colgroup>
 			<col width="80" align="center">

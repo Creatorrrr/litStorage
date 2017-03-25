@@ -22,7 +22,7 @@ public class LitStorageMyStorageListController extends HttpServlet {
 		LitStorageService service = new LitStorageServiceLogic();
 		//get loginId from session
 		String id = (String)request.getSession().getAttribute("loginId");
-		
+			
 		if(id == null){
 			// if not logined, send to loginPage
 			response.sendRedirect(request.getContextPath()+"/views/login.jsp");
@@ -30,7 +30,9 @@ public class LitStorageMyStorageListController extends HttpServlet {
 		//find LitStorage by login Id
 		List<LitStorage> list = service.findLitStoragesByMemberId(id);
 		request.setAttribute("litStorages", list);
+		LitStorage ls = service.findLitStorageById(request.getParameter("id"));
 		
+		request.setAttribute("litStorage", ls);
 		request.getRequestDispatcher("/views/litStorageMyStorageList.jsp").forward(request, response);
 		}
 	}

@@ -105,6 +105,10 @@ textarea {
 <title>초대 회원 검색</title>
 </head>
 <body>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+</jsp:include>
 	<form method="post">
 		<select name="type" id="type">
 			<option value="id">아이디</option>

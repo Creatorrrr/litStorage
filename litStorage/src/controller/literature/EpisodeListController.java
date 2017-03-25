@@ -28,11 +28,10 @@ public class EpisodeListController extends HttpServlet {
 		// 2. Show list of serials.
 
 		String literatureId = request.getParameter("LiteratureId");
-
+		
 		Literature literature = service.findLiteratureById(literatureId);
 		
 		request.setAttribute("literature", literature);
-
 		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 
 	}

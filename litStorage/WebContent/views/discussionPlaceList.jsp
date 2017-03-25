@@ -14,7 +14,10 @@
 
 </head>
 <body>
-
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+</jsp:include>
 
 	<h1>토론장</h1>
 	<div class="panel panel-default">
