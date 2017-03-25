@@ -27,7 +27,12 @@ public class MemberModifyController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("loginId");
-		System.out.println(loginId);
+		//로그인 안된 상태로 접근시
+		if(loginId == null || loginId.isEmpty()){
+			response.sendRedirect(request.getContextPath() + "/");
+			return ;
+		}
+		//로그인 됬을때
 		MemberService service = new MemberServiceLogic();
 		Member memberDB = service.findMemberById(loginId);
 		memberDB.setPassword("");

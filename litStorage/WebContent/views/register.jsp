@@ -6,9 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
-<script type="text/javascript" src="${ctx }/resources/js/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/jquery.validate.min.js"></script>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
+<%@ include file="_includeCSSJS.jspf" %>
 <script type="text/javascript">
 
 
@@ -74,7 +72,7 @@ $(function() {
 </head>
 <body>
  
-
+<div >
     <h3>회원가입</h3>
 	
 	<br>
@@ -103,9 +101,7 @@ $(function() {
 		</table><br>
 		<div align="center"><input class="btn" type="reset" value="취소"> <input class="btn btn-success" type="submit" value="회원가입"></div>
 	</form>
-	<br>
-        
-        
+</div> 
         
         
  
