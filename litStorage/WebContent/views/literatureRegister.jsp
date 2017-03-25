@@ -76,7 +76,7 @@ div {
 					<form action="${ctx }/literature/register.do" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="litStorageId" value="${litStorageId }">
 						<div>
-							<h4>이미지 업로드${litStorageId }</h4>
+							<h4>이미지 업로드</h4>
 							<input type="file" id="image" name="image">
 						</div>
 						<div>

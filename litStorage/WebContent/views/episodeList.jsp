@@ -71,8 +71,7 @@ div {
 				<h1>연재 글 목록</h1>
 				<div class="text-right">
 					<!-- LiteratureDeleteController -->
-					<a href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품
-						삭제</a>
+					<a href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품 삭제</a>
 				</div>
 
 				<div class="panel panel-default">
@@ -96,31 +95,51 @@ div {
 							onclick="location.href='${ctx }/episode/register.do?literatureId=${literature.id}'">연재글
 							등록</button>
 					</div>
-					<form action="${ctx }/episode/register.do" method="post">
-						<table class="table table-striped">
+					<table class="table table-striped">
+						<colgroup>
+							<col width="50">
+							<col width="500">
+							<col width="100">
+							<col width="100">
+						</colgroup>
+						<thead>
 							<tr>
+								<td>번호</td>
 								<td>제목</td>
 								<td>작성자</td>
 								<td>공개 범위</td>
 							</tr>
-
-							<c:forEach items="${literature.episodes }" var="episode">
-								<c:if test="${episode ne null }">
-									
-									<a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a>
+						</thead>
+						<tbody>
+							<c:choose>
+								<c:when test=" eq null}">
 									<tr>
-										<td>${episode.writer.id }</td>
-
-										<td><select name="openSelect">
-												<option value="M">저장소 협업 작가만 공개</option>
-												<option value="A">모두 공개</option>
-										</select></td>
-										<td><button type="submit" onclick="location.href='${ctx}/episode/detail.do?episodeId=${episdoe.id }'">공개 선택</button></td>
+										<td colspan="7" class="text-center">등록된 작품저장소의 정보가 존재하지 않습니다.</td>
 									</tr>
-								</c:if>
-							</c:forEach>
-						</table>
-					</form>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${literature.episodes}" var="episode" varStatus="status">
+										<tr>
+											<td>${status.count }</td>
+											<td>
+												<a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a>
+											</td>
+											<td>${episode.writer.id }</td>
+											<td>
+												<form action="${ctx }/episode/bound.do" method="post">
+													<select name="openSelect">
+														<option value="M">저장소 협업 작가만 공개</option>
+														<option value="A">모두 공개</option>
+													</select>
+													<button type="submit" onclick="location.href='${ctx}/episode/detail.do?episodeId=${episode.id }'">공개 선택</button>
+												</form>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

@@ -58,6 +58,10 @@
 								<td>생성자</td>
 								<td>${litStorage.creator.id }</td>
 							</tr>
+							<tr>
+								<td>Email : </td>
+								<td>${litStorage.creator.email }</td>
+							</tr>
 						</table>
 					</div>
 				</c:forEach>
