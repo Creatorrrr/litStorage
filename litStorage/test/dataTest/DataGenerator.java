@@ -107,13 +107,6 @@ public class DataGenerator {
 			e.printStackTrace();
 		}
 		
-		// liter.setName();
-		// liter.setGenre();
-		// liter.setImagePath();
-		// liter.setIntroduce();
-		// liter.setCreator();
-		// liter.setHits();
-		// liter.setLitStorage();
 		
 		for (int i = 1; i <= 200; i++) {
 			try {
