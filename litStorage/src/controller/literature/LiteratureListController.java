@@ -13,7 +13,7 @@ import service.facade.LitStorageService;
 import service.logic.LitStorageServiceLogic;
 
 @WebServlet("/literature/list.do")
-public class LiteratureLIstController extends HttpServlet {
+public class LiteratureListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,7 +27,7 @@ public class LiteratureLIstController extends HttpServlet {
 		LitStorage litStorage = service.findLitStorageById(litstorageId);
 		
 		request.setAttribute("litStorage", litStorage);
-
+		
 		request.getRequestDispatcher("/views/literatureList.jsp").forward(request, response);
 	}
 

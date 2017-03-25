@@ -27,6 +27,11 @@
   		VALUES(#{member.id}, #{litStorage.id}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'))
   	</insert>
   	
+  	<delete id="deleteMemberLitStorageByLitStorageId" parameterType="String">
+  		DELETE FROM memberlitstorage
+  		WHERE litstorageid = #{id}
+  	</delete>
+  	
   	<select id="selectMemberLitStoragesByLitStorageId" parameterType="String" resultMap="memberLitStorageMap">
   		SELECT memberid, litstorageid, jointime
   		FROM memberlitstorage
