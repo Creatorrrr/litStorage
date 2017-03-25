@@ -42,7 +42,7 @@ public class LiteratureRegisterController extends HttpServlet {
 		MemberService Mservice = new MemberServiceLogic();
 		String literatureName = request.getParameter("inputName");
 		String literatureGenre = request.getParameter("selectGenre");
-		String imagePath = "/resouce/image/aa";
+		String imagePath = request.getParameter("imagePath");
 		String literatureIntroduce = request.getParameter("inputIntroduce");
 
 		String loginId = (String) request.getSession().getAttribute("loginId");

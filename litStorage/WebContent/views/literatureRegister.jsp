@@ -75,7 +75,7 @@ div {
 
 			</div>
 			<div>
-			<img  src="">
+			<img  src="${imagePath }" style="width:304px;height:228px;">
 			<form action="../literature/registerImg.do" method="post" enctype="multipart/form-data">
 				<h4>이미지 업로드</h4>
 				제목:
@@ -90,6 +90,7 @@ div {
 			<form action="../literature/register.do" method="post"
 				enctype="multipart/form-data">
 				<input type="hidden" name="litStorageId" value="${litStorageId }">
+				<input type="hidden" name="imagePath" value="${imagePath }">
 				<div class="col-xs-12 col-md-8">
 					<h1>${litStorageId }</h1>
 					<div class="text-right">

@@ -71,7 +71,7 @@
 			SELECT LITERATURE_SEQ.nextval FROM dual
 		</selectKey>
 		INSERT INTO
-		literature(id, name, genre, imagepath, introduce, writer,
+		literature(id, name, jdbcType = VARCHAR, genre, imagepath, introduce, jdbcType = VARCHAR, writer,
 		hits, litstorageid)
 		VALUES (#{id}, #{name}, #{genre}, #{imagePath},
 		#{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
