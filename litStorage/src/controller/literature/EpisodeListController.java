@@ -1,7 +1,6 @@
 package controller.literature;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.Episode;
 import domain.Literature;
 import service.facade.LiteratureService;
 import service.logic.LiteratureServiceLogic;
@@ -29,14 +27,11 @@ public class EpisodeListController extends HttpServlet {
 		// 1. Show the contents and artist name.
 		// 2. Show list of serials.
 
-		String literatureId = request.getParameter("LiteratureId");
-
-		List<Episode> episodes = service.findEpisodeByLiteratureId(literatureId);
+		String literatureId = request.getParameter("literatureId");
+		
 		Literature literature = service.findLiteratureById(literatureId);
 		
 		request.setAttribute("literature", literature);
-		request.setAttribute("episodes", episodes);
-
 		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 
 	}

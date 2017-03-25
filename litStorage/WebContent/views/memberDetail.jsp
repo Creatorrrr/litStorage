@@ -40,7 +40,7 @@
 			<tr>
 				<td colspan="2" align="center">
 				<a href="${ctx }/member/modify.do" class="btn">정보수정</a> 
-				
+				<a href="${ctx }/views/main.jsp" class="btn">메인으로</a> 
 				</td>
 			</tr>
 		</table>

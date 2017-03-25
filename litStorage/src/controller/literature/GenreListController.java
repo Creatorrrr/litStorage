@@ -25,24 +25,37 @@ import service.logic.LiteratureServiceLogic;
 public class GenreListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("text/xml;charset=utf-8");
 		OutputStream out = response.getOutputStream();
-
-		JAXBContext context;
 		
-		String type=request.getParameter("type");
+		JAXBContext context;
+
+		String type = request.getParameter("type");
 		String genre = request.getParameter("genre");
-		System.out.println(genre);
 
 		LiteratureService service = new LiteratureServiceLogic();
 
 		List<Literature> list = new ArrayList<>();
-		if(type.equals("newGenre")){
+		if (type.equals("newGenre")) {
 			list = service.findLiteraturesByGenreOrderById(genre);
 		} else {
 			list = service.findLiteraturesByGenreOrderByHits(genre);
 		}
+
+		if (request.getParameter("from").equals("main")) {
+			List<Literature> cutList = new ArrayList<>();
+			for (int i = 0; i < 6; i++) {
+				try {
+					cutList.add(list.get(i));
+				} catch (Exception e) {}
+				
+			}
+			list.clear();
+			list = cutList;
+		}
+
 		try {
 			context = JAXBContext.newInstance(Wrapper.class, Literature.class);
 			Marshaller m = context.createMarshaller();

@@ -1,6 +1,7 @@
 package controller.litStorage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.LitStorage;
+import domain.MemberLitStorage;
 import service.facade.LitStorageService;
 import service.logic.LitStorageServiceLogic;
 
@@ -22,17 +24,25 @@ public class LitStorageMyStorageListController extends HttpServlet {
 		LitStorageService service = new LitStorageServiceLogic();
 		//get loginId from session
 		String id = (String)request.getSession().getAttribute("loginId");
-		
+			
 		if(id == null){
 			// if not logined, send to loginPage
 			response.sendRedirect(request.getContextPath()+"/views/login.jsp");
-		}else{
-		//find LitStorage by login Id
-		List<LitStorage> list = service.findLitStoragesByMemberId(id);
-		request.setAttribute("litStorages", list);
+			return;
+		}
+		
+		//find MemberLitStorage by login Id
+		List<LitStorage> lsList = new ArrayList<>();
+
+		List<MemberLitStorage> mlsList = service.findMemberLitStoragesByMemberId(id);
+		
+		// rearrange List<LitStorage> from List<MemberLitStorag>e
+		for(MemberLitStorage mls : mlsList) {
+			lsList.add(mls.getLitStorage());
+		}
+		
+		request.setAttribute("litStorages", lsList);
 		
 		request.getRequestDispatcher("/views/litStorageMyStorageList.jsp").forward(request, response);
-		}
 	}
-
 }

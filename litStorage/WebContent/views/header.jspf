@@ -7,7 +7,8 @@
 		<a href="${ctx }/login.do">로그인</a> | <a href="${ctx }/views/register.jsp">회원가입</a>
 	</c:when>
 	<c:otherwise>
-		<b>${loginId}</b>님!! 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
+		<b>${loginId}</b>님!! 환영합니다. 
+		<a href="${ctx }/logout.do">로그아웃</a>
 		<a href="${ctx}/member/detail.do">회원정보</a>
 		<a href="${ctx}/member/inviteList.do">초대 온 목록</a>
 	</c:otherwise>
@@ -16,7 +17,7 @@
 <!-- navigation bar area -->
 <a href="${ctx }/post/postList.do">자유게시판</a>||
 <a href="${ctx }/litStorage/myList.do">작품 저장소</a>||
-<a href="${ctx }/literature/list.do">작품 목록</a>
+<a href="${ctx }/literature/allList.do">작품 목록</a>
 <hr>
 
 <div id="message">${message }</div>

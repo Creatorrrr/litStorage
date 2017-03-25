@@ -15,6 +15,19 @@
 </head>
 <body>
 
+<c:choose>
+ <c:when test="${litStorage.creator.id eq loginId}">
+ <c:set var="isMaster" value="true" />
+ </c:when>
+ <c:otherwise>
+ <c:set var="isMaster" value="false" />
+ </c:otherwise>
+ </c:choose>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+ <jsp:param name="isMaster" value="${isMaster }"/>
+</jsp:include>
 
 	<h1>토론장</h1>
 	<div class="panel panel-default">
@@ -57,7 +70,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<input type="hidden" name="litStorageId" value="333" class="form-control">
+							<input type="hidden" name="litStorageId" value="${litStorage.id }" class="form-control">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							<button type="button" id="registerBtn" class="btn btn-primary">토론장 생성</button>
 						</div>

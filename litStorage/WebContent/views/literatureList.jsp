@@ -31,13 +31,26 @@ div {
 </head>
 
 <body>
+<c:choose>
+ <c:when test="${litStorage.creator.id eq loginId}">
+ <c:set var="isMaster" value="true" />
+ </c:when>
+ <c:otherwise>
+ <c:set var="isMaster" value="false" />
+ </c:otherwise>
+ </c:choose>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+ <jsp:param name="isMaster" value="${isMaster }"/>
+</jsp:include>
 	<!-- <input type="button" id="deleteEpisode"
 		onclick="location.href='../episode/list' "> -->
+		
 	<form action="../episode/deteil.do" method="post">
 		<input type="hidden" id="deleteEpisode" value="F">
 	</form>
 	<div class="container">
-
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
 
@@ -45,17 +58,17 @@ div {
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+				<!-- 	<div class="text-right">
 						<button>로그인</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<%-- <div class="col-md-6">
 						<a href="javascript:;">자유게시판</a> <a
 							href="${ctx }/litStorage/allList.do;">작품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
-					</div>
+					</div> --%>
 					<form action="../episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
@@ -71,41 +84,35 @@ div {
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-12">
-
 			<div class="col-xs-6 col-md-4">
-				<h1>${literature.name }</h1>
+				<h1>${litStorage.name }</h1>
 				<div>
-
 					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
 						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
 						href="javascript:;">회원 초대</a>
-
-
 				</div>
-
 			</div>
 			<div class="col-xs-12 col-md-8">
 				<h1>작품 목록</h1>
 				<div class="text-right">
-					<a
-						href="${ctx }/literature/register.do?litStorageId=${literature.litStorage.id}">작품
-						등록</a>
+					<a href="${ctx }/literature/register.do?litStorageId=${litStorage.id}">작품 등록</a>
 				</div>
 				<div class="panel panel-default">
 					<div>
-						<a>장르</a> <a>:제목:</a> <a>작성자</a>
+						<a>장르:</a> <a>제목:</a> <a>작성자:</a>
+						
 					</div>
 					<c:forEach items="${literatures }" var="literature">
 						<div>
-							<a>${literature.genre }</a><a
-								href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a><a>${literature.creator.name }</a>
+							<a>${literature.genre }</a> <a
+								href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a>
+							/<a>${literature.creator.name }</a>
+							<!-- 이전 작품과 구분하기 위해 / 추가 -->
 						</div>
 					</c:forEach>
 				</div>
-				<div class="row"></div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

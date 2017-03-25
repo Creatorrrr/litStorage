@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.DiscussionPlace;
 import domain.LitStorage;
+import domain.Member;
 import service.facade.DiscussionPlaceService;
 import service.logic.DiscussionPlaceServiceLogic;
+import service.logic.LitStorageServiceLogic;
 
 
 
@@ -27,6 +29,11 @@ public class DiscussionPlaceListController extends HttpServlet {
 		String litStorageId = request.getParameter("litStorageId");
 		List<DiscussionPlace> list=service.findDiscussionPlacesByLitStorageId(litStorageId);
 		request.setAttribute("discussionPlaces", list);
+		
+		//sideNav를 위해 litStorage 재포함
+		LitStorage ls = new LitStorageServiceLogic().findLitStorageById(litStorageId);
+		request.setAttribute("litStorage", ls);
+		
 		request.getRequestDispatcher("/views/discussionPlaceList.jsp").forward(request, response);
 		
 	}

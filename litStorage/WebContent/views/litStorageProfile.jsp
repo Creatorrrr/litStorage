@@ -104,9 +104,22 @@ textarea {
 }
 </style>
 
-<title>Insert title here</title>
+<title>작품 저장소 프로필</title>
 </head>
 <body>
+ <c:choose>
+ <c:when test="${litStorage.creator.id eq loginId}">
+ <c:set var="isMaster" value="true" />
+ </c:when>
+ <c:otherwise>
+ <c:set var="isMaster" value="false" />
+ </c:otherwise>
+ </c:choose>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+ <jsp:param name="isMaster" value="${isMaster }"/>
+</jsp:include>
 	<table class="table table-hover table-condensed">
 		<colgroup>
 			<col width="80" align="center">
@@ -132,12 +145,10 @@ textarea {
 			<td>${litStorage.introduce }</td>
 		</tr>
 	</table>
-	<a href="${ctx }/literature/list.do?id=${litStorage.id}">작품 목록 </a>
 	<c:if test="${isNotJoined}">
 	<button id="onclick" type="button">참가 요청</button>
 	</c:if>
-	<a href="${ctx }/member/search.do?litStorageId=${litStorage.id}">작품 저장소 초대 회원 검색</a><br>
-	
+	<a href="${ctx }/litStorage/delete.do?litStorageId="${litStorage.id }">작품 저장소 삭제</a>
 	
 	<!-- request popup form div start-->
 	<div id="sendRequest">

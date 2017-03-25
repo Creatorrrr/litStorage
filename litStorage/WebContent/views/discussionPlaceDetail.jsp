@@ -9,7 +9,18 @@
 
 </head>
 <body>
-
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+ <c:choose>
+ <c:when test="${litStorage.creator.id eq loginId}">
+ <jsp:param name="isMaster" value="true"/>
+ </c:when>
+ <c:otherwise>
+ <jsp:param name="isMaster" value="false"/>
+ </c:otherwise>
+ </c:choose>
+</jsp:include>
 <p>토론장</p>
 <div>
 <h1>토론주제 : ${discussionPlace.title }</h1>

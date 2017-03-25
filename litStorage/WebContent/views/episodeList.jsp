@@ -28,26 +28,26 @@ div {
 </style>
 </head>
 <body>
+<%@include file="./header.jspf" %>   
 	<div class="container">
-
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
-
 				<div class="row">
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
-						<button>로그아웃</button>
-						<button>회원 정보 수정</button>
-					</div>
+					<%-- <div class="text-right">                      header.jspf 붙임  
+						<a href="${ctx }/logout.do">로그아웃</a> <a
+							href="${ctx}/member/detail.do">회원정보</a> <a
+							href="${ctx}/member/inviteList.do">초대 온 목록</a>
+					</div> --%>
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<%-- <div class="col-md-6">                    header.jspf 붙임  
 						<a href="javascript:;">자유게시판</a> <a
 							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
-					</div>
+					</div> --%>
 					<form action="../episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
@@ -59,22 +59,11 @@ div {
 						</div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-12">
-
 			<div class="col-xs-6 col-md-4">
 				<h1>작품이름</h1>
-				<div>
-
-					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
-						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
-						href="javascript:;">회원 초대</a>
-
-
-				</div>
-
 			</div>
 			<form action="../episode/list.do" method="post">
 				<c:forEach items="${literatures }" var="literature"></c:forEach>
@@ -89,20 +78,22 @@ div {
 					<div class="panel panel-default">
 						<div class="row">
 
+							<form method="post" enctype="multipart/form-data"
+								action="imgup.jsp">
+								<input type="file" name="filename1" size=40> <input
+									type="submit" value="업로드"><br> <br>
 
+								<div class="col-md-3">
 
-
-							<div class="col-md-3">
-
-								<h4>${literature.genre }</h4>
-								<h4>${literature.name }</h4>
-								<h4>${literature.introduce }</h4>
-							</div>
-							<div class="text-middle">
-								<h4>${literature.creator.name }</h4>
-								<h4>${literature.creator.id }</h4>
-								<h4>${literature.creator.email }</h4>
-							</div>
+									<h4>${literature.genre }</h4>
+									<h4>${literature.name }</h4>
+									<h4>${literature.introduce }</h4>
+								</div>
+								<div class="text-middle">
+									<h4>${literature.creator.name }</h4>
+									<h4>${literature.creator.id }</h4>
+									<h4>${literature.creator.email }</h4>
+								</div>
 
 						</div>
 						<div class="text-right">
@@ -167,5 +158,6 @@ div {
 
 
 
+	</div>
 </body>
 </html>

@@ -32,15 +32,16 @@
 		</tr>
 	</table>
 	<br>
-	<%-- <c:if test="${isAdmin }"> --%>
-		<div align="center">
-			<input class="btn" value="삭제" type="button"
-				onclick="javascript:window.location='${ctx }/postDelete.do?id=${post.id}'">
-			<input class="btn" type="button" value="수정"
-				onclick="javascript:window.location='${ctx}/postModify.do?id=${post.id }'">
-
-		</div>
-		<br>
-	<%-- </c:if> --%>
+	<c:if test="${loginId ne null}">
+		<%-- <c:if test=" ${loginId eq 'post.writer.id'} "> --%>     <!--본인이 작성한 글만 수정 삭제 가능하도록  -->
+			<div align="center">
+				<input class="btn" value="삭제" type="button"
+					onclick="javascript:window.location='${ctx }/postDelete.do?id=${post.id}'">
+				<input class="btn" type="button" value="수정"
+					onclick="javascript:window.location='${ctx}/postModify.do?id=${post.id }'">
+			</div>
+			<br>
+		<%-- </c:if> --%>
+	</c:if>
 </body>
 </html>
