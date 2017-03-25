@@ -31,16 +31,9 @@ div {
 </head>
 
 <body>
-	<!-- <input type="button" id="deleteEpisode"
-		onclick="location.href='../episode/list' "> -->
-		<form action="../episode/deteil.do" method="post">
-	<input type="hidden" id="deleteEpisode" value="F">
-		</form>
 	<div class="container">
-
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
-
 				<div class="row">
 					<div class="col-md-6">
 						<h1>제목</h1>
@@ -52,11 +45,11 @@ div {
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<a href="javascript:;">자유게시판</a> <a
-							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
-							href="javascript:;">작품 목록</a>
+						<a href="javascript:;">자유게시판</a>
+						<a href="${ctx }/litStorage/allList.do;">직품 저장소</a>
+						<a href="javascript:;">작품 목록</a>
 					</div>
-					<form action="../episode/list.do" method="post">
+					<form action="${ctx }/episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
 								<option value="writerId">작가 아이디</option>
