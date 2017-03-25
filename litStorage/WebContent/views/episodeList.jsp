@@ -61,19 +61,20 @@ div {
 			<div class="col-xs-6 col-md-4">
 				<h1>작품이름</h1>
 				<div>
-					<a href="javascript:;">프로필</a>
-					<a href="javascript:;">작품 목록</a>
-					<a href="javascript:;">토론장</a>
-					<a href="javascript:;">참가 회원 목록</a>
-					<a href="javascript:;">회원 초대</a>
+					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
+						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
+						href="javascript:;">회원 초대</a>
 				</div>
 			</div>
+
 			<div class="col-xs-12 col-md-8">
 				<h1>연재 글 목록</h1>
 				<div class="text-right">
 					<!-- LiteratureDeleteController -->
-					<a href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품 삭제</a>
+					<a href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품
+						삭제</a>
 				</div>
+
 				<div class="panel panel-default">
 					<div class="row">
 						<div>
@@ -95,29 +96,31 @@ div {
 							onclick="location.href='${ctx }/episode/register.do?literatureId=${literature.id}'">연재글
 							등록</button>
 					</div>
-					<table class="table table-striped">
-						<tr>
-							<td>제목</td>
-							<td>작성자</td>
-							<td>공개 범위</td>
-						</tr>
-						<c:forEach items="${literature.episodes }" var="episode">
-							<c:if test="${episode ne null }">
-								<tr>
-									<td>
-										<a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a>
-									</td>
-									<td>${episode.writer.id }</td>
-									<td>
-										<select name="openSelect">
-											<option value="M">저장소 협업 작가만 공개</option>
-											<option value="A">모두 공개</option>
-										</select>
-									</td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</table>
+					<form action="${ctx }/episode/register.do" method="post">
+						<table class="table table-striped">
+							<tr>
+								<td>제목</td>
+								<td>작성자</td>
+								<td>공개 범위</td>
+							</tr>
+
+							<c:forEach items="${literature.episodes }" var="episode">
+								<c:if test="${episode ne null }">
+									
+									<a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a>
+									<tr>
+										<td>${episode.writer.id }</td>
+
+										<td><select name="openSelect">
+												<option value="M">저장소 협업 작가만 공개</option>
+												<option value="A">모두 공개</option>
+										</select></td>
+										<td><button type="submit" onclick="location.href='${ctx}/episode/detail.do?episodeId=${episdoe.id }'">공개 선택</button></td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
