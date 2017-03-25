@@ -22,6 +22,7 @@
 div {
 	border: 1px solid #ccc;
 }
+
 #boardRegisterForm {
 	display: none;
 	width: 300px;
@@ -35,24 +36,28 @@ div {
 		<div class="row">
 			<div class="col-md-12">
 				<h3>자유게시판 목록</h3>
-
-				<button class="btn" type="button" onclick="addBoard();")>게시판추가</button>
-				<div class="container" id="boardRegisterForm">
-					<form action="${ctx }/board/boardRegister.do" method="post">
-						<input id="boardName" name="boardName" class="form-control"
-							type="text" value=""> <input class="btn" type="submit"
-							value="추가">
-					</form>
-				</div>
-				<br>
-				<c:forEach items="${boards }" var="board">
-					<div>
-						<a class="btn btn-sm btn-success"
-							href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
-						<a class="btn" href="${ctx }/boardDelete.do?boardId=${board.id }">삭제</a>
+				<c:if test="${ admin eq true }">       <!--"${loginId eq isAdmin }"  -->
+					<button class="btn" type="button" onclick="addBoard();")>게시판추가</button>
+					<div class="container" id="boardRegisterForm">
+						<form action="${ctx }/board/boardRegister.do" method="post">
+							<input id="boardName" name="boardName" class="form-control"
+								type="text" value=""> <input class="btn" type="submit"
+								value="추가">
+						</form>
 					</div>
-				</c:forEach>
+					</c:if>
+					<br>
 
+					<c:forEach items="${boards }" var="board">
+						<div>
+							<a class="btn btn-sm btn-success"
+								href="${ctx}/post/postList.do?boardId=${board.id}">${board.title }</a>
+						<c:if test="${isAdmin eq admin}">
+							<a class="btn" href="${ctx }/boardDelete.do?boardId=${board.id }">삭제</a>
+							</c:if>
+						</div>
+					</c:forEach>
+	
 				<table class="table table-hover table-condensed">
 					<colgroup>
 						<col width="80" align="center">
@@ -100,10 +105,10 @@ div {
 						</c:choose>
 					</tbody>
 				</table>
-				<%-- <c:if test="${isAdmin }"> --%>
+				<c:if test="${loginId ne null }">
 					<td><a class="btn btn-sm btn-success"
 						href="${ctx}/postRegister.do?boardId=${boardId}">게시물등록</a></td>
-				<%-- </c:if> --%>
+				</c:if>
 			</div>
 		</div>
 	</div>

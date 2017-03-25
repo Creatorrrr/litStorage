@@ -32,7 +32,7 @@
 		</tr>
 	</table>
 	<br>
-	<%-- <c:if test="${isAdmin }"> --%>
+	<c:if test="${loginId ne null }">
 		<div align="center">
 			<input class="btn" value="삭제" type="button"
 				onclick="javascript:window.location='${ctx }/postDelete.do?id=${post.id}'">
@@ -41,6 +41,6 @@
 
 		</div>
 		<br>
-	<%-- </c:if> --%>
+	</c:if>
 </body>
 </html>
