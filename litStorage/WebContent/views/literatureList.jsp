@@ -42,7 +42,6 @@ div {
 		<input type="hidden" id="deleteEpisode" value="F">
 	</form>
 	<div class="container">
-
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
 
@@ -76,41 +75,51 @@ div {
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-12">
-
 			<div class="col-xs-6 col-md-4">
-				<h1>${literature.name }</h1>
+				<h1>${litStorage.name }</h1>
 				<div>
-
 					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
 						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
 						href="javascript:;">회원 초대</a>
-
-
 				</div>
-
 			</div>
 			<div class="col-xs-12 col-md-8">
 				<h1>작품 목록</h1>
 				<div class="text-right">
-					<a
-						href="${ctx }/literature/register.do?litStorageId=${literature.litStorage.id}">작품
-						등록</a>
+					<a href="${ctx }/literature/register.do?litStorageId=${litStorage.id}">작품 등록</a>
 				</div>
 				<div class="panel panel-default">
 					<div>
-						<a>장르</a> <a>:제목:</a> <a>작성자</a>
+						<table border="1">
+							<colgroup>
+								<col width="50">
+								<col width="100">
+								<col width="500">
+								<col width="100">
+							</colgroup>
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>장르</th>
+									<th>제목</th>
+									<th>작성자</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${litStorage.literatures }" var="literature" varStatus="status">
+									<td>${status.count }</td>
+									<td>${literature.genre }</td>
+									<td>
+										<a href="${ctx}/episode/list.do?literatureId=${literature.id}">${literature.name }</a>
+									</td>
+									<td>${literature.creator.name }</td>
+								</c:forEach>
+							</tbody>
+						</table>
 					</div>
-					<c:forEach items="${literatures }" var="literature">
-						<div>
-							<a>${literature.genre }</a><a
-								href="${ctx}/episode/list.do?LiteratureId=${literature.id}">${literature.name }</a><a>${literature.creator.name }</a>
-						</div>
-					</c:forEach>
 				</div>
-				<div class="row"></div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

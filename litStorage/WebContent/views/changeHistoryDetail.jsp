@@ -73,7 +73,7 @@ div {
 		<div class="col-xs-12 col-md-12">
 
 			<div class="col-xs-6 col-md-4">
-				<h1>${episode.literature.name }</h1>
+				<h1>${history.episode.literature.name }</h1>
 				<div>
 					<div>
 						<a href="javascript:;">프로필</a>
@@ -95,30 +95,28 @@ div {
 
 			</div>
 			<div class="col-xs-12 col-md-8">
-				<h1>연재 글</h1>
-				<div class="text-right">
-					<button type="button"
-						onclick="location.href='../episode/modify.do?episodeId=${episode.id}' ">이전상태</button>
-					<button
-						onclick="location.href='../episode/delete.do.do?episodeId=${episode.id}' ">복구하기</button>
-				</div>
+				<h1>연재 글 복구</h1>
 				<div class="panel panel-default">
+					<div class="text-right">
+						<button type="button"
+							onclick="location.href='${ctx }/episode/list.do?episodeId=${history.episode.literature.id}'">이전상태</button>
+						<button type="button"
+							onclick="location.href='${ctx }/episode/rollback.do?historyId=${history.id}'">복구하기</button>
+					</div>
 					<div class="row">
-						<form action="../episode/register.do" method="post">
-							<input type="hidden" name="literatureId" value="${LiteratureId }">
-							<div class="col-md-3">
-								<div>
-									<h2>제목 ${episode.title }</h2>
-								</div>
-								<div>
-									<textarea rows="10" cols="75" name="BeforeEpisodeContents">${episode.content }</textarea>
-									<textarea rows="10" cols="75" name="NowEepisodeContents">${episode.content }</textarea>
-								</div>
-
+						<div class="col-md-3">
+							<div>
+								<h2>제목 ${history.episode.title }</h2>
 							</div>
-							
-						</form>
-
+							<div>
+								<span>이전 글</span>
+								<textarea rows="10" cols="75" name="beforeEpisodeContent">${history.contentFromGit }</textarea>
+							</div>
+							<div>
+								<span>현재 글</span>
+								<textarea rows="10" cols="75" name="nowEpisodeContent">${history.episode.contentFromGit }</textarea>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

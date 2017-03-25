@@ -1,7 +1,6 @@
 package controller.literature;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,9 +63,9 @@ public class LiteratureRegisterController extends HttpServlet {
 
 		boolean check = Lservice.registerLiterature(literature);
 		
-		List<Literature> literatures = Lservice.findLiteraturesByLitStorageId(litStorageId);
-		request.setAttribute("literature", literature);
-		request.setAttribute("literatures", literatures);
+		LitStorage litStorage = LSservice.findLitStorageById(litStorageId);
+		
+		request.setAttribute("litStorage", litStorage);
 
 		request.getRequestDispatcher("/views/literatureList.jsp").forward(request, response);
 

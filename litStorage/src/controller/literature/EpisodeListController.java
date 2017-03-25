@@ -27,7 +27,7 @@ public class EpisodeListController extends HttpServlet {
 		// 1. Show the contents and artist name.
 		// 2. Show list of serials.
 
-		String literatureId = request.getParameter("LiteratureId");
+		String literatureId = request.getParameter("literatureId");
 		
 		Literature literature = service.findLiteratureById(literatureId);
 		

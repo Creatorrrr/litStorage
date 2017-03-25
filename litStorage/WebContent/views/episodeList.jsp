@@ -72,7 +72,7 @@ div {
 				<h1>연재 글 목록</h1>
 				<div class="text-right">
 					<!-- LiteratureDeleteController -->
-					<a href="${ctx}/literature/delete.do?deleteLiteratureId=${literature.id}">작품 삭제</a>
+					<a href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품 삭제</a>
 				</div>
 				<div class="panel panel-default">
 					<div class="row">
@@ -104,7 +104,7 @@ div {
 									<td>
 										<a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a>
 									</td>
-									<td>${episode.writer.name }</td>
+									<td>${episode.writer.id }</td>
 									<td>
 										<select name="openSelect">
 											<option value="M">저장소 협업 작가만 공개</option>

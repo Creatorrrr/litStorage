@@ -26,7 +26,7 @@ public class LitStorageMyStorageListController extends HttpServlet {
 		if(id == null){
 			// if not logined, send to loginPage
 			response.sendRedirect(request.getContextPath()+"/views/login.jsp");
-		}else{
+		}else{System.out.println(id+"asdffffffffffffffffffffffffffffffffffffff");
 		//find LitStorage by login Id
 		List<LitStorage> list = service.findLitStoragesByMemberId(id);
 		request.setAttribute("litStorages", list);

@@ -28,6 +28,7 @@
 		SELECT id, editor, content, changeTime, message, episodeId
 		FROM changehistory
 		WHERE episodeId = #{id}
+		ORDER BY id DESC
 	</select>
 	<select id="selectChangeHistoryById"
 		parameterType="String" resultMap="changeHistoryMap">
