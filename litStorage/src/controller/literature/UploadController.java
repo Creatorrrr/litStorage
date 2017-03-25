@@ -34,9 +34,6 @@ public class UploadController extends HttpServlet {
 	}
 
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		LiteratureService Lservice = new LiteratureServiceLogic();
-		MemberService Mservice = new MemberServiceLogic();
 		String root = req.getSession().getServletContext().getRealPath("/");
 
 		String pathname = root + "saveImg";
@@ -54,29 +51,12 @@ public class UploadController extends HttpServlet {
 		MultipartRequest mr = new MultipartRequest(req, pathname, maxFilesize, encType, new DefaultFileRenamePolicy());
 
 		File file1 = mr.getFile("filename1");
-//		String litStorageId = req.getParameter("litStorageId");
-//		String loginId = (String)req.getSession().getAttribute("loginId");
+		String litStorageId = mr.getParameter("litStorageId");
+		System.out.println(litStorageId);
 		
 		req.setAttribute("imagePath", file1.getPath());
-		
+		req.setAttribute("litStorageId", litStorageId);
 		req.getRequestDispatcher("../views/literatureRegister.jsp").forward(req, resp);
-//		Literature literature = new Literature();
-//		LitStorage litStorage = new LitStorage();
-//		Member member = new Member();
-//		literature.setImagePath(file1.getPath());
-//		
-//		member =Mservice.findMemberById(loginId);
-//		
-//		literature.setCreator(member);
-//		litStorage.setId(litStorageId);
-//		literature.setLitStorage(litStorage);
-//		Lservice.registerLiterature(literature);
-
-		// System.out.println(file1.getPath());
-		// System.out.println(file1); // 첨부된 파일의 전체경로
-		//
-		// System.out.println(req.getParameter("title")); // null
-		// System.out.println(mr.getParameter("title")); // 입력된 문자
 
 	}
 

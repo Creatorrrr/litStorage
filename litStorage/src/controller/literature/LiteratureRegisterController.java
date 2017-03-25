@@ -26,7 +26,7 @@ public class LiteratureRegisterController extends HttpServlet {
 			throws ServletException, IOException {
 
 		String litStorageId = request.getParameter("litStorageId");
-		
+		System.out.println(litStorageId);
 		request.setAttribute("litStorageId", litStorageId);
 
 		request.getRequestDispatcher("/views/literatureRegister.jsp").forward(request, response);

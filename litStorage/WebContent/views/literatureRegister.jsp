@@ -46,7 +46,7 @@ div {
 							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
 					</div>
-					<form action="../episode/list.do" method="post">
+					<form action="${ctx }/episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
 								<option value="writerId">작가 아이디</option>
@@ -77,6 +77,7 @@ div {
 			<div>
 			<img  src="${imagePath }" style="width:304px;height:228px;">
 			<form action="../literature/registerImg.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="litStorageId" value="${litStorageId }">
 				<h4>이미지 업로드</h4>
 				제목:
 				<input type="text" name="title" placeholder="제목을 입력하세요"><br> 
@@ -87,7 +88,7 @@ div {
 				</form>
 
 			</div>
-			<form action="../literature/register.do" method="post"
+			<form action="${ctx }/literature/register.do" method="post"
 				enctype="multipart/form-data">
 				<input type="hidden" name="litStorageId" value="${litStorageId }">
 				<input type="hidden" name="imagePath" value="${imagePath }">
