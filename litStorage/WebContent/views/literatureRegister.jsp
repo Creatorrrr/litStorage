@@ -74,8 +74,22 @@ div {
 				</div>
 
 			</div>
-			<form action="../literature/register.do" method="post">
-			<input type="hidden" name="litStorageId" value="${litStorageId }">
+			<div>
+			<img  src="">
+			<form action="../literature/registerImg.do" method="post" enctype="multipart/form-data">
+				<h4>이미지 업로드</h4>
+				제목:
+				<input type="text" name="title" placeholder="제목을 입력하세요"><br> 
+				파일1:
+				<input type="file" name="filename1"><br>
+				
+				<input type="submit" value="업로드">
+				</form>
+
+			</div>
+			<form action="../literature/register.do" method="post"
+				enctype="multipart/form-data">
+				<input type="hidden" name="litStorageId" value="${litStorageId }">
 				<div class="col-xs-12 col-md-8">
 					<h1>${litStorageId }</h1>
 					<div class="text-right">
@@ -90,10 +104,10 @@ div {
 								<div>
 									<h4>장르</h4>
 									<select name="selectGenre">
-								<option value="martial">무협</option>
-								<option value="romance">로맨스</option>
-								<option value="action">액션</option>
-							</select>
+										<option value="martial">무협</option>
+										<option value="romance">로맨스</option>
+										<option value="action">액션</option>
+									</select>
 								</div>
 								<div>
 									<h4>이름</h4>

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -92,6 +94,7 @@ div {
 									<h4>${literature.creator.id }</h4>
 									<h4>${literature.creator.email }</h4>
 								</div>
+
 						</div>
 						<div class="text-right">
 							<button type="button"
@@ -116,7 +119,6 @@ div {
 												<option value="M">저장소 협업 작가만 공개</option>
 												<option value="A">모두 공개</option>
 										</select></td>
-
 									</tr>
 								</c:if>
 							</c:forEach>
@@ -149,10 +151,12 @@ div {
 							</c:if>
 						</c:forEach>
 					</table>
+					</div>
+					</form>
 				</div>
 		</div>
-		</form>
-	</div>
+
+
 
 	</div>
 </body>
