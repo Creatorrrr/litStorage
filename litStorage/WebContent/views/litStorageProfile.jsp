@@ -148,8 +148,9 @@ textarea {
 	<c:if test="${isNotJoined}">
 	<button id="onclick" type="button">참가 요청</button>
 	</c:if>
-	<a href="${ctx }/litStorage/delete.do?litStorageId=${litStorage.id }">작품 저장소 삭제</a>
-	<%-- <a href="${ctx }/literature/list.do?Id=${litStorage.id }">작품 목록</a> --%>
+	<c:if test="${litStorage.creator.id eq sessionScope.loginId }">
+		<a href="${ctx }/litStorage/delete.do?litStorageId=${litStorage.id }">작품 저장소 삭제</a>
+	</c:if>
 	<!-- request popup form div start-->
 	<div id="sendRequest">
 		<form class="form" action="${ctx }/litStorage/request.do" id="send" method="post">

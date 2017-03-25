@@ -10,8 +10,10 @@ public interface LiteratureService {
 	public boolean registerLiterature(Literature literature);
 
 	public boolean removeLiterature(String Id);
+	
+	public boolean increaseLiteratureHitByLiteratureId(String id);
 
-	public Literature findLiteratureById(String Id);
+	public Literature findLiteratureById(String id);
 
 	public List<Literature> findLiteratureByName(String name);
 

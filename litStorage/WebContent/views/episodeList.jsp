@@ -152,8 +152,16 @@ div {
 													<form action="${ctx }/episode/bound.do" method="post">
 														<input type="hidden" name="episodeId" value="${episode.id }">
 														<select name="bound">
-															<option value="M">저장소 협업 작가만 공개</option>
-															<option value="A">모두 공개</option>
+															<c:choose>
+																<c:when test="${episode.bound.charAt(0) eq 'M'.charAt(0) }">
+																	<option value="M">저장소 협업 작가만 공개</option>
+																	<option value="A">모두 공개</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="A">모두 공개</option>
+																	<option value="M">저장소 협업 작가만 공개</option>
+																</c:otherwise>
+															</c:choose>
 														</select>
 														<button type="submit">공개 선택</button>
 													</form>

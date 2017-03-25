@@ -31,6 +31,8 @@ public class EpisodeListController extends HttpServlet {
 		
 		Literature literature = service.findLiteratureById(literatureId);
 		
+		service.increaseLiteratureHitByLiteratureId(literatureId);
+		
 		request.setAttribute("literature", literature);
 		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 

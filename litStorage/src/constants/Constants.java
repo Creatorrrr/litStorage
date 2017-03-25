@@ -1,8 +1,12 @@
 package constants;
 
 public class Constants {
-	public static final String ROOT_PATH = "C:/Users/Creator/litStorageGit";
-	public static final String IMAGE_PATH = "C:/Users/Creator/litStorageImgs";
+	public static final String ROOT = "C:/Users/Creator";
+	
+	public static final String ROOT_PATH = ROOT + "/litStorageGit";
+	public static final String IMAGE_PATH = ROOT + "/litStorageImgs";
+	
+	public static final String DEFAULT_IMAGE = IMAGE_PATH + "/default.jpg";
 	
 	public static final String BOUND_MEMBER = "M";
 	public static final String BOUND_ALL = "A";

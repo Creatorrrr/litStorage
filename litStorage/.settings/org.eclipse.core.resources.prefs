@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/controller/board/PostListController.java=UTF-8
+encoding//src/controller/literature/LiteratureListController.java=UTF-8
 encoding//src/controller/literature/LiteratureRegisterController.java=UTF-8
 encoding//src/controller/member/LoginController.java=UTF-8
 encoding//src/controller/member/MemberRegisterController.java=UTF-8

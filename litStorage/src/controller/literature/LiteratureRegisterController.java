@@ -86,7 +86,11 @@ public class LiteratureRegisterController extends HttpServlet {
 		
 		literature.setName(name);
 		literature.setGenre(genre);
-		literature.setImagePath(image.getCanonicalPath());
+		if(image == null) {
+			literature.setImagePath(Constants.DEFAULT_IMAGE);
+		} else {
+			literature.setImagePath(image.getCanonicalPath());
+		}
 		literature.setIntroduce(introduce);
 		literature.setCreator(creator);
 		literature.setHits(0);

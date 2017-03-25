@@ -100,7 +100,7 @@ div {
 				<div class="panel panel-default">
 					<div class="text-right">
 						<button type="button"
-							onclick="location.href='${ctx }/episode/list.do?episodeId=${history.episode.literature.id}'">이전상태</button>
+							onclick="location.href='${ctx }/episode/detail.do?episodeId=${history.episode.id}'">이전상태</button>
 						<button type="button"
 							onclick="location.href='${ctx }/episode/rollback.do?historyId=${history.id}'">복구하기</button>
 					</div>

@@ -54,6 +54,11 @@ public class LiteratureServiceLogic implements LiteratureService {
 		
 		return checkLiterature && checkGit;
 	}
+	
+	@Override
+	public boolean increaseLiteratureHitByLiteratureId(String id) {
+		return lStore.updateLiteratureHitByLiteratureId(id);
+	}
 
 	@Override
 	public Literature findLiteratureById(String Id) {

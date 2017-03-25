@@ -29,8 +29,8 @@
 		<select name="type" id="type">
 			<option value="id">생성자 아이디</option>
 			<option value="name">저장소 이름</option>
-		</select> <input type="text" name="keyword"> <input type="button"
-			name="search" id="btn" value="검색">
+		</select> <input type="text" name="keyword">
+		<input type="button" name="search" id="btn" value="검색">
 	
 	<!--  -->
 		<c:choose>
