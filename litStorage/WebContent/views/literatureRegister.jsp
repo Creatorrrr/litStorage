@@ -71,7 +71,7 @@ div {
 			<div class="panel panel-default">
 				<div class="row">
 					<form action="${ctx }/literature/register.do" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="literatureId" value="${literatureId }">
+						<input type="hidden" name="litStorageId" value="${litStorageId }">
 						<div>
 							<h4>이미지 업로드</h4>
 							<input type="file" id="image" name="image">
@@ -79,9 +79,9 @@ div {
 						<div>
 							<h4>장르</h4>
 							<select name="selectGenre">
-								<option value="martial">무협</option>
-								<option value="romance">로맨스</option>
-								<option value="action">액션</option>
+								<c:forEach items="${boards}" var="board">
+									<option value="${board.id }">${board.title }</option>
+								</c:forEach>
 							</select>
 						</div>
 						<div>
@@ -89,8 +89,8 @@ div {
 							<textarea rows="1" cols="75" name="name"></textarea>
 						</div>
 						<div>
-							<h4>내용</h4>
-							<textarea rows="10" cols="75" name="content"></textarea>
+							<h4>소개</h4>
+							<textarea rows="10" cols="75" name="introduce"></textarea>
 						</div>
 						<div class="text-right">
 							<button type="reset">취소하기</button>

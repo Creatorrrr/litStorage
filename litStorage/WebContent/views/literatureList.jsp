@@ -111,12 +111,14 @@ div {
 							</thead>
 							<tbody>
 								<c:forEach items="${litStorage.literatures }" var="literature" varStatus="status">
-									<td>${status.count }</td>
-									<td>${literature.genre }</td>
-									<td>
-										<a href="${ctx}/episode/list.do?literatureId=${literature.id}">${literature.name }</a>
-									</td>
-									<td>${literature.creator.name }</td>
+									<tr>
+										<td>${status.count }</td>
+										<td>${literature.genre }</td>
+										<td>
+											<a href="${ctx}/episode/list.do?literatureId=${literature.id}">${literature.name }</a>
+										</td>
+										<td>${literature.creator.name }</td>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>

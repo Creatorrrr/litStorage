@@ -76,6 +76,9 @@ div {
 				</div>
 				<div class="panel panel-default">
 					<div class="row">
+						<div>
+							<img src="${ctx }/literature/image.do?literatureId=${literature.id }" width="128" height="128">
+						</div>
 						<div class="col-md-3">
 							<h4>${literature.genre }</h4>
 							<h4>${literature.name }</h4>

@@ -22,9 +22,9 @@ public class LiteratureListController extends HttpServlet {
 		// 작품 리스트로 이동
 		LitStorageService service = new LitStorageServiceLogic();
 
-		String litstorageId = request.getParameter("id");
+		String litStorageId = request.getParameter("id");
 
-		LitStorage litStorage = service.findLitStorageById(litstorageId);
+		LitStorage litStorage = service.findLitStorageById(litStorageId);
 		
 		request.setAttribute("litStorage", litStorage);
 		
