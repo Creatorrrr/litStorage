@@ -27,6 +27,12 @@ public class DiscussionPlaceListController extends HttpServlet {
 		String litStorageId = request.getParameter("litStorageId");
 		List<DiscussionPlace> list=service.findDiscussionPlacesByLitStorageId(litStorageId);
 		request.setAttribute("discussionPlaces", list);
+		
+		//sideNav를 위해 litStorage 재포함
+		LitStorage ls = new LitStorage();
+		ls.setId(litStorageId);
+		request.setAttribute("litStorage", ls);
+		
 		request.getRequestDispatcher("/views/discussionPlaceList.jsp").forward(request, response);
 		
 	}

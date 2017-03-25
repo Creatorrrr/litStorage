@@ -30,9 +30,7 @@ public class LitStorageMyStorageListController extends HttpServlet {
 		//find LitStorage by login Id
 		List<LitStorage> list = service.findLitStoragesByMemberId(id);
 		request.setAttribute("litStorages", list);
-		LitStorage ls = service.findLitStorageById(request.getParameter("id"));
 		
-		request.setAttribute("litStorage", ls);
 		request.getRequestDispatcher("/views/litStorageMyStorageList.jsp").forward(request, response);
 		}
 	}

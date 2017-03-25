@@ -20,9 +20,7 @@
 	</head>
 	<body>
 <%@ include file="header.jspf"%>
- <jsp:include page="litStorageSideNav.jsp">
- <jsp:param name="litStorage" value="${litStorage.id }"/>
-</jsp:include>
+
 	<h1>내 작품 저장소</h1>
 		<c:choose>
 			<c:when test="${litStorages eq null || empty litStorages }">
