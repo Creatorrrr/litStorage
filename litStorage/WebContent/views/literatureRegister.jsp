@@ -75,21 +75,18 @@ div {
 
 			</div>
 			<div>
-			<img  src="${imagePath }" style="width:304px;height:228px;">
-			<form action="../literature/registerImg.do" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="litStorageId" value="${litStorageId }">
-				<h4>이미지 업로드</h4>
-				제목:
-				<input type="text" name="title" placeholder="제목을 입력하세요"><br> 
-				파일1:
-				<input type="file" name="filename1"><br>
-				
-				<input type="submit" value="업로드">
+				<img src="${imagePath }" style="width: 304px; height: 228px;">
+				<form action="../literature/registerImg.do" method="post"
+					enctype="multipart/form-data">
+					<input type="hidden" name="litStorageId" value="${litStorageId }">
+					<h4>이미지 업로드</h4>
+					제목: <input type="text" name="title" placeholder="제목을 입력하세요"><br>
+					파일1: <input type="file" name="filename1"><br> <input
+						type="submit" value="업로드">
 				</form>
 
 			</div>
-			<form action="${ctx }/literature/register.do" method="post"
-				enctype="multipart/form-data">
+			<form action="${ctx }/literature/register.do" method="post">
 				<input type="hidden" name="litStorageId" value="${litStorageId }">
 				<input type="hidden" name="imagePath" value="${imagePath }">
 				<div class="col-xs-12 col-md-8">

@@ -78,10 +78,6 @@ div {
 					<div class="panel panel-default">
 						<div class="row">
 
-							<form method="post" enctype="multipart/form-data"
-								action="imgup.jsp">
-								<input type="file" name="filename1" size=40> <input
-									type="submit" value="업로드"><br> <br>
 
 								<div class="col-md-3">
 
@@ -137,16 +133,21 @@ div {
 							<td>작성자</td>
 							<td>공개 범위</td>
 						</tr>
+						
 						<c:forEach items="${episodes }" var="episode">
 							<c:if test="${episode ne null }">
 								<tr>
 									<td><a
 										href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a></td>
 									<td>${episode.writer.name }</td>
+									
+									
 									<td><select name="openSelect">
 											<option value="M">저장소 협업 작가만 공개</option>
 											<option value="A">모두 공개</option>
 									</select></td>
+									<td>
+									</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -158,6 +159,5 @@ div {
 
 
 
-	</div>
 </body>
 </html>
