@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.LitStorage;
 import domain.Literature;
+import service.facade.LitStorageService;
 import service.facade.LiteratureService;
+import service.logic.LitStorageServiceLogic;
 import service.logic.LiteratureServiceLogic;
 
 @WebServlet("/literature/list.do")
@@ -23,7 +25,7 @@ public class LiteratureLIstController extends HttpServlet {
 		// 전체 작품 저장소 및 나의 작품 저장소 LitstorageId 가져오기
 		// 작품 리스트로 이동
 		LiteratureService service = new LiteratureServiceLogic();
-
+		LitStorageService lsService = new LitStorageServiceLogic();
 		String litstorageId = request.getParameter("id");
 		
 		System.out.println(litstorageId);
@@ -31,8 +33,10 @@ public class LiteratureLIstController extends HttpServlet {
 		System.out.println(literatures);
 		Literature literature = new Literature();
 		LitStorage litStorage = new LitStorage();
-		litStorage.setId(litstorageId);
+		litStorage = lsService.findLitStorageById(litstorageId);
 		literature.setLitStorage(litStorage);
+		
+		
 		request.setAttribute("litStorage", litStorage);
 		request.setAttribute("literature", literature);
 		request.setAttribute("literatures", literatures);
