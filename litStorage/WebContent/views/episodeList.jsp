@@ -26,6 +26,9 @@ div {
 </style>
 </head>
 <body>
+
+	<%@ include file="header.jspf"%>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
@@ -33,62 +36,97 @@ div {
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+					<!-- <div class="text-right">
 						<button>로그아웃</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<a href="javascript:;">자유게시판</a> <a
+						<%-- <a href="javascript:;">자유게시판</a> <a
 							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
+					</div> --%>
+						<form action="${ctx }/episode/list.do" method="post">
+							<div class="text-right">
+								<select name="selectContents">
+									<option value="writerId">작가 아이디</option>
+									<option value="writerName">작가명</option>
+									<option value="memberName">회원 이름</option>
+								</select> <input type="text" name="search" placeholder="검색 내용을 입력해주세요.">
+								<button type="submit">검색</button>
+							</div>
+						</form>
 					</div>
-					<form action="${ctx }/episode/list.do" method="post">
-						<div class="text-right">
-							<select name="selectContents">
-								<option value="writerId">작가 아이디</option>
-								<option value="writerName">작가명</option>
-								<option value="memberName">회원 이름</option>
-							</select> <input type="text" name="search" placeholder="검색 내용을 입력해주세요.">
-							<button type="submit">검색</button>
-						</div>
-					</form>
 				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 col-md-12">
-			<div class="col-xs-6 col-md-4">
-				<h1>작품이름</h1>
-				<div>
-					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
-						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
-						href="javascript:;">회원 초대</a>
-				</div>
-			</div>
-
-			<div class="col-xs-12 col-md-8">
-				<h1>연재 글 목록</h1>
-				<div class="text-right">
-					<!-- LiteratureDeleteController -->
-					<a href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품
-						삭제</a>
+			<div class="col-xs-12 col-md-12">
+				<div class="col-xs-6 col-md-4">
+					<h1>작품이름</h1>
+					<div>
+						<a href="${ctx }/views/litStorageProfile.jsp">프로필</a> <a
+							href="${ctx }/views/litStorageList.jsp">작품 목록</a> <a
+							href="${ctx }/views/discussionPlaceList.jsp">토론장</a> <a
+							href="${ctx }/litStorage/memberList.do?id=">참가 회원 목록</a> <a
+							href="${ctx }/member/search.do?litStorageId=${litStorageId }">회원
+							초대</a>
+					</div>
 				</div>
 
-				<div class="panel panel-default">
-					<div class="row">
-						<div>
-							<img src="${ctx }/literature/image.do?literatureId=${literature.id }" width="128" height="128">
-						</div>
-						<div class="col-md-3">
-							<h4>${literature.genre }</h4>
+				<div class="col-xs-12 col-md-8">
+					<h1>연재 글 목록</h1>
+					<div class="text-right">
+						<!-- LiteratureDeleteController -->
+						<a
+							href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품삭제</a>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="row">
+							<div>
+								<img
+									src="${ctx }/literature/image.do?literatureId=${literature.id }"
+									width="128" height="128">
+							</div>
+
+							<div class="col-md-3">
+							<tr>
+								<th>장르</th>&nbsp;&nbsp;
+								<td>${literature.genre }</td>
+							</tr>
+							<br>
+							<tr>
+								<th>제목</th>&nbsp;&nbsp;
+								<td>${literature.name }</td>
+							</tr>
+							<br>
+							<tr>
+								<th>내용</th>&nbsp;&nbsp;
+								<td>${literature.name }</td>
+							</tr>
+							<%-- <h4>${literature.genre }</h4>
 							<h4>${literature.name }</h4>
-							<h4>${literature.introduce }</h4>
+							<h4>${literature.name }</h4> --%>
 						</div>
+
 						<div class="text-middle">
-							<h4>${literature.creator.name }</h4>
+							<tr>
+								<th>이름</th>&nbsp;&nbsp;
+								<td>${literature.creator.name }</td>
+							</tr>
+							<br>
+							<tr>
+								<th>아이디</th>&nbsp;&nbsp;
+								<td>${literature.creator.id }</td>
+							</tr>
+							<br>
+							<tr>
+								<th>이메일</th>&nbsp;&nbsp;
+								<td>${literature.creator.email }</td>
+							</tr>
+							<%-- <h4>${literature.creator.name }</h4>
 							<h4>${literature.creator.id }</h4>
-							<h4>${literature.creator.email }</h4>
+							<h4>${literature.creator.email }</h4> --%>
 						</div>
 					</div>
 					<div class="text-right">
@@ -102,20 +140,25 @@ div {
 								<td>제목</td>
 								<td>작성자</td>
 								<td>공개 범위</td>
+								<td></td>
 							</tr>
 
 							<c:forEach items="${literature.episodes }" var="episode">
 								<c:if test="${episode ne null }">
-									
-									<a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a>
+
+
 									<tr>
+										<td><a
+											href="${ctx }/episode/detail.do?episode=${episode.id }">${episode.title }</a></td>
 										<td>${episode.writer.id }</td>
 
 										<td><select name="openSelect">
 												<option value="M">저장소 협업 작가만 공개</option>
 												<option value="A">모두 공개</option>
 										</select></td>
-										<td><button type="submit" onclick="location.href='${ctx}/episode/detail.do?episodeId=${episdoe.id }'">공개 선택</button></td>
+										<td><button type="submit"
+												onclick="location.href='${ctx}/episode/detail.do?episodeId=${episdoe.id }'">공개
+												선택</button></td>
 									</tr>
 								</c:if>
 							</c:forEach>
