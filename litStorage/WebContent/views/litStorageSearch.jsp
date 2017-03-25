@@ -33,23 +33,6 @@
 			name="search" id="btn" value="검색">
 	</form>
 	<div id="result">
-	<div class="litStorageBox">
-		<table border="1">
-			<tr>
-				<td>이름</td>
-				<td><a href="${ctx}/litStorage/profile.do?id=${litStorage.id}">${litStorage.name }</a></td>
-			</tr>
-			<tr>
-				<td>소개</td>
-				<td>${litStorage.introduce }</td>
-			</tr>
-			
-			<tr>
-				<td>Email : </td>
-				<td>${litStorage.creator.email }</td>
-			</tr>
-		</table>
-	</div>
 	</div>
 
 
@@ -92,9 +75,6 @@
 			});
 		});
 	});
-	</script>
-	<script>
-		
 	</script>
 </body>
 </html>

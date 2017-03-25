@@ -25,7 +25,7 @@ public class LiteratureLIstController extends HttpServlet {
 		LiteratureService service = new LiteratureServiceLogic();
 
 		String litstorageId = request.getParameter("id");
-
+		
 		System.out.println(litstorageId);
 		List<Literature> literatures = service.findLiteraturesByLitStorageId(litstorageId);
 		System.out.println(literatures);
@@ -33,7 +33,7 @@ public class LiteratureLIstController extends HttpServlet {
 		LitStorage litStorage = new LitStorage();
 		litStorage.setId(litstorageId);
 		literature.setLitStorage(litStorage);
-		
+		request.setAttribute("litStorage", litStorage);
 		request.setAttribute("literature", literature);
 		request.setAttribute("literatures", literatures);
 

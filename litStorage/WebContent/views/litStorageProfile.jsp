@@ -136,11 +136,10 @@ textarea {
 			<td>${litStorage.introduce }</td>
 		</tr>
 	</table>
-	<a href="${ctx }/literature/list.do?id=${litStorage.id}">작품 목록 </a>
 	<c:if test="${isNotJoined}">
 	<button id="onclick" type="button">참가 요청</button>
 	</c:if>
-	<a href="${ctx }/member/search.do?litStorageId=${litStorage.id}">작품 저장소 초대 회원 검색</a><br>
+	
 	
 	
 	<!-- request popup form div start-->

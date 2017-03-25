@@ -28,9 +28,9 @@ public class DiscussionPlaceRegisterController extends HttpServlet {
 		DiscussionPlace d = new DiscussionPlace();
 		d.setTitle(title);
 		
-		Member u= new Member();
-		u.setId("test");
-		d.setCreator(u);
+		Member member= new Member();
+		member.setId((String)request.getSession().getAttribute("loginId"));
+		d.setCreator(member);
 		
 		LitStorage l= new LitStorage();
 		l.setId(litStorageId);
@@ -38,12 +38,7 @@ public class DiscussionPlaceRegisterController extends HttpServlet {
 		d.setLitStorage(l);
 
 		boolean check = service.registerDiscussionPlace(d);
-		//if(check){
-			//load list page
-			response.sendRedirect(request.getContextPath() + "/discussionPlace/list.do");
-		//}else{
-			//load error page
-		//}
+			response.sendRedirect(request.getContextPath() + "/discussionPlace/list.do?litStorageId="+litStorageId);
 
 
 

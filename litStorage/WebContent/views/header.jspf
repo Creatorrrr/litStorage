@@ -16,7 +16,7 @@
 <!-- navigation bar area -->
 <a href="${ctx }/post/postList.do">자유게시판</a>||
 <a href="${ctx }/litStorage/myList.do">작품 저장소</a>||
-<a href="${ctx }/literature/list.do">작품 목록</a>
+<a href="${ctx }/literature/allList.do">작품 목록</a>
 <hr>
 
 <div id="message">${message }</div>

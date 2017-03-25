@@ -6,7 +6,11 @@
 <head>
 </head>
 <body>
+
+
+
 <!-- side navigation bar area -->
+
 <a href="${ctx }/litStorage/profile.do?id=${param.litStorage }">프로필</a>||
 <a href="${ctx }/literature/list.do?id=${param.litStorage }">작품 목록</a>||
 <a href="${ctx }/discussionPlace/list.do?litStorageId=${param.litStorage }">토론장</a>||

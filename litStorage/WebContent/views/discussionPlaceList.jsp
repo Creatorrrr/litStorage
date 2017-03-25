@@ -60,7 +60,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<input type="hidden" name="litStorageId" value="333" class="form-control">
+							<input type="hidden" name="litStorageId" value="${litStorage.id }" class="form-control">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							<button type="button" id="registerBtn" class="btn btn-primary">토론장 생성</button>
 						</div>
