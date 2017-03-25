@@ -25,6 +25,8 @@
 </style>
 </head>
 <body>
+<%@ include file="header.jspf"%>
+
 	<form method="post">
 		<select name="type" id="type">
 			<option value="id">작가 아이디</option>

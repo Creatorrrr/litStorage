@@ -71,15 +71,8 @@
 			SELECT LITERATURE_SEQ.nextval FROM dual
 		</selectKey>
 		INSERT INTO
-<<<<<<< HEAD
 		literature(id, name, genre, imagepath, introduce, writer, hits, litstorageid)
 		VALUES (#{id}, #{name}, #{genre}, #{imagePath}, #{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
-=======
-		literature(id, name, genre, imagepath, introduce, writer,
-		hits, litstorageid)
-		VALUES (#{id}, #{name}, #{genre}, #{imagePath},
-		#{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
->>>>>>> refs/remotes/origin/eom
 	</insert>
 
 	<delete id="deleteLiterature" parameterType="string">

@@ -25,7 +25,7 @@
 <a href="${ctx }/litStorage/memberList.do?id=4">작품 저장소 참가 회원</a><br>
 <a href="${ctx }/post/postList.do">자유 게시판</a><br>
 <a href="${ctx }/litStorage/allList.do">작품 저장소 목록</a><br>
-<a href="${ctx }/discussionPlace/list.do">토론장 목록</a><br>
+<a href="${ctx }/views/discussionPlaceList.jsp">토론장 목록</a><br>
 
 <br><br>
 <!-- if you want to move member invite page, make sure that page must contain LitStorage -->

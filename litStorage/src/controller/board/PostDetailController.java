@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.Board;
 import domain.Post;
 import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
@@ -21,7 +22,10 @@ public class PostDetailController extends HttpServlet {
 		BoardService service = new BoardServiceLogic();
 	//	System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		String postId = request.getParameter("id");
-	
+		
+		Post post = new Post();
+		post=service.findPostById(postId);
+
 		request.setAttribute("post",service.findPostById(postId));
 		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
 	//	response.sendRedirect(request.getContextPath()+"/views/postDetail.jsp");
