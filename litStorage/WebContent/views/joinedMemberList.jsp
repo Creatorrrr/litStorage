@@ -15,6 +15,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:choose>
+ <c:when test="${litStorage.creator.id eq loginId}">
+ <c:set var="isMaster" value="true" />
+ </c:when>
+ <c:otherwise>
+ <c:set var="isMaster" value="false" />
+ </c:otherwise>
+ </c:choose>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+ <jsp:param name="isMaster" value="${isMaster }"/>
+</jsp:include>
 	<!--  Main member table start-->
 	<table class="table table-hover table-condensed">
 		<caption>메인 작가</caption>

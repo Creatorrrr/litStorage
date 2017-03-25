@@ -25,6 +25,8 @@ public class DiscussionContentStoreLogic implements DiscussionContentStore{
 			check = mapper.insertDiscussionContent(discussionContent);
 			if(check>0){
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		}finally {
 			session.close();
@@ -54,6 +56,8 @@ public class DiscussionContentStoreLogic implements DiscussionContentStore{
 			check = mapper.deleteDiscussionContentById(id);
 			if(check>0){
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		}finally {
 			session.close();

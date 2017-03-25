@@ -8,36 +8,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import constants.Constants;
 import domain.Episode;
 import domain.Literature;
 import domain.Member;
 import service.facade.LiteratureService;
-import service.facade.MemberService;
 import service.logic.LiteratureServiceLogic;
-import service.logic.MemberServiceLogic;
 
 @WebServlet("/episode/register.do")
 public class EpisodeRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private LiteratureService Lservice;
-	private MemberService Mservice;
 	
 	public EpisodeRegisterController() {
 		Lservice = new LiteratureServiceLogic();
-		Mservice = new MemberServiceLogic();
-				
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 1. receive LiteratureId
 		
-		String LiteratureId = req.getParameter("literatureId"); 
-		System.out.println(LiteratureId+"aaaaa");
-		req.setAttribute("LiteratureId", LiteratureId);
+		String literatureId = req.getParameter("literatureId"); 
+		req.setAttribute("literatureId", literatureId);
 		
-		req.getRequestDispatcher("../views/episodeRegister.jsp").forward(req, resp);
+		req.getRequestDispatcher("/views/episodeRegister.jsp").forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,40 +42,34 @@ public class EpisodeRegisterController extends HttpServlet {
 
 		LiteratureService service = new LiteratureServiceLogic();
 
-		String LiteratureId = request.getParameter("literatureId");
-		String selectGenre = request.getParameter("selectGenre");
+		String literatureId = request.getParameter("literatureId");
 		String episodeName = request.getParameter("episodeName");
 		String episodeContents = request.getParameter("episodeContents");
-		
-		
 		Episode episode = new Episode();
+		episode.setTitle(episodeName);
+		episode.setContent(episodeContents);
 		// Genre literature
-		Literature literature = Lservice.findLiteratureById(LiteratureId);
-		System.out.println(LiteratureId+"aaaaaaaaaaa");
+		Literature literature = Lservice.findLiteratureById(literatureId);
 		
-		literature.setId(LiteratureId);
-		literature.setGenre(selectGenre);
 		episode.setLiterature(literature);
 		
-		episode.setTitle(episodeName);
-		
-		episode.setContent(episodeContents);
-		Lservice.findLiteratureById(LiteratureId);
-		
 		//episode writer
-		Member writer = Mservice.findMemberById(literature.getCreator().getId());
-		System.out.println(literature.getCreator().getName());
+		Member writer = new Member();
+		writer.setId((String)request.getSession().getAttribute("loginId"));
+		
 		episode.setWriter(writer);
 		
 		//private on register Member
-		episode.setBound("M");
+		episode.setBound(Constants.BOUND_MEMBER);
 		
-		boolean check = service.registerEpisode(episode);
-		
-		if(check){
-			response.sendRedirect(request.getContextPath()+"/episode/list.do");
+		if(!service.registerEpisode(episode)) {
+			throw new RuntimeException("fail to register episode");
 		}
-
+		
+		Literature registeredLiterature = service.findLiteratureById(literatureId);
+		
+		request.setAttribute("literature", registeredLiterature);
+		
+		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 	}
-
 }

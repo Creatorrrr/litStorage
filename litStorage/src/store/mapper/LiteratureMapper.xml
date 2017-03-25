@@ -19,7 +19,7 @@
 		<association property="litStorage" column="litstorageid"
 			select="store.mapper.LitStorageMapper.selectLitStorageById" javaType="LitStorage"
 			jdbcType="VARCHAR" />
-		<collection property="episodes" column="id" select="store.mapper.EpisodeMapper.selectEpisodeById" 
+		<collection property="episodes" column="id" select="store.mapper.EpisodeMapper.selectEpisodesByLiteratureId" 
 			javaType="ArrayList" jdbcType="VARCHAR" />
 	</resultMap>
 
@@ -43,18 +43,21 @@
 	<select id="selectLiteraturesByName" parameterType="string"
 		resultMap="literatureMap">
 		<include refid="selectLiterature" />
-		WHERE name = #{name}
+		WHERE name LIKE '%'||#{name}||'%'
 	</select>
 
 	<select id="selectLiteraturesByGenreOrderByHits" parameterType="string"
 		resultMap="literatureMap">
 		<include refid="selectLiterature" />
+		WHERE genre = #{genre}
 		ORDER BY hits DESC
 	</select>
 
-	<select id="selectLiteratureByGenreOrderById" resultMap="literatureMap">
+	<select id="selectLiteraturesByGenreOrderById" parameterType="string"
+	 resultMap="literatureMap">
 		<include refid="selectLiterature" />
-		WHERE id = #{id} ORDER BY id DESC
+		WHERE genre = #{genre}
+		ORDER BY id DESC
 	</select>
 
 	<select id="selectLiteraturesByMemberId" parameterType="string"
@@ -68,10 +71,8 @@
 			SELECT LITERATURE_SEQ.nextval FROM dual
 		</selectKey>
 		INSERT INTO
-		literature(id, name, genre, imagepath, introduce, writer,
-		hits, litstorageid)
-		VALUES (#{id}, #{name}, #{genre}, #{imagePath},
-		#{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
+		literature(id, name, genre, imagepath, introduce, writer, hits, litstorageid)
+		VALUES (#{id}, #{name}, #{genre}, #{imagePath}, #{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
 	</insert>
 
 	<delete id="deleteLiterature" parameterType="string">

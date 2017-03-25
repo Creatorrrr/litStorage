@@ -36,10 +36,10 @@ public class EpisodeStoreLogicTest {
 		e.setBound("0001");
 		
 		Literature l= new Literature();
-		l.setId("11");
+		l.setId("1");
 		
 		LitStorage ls = new LitStorage();
-		ls.setId("1");
+		ls.setId("5");
 		l.setLitStorage(ls);
 		
 		e.setLiterature(l);
@@ -91,6 +91,11 @@ public class EpisodeStoreLogicTest {
 //		
 //		assertTrue(store.deleteEpisode(e.getId()));
 //		assertTrue(store.deleteEpisodeToGit(e));
+//	}
+//	
+//	@Test
+//	public void testDeleteEpisodesByLiteratureId() {
+//		assertTrue(store.deleteEpisodesByLiteratureId("11"));
 //	}
 //
 //	@Test

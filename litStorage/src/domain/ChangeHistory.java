@@ -60,8 +60,8 @@ public class ChangeHistory {
 		this.content = content;
 	}
 	
-	public Date getChangeTime() {
-		return changeTime;
+	public String getChangeTime() {
+		return changeTime.toString().substring(2);
 	}
 	
 	public void setChangeTime(Date changeTime) {
@@ -76,6 +76,9 @@ public class ChangeHistory {
 		this.message = message;
 	}
 	
+	/*
+	 * title at first line
+	 */
 	public String getContentFromGit() {
 		Git git = null;
 		
@@ -110,7 +113,8 @@ public class ChangeHistory {
 	        
 	        bReader = new BufferedReader(new InputStreamReader(oLoader.openStream(), "UTF-8"));
 			
-			strBuilder.append(bReader.readLine());
+	        //strBuilder.append(bReader.readLine());	// if you want to get title then use this line
+			bReader.readLine();	// waste title line
 			while((line = bReader.readLine()) != null) {
 				strBuilder.append("\r\n");
 				strBuilder.append(line);

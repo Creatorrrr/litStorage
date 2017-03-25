@@ -109,6 +109,7 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			bWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
 			
 			bWriter.write(episode.getTitle());
+			bWriter.write("\r\n");
 			bWriter.write(episode.getContent());
 			bWriter.flush();
 			
@@ -215,7 +216,7 @@ public class EpisodeStoreLogic implements EpisodeStore {
 	}
 	
 	@Override
-	public String deleteEpisodeToGit(Episode episode, String message) {
+	public String deleteEpisodeFromGit(Episode episode, String message) {
 		Git git = null;
 		
 		File repoDir = new File(PathBuilder.buildLitStoragePath(episode.getLiterature().getLitStorage()));
@@ -246,6 +247,27 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		} finally {
 			AutoCloser.close(git);
 		}
+	}
+	
+	@Override
+	public boolean deleteEpisodesByLiteratureId(String literatureId) {
+		SqlSession session = factory.openSession();
+		
+		boolean check = false;
+		
+		try {
+			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
+			check = mapper.deleteEpisodesByLiteratureId(literatureId);
+			
+			if (check) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return check;
 	}
 
 	@Override
@@ -283,6 +305,8 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			check = mapper.updateBound(bound);
 			if (check) {
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		} finally {
 			session.close();
@@ -301,6 +325,8 @@ public class EpisodeStoreLogic implements EpisodeStore {
 			
 			if (check = mapper.insertChangeHistory(history) > 0) {
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		} finally {
 			session.close();

@@ -23,31 +23,31 @@ public class LiteratureLogicTest {
 
 	}
 
-//	@Test
-//	public void testInsertLiterature() {
-//		String name = "f";
-//		String genre = "y";
-//		String imagepath = "a/a/a";
-//		String introduce = "w";
-//		Member creator = new Member();
-//		creator.setId("k");
-//		int hit = 2;
-//		LitStorage litStorage = new LitStorage();
-//		litStorage.setId("1");
-//		
-//		Literature literature = new Literature();
-//		
-//		literature.setName(name);
-//		literature.setGenre(genre);
-//		literature.setImagePath(imagepath);
-//		literature.setIntroduce(introduce);
-//		literature.setCreator(creator);
-//		literature.setHits(hit);
-//		literature.setLitStorage(litStorage);
-//		
-//		assertTrue(store.insertLiterature(literature));
-//		assertTrue(store.insertLiteratureToGit(literature));
-//	}
+	@Test
+	public void testInsertLiterature() {
+		String name = "f";
+		String genre = "y";
+		String imagepath = "a/a/a";
+		String introduce = "w";
+		Member creator = new Member();
+		creator.setId("k");
+		int hit = 2;
+		LitStorage litStorage = new LitStorage();
+		litStorage.setId("5");
+		
+		Literature literature = new Literature();
+		
+		literature.setName(name);
+		literature.setGenre(genre);
+		literature.setImagePath(imagepath);
+		literature.setIntroduce(introduce);
+		literature.setCreator(creator);
+		literature.setHits(hit);
+		literature.setLitStorage(litStorage);
+		
+		assertTrue(store.insertLiterature(literature));
+		assertTrue(store.insertLiteratureToGit(literature));
+	}
 //
 //	@Test
 //	public void testDeleteLiterature() {

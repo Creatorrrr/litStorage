@@ -12,20 +12,18 @@ import domain.Episode;
 import domain.Literature;
 import domain.Member;
 import service.facade.LiteratureService;
-import service.facade.MemberService;
 import service.logic.LiteratureServiceLogic;
-import service.logic.MemberServiceLogic;
 
 @WebServlet("/episode/modify.do")
 public class EpisodeModifyController extends HttpServlet {	
 	private static final long serialVersionUID = 1L;
 	
 	private LiteratureService Lservice;
-	private MemberService Mservice;
+	//private MemberService Mservice;
 	
 	public EpisodeModifyController() {
 		Lservice = new LiteratureServiceLogic();
-		Mservice = new MemberServiceLogic();
+		//Mservice = new MemberServiceLogic();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -34,48 +32,39 @@ public class EpisodeModifyController extends HttpServlet {
 		// 2. recevice episodeId
 		// 3. show modify detail
 		
-		
 		String episodeId = request.getParameter("episodeId");
 		Episode episode = Lservice.findEpisodeById(episodeId);
 		request.setAttribute("episode", episode);
 		
-		request.getRequestDispatcher("../views/episodeModify.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/episodeModify.jsp").forward(request, response);
 		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		String episdoeId = request.getParameter("modifyEpisodeId");
-		String literatureId = request.getParameter("modifyLiteratureId");
-		String Genre = request.getParameter("modifySelectGenre");
-		String Title = request.getParameter("modifyEpisodeTitle");
-		String Contents = request.getParameter("modifyEpisodeContents");
+		String episodeId = request.getParameter("episodeId");
+		String title = request.getParameter("episodeTitle");
+		String content = request.getParameter("episodeContent");
+		String boundSelect = request.getParameter("openSelect"); 
 		
-		Episode targetEpisode =  Lservice.findEpisodeById(episdoeId);
+		Episode episode = Lservice.findEpisodeById(episodeId);
+		episode.setTitle(title);
+		episode.setContent(content);
+		episode.setBound(boundSelect);
+		Member writer = new Member();
+		writer.setId((String)request.getSession().getAttribute("loginId"));
 		
-		Member member = Mservice.findMemberById(targetEpisode.getWriter().getId());
+		episode.setWriter(writer);
 		
-		Episode episode = new Episode();
-		Literature literature = new Literature();
-		
-		literature.setGenre(Genre);
-		literature.setId(literatureId);
-		episode.setId(episdoeId);
-		
-		episode.setLiterature(literature);
-		
-		episode.setTitle(Title);
-		episode.setContent(Contents);
-		episode.setWriter(member);
-		
-		
-		boolean check = Lservice.modifyEpisode(episode);
-		
-		if(check){
-			response.sendRedirect(request.getContextPath()+"/epsode/detail.do");
+		if(!Lservice.modifyEpisode(episode)) {
+			throw new RuntimeException("episode modify failed");
 		}
 		
+		Literature literature = Lservice.findLiteratureById(episode.getLiterature().getId());
 		
+		request.setAttribute("literature", literature);
+		
+		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
 	}
 
 }

@@ -1,7 +1,19 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+import com.sun.xml.internal.txw2.annotation.XmlAttribute;
+
+
+@XmlRootElement(name="literature")
+@XmlType(propOrder = {"id","name","genre","introduce","creator","hits"})
+@XmlSeeAlso({ArrayList.class,Member.class})
 public class Literature {
 	private String id;
 	private String name;
@@ -13,6 +25,7 @@ public class Literature {
 	private List<Episode> episodes;
 	private LitStorage litStorage;
 	
+	@XmlTransient
 	public LitStorage getLitStorage() {
 		return litStorage;
 	}
@@ -20,7 +33,8 @@ public class Literature {
 	public void setLitStorage(LitStorage litStorage) {
 		this.litStorage = litStorage;
 	}
-
+	
+	@XmlAttribute
 	public String getId() {
 		return id;
 	}
@@ -44,7 +58,7 @@ public class Literature {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	
+	@XmlTransient
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -76,7 +90,7 @@ public class Literature {
 	public void setHits(int hits) {
 		this.hits = hits;
 	}
-	
+	@XmlTransient
 	public List<Episode> getEpisodes() {
 		return episodes;
 	}

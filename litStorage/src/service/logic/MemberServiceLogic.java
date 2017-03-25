@@ -47,8 +47,8 @@ public class MemberServiceLogic implements MemberService{
 	}
 
 	@Override
-	public boolean removeInviteRequest(String senderId, String receiverId) {
-		return iStore.deleteInviteRequest(senderId, receiverId);
+	public boolean removeInviteRequest(InviteRequest inviteRequest) {
+		return iStore.deleteInviteRequest(inviteRequest);
 	}
 
 	@Override

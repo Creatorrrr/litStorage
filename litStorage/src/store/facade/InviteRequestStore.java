@@ -6,7 +6,7 @@ import domain.InviteRequest;
 
 public interface InviteRequestStore {
 	public boolean insertInviteRequest(InviteRequest inviteRequest);
-	public boolean deleteInviteRequest(String senderId, String receiverId);
+	public boolean deleteInviteRequest(InviteRequest inviteRequest);
 	public List<InviteRequest> selectInviteRequestBySenderId(String senderId);
 	public List<InviteRequest> selectInviteRequestByReceiverId(String receiverId);
 }

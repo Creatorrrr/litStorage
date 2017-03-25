@@ -11,7 +11,7 @@ import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
 
 @WebServlet("/postDelete.do")
-public class PostDelete extends HttpServlet {
+public class PostDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +22,10 @@ public class PostDelete extends HttpServlet {
 		String id = request.getParameter("id");
 		//service.removeBoard(id);
 		service.removePost(id);
-		response.sendRedirect(request.getContextPath()+"/views/postList.jsp");
+		response.sendRedirect(request.getContextPath()+"/post/postList.do");// /post/postList.do
+		
+//		request.setAttribute("post", id);
+//		response.sendRedirect(request.getContextPath()+"/views/postList.jsp");
 	}
 
 }

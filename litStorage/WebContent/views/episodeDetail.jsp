@@ -31,32 +31,26 @@ div {
 </head>
 
 <body>
-	<!-- <input type="button" id="deleteEpisode"
-		onclick="location.href='../episode/list' "> -->
-		<form action="../episode/deteil.do" method="post">
-	<input type="hidden" id="deleteEpisode" value="F">
-		</form>
+<%@ include file="header.jspf"%>
 	<div class="container">
-
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
-
 				<div class="row">
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+					<!-- <div class="text-right">
 						<button>로그인</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-md-6">
-						<a href="javascript:;">자유게시판</a> <a
-							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
-							href="javascript:;">작품 목록</a>
-					</div>
-					<form action="../episode/list.do" method="post">
+					<%-- <div class="col-md-6">
+						<a href="javascript:;">자유게시판</a>
+						<a href="${ctx }/litStorage/allList.do;">직품 저장소</a>
+						<a href="javascript:;">작품 목록</a>
+					</div> --%>
+					<form action="${ctx }/episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
 								<option value="writerId">작가 아이디</option>
@@ -67,50 +61,46 @@ div {
 						</div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-12">
-
 			<div class="col-xs-6 col-md-4">
 				<h1>${episode.literature.name }</h1>
 				<div>
-
-					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
-						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
-						href="javascript:;">회원 초대</a>
-
-
+					<a href="javascript:;">프로필</a>
+					<a href="javascript:;">작품 목록</a>
+					<a href="javascript:;">토론장</a>
+					<a href="javascript:;">참가 회원 목록</a>
+					<a href="javascript:;">회원 초대</a>
 				</div>
-
 			</div>
 			<div class="col-xs-12 col-md-8">
 				<h1>연재 글</h1>
 				<div class="text-right">
 					<button type="button"
-						onclick="location.href='../episode/modify.do?episodeId=${episode.id}' ">수정하기</button>
-					<button onclick="location.href='../episode/delete.do.do?episodeId=${episode.id}' ">삭제하기</button>
+						onclick="location.href='${ctx }/episode/modify.do?episodeId=${episode.id}'">수정하기</button>
+					<button type="button"
+						onclick="location.href='${ctx }/episode/delete.do?episodeId=${episode.id}'">삭제하기</button>
 				</div>
 				<div class="panel panel-default">
 					<div class="row">
-						<form action="../episode/register.do" method="post">
-							<input type="hidden" name="literatureId" value="${LiteratureId }">
-							<div class="col-md-3">
-								<div>
-									<h2>제목 ${episode.title }</h2>
-								</div>
-								<div>
-									<textarea rows="10" cols="75" name="episodeContents">${episode.content }</textarea>
-								</div>
-
+						<div class="col-md-3">
+							<div>
+								<h2>제목 : ${episode.title }</h2>
 							</div>
-							<div class="panel panel-default">
-								<div>
-									<a>등록 날짜</a> <a>:아이디:</a> <a>변경이력 메시지</a>
-								</div>
+							<div>
+								<textarea rows="10" cols="75" name="episodeContents">${episode.contentFromGit }</textarea>
 							</div>
-						</form>
-
+						</div>
+						<div class="panel panel-default">
+							<c:forEach items="${episode.histories }" var="history" varStatus="status">
+								<a href="${ctx }/episode/changeHistoryDetail.do?historyId=${history.id}">
+									<span>등록 날짜 : ${history.changeTime } </span>
+									<span>변경 회원 : ${history.editor.id } </span>
+									<span>메시지 : ${history.message} </span>
+								</a><br>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>

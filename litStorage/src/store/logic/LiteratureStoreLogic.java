@@ -1,7 +1,6 @@
 package store.logic;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -76,14 +75,28 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	}
 	
 	@Override
-	public boolean deleteLiteratureFromGit(Literature literature) {
-		File literatureDir = new File(PathBuilder.buildLiteraturePath(literature));
+	public boolean deleteLiteratureFromGit(String path) {
+		File file = new File(path);
 		
-		if(!literatureDir.exists()) {
+		if(!file.exists()) {
 			return false;
 		}
 		
-		literatureDir.delete();
+		File[] tempFile = file.listFiles();
+		
+		if(tempFile.length > 0){
+			for (int i = 0; i < tempFile.length; i++){ 
+				if(tempFile[i].isFile()){ 
+					tempFile[i].delete(); 
+				} else {
+					deleteLiteratureFromGit(tempFile[i].getPath()); 
+				} 
+				tempFile[i].delete(); 
+			}
+			file.delete(); 
+		} else {
+			file.delete();
+		}
 		
 		return true;
 	}
@@ -96,7 +109,6 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			literature = mapper.selectLiteraturesById(literatureId);
-			session.commit();
 		} finally {
 			session.close();
 		}
@@ -111,7 +123,6 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			list = mapper.selectLiteraturesByLitStorageId(litstorageId);
-			session.commit();
 		} finally {
 			session.close();
 		}
@@ -126,6 +137,20 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			list = mapper.selectLiteraturesByName(name);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Literature> selectLiteraturesByGenreOrderByHits(String genre) {
+		SqlSession session = factory.openSession();
+		List<Literature> list = null;
+		
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			list = mapper.selectLiteraturesByGenreOrderByHits(genre);
 			session.commit();
 		} finally {
 			session.close();
@@ -134,28 +159,13 @@ public class LiteratureStoreLogic implements LiteratureStore{
 	}
 
 	@Override
-	public List<Literature> selectLiteraturesByGenreOrderByHits() {
+	public List<Literature> selectLiteraturesByGenreOrderById(String genre) {
 		SqlSession session = factory.openSession();
 		List<Literature> list = null;
 		
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			list = mapper.selectLiteraturesByGenreOrderByHits();
-			session.commit();
-		} finally {
-			session.close();
-		}
-		return list;
-	}
-
-	@Override
-	public List<Literature> selectLiteratureByGenreOrderById(String Id) {
-		SqlSession session = factory.openSession();
-		List<Literature> list = null;
-		
-		try {
-			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
-			list = mapper.selectLiteratureByGenreOrderById(Id);
+			list = mapper.selectLiteraturesByGenreOrderById(genre);
 			session.commit();
 		} finally {
 			session.close();
@@ -171,7 +181,6 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			list = mapper.selectLiteraturesByMemberId(memberId);
-			session.commit();
 		} finally {
 			session.close();
 		}

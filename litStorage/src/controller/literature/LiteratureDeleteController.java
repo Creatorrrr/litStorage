@@ -1,8 +1,6 @@
 package controller.literature;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.LitStorage;
 import domain.Literature;
-import domain.MemberLitStorage;
+import domain.Member;
 import service.facade.LitStorageService;
 import service.facade.LiteratureService;
 import service.logic.LitStorageServiceLogic;
@@ -26,33 +24,27 @@ public class LiteratureDeleteController extends HttpServlet {
 			throws ServletException, IOException {
 		// 1. recevice LiteratureId to episodeList.jsp
 		// 2. delete literature
+
+		LiteratureService lService = new LiteratureServiceLogic();
+		LitStorageService lsService = new LitStorageServiceLogic();
+
+		String literatureId = request.getParameter("literatureId");
 		
-		LiteratureService Lservice = new LiteratureServiceLogic();
-		LitStorageService LSservice = new LitStorageServiceLogic();
+		Literature literature = lService.findLiteratureById(literatureId);
 		
-		String deleteLiteratureId = request.getParameter("deleteLiteratureId");
-		System.out.println(deleteLiteratureId);
-		Literature literature = Lservice.findLiteratureById(deleteLiteratureId);
+		Member creator = new Member();
+		creator.setId((String)request.getSession().getAttribute("loginId"));
 		
-//		boolean check = Lservice.removeLiterature(deleteLiteratureId);
-		//전 작품저장소 화면 이동 
+		literature.setCreator(creator);
 		
-		String loginedId = (String)request.getSession().getAttribute("loginId");
-		System.out.println(loginedId);
-		
-		List<MemberLitStorage> memberLitstorage = LSservice.findMemberLitStoragesByMemberId(loginedId);
-		
-		List<LitStorage> litstorage = new ArrayList<>();
-		
-		for(MemberLitStorage memberlitstorage : memberLitstorage){
-			 litstorage = LSservice.findLitStoragesByMemberId(memberlitstorage.getMember().getId());
-			
+		if(!lService.removeLiterature(literatureId)) {
+			throw new RuntimeException("literature remove failed");
 		}
 		
-		request.setAttribute("litstorages", litstorage);
+		LitStorage litStorage = lsService.findLitStorageById(literature.getLitStorage().getId());
 		
-		request.getRequestDispatcher("../views/litStorageMyStorageList.jsp").forward(request, response);;
-//		response.sendRedirect(request.getContextPath()+"/episode/do");
-	}
+		request.setAttribute("litStorage", litStorage);
 
+		request.getRequestDispatcher("/views/literatureList.jsp").forward(request, response);
+	}
 }

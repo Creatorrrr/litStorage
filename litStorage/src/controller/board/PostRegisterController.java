@@ -27,6 +27,7 @@ public class PostRegisterController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 		String boardId = req.getParameter("boardId");
+		
 		req.setAttribute("boardId", boardId);
 		req.getRequestDispatcher("/views/postRegister.jsp").forward(req, resp);
 	}
@@ -39,20 +40,23 @@ public class PostRegisterController extends HttpServlet {
 		String postContent = request.getParameter("postContent");
 		String hashtag = request.getParameter("hashtag");
 		String boardId=request.getParameter("boardId");
-		
-		Board board = new Board();
-		Post post = new Post();
 
 		BoardService service = new BoardServiceLogic();
 
 		String writerId=(String)request.getSession().getAttribute("loginId"); // Must be logined
-		Member writer = new Member();
 		
-		writer.setId(writerId);
+		Post post = new Post();
+
 		post.setTitle(postTitle);
 		post.setContent(postContent);
 		post.setHashTag(hashtag);
+		
+		Member writer = new Member();
+		writer.setId(writerId);
+		
 		post.setWriter(writer);
+		
+		Board board = new Board();
 		board.setId(boardId);
 		post.setBoard(board);
 		
@@ -60,14 +64,8 @@ public class PostRegisterController extends HttpServlet {
 			throw new RuntimeException("post register failed");
 		}
 		
-	//	System.out.println(post.getId()+"/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-	//	List<Post>list = service.findPostsByWriterId(writerId);
-	//	response.sendRedirect(request.getContextPath()+"/post/postDetail.do");
-		
-		request.setAttribute("post",service.findPostById(post.getId()));
+		request.setAttribute("post", service.findPostById(post.getId()));
 		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
-
-
 	}
 
 }

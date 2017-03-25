@@ -105,6 +105,19 @@ textarea {
 <title>초대 회원 검색</title>
 </head>
 <body>
+<c:choose>
+ <c:when test="${litStorage.creator.id eq loginId}">
+ <c:set var="isMaster" value="true" />
+ </c:when>
+ <c:otherwise>
+ <c:set var="isMaster" value="false" />
+ </c:otherwise>
+ </c:choose>
+<%@ include file="header.jspf"%>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+ <jsp:param name="isMaster" value="${isMaster }"/>
+</jsp:include>
 	<form method="post">
 		<select name="type" id="type">
 			<option value="id">아이디</option>
@@ -146,7 +159,7 @@ textarea {
 			<input type="hidden" name="litStorageId" value="${litStorage.id }">
 			<h3>초대 메시지 작성</h3>
 			<hr/>
-			<br /> <label>보내는 사람 : ${loginId }</label> <br /> <br /> <label>요청
+			<br /> <label>보내는 사람 : ${loginId }</label> <br /> <br /> <label>초대
 				메시지 :</label> <br /> <input type="text" id="message" name="message"
 				placeholder="메세지를 작성하세요" /><br /> <br /> <input type="button" name="sendMessage"
 				id="submit" value="보내기" /> <input type="button" id="cancel"

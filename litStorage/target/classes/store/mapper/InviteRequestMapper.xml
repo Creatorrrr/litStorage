@@ -39,7 +39,7 @@
 	</insert>
 	<delete id="deleteInviteRequest" parameterType="map">
 		DELETE FROM inviterequest
-		WHERE sender = #{sender} AND receiver = #{receiver} AND litStorageId = #{litStorage.id}
+		WHERE sender = #{sender} AND receiver = #{receiver} AND litStorageId = #{litStorage}
 	</delete>
 </mapper>
   

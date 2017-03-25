@@ -8,6 +8,7 @@
 <title>로그인</title>
 </head>
 <body>
+    <a href="${ctx }/views/main.jsp" class="btn">메인으로</a> <!-- UI에서 삭제해도 ok -->
 	<form action="${ctx }/login.do" method="post">
 		<table class="table">
 			<tr>

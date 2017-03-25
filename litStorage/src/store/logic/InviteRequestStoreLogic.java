@@ -21,34 +21,40 @@ public class InviteRequestStoreLogic implements InviteRequestStore {
 	@Override
 	public boolean insertInviteRequest(InviteRequest inviteRequest) {
 		SqlSession session = factory.openSession();
-		int check;
+		boolean check = false;
 
 		try {
 			InviteRequestMapper mapper = session.getMapper(InviteRequestMapper.class);
-			check = mapper.insertInviteRequest(inviteRequest);
-			session.commit();
+			if(check = mapper.insertInviteRequest(inviteRequest) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
 		} finally {
 			session.close();
 		}
-		return check > 0;
+		return check;
 	}
 
 	@Override
-	public boolean deleteInviteRequest(String sender, String receiver) {
+	public boolean deleteInviteRequest(InviteRequest inviteRequest) {
 		SqlSession session = factory.openSession();
-		int check;
+		boolean check = false;
 		HashMap<String, String> map = new HashMap<>();
-		map.put("sender", sender);
-		map.put("receiver", receiver);
+		map.put("sender", inviteRequest.getSender().getId());
+		map.put("receiver", inviteRequest.getReceiver().getId());
+		map.put("litStorage", inviteRequest.getLitStorage().getId());
 
 		try {
-			check = session.delete("deleteInviteRequest", map);
-			session.commit();
-			
+			if(check = session.delete("deleteInviteRequest", map) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
 		} finally {
 			session.close();
 		}
-		return check > 0;
+		return check;
 	}
 
 	@Override
@@ -59,7 +65,6 @@ public class InviteRequestStoreLogic implements InviteRequestStore {
 		try {
 			InviteRequestMapper mapper = session.getMapper(InviteRequestMapper.class);
 			list = mapper.selectInviteRequestBySenderId(senderId);
-			session.commit();
 		} finally {
 			session.close();
 		}
@@ -74,7 +79,6 @@ public class InviteRequestStoreLogic implements InviteRequestStore {
 		try {
 			InviteRequestMapper mapper = session.getMapper(InviteRequestMapper.class);
 			list = mapper.selectInviteRequestByReceiverId(receiverId);
-			session.commit();
 		} finally {
 			session.close();
 		}

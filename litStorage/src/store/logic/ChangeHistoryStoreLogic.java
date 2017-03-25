@@ -27,6 +27,8 @@ public class ChangeHistoryStoreLogic implements ChangeHistoryStore{
 			check = mapper.insertChangeHistory(changeHistory);
 			if(check>0){
 				session.commit();
+			} else {
+				session.rollback();
 			}
 		}finally {
 			session.close();

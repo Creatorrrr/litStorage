@@ -1,6 +1,7 @@
 package controller.literature;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Episode;
+import domain.Literature;
 import service.facade.LiteratureService;
-import service.logic.LitStorageServiceLogic;
 import service.logic.LiteratureServiceLogic;
 
 @WebServlet("/episode/delete.do")
@@ -20,18 +21,20 @@ public class EpisodeDeleteController extends HttpServlet {
 			throws ServletException, IOException {
 		// 1. recevice episodeId to episodeDetail.jsp
 		// 2. delete episode
-		
-		LiteratureService service = new LiteratureServiceLogic();
+
+		LiteratureService Lservice = new LiteratureServiceLogic();
 		
 		String episodeId = request.getParameter("episodeId");
 		
-		Episode episode = service.findEpisodeById(episodeId);
+		Episode episode = Lservice.findEpisodeById(episodeId);
 		
-		boolean check = service.removeEpisode(episode);
+		Lservice.removeEpisode(episodeId);
 		
-		if(check){
-			response.sendRedirect(request.getContextPath()+"/cc/cc");
-		}
-	}
+		// 전 연재글 목록으로 이동
+		Literature literature = Lservice.findLiteratureById(episode.getLiterature().getId());
+		
+		request.setAttribute("literature", literature);
 
+		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);
+	}
 }
