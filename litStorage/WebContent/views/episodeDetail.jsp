@@ -31,6 +31,7 @@ div {
 </head>
 
 <body>
+<%@ include file="header.jspf"%>
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
@@ -38,17 +39,17 @@ div {
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+					<!-- <div class="text-right">
 						<button>로그인</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<%-- <div class="col-md-6">
 						<a href="javascript:;">자유게시판</a>
 						<a href="${ctx }/litStorage/allList.do;">직품 저장소</a>
 						<a href="javascript:;">작품 목록</a>
-					</div>
+					</div> --%>
 					<form action="${ctx }/episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">

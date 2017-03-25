@@ -26,6 +26,7 @@ div {
 </style>
 </head>
 <body>
+<%@ include file="header.jspf"%>
 	<div class="container">
 
 		<div class="row">
@@ -35,17 +36,17 @@ div {
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+				<!-- 	<div class="text-right">
 						<button>로그아웃</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<%-- <div class="col-md-6">
 						<a href="javascript:;">자유게시판</a> <a
 							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
-					</div>
+					</div> --%>
 					<form action="../episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
@@ -67,8 +68,8 @@ div {
 				<div>
 
 					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
-						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
-						href="javascript:;">회원 초대</a>
+						href="${ctx }/views/discussionPlaceList.jsp">토론장</a> <a href="${ctx }/litStorage/memberList.do?id=">참가 회원 목록</a> <a
+						href="${ctx }/member/search.do?litStorageId=">회원 초대</a>/member/search.do?litStorageId=<!-- ${ctx }/views/memberInviteSearch.jsp= -->
 
 
 				</div>
@@ -88,7 +89,8 @@ div {
 
 			</div>
 			<form action="../literature/register.do" method="post"
-				enctype="multipart/form-data">
+				enctype="multipart/form-data" name="litRegister"
+		onsubmit="return checkIt()">
 				<input type="hidden" name="litStorageId" value="${litStorageId }">
 				<div class="col-xs-12 col-md-8">
 					<h1>${litStorageId }</h1>
@@ -132,6 +134,23 @@ div {
 
 
 	</div>
+<br>
+	<script type="text/javaScript">
+		function checkIt() {
 
+			var litRegister = document.litRegister;
+
+			if (!litRegister.inputName.value) {
+				alert("이름을 입력하세요");
+				return false;
+			}
+
+			if (!litRegister.inputIntroduce.value) {
+				alert("내용을 입력하세요");
+				return false;
+			}
+			return true;
+		}
+	</script>
 </body>
 </html>
