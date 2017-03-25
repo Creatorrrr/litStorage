@@ -45,7 +45,6 @@ public class EpisodeRegisterController extends HttpServlet {
 		String literatureId = request.getParameter("literatureId");
 		String episodeName = request.getParameter("episodeName");
 		String episodeContents = request.getParameter("episodeContents");
-		
 		Episode episode = new Episode();
 		episode.setTitle(episodeName);
 		episode.setContent(episodeContents);
