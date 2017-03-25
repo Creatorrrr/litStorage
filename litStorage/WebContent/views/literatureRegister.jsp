@@ -69,8 +69,7 @@ div {
 
 					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
 						href="${ctx }/views/discussionPlaceList.jsp">토론장</a> <a href="${ctx }/litStorage/memberList.do?id=">참가 회원 목록</a> <a
-						href="${ctx }/member/search.do?litStorageId=">회원 초대</a>/member/search.do?litStorageId=<!-- ${ctx }/views/memberInviteSearch.jsp= -->
-
+						href="${ctx }/member/search.do?litStorageId=">회원 초대</a>
 
 				</div>
 
