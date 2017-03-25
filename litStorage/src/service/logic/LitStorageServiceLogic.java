@@ -77,6 +77,8 @@ public class LitStorageServiceLogic implements LitStorageService {
 		boolean checkLitStorage = lsStore.deleteLitStorage(litStorage.getId()); // delete litStorage from db
 		boolean checkGit = lsStore.deleteLitStorageFromGit(PathBuilder.buildLitStoragePath(litStorage));
 		
+		mlsStore.deleteMemberLitStorageByLitStorageId(litStorageId);
+		
 		return checkLitStorage && checkGit;
 	}
 

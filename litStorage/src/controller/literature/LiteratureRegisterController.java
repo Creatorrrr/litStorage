@@ -41,17 +41,18 @@ public class LiteratureRegisterController extends HttpServlet {
 		
 		MemberService Mservice = new MemberServiceLogic();
 		
-		String literatureName = request.getParameter("inputName");
+		String literatureName = request.getParameter("name");
 		String literatureGenre = request.getParameter("selectGenre");
-		String imagePath = request.getParameter("imagePath");
-		String literatureIntroduce = request.getParameter("inputIntroduce");
+//		String imagePath = request.getParameter("imagePath");
+		String imagePath = "aaa";
+		String literatureIntroduce = request.getParameter("content");
 
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		Member creator = Mservice.findMemberById(loginId);
-
 		int hits = 0;
 
 		String litStorageId = request.getParameter("litStorageId");
+		System.out.println(litStorageId);
 		LitStorage litstorageId = LSservice.findLitStorageById(litStorageId);
 		Literature literature = new Literature();
 		System.out.println(litStorageId);
@@ -72,5 +73,8 @@ public class LiteratureRegisterController extends HttpServlet {
 		request.getRequestDispatcher("/views/literatureList.jsp").forward(request, response);
 
 	}
+	
+	
+	
 
 }

@@ -32,13 +32,16 @@ public class LitStorageMyStorageListController extends HttpServlet {
 		}
 		
 		//find MemberLitStorage by login Id
-		List<LitStorage> lsList = new ArrayList<>();
+		List<LitStorage> lsList = null;
 
 		List<MemberLitStorage> mlsList = service.findMemberLitStoragesByMemberId(id);
 		
-		// rearrange List<LitStorage> from List<MemberLitStorag>e
-		for(MemberLitStorage mls : mlsList) {
-			lsList.add(mls.getLitStorage());
+		// rearrange List<LitStorage> from List<MemberLitStorage>
+		if(mlsList.size() > 0) {
+			lsList = new ArrayList<>();
+			for(MemberLitStorage mls : mlsList) {
+				lsList.add(mls.getLitStorage());
+			}
 		}
 		
 		request.setAttribute("litStorages", lsList);
