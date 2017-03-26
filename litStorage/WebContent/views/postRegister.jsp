@@ -13,11 +13,11 @@
 
 <%@ include file="header.jspf"%>
 
-	<a href="${ctx }/post/postList.do">게시글 목록</a>
+	<a href="${ctx }/post/list.do">게시글 목록</a>
 	<h3>게시글 등록</h3>
 
 	<br>
-	<form action="${ctx }/postRegister.do" method="post" name="pregister"
+	<form action="${ctx }/post/register.do" method="post" name="pregister"
 		onsubmit="return checkIt()">
 		<input name="boardId" type="hidden" value="${boardId }">
 		<table class="table">
@@ -27,8 +27,10 @@
 			</colgroup>
 			<tr>
 				<th>제목</th>
-				<td><input id="postTitle" name="postTitle" class="form-control"
-					type="text" value=""></td>
+				<td>
+					<input id="postTitle" name="postTitle" class="form-control"
+					type="text" value="">
+				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
@@ -45,7 +47,7 @@
 		<br>
 		<div align="center">
 			<input class="btn" type="reset" value="취소하기"
-				onclick="javascript:window.location='${ctx }/post/postList.do'">
+				onclick="javascript:window.location='${ctx }/post/list.do?boardId=${boardId }'">
 			<input class="btn" type="submit" value="등록하기"">
 		</div>
 	</form>

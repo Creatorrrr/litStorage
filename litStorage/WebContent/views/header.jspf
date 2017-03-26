@@ -16,7 +16,7 @@
 </c:choose>
 <hr>
 <!-- navigation bar area -->
-<a href="${ctx }/post/postList.do">자유게시판</a>&nbsp;&nbsp;
+<a href="${ctx }/post/list.do">자유게시판</a>&nbsp;&nbsp;
 <a href="${ctx }/litStorage/myList.do">작품 저장소</a>&nbsp;&nbsp;
 <a href="${ctx }/literature/allList.do">작품 목록</a>
 <hr>

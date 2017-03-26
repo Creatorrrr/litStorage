@@ -78,6 +78,11 @@
 	<delete id="deleteLiterature" parameterType="string">
 		DELETE FROM
 		literature WHERE id = #{id}
-
 	</delete>
+	
+	<update id="updateLiteratureHitByLiteratureId" parameterType="String">
+		UPDATE literature
+		SET hits = (SELECT hits FROM literature WHERE id = #{id}) + 1
+		WHERE id = #{id}
+	</update>
 </mapper>

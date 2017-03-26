@@ -48,17 +48,20 @@ public class MainController extends HttpServlet {
 				newCutList.add(newList.get(i));
 			}catch(Exception e){}
 		}
+		
 		request.setAttribute("recoLiteratures", recoCutList);
 		request.setAttribute("newLiteratures", newCutList);
+		
+		List<Board> bListRemoved = new ArrayList<>();
 
 		/* 장르 dropdownlist를 만들기 위해 게시판 이름을 싹 보내줌(신고 빼고) */
 		for (Board b : bList) {
-			if (b.getTitle().equals("신고")) {
-				bList.remove(b);
+			if (!b.getTitle().equals("신고")) {
+				bListRemoved.add(b);
 			}
 		}
 
-		request.setAttribute("genreList", bList);
+		request.setAttribute("genreList", bListRemoved);
 
 		request.getRequestDispatcher("/views/index.jsp").forward(request, response);
 	}

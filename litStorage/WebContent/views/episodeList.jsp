@@ -149,11 +149,20 @@ div {
 												<td>${episode.writer.id }</td>
 												<td>
 													<form action="${ctx }/episode/bound.do" method="post">
-														<select name="openSelect">
-															<option value="M">저장소 협업 작가만 공개</option>
-															<option value="A">모두 공개</option>
+														<input type="hidden" name="episodeId" value="${episode.id }">
+														<select name="bound">
+															<c:choose>
+																<c:when test="${episode.bound.charAt(0) eq 'M'.charAt(0) }">
+																	<option value="M">저장소 협업 작가만 공개</option>
+																	<option value="A">모두 공개</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="A">모두 공개</option>
+																	<option value="M">저장소 협업 작가만 공개</option>
+																</c:otherwise>
+															</c:choose>
 														</select>
-														<button type="submit" onclick="location.href='${ctx}/episode/detail.do?episodeId=${episode.id }'">공개 선택</button>
+														<button type="submit">공개 선택</button>
 													</form>
 												</td>
 											</tr>

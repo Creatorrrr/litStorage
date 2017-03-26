@@ -54,6 +54,11 @@ public class LiteratureServiceLogic implements LiteratureService {
 		
 		return checkLiterature && checkGit;
 	}
+	
+	@Override
+	public boolean increaseLiteratureHitByLiteratureId(String id) {
+		return lStore.updateLiteratureHitByLiteratureId(id);
+	}
 
 	@Override
 	public Literature findLiteratureById(String Id) {
@@ -143,11 +148,6 @@ public class LiteratureServiceLogic implements LiteratureService {
 	@Override
 	public List<Episode> findEpisodeByLiteratureId(String literatureId) {
 		return epStore.selectEpisodesByLiteratureId(literatureId);
-	}
-
-	@Override
-	public boolean modifyBoundById(String Id) {
-		return epStore.updateBound(Id);
 	}
 
 //	@Override

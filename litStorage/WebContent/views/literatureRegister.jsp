@@ -75,7 +75,8 @@ div {
 			</div>
 			<div class="panel panel-default">
 				<div class="row">
-					<form action="${ctx }/literature/register.do" method="post" enctype="multipart/form-data">
+					<form action="${ctx }/literature/register.do" method="post" 
+						name="literatureRegister" enctype="multipart/form-data" onsubmit="return checkIt()">
 						<input type="hidden" name="litStorageId" value="${litStorageId }">
 						<div>
 							<h4>이미지 업로드</h4>
@@ -85,7 +86,7 @@ div {
 							<h4>장르</h4>
 							<select name="selectGenre">
 								<c:forEach items="${boards}" var="board">
-									<option value="${board.id }">${board.title }</option>
+									<option value="${board.title }">${board.title }</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -98,7 +99,7 @@ div {
 							<textarea rows="10" cols="75" name="introduce"></textarea>
 						</div>
 						<div class="text-right">
-							<button type="reset">취소하기</button>
+							<button type="reset" onclick="location.href='${ctx }/literature/list.do?id=${litStorageId }'">취소하기</button>
 							<button type="submit">작품 등록</button>
 						</div>
 					</form>
@@ -110,15 +111,15 @@ div {
 	<script type="text/javaScript">
 		function checkIt() {
 
-			var litRegister = document.litRegister;
+			var literatureRegister = document.literatureRegister;
 
-			if (!litRegister.inputName.value) {
-				alert("이름을 입력하세요");
+			if (!literatureRegister.name.value) {
+				alert("제목을 입력하세요");
 				return false;
 			}
 
-			if (!litRegister.inputIntroduce.value) {
-				alert("내용을 입력하세요");
+			if (!literatureRegister.introduce.value) {
+				alert("소개를 입력하세요");
 				return false;
 			}
 			return true;

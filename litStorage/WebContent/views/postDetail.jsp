@@ -10,8 +10,7 @@
 </head>
 <body>
 <%@ include file="header.jspf"%>
-
-	<a href="${ctx }/post/postList.do">게시글 목록</a>
+	<a href="${ctx }/post/list.do?boardId=${post.board.id}">게시글 목록</a>
 	<h3>게시글 상세</h3>
 	<br>
 	<table class="table">
@@ -33,15 +32,14 @@
 		</tr>
 	</table>
 	<br>
-	<c:if test="${loginId ne null}">
-			<c:if test=" ${post.id eq loginId} ">    <!--본인이 작성한 글만 수정 삭제 가능하도록   -->
+	<c:if test="${sessionScope.loginId ne null}">
+		<c:if test="${post.writer.id eq sessionScope.loginId || sessionScope.isAdmin}">    <!--본인이 작성한 글만 수정 삭제 가능하도록   -->
 			<div align="center">
-				<input class="btn" value="삭제" type="button"
-					onclick="javascript:window.location='${ctx }/postDelete.do?id=${post.id}'">
+				<input class="btn" type="button" value="삭제"
+					onclick="javascript:window.location='${ctx }/post/delete.do?postId=${post.id}'">
 				<input class="btn" type="button" value="수정"
-					onclick="javascript:window.location='${ctx}/postModify.do?id=${post.id }'">
+					onclick="javascript:window.location='${ctx}/post/modify.do?postId=${post.id }'">
 			</div>
-			<br>
 		 </c:if> 
 	</c:if>
 </body>

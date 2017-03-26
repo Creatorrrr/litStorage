@@ -18,6 +18,5 @@ public interface EpisodeStore {
 	public boolean deleteEpisodesByLiteratureId(String literatureId);
 	public Episode selectEpisodeById(String id);
 	public List<Episode> selectEpisodesByLiteratureId(String literatureId);
-	public boolean updateBound(String bound);
 	public boolean insertChangeHistory(ChangeHistory history);
 }

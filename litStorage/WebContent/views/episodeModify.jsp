@@ -84,7 +84,7 @@ div {
 								</div>
 							</div>
 							<div class="text-right">
-								<button type="reset">취소하기</button>
+								<button type="reset" onclick="location.href='${ctx }/episode/detail.do?episodeId=${episode.id}'">취소하기</button>
 								<button type="submit">연재글 수정</button>
 							</div>
 						</form>

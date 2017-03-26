@@ -1,6 +1,8 @@
 package test.store.logic;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -83,8 +85,8 @@ public class PostStoreLogicTest {
 	}
 
 	@Test    
-	public void testSelectPostsByContent() {
-		List<Post> postList = logic.selectPostsByContent("동에번쩍");
+	public void testSelectPostsByContent() {		
+		List<Post> postList = logic.selectPostsByContent("동에번쩍", "1");
 	
 		assertEquals(1,postList.size());
 		assertEquals("동에번쩍",postList.get(0).getContent());
@@ -92,14 +94,14 @@ public class PostStoreLogicTest {
 
 	@Test
 	public void testSelectPostsByHashtag() {
-		List<Post> postList = logic.selectPostsByHashtag("길동이");
+		List<Post> postList = logic.selectPostsByHashtag("길동이", "1");
 		
 		assertEquals("길동이", postList.get(0).getHashTag());
 	}
 	
 	@Test
 	public void testSelectPostsByTitle() {
-		List<Post> postList = logic.selectPostsByTitle("22");
+		List<Post> postList = logic.selectPostsByTitle("22", "1");
 		
 		assertEquals("22", postList.get(0).getBoard().getId());
 		assertEquals("4", postList.get(1).getBoard().getId());

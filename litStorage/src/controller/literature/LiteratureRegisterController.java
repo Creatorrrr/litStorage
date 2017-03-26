@@ -2,6 +2,7 @@ package controller.literature;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,9 +35,18 @@ public class LiteratureRegisterController extends HttpServlet {
 		BoardService service = new BoardServiceLogic();
 		
 		List<Board> boardList = service.findAllBoards();
+		List<Board> bListRemoved = new ArrayList<>();
+
+		/* 장르 dropdownlist를 만들기 위해 게시판 이름을 싹 보내줌(신고 빼고) */
+		for (Board b : boardList) {
+			if (!b.getTitle().equals("신고")) {
+				bListRemoved.add(b);
+			}
+		}
+		
 		String litStorageId = request.getParameter("litStorageId");
 
-		request.setAttribute("boards", boardList);
+		request.setAttribute("boards", bListRemoved);
 		request.setAttribute("litStorageId", litStorageId);
 
 		request.getRequestDispatcher("/views/literatureRegister.jsp").forward(request, response);
@@ -76,7 +86,11 @@ public class LiteratureRegisterController extends HttpServlet {
 		
 		literature.setName(name);
 		literature.setGenre(genre);
-		literature.setImagePath(image.getCanonicalPath());
+		if(image == null) {
+			literature.setImagePath(Constants.DEFAULT_IMAGE);
+		} else {
+			literature.setImagePath(image.getCanonicalPath());
+		}
 		literature.setIntroduce(introduce);
 		literature.setCreator(creator);
 		literature.setHits(0);

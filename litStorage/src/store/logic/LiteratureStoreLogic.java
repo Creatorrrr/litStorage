@@ -100,6 +100,23 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		
 		return true;
 	}
+	
+	public boolean updateLiteratureHitByLiteratureId(String literatureId) {
+		SqlSession session = factory.openSession();
+		boolean check = false;
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			
+			if(check = mapper.updateLiteratureHitByLiteratureId(literatureId) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return check;
+	}
 
 	@Override
 	public Literature selectLiteraturesById(String literatureId) {
