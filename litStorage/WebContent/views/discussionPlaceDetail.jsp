@@ -9,17 +9,18 @@
 
 </head>
 <body>
+<c:choose>
+ <c:when test="${litStorage.creator.id eq loginId}">
+ <c:set var="isMaster" value="true" />
+ </c:when>
+ <c:otherwise>
+ <c:set var="isMaster" value="false" />
+ </c:otherwise>
+ </c:choose>
 <%@ include file="header.jspf"%>
  <jsp:include page="litStorageSideNav.jsp">
  <jsp:param name="litStorage" value="${litStorage.id }"/>
- <c:choose>
- <c:when test="${litStorage.creator.id eq loginId}">
- <jsp:param name="isMaster" value="true"/>
- </c:when>
- <c:otherwise>
- <jsp:param name="isMaster" value="false"/>
- </c:otherwise>
- </c:choose>
+ <jsp:param name="isMaster" value="${isMaster }"/>
 </jsp:include>
 <p>토론장</p>
 <div>
