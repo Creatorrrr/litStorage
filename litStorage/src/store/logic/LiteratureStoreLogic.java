@@ -1,6 +1,7 @@
 package store.logic;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -232,6 +233,39 @@ public class LiteratureStoreLogic implements LiteratureStore{
 			session.close();
 		}
 		return list;
+	}
+	
+	@Override
+	public List<Literature> selectLiteraturesByGenreWithPage(String genre, String begin, String end) {
+		SqlSession session = factory.openSession();
+		List<Literature> list = null;
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("genre", genre);
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			list = mapper.selectLiteraturesByGenreWithPage(map);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	@Override
+	public String selectRowsByGenre(String genre) {
+		SqlSession session = factory.openSession();
+		String rows = null;
+		
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			rows = mapper.selectRowsByGenre(genre);
+		} finally {
+			session.close();
+		}
+		return rows;
 	}
 
 }

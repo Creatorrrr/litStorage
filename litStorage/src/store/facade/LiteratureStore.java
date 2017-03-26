@@ -1,5 +1,6 @@
 package store.facade;
 
+import java.util.HashMap;
 import java.util.List;
 
 import domain.Literature;
@@ -18,4 +19,6 @@ public interface LiteratureStore {
 	public List<Literature> selectLiteraturesByGenreOrderById(String genre);
 	public List<Literature> selectLiteraturesByGenreOrderByIdForMain(String genre);
 	public List<Literature> selectLiteraturesByMemberId(String memberId);
+	public List<Literature> selectLiteraturesByGenreWithPage(String genre, String begin, String end);
+	public String selectRowsByGenre(String genre);
 }

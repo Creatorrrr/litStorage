@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="_var.jsp"%>
 <%@ include file="_html.jsp"%>
 <title>자유게시판 - 소설 공동작업</title>
@@ -83,7 +84,7 @@
 										<c:otherwise>
 											<c:forEach items="${posts }" var="post" varStatus="status">
 												<tr>
-													<td>${status.count }</td>
+													<td>${post.id }</td>
 													<td><a href="${ctx }/post/detail.do?postId=${post.id }">${post.title }</a></td>
 													<td>${post.writer.id}</td>
 												</tr>
@@ -92,6 +93,12 @@
 									</c:choose>
 								</tbody>
 							</table>
+							<div>
+								<fmt:parseNumber var="pages" integerOnly="true" value="${rows / 20 }"/>
+								<c:forEach var="i" begin="1" end="${pages + 1 }" step="1">
+									<a href="${ctx }/post/list.do?boardId=${boardId}&pageNum=${i}">${i}</a>
+								</c:forEach>
+							</div>
 						</c:if>
 					</c:forEach>
 				</c:if>

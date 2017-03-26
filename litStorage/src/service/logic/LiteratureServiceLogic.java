@@ -2,6 +2,7 @@ package service.logic;
 
 import java.util.List;
 
+import constants.Constants;
 import domain.ChangeHistory;
 import domain.Episode;
 import domain.Literature;
@@ -100,6 +101,19 @@ public class LiteratureServiceLogic implements LiteratureService {
 	@Override
 	public List<Literature> findLiteraturesByGenreOrderByIdForMain(String genre) {
 		return lStore.selectLiteraturesByGenreOrderByIdForMain(genre);
+	}
+	
+	@Override
+	public List<Literature> findLiteraturesByGenreWithPage(String genre, String page) {
+		String begin = (Integer.parseInt(page) - 1) * Constants.LITERATURE_ROW_SIZE + 1 + "";
+		String end = Integer.parseInt(page) * Constants.LITERATURE_ROW_SIZE + "";
+		
+		return lStore.selectLiteraturesByGenreWithPage(genre, begin, end);
+	}
+	
+	@Override
+	public String findRowsByGenre(String genre) {
+		return lStore.selectRowsByGenre(genre);
 	}
 	
 	@Override

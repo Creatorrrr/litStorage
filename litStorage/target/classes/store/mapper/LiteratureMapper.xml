@@ -61,6 +61,19 @@
 		WHERE genre = #{genre}
 		ORDER BY id DESC
 	</select>
+	
+	<select id="selectLiteraturesByGenreWithPage" parameterType="HashMap"
+		resultMap="literatureMap">
+		SELECT id, name, genre, imagepath, introduce, writer, hits, litstorageid
+		FROM (SELECT rownum rnum, id, name, genre, imagepath, introduce, writer, hits, litstorageid FROM literature WHERE genre = #{genre})
+		WHERE rnum BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="selectRowsByGenre" parameterType="String" resultType="String">
+		SELECT COUNT(*)
+		FROM literature
+		WHERE genre = #{genre}
+	</select>
 
 	<select id="selectLiteraturesByGenreOrderByHitsForMain"
 		parameterType="string" resultMap="literatureMap">

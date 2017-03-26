@@ -14,4 +14,8 @@ public class Constants {
 	public static final String POST_TITLE = "postTitle";
 	public static final String POST_CONTENT = "postContent";
 	public static final String POST_HASHTAG = "postHashtag";
+	
+	public static final int POST_ROW_SIZE = 20;
+	public static final int LITSTORAGE_ROW_SIZE = 50;
+	public static final int LITERATURE_ROW_SIZE = 30;
 }

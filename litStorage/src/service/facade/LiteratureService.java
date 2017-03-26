@@ -28,6 +28,10 @@ public interface LiteratureService {
 	public List<Literature> findLiteraturesByGenreOrderById(String genre);
 	
 	public List<Literature> findLiteraturesByGenreOrderByIdForMain(String genre);
+	
+	public List<Literature> findLiteraturesByGenreWithPage(String genre, String page);
+	
+	public String findRowsByGenre(String genre);
 
 	public boolean registerEpisode(Episode episode);
 

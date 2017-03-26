@@ -2,6 +2,7 @@ package service.logic;
 
 import java.util.List;
 
+import constants.Constants;
 import domain.Board;
 import domain.Post;
 import service.facade.BoardService;
@@ -58,6 +59,19 @@ public class BoardServiceLogic implements BoardService {
 	@Override
 	public List<Post> findPostsByBoardId(String id) {
 		return pStore.selectPostsByBoardId(id);
+	}
+	
+	@Override
+	public String findRowsByBoardId(String boardId) {
+		return pStore.selectRowsByBoardId(boardId);
+	}
+	
+	@Override
+	public List<Post> findPostsByBoardIdWithPage(String boardId, String page) {
+		String begin = (Integer.parseInt(page) - 1) * Constants.POST_ROW_SIZE + 1 + "";
+		String end = Integer.parseInt(page) * Constants.POST_ROW_SIZE + "";
+
+		return pStore.selectPostsByBoardIdWithPage(boardId, begin, end);
 	}
 
 	@Override
