@@ -102,9 +102,9 @@ div{border: 1px solid #ccc;}
 									</tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${posts }" var="post" varStatus="status">
+									<c:forEach items="${posts }" var="post">
 										<tr>
-											<td>${status.count }</td>
+											<td>${post.id }</td>
 											<td><a href="${ctx }/post/detail.do?postId=${post.id }">${post.title }</a></td>
 											<td>${post.writer.id}</td>
 										</tr>
@@ -113,7 +113,12 @@ div{border: 1px solid #ccc;}
 							</c:choose>
 						</tbody>
 					</table>
-		
+					<div>
+						<fmt:parseNumber var="pages" integerOnly="true" value="${rows / 20 }"/>
+						<c:forEach var="i" begin="1" end="${pages + 1 }" step="1">
+							<a href="${ctx }/post/list.do?boardId=${boardId}&pageNum=${i}">${i}</a>
+						</c:forEach>
+					</div>
 				</c:if>
 			</c:forEach>
 		</c:if>

@@ -147,8 +147,8 @@
 					$(resultId).html('');
 					$(xmlData).each(function() {
 						var rs = one.clone();
-						rs.find('img').val('src', $(this).find('imagePath').text());
-						rs.find('.literature').val('href', '${ctx}/episode/list.do?literatureId=' + $(this).find("id").text());
+						rs.find('img').attr('src', $(this).find('imagePath').text());
+						rs.find('.literature').attr('href', '${ctx}/episode/list.do?literatureId=' + $(this).find("literature>id").text());
 						rs.find('.literature').text( $(this).find("name:first").text());
 						rs.find('.creatorId').html($(this).find("creator").find("id").text());
 						rs.find('.genre').html($(this).find("genre").text());
