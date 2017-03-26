@@ -77,17 +77,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="${ctx }/">HOME</a>
+      <a class="navbar-brand" href="${ctx }/">메인페이지</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
 		<li><a href="${ctx }/post/list.do">자유게시판</a></li>
 		<li><a href="${ctx }/litStorage/myList.do">작품 저장소</a></li>
 		<li><a href="${ctx }/literature/allList.do">작품 목록</a></li>
-		<c:if test="${loginId ne null }">
-			<!-- 메인 페이지에서 로그인시 작품 저장소 등록 버튼이 보임 -->
-			<li><a href="${ctx }/litStorage/register.do">작품 저장소 등록</a></li>
-		</c:if>
 		
       </ul>
 
