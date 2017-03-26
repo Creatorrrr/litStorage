@@ -1,20 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>joinedMemberList - 소설 공동작업</title>
 
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="header.jspf"%>
+
+
 <c:choose>
  <c:when test="${litStorage.creator.id eq loginId}">
  <c:set var="isMaster" value="true" />
@@ -23,7 +16,8 @@
  <c:set var="isMaster" value="false" />
  </c:otherwise>
  </c:choose>
-<%@ include file="header.jspf"%>
+
+
  <jsp:include page="litStorageSideNav.jsp">
  <jsp:param name="litStorage" value="${litStorage.id }"/>
  <jsp:param name="isMaster" value="${isMaster }"/>
@@ -73,5 +67,7 @@
 		</c:forEach>
 	</table>
 	<!-- sub member table over -->
-</body>
-</html>
+
+
+
+<%@ include file="footer.jspf"%>

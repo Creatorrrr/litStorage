@@ -1,38 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
-<!-- tag를 사용하기위해 선언 -->
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>자유게시판 - 소설 공동작업</title>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!-- <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="resources/css/style.css" rel="stylesheet"> -->
-<title>자유게시판</title>
+<%@ include file="header.jspf"%>
 
 
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/js/bootstrap.min.js"></script>
-<style type="text/css">
-div {
-	border: 1px solid #ccc;
-}
-
-#boardRegisterDiv {
-	display: none;
-	width: 300px;
-}
-</style>
-
-</head>
-<body>
-	<%@ include file="/views/header.jspf"%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -148,5 +123,7 @@ div {
 		    }
 		}
 	</script>
-</body>
-</html>
+	
+	
+	
+<%@ include file="footer.jspf"%>

@@ -1,30 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>연재글 수정</title>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	
-</script>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>연재글 수정 - 소설 공동작업</title>
+
+<%@ include file="header.jspf"%>
+
 
 <style type="text/css">
 div {
 	border: 1px solid #ccc;
 }
 </style>
-</head>
-<body>
 
-	<%@ include file="header.jspf"%>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
@@ -112,5 +102,5 @@ div {
 		}
 	</script>
 
-</body>
-</html>
+
+<%@ include file="footer.jspf"%>

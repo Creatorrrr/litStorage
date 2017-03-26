@@ -1,15 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<title>게시글 상세</title>
-</head>
-<body>
-<%@ include file="header.jspf"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>게시글 상세 - 소설 공동작업</title>
+
+
+
+
 	<a href="${ctx }/post/list.do?boardId=${post.board.id}">게시글 목록</a>
 	<h3>게시글 상세</h3>
 	<br>
@@ -42,5 +40,5 @@
 			</div>
 		 </c:if> 
 	</c:if>
-</body>
-</html>
+
+<%@ include file="footer.jspf"%>

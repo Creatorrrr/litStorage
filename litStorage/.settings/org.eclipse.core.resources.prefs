@@ -1,5 +1,12 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/controller/MainController.java=UTF-8
+=======
+encoding//WebContent/views/_mainbar.jsp=UTF-8
+encoding//WebContent/views/_var.jsp=UTF-8
+encoding//WebContent/views/header.jspf=UTF-8
+encoding//WebContent/views/index2.jsp=UTF-8
+>>>>>>> refs/remotes/origin/zun0326
 encoding//src/controller/board/PostListController.java=UTF-8
 encoding//src/controller/discussionPlace/DiscussionContentDeleteController.java=UTF-8
 encoding//src/controller/discussionPlace/DiscussionPlaceListController.java=UTF-8
