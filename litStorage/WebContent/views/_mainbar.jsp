@@ -5,20 +5,18 @@
 
 <div class="jumbotron">
 
-  <div class="container text-center">
-    <h1>소설 공동 작업</h1>      
-    <p>Mission, Vission & Values</p>
-  </div>
-  
-  
-  <div class=" navbar-right" style="background: #ccc;">
-  		<c:choose>
-			<c:when test="${loginId eq null }">
-				<ul class="nav navbar-nav">
-					<li>
-						<!-- 로그인 시작 -->
-						<button id="loginBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">로그인</button>
+	<div class="container text-center">
+		<h1>소설 공동 작업</h1>      
+		<p>Mission, Vission & Values</p>
+	
+	
 
+		<div class="nav  navbar-right" style="background: #ccc;">
+	  		<c:choose>
+				<c:when test="${loginId eq null }">
+						<!-- 로그인 버튼 -->
+						<button id="loginBtn" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">로그인</button>
+	
 						<div class="modal" id="modal">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
@@ -28,45 +26,44 @@
 						      </div>
 						      
 						      <form action="${ctx }/login.do" method="post">
-						      <div class="modal-body">
-						        <label>ID<input id="loginId" name="loginId" class="form-control" type="text" value="" placeholder="ID를 입력해주세요."></label>
-								<label>Password<input id="password" name="password" class="form-control" type="password" value="" placeholder="비밀번호를 입력해주세요."></label>
-								 <button type="submit" class="btn btn-success">로그인</button>
-						
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						      
-						      </div>
+								      <div class="modal-body">
+								        <label>ID<input id="loginId" name="loginId" class="form-control" type="text" value="" placeholder="ID를 입력해주세요."></label>
+										<label>Password<input id="password" name="password" class="form-control" type="password" value="" placeholder="비밀번호를 입력해주세요."></label>
+										 <button type="submit" class="btn btn-success">로그인</button>
+								
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								      
+								      </div>
 						      </form>
 						      
 						    </div>
 						  </div>
 						</div>
 						<script type="text/javascript">
-						
 							$('#loginBtn').click(function(){
 								$('#modal').modal('toggle');
 							});
-						
 						</script>
-						<!-- 로그인 끝 -->
+						<!-- 회원가입 버튼 -->
+						<a href="${ctx }/views/register.jsp" class="btn btn-success">회원가입</a>
+				
+				</c:when>
+				<c:otherwise>
+					<span class="glyphicon glyphicon-user"></span>
+					<b>${loginId}</b>님!! 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
+					<ul >
+						<li><a href="${ctx}/member/detail.do">회원정보</a></li>
+						<li><a href="${ctx}/member/inviteList.do">초대 온 목록</a></li>
+					</ul>
+				</c:otherwise>
+			</c:choose>
+	   </div>
+	</div>
 
-
-					</li>
-					<li><a href="${ctx }/views/register.jsp" class="btn btn-success">회원가입</a></li>
-				</ul>
-			</c:when>
-			<c:otherwise>
-				<span class="glyphicon glyphicon-user"><b>${loginId}</b>님!! 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
-				<ul >
-					<li><a href="${ctx}/member/detail.do">회원정보</a></li>
-					<li><a href="${ctx}/member/inviteList.do">초대 온 목록</a></li>
-				</ul>
-			</c:otherwise>
-		</c:choose>
-   </div>
 </div>
+
 
 <!-- 메인메뉴 시작 -->
 <nav class="navbar navbar-inverse">
@@ -87,7 +84,7 @@
 		
       </ul>
 
-		<!-- 메인 페이지용 작품 검색창, 검색시 이동함 -->
+		<!-- 메인 페이지용 작품 검색창 -->
 		<form method="get"  class="navbar-form navbar-right" >
 			<div class="form-group">
 				<select name="type" id="type" class="form-control">
@@ -99,46 +96,122 @@
 			</div>
 		</form>
 		
+		
+		<div id="litTemplate" class="hidden">
+			<div class="literatureBox">
+				<table  class="table table-striped table-hover ">
+					<tr>
+						<td colspan="2"><img class="imagePath img-responsive" src="${literature.imagePath }" style="width:165px;height:239px;"></td>
+					</tr>
+					<tr>
+						<td>작품명</td>
+						<td><a class="literature" href="${ctx}/episode/list.do?literatureId=${literature.id}">${literature.name }</a></td>
+					</tr>
+					<tr>
+						<td>작가</td>
+						<td class="creatorId">${literature.creator.id }</td>
+					</tr>
+					<tr>
+						<td>장르</td>
+						<td class="genre">${literature.genre }</td>
+					</tr>
+					<tr>
+						<td>소개</td>
+						<td class="introduce">${literature.introduce }</td>
+					</tr>
+					<tr>
+						<td>조회수</td>
+						<td class="hits">${literature.hits }</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<style>
+		
+		.literatureBox {
+			display: inline-block;
+		    margin: 10px;
+		    border: 3px solid #73AD21;
+		}
+		
+		</style>
+		
 		<script>
-		$(document).ready(function() {
-	
-		/* ajax로 작품 다른거 검색하기*/
-		$("input[name='search']").click(function() {
-			$.ajax({
-				url : "/litStorage/literature/search.do",
-				data : {type : $("#type option:selected").val(),
-						keyword : $("input[name='keyword']").val()},
-				type : "post",
-				dataType : "xml",
-				success : function(xml) {
-						var xmlData = $(xml).find("literature");
-						var listLength = xmlData.length;
-						//alert(listLength);
-						$("#searchResult").empty();			
-						if (listLength) {
-							var contentStr = "";
-							$(xmlData).each(function() {
-								contentStr += "<div class='literatureBox'><table class='table table-striped table-hover'><tr><td>이름</td><td><a href='/litStorage/litStorage/profile.do?id="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
-								+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
-								+"<td>소개</td><td>"+ $(this).find("introduce").text()
-								+"</td></tr><tr><td>장르</td><td>"+$(this).find("genre").text()
-								+ "</td></tr><tr><td>조회수</td><td>"+$(this).find("hits").text()+"</td></tr></table></div>";
-							});
-							$("#searchResult").append(contentStr);
-							//alert(contentStr);
+		
+			
+			function secessFun(xml,resultId){
+				var xmlData = $(xml).find("literature");
+				var listLength = xmlData.length;
+				$(resultId).empty();			
+				if (listLength) {
+					var one = $("#litTemplate > .literatureBox").first();
+					$(resultId).html('');
+					$(xmlData).each(function() {
+						var rs = one.clone();
+						rs.find('img').val('src', $(this).find('imagePath').text());
+						rs.find('.literature').val('href', '${ctx}/episode/list.do?literatureId=' + $(this).find("id").text());
+						rs.find('.literature').text( $(this).find("name:first").text());
+						rs.find('.creatorId').html($(this).find("creator").find("id").text());
+						rs.find('.genre').html($(this).find("genre").text());
+						rs.find('.introduce').html($(this).find("introduce").text());
+						rs.find('.hits').html($(this).find("hits").text());
+						$(resultId).append(rs);
+					});
+					
+				}else{
+					$(resultId).html('<div class="alert alert-dismissible alert-info"><a href="${ctx}/" type="button" class="close" data-dismiss="alert">&times;</a><strong>Heads up!</strong>검색하신 작품이 없습니다.</div>');
+				}
+			}
+			
+			$(document).ready(function() {
+				/* ajax로 작품 다른거 검색하기*/
+				$("input[name='search']").click(function() {
+					$.ajax({
+						url : "/litStorage/literature/search.do",
+						data : {type : $("#type option:selected").val(),
+								keyword : $("input[name='keyword']").val()},
+						type : "post",
+						dataType : "xml",
+						success : function(xml) {
+							secessFun(xml,"#result");
 						}
-					}
+					});
 				});
+	
 			});
-		});
+		
 		</script>
-		<!-- 메인 메뉴 검색바 끝 -->
+		<!-- 메인 페이지용 작품 검색창 -->
 
       </div>
     </div>
   </div>
 </nav>
 <!-- 메인 메뉴 끝 -->
+
+
+
+<!-- ajax loading start -->
+<div id='ajax_loader' style="position: fixed; left: 50%; top: 40%; display: none;">
+<img src="${ctx }/resources/img/ajax-loader.gif"></img></div>
+<script type="text/javascript">
+	//gif download: http://ajaxload.info/
+    jQuery(function ($){
+    	$('body').append($('#ajax_loader'));
+    	
+        $(document).ajaxStop(function(){
+            $("#ajax_loader").hide();
+         });
+         $(document).ajaxStart(function(){
+             $("#ajax_loader").show();
+         });    
+    });    
+</script>
+<!-- ajax loading end -->
+	
+
+
 
 <c:if test="${message ne null }">
 	<!-- 요청결과 (3초후 자동 없어짐) -->
@@ -152,10 +225,3 @@
 
 
 
-<style>
-		.literatureBox {
-			display: inline-block;
-		    margin: 10px;
-		    border: 3px solid #73AD21;
-		}
-</style>
