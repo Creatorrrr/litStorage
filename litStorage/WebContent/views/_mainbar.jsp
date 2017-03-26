@@ -58,7 +58,7 @@
 				</ul>
 			</c:when>
 			<c:otherwise>
-				<span class="glyphicon glyphicon-user"><b>${loginId}</b>님!! 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
+				<span class="glyphicon glyphicon-user"><b>${loginId}</b>님 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
 				<ul >
 					<li><a href="${ctx}/member/detail.do">회원정보</a></li>
 					<li><a href="${ctx}/member/inviteList.do">초대 온 목록</a></li>
@@ -88,7 +88,7 @@
       </ul>
 
 		<!-- 메인 페이지용 작품 검색창, 검색시 이동함 -->
-		<form method="get"  class="navbar-form navbar-right" >
+		<form method="get"  class="navbar-form navbar-right" action="${ctx }/literature/search.do">
 			<div class="form-group">
 				<select name="type" id="type" class="form-control">
 					<option value="id">작가 아이디</option>

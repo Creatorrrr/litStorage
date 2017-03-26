@@ -58,7 +58,7 @@ public class Literature {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	@XmlTransient
+	
 	public String getImagePath() {
 		return imagePath;
 	}

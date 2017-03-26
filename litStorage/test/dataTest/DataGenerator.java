@@ -46,111 +46,114 @@ public class DataGenerator {
 		}
 	}
 
-	 @Test
-	 public void makeLitStorage() {
-	 List<String> nameList = new ArrayList<>();
-	 try {
-	 BufferedReader in = new BufferedReader(new
-	 FileReader("litStorageName.txt"));
-	 String str;
-	
-	 while ((str = in.readLine()) != null) {
-	 nameList.add(str);
-	 }
-	
-	 int nameRand;
-	 int introRand;
-	 int writerRand;
-	 for(int i = 0 ; i < nameList.size(); i++){
-	 nameRand = (int)(Math.random() * (nameList.size()));
-	 introRand = (int)(Math.random() * (nameList.size()));
-	 writerRand = (int)(Math.random() * (nameList.size()));
-	 LitStorage lit = new LitStorage();
-	 lit.setName(nameList.get(nameRand));
-	 lit.setIntroduce(nameList.get(introRand));
-	 lit.setCreator(memberList.get(writerRand));
-	 lsService.registerLitStorage(lit);
-	 }
-	
-	
-	 in.close();
-	 } catch (FileNotFoundException e) {
-	 e.printStackTrace();
-	 } catch (IOException e) {
-	 e.printStackTrace();
-	 }
-	
-	
-	 assertEquals(true,true);
-	 }
+	/*
+	 * @Test public void makeLitStorage() { List<String> nameList = new
+	 * ArrayList<>(); try { BufferedReader in = new BufferedReader(new
+	 * FileReader("litStorageName.txt")); String str;
+	 * 
+	 * while ((str = in.readLine()) != null) { nameList.add(str); }
+	 * 
+	 * int nameRand; int introRand; int writerRand; for(int i = 0 ; i <
+	 * nameList.size(); i++){ nameRand = (int)(Math.random() *
+	 * (nameList.size())); introRand = (int)(Math.random() * (nameList.size()));
+	 * writerRand = (int)(Math.random() * (nameList.size())); LitStorage lit =
+	 * new LitStorage(); lit.setName(nameList.get(nameRand));
+	 * lit.setIntroduce(nameList.get(introRand));
+	 * lit.setCreator(memberList.get(writerRand));
+	 * lsService.registerLitStorage(lit); }
+	 * 
+	 * 
+	 * in.close(); } catch (FileNotFoundException e) { e.printStackTrace(); }
+	 * catch (IOException e) { e.printStackTrace(); }
+	 * 
+	 * 
+	 * assertEquals(true,true); }
+	 * 
+	 * @Test public void makeLiterature() { Document doc = null; Elements
+	 * titleContents = null; Elements imageContents = null; List<LitStorage>
+	 * lsList = lsService.findAll(); List<Board> genreList = new
+	 * BoardServiceLogic().findAllBoards(); List<String> introList = new
+	 * ArrayList<>();
+	 * 
+	 * int lsRand, genreRand, introRand, memberRand; try { BufferedReader in =
+	 * new BufferedReader(new FileReader("litStorageName.txt")); String str;
+	 * 
+	 * while ((str = in.readLine()) != null) { introList.add(str); } in.close();
+	 * } catch (FileNotFoundException e1) { e1.printStackTrace(); } catch
+	 * (IOException e) { e.printStackTrace(); }
+	 * 
+	 * 
+	 * for (int i = 1; i <= 200; i++) { try { doc =
+	 * Jsoup.connect("https://ridibooks.com/category/books/1710?page="+i).get();
+	 * titleContents = doc.select("h3.meta_title span.title_text");
+	 * imageContents = doc.select("div.thumbnail_image img"); } catch
+	 * (IOException e) { e.printStackTrace(); }
+	 * 
+	 * for (int j = 0; j < 20; j++) { lsRand = (int)(Math.random() * (300)+1);
+	 * genreRand = (int)((Math.random()*7)-1); introRand = (int)(Math.random() *
+	 * (introList.size())); memberRand = (int)(Math.random() *
+	 * (memberList.size())); Literature liter = new Literature();
+	 * liter.setName(titleContents.get(j).text());
+	 * liter.setGenre(genreList.get(genreRand).getTitle());
+	 * liter.setImagePath(imageContents.get(j).attr("src"));
+	 * liter.setIntroduce(introList.get(introRand));
+	 * liter.setCreator(memberList.get(memberRand));
+	 * liter.setHits((int)(Math.random()*90000));
+	 * liter.setLitStorage(lsList.get(lsRand));
+	 * 
+	 * lService.registerLiterature(liter); } }
+	 * 
+	 * 
+	 * assertEquals(true, true); }
+	 */
 
 	@Test
-	public void makeLiterature() {
-		Document doc = null;
-		Elements titleContents = null;
-		Elements imageContents = null;
-		List<LitStorage> lsList = lsService.findAll();
-		List<Board> genreList = new BoardServiceLogic().findAllBoards();
-		List<String> introList = new ArrayList<>();
-		
-		int lsRand, genreRand, introRand, memberRand;
+	public void makeEpisode() {
+
+		List<Literature> literList = lService.findLiteratureByName("");
+
+		List<String> contentList = new ArrayList<>();
+
 		try {
 			BufferedReader in = new BufferedReader(new FileReader("litStorageName.txt"));
-			 String str;
-				
-			 while ((str = in.readLine()) != null) {
-				 introList.add(str);
-			 }
-			 in.close();
+			String str;
+
+			while ((str = in.readLine()) != null) {
+				contentList.add(str);
+			}
+			in.close();
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		for (int i = 1; i <= 200; i++) {
-			try {
-				doc = Jsoup.connect("https://ridibooks.com/category/books/1710?page="+i).get();
-				titleContents = doc.select("h3.meta_title span.title_text");
-				imageContents = doc.select("div.thumbnail_image img");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			for (int j = 0; j < 20; j++) {
-				lsRand = (int)(Math.random() * (300)+1);
-				genreRand = (int)((Math.random()*7)-1);
-				introRand = (int)(Math.random() * (introList.size()));
-				memberRand = (int)(Math.random() * (memberList.size()));
-				Literature liter = new Literature();
-				liter.setName(titleContents.get(j).text());
-				liter.setGenre(genreList.get(genreRand).getTitle());
-				liter.setImagePath(imageContents.get(j).attr("src"));
-				liter.setIntroduce(introList.get(introRand));
-				liter.setCreator(memberList.get(memberRand));
-				liter.setHits((int)(Math.random()*90000));
-				liter.setLitStorage(lsList.get(lsRand));
+		int boundRand, contentRand;
+		String bound;
+		int count = 1;
+		for (Literature liter : literList) {
+			if (count > 101) {
+				for (int i = 1; i <= 5; i++) {
+					Episode ep = new Episode();
+					boundRand = (int) (Math.random());
+					contentRand = (int) (Math.random() * (contentList.size()));
+					if (boundRand == 0) {
+						bound = "R";
+					} else {
+						bound = "A";
+					}
+					ep.setBound(bound);
+					ep.setLiterature(liter);
+					ep.setTitle(i + "화");
+					ep.setWriter(liter.getCreator());
+					lService.registerEpisode(ep);
+					System.out.println(count++);
+				}
 				
-				lService.registerLiterature(liter);
 			}
+			count++;
 		}
-		
-		
+
 		assertEquals(true, true);
-	}
-	
-	@Test
-	public void makeEpisode(){
-		Episode ep = new Episode();
-//		ep.setBound(bound);
-//		ep.setContent(content);
-//		ep.setLiterature(literature);
-//		ep.setTitle(title);
-//		ep.setWriter(writer);
-		
-		
-		assertEquals(true,true);
 	}
 
 }

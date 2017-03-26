@@ -1,6 +1,7 @@
 package controller.literature;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,12 +33,16 @@ public class LiteratureAllListController extends HttpServlet {
 		
 		List<Literature> newList = lService.findLiteraturesByGenreOrderById(bList.get(0).getTitle());
 		request.setAttribute("literatures", newList);
+		List<Board> bListRemoved = new ArrayList<>();
+
+		/* 장르 dropdownlist를 만들기 위해 게시판 이름을 싹 보내줌(신고 빼고) */
 		for (Board b : bList) {
-			if (b.getTitle().equals("신고")) {
-				bList.remove(b);
+			if (!b.getTitle().equals("신고")) {
+				bListRemoved.add(b);
 			}
 		}
-		request.setAttribute("genreList", bList);
+
+		request.setAttribute("genreList", bListRemoved);
 
 		request.getRequestDispatcher("/views/literatureAllList.jsp").forward(request, response);
 	}

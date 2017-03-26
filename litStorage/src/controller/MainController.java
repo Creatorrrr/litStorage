@@ -32,14 +32,14 @@ public class MainController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() +"/views/index.jsp");
 			return ;
 		}
-		List<Literature> recoList = lService.findLiteraturesByGenreOrderByHits(bList.get(0).getTitle());
+		/*List<Literature> recoList = lService.findLiteraturesByGenreOrderByHits(bList.get(0).getTitle());
 		List<Literature> newList = lService.findLiteraturesByGenreOrderById(bList.get(0).getTitle());
 
 		List<Literature> recoCutList = new ArrayList<>();
 		List<Literature> newCutList = new ArrayList<>();
-		/*
+		
 		 * 메인페이지에 작품 6개만 보낼거라 6개만 짜름. 갯수 조정이 필요하면 for문 조건문을 조정하면 됩니다.
-		 */
+		 
 		for (int i = 0; i < 6; i++) {
 			try{
 				recoCutList.add(recoList.get(i));
@@ -47,7 +47,10 @@ public class MainController extends HttpServlet {
 			try{
 				newCutList.add(newList.get(i));
 			}catch(Exception e){}
-		}
+		}*/
+		
+		List<Literature> recoCutList = lService.findLiteraturesByGenreOrderByHitsForMain(bList.get(0).getTitle());
+		List<Literature> newCutList = lService.findLiteraturesByGenreOrderByIdForMain(bList.get(0).getTitle());
 		
 		request.setAttribute("recoLiteratures", recoCutList);
 		request.setAttribute("newLiteratures", newCutList);

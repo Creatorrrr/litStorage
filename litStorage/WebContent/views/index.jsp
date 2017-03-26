@@ -32,9 +32,9 @@
 			<div class="literatureBox">
 				<table border="1">
 					<!-- 이건 지금 안됩니다. 이미지 추가되면 경로 되고나서 될거임~ 되면 주석 지우세용  -->
-					<!-- <tr>
+					 <tr>
 			<td><img src="${literature.imagePath }"></td>
-			</tr> -->
+			</tr>
 					<tr>
 						<td>작품명</td>
 						<td><a
@@ -74,9 +74,9 @@
 			<div class="literatureBox">
 				<table border="1">
 					<!-- 이건 지금 안됩니다. 이미지 추가되면 경로 되고나서 될거임~ 되면 주석 지우세용  -->
-					<!-- <tr>
+					<tr>
 			<td><img src="${literature.imagePath }"></td>
-			</tr> -->
+			</tr>
 					<tr>
 						<td>작품명</td>
 						<td><a
@@ -126,7 +126,8 @@
 							if (listLength) {
 								var contentStr = "";
 								$(xmlData).each(function() {
-									contentStr += "<div class='literatureBox'><table border='1'><tr><td>작품명</td><td><a href='${ctx}/episode/list.do?literatureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
+									contentStr += "<div class='literatureBox'><table border='1'><tr><td><img src="+$(this).find("imagePath").text() + "'></td></tr>"
+									+"<tr><td>작품명</td><td><a href='${ctx}/episode/list.do?LiteratureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
 											+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
 											+"<td>장르</td><td>"+ $(this).find("genre").text()
 											+"</td></tr><tr><td>소개</td><td>"+$(this).find("introduce").text()
@@ -152,7 +153,8 @@
 							if (listLength) {
 								var contentStr = "";
 								$(xmlData).each(function() {
-									contentStr += "<div class='literatureBox'><table border='1'><tr><td>작품명</td><td><a href='${ctx}/episode/list.do?literatureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
+									contentStr += "<div class='literatureBox'><table border='1'><tr><td><img src="+$(this).find("imagePath").text() + "'></td></tr>"
+									+"<tr><td>작품명</td><td><a href='${ctx}/episode/list.do?LiteratureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
 											+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
 											+"<td>장르</td><td>"+ $(this).find("genre").text()
 											+"</td></tr><tr><td>소개</td><td>"+$(this).find("introduce").text()
