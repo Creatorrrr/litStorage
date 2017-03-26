@@ -7,23 +7,9 @@
 
 <%@ include file="header.jspf"%>
 
-	<style>
-
-	#registerForm {
-		width: 670px;
-	}
-
-	#registerForm label.error {
-		margin-left: 10px;
-		width: auto;
-		display: inline;
-		color: red;
-	}
-
-	</style>
 
 	<form id="registerForm" action="${ctx }/member/modify.do"  method="post">
-		<table width="600" border="1" cellspacing="0" cellpadding="3" align="center">
+		<table class="table table-striped table-hover " >
 			<tr>
 				<td colspan="2" height="39" align="center"><b>회원정보수정</b></td>
 			</tr>
@@ -33,15 +19,15 @@
 			</tr>
 			<tr>
 				<td width="200">비밀번호</td>
-				<td width="400"><input type="password" name="password" size="10"maxlength="10" value="${member.password}"></td>
+				<td width="400"><input type="password" name="password" class="form-control" size="10"maxlength="10" value="${member.password}"></td>
 			</tr>
 			<tr>
 				<td width="200">이름</td>
-				<td width="400"><input type="text" name="name" size="15" maxlength="10" value="${member.name}"></td>
+				<td width="400"><input type="text" name="name" class="form-control" size="15" maxlength="10" value="${member.name}"></td>
 			</tr>
 			<tr>
 				<td width="200">E-Mail</td>
-				<td width="400"><input type="text" name="email" size="40" maxlength="30" value="${member.email}"></td>
+				<td width="400"><input type="text" name="email" class="form-control" size="40" maxlength="30" value="${member.email}"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
@@ -56,55 +42,48 @@
 	
 	<script type="text/javascript">
 
-$(function() {
-	
-	$("#registerForm").validate({
-		rules: {
-			id: "required",
-			name: {
-				required: true,
-				minlength: 2
+	$(function() {
+		
+		$("#registerForm").validate({
+			rules: {
+				id: "required",
+				name: {
+					required: true,
+					minlength: 2
+				},
+				password: {
+					required: true,
+					minlength: 5
+				},
+				password2: {
+					required: true,
+					minlength: 5,
+					equalTo: "#password"
+				},
+				email: {
+					required: true,
+					email: true
+				}
 			},
-			password: {
-				required: true,
-				minlength: 5
-			},
-			password2: {
-				required: true,
-				minlength: 5,
-				equalTo: "#password"
-			},
-			email: {
-				required: true,
-				email: true
+			messages: {
+				id: "ID를 입력해주세요.",
+				name: "이름을 입력해주세요.",
+				password: {
+					required: "비밀번호를 입력해주세요.",
+					minlength: "비밀번호는 5자 이상이여야 합니다."
+				},
+				password2: {
+					required: "비밀번호를 확인을 입력해주세요.",
+					minlength: "비밀번호는 5자 이상이여야 합니다.",
+					equalTo: "비밀번호가 일치하지 않습니다."
+				},
+				email: "이메일을 입력해주세요."
 			}
-		},
-		messages: {
-			id: "ID를 입력해주세요.",
-			name: "이름을 입력해주세요.",
-			password: {
-				required: "비밀번호를 입력해주세요.",
-				minlength: "비밀번호는 5자 이상이여야 합니다."
-			},
-			password2: {
-				required: "비밀번호를 확인을 입력해주세요.",
-				minlength: "비밀번호는 5자 이상이여야 합니다.",
-				equalTo: "비밀번호가 일치하지 않습니다."
-			},
-			email: "이메일을 입력해주세요."
-		}
+		});
+
 	});
 
 
-
-
-});
-
-</script>
-
-	
-	<script type="text/javaScript">
-	
 	function backBtn(){
 		location.href="${ctx }/member/detail.do";
 	}
