@@ -34,9 +34,11 @@
 			</div>
 			<div class="col-xs-12 col-md-8">
 				<h1>작품 목록</h1>
-				<div class="text-right">
-					<a href="${ctx }/literature/register.do?litStorageId=${litStorage.id}">작품 등록</a>
-				</div>
+				<c:if test="${onGroup || sessionScope.isAdmin }">
+					<div class="text-right">
+						<a href="${ctx }/literature/register.do?litStorageId=${litStorage.id}">작품 등록</a>
+					</div>
+				</c:if>
 				<div class="panel panel-default">
 					<div>
 						<table border="1">

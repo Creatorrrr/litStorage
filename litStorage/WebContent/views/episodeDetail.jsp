@@ -77,18 +77,20 @@ div {
 								<textarea rows="10" cols="75" name="episodeContents">${episode.contentFromGit }</textarea>
 							</div>
 						</div>
-						<div class="panel panel-default">
-							<c:forEach items="${episode.histories }" var="history"
-								varStatus="status">
-								<a
-									href="${ctx }/episode/changeHistoryDetail.do?historyId=${history.id}">
-									<span>등록 날짜 : ${history.changeTime } </span> <span>변경 회원
-										: ${history.editor.id } </span> <span>메시지 : ${history.message}
-								</span>
-								</a>
-								<br>
-							</c:forEach>
-						</div>
+						<c:if test="${onGroup || sessionScope.isAdmin }">
+							<div class="panel panel-default">
+								<c:forEach items="${episode.histories }" var="history"
+									varStatus="status">
+									<a
+										href="${ctx }/episode/changeHistoryDetail.do?historyId=${history.id}">
+										<span>등록 날짜 : ${history.changeTime } </span> <span>변경 회원
+											: ${history.editor.id } </span> <span>메시지 : ${history.message}
+									</span>
+									</a>
+									<br>
+								</c:forEach>
+							</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

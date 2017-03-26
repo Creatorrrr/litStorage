@@ -90,6 +90,7 @@ public class Episode {
 			
 			//strBuilder.append(bReader.readLine());	// if you want to get title then use this line
 			bReader.readLine();	// waste title line
+			strBuilder.append(bReader.readLine());
 			while((line = bReader.readLine()) != null) {
 				strBuilder.append("\r\n");
 				strBuilder.append(line);

@@ -60,11 +60,12 @@ div {
 				</div>
 				<div class="col-xs-12 col-md-8">
 					<h1>연재 글 목록</h1>
-					<div class="text-right">
-						<!-- LiteratureDeleteController -->
-						<a
-							href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품삭제</a>
-					</div>
+					<c:if test="${litearture.litStorage.creator.id eq sessionScope.loginId || literature.creator.id eq sessionScope.loginId || sessionScope.isAdmin }">
+						<div class="text-right">
+							<!-- LiteratureDeleteController -->
+							<a href="${ctx}/literature/delete.do?literatureId=${literature.id}">작품삭제</a>
+						</div>
+					</c:if>
 					<div class="panel panel-default">
 						<div class="row">
 							<div>
@@ -100,11 +101,13 @@ div {
 								</tr>
 							</table>
 						</div>
-						<div class="text-right">
-							<button type="button"
-								onclick="location.href='${ctx }/episode/register.do?literatureId=${literature.id}'">연재글
-								등록</button>
-						</div>
+						<c:if test="${onGroup || sessionScope.isAdmin}">
+							<div class="text-right">
+								<button type="button"
+									onclick="location.href='${ctx }/episode/register.do?literatureId=${literature.id}'">연재글
+									등록</button>
+							</div>
+						</c:if>
 						<table class="table table-striped">
 							<colgroup>
 								<col width="50">

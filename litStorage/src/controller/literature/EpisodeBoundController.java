@@ -27,6 +27,7 @@ public class EpisodeBoundController extends HttpServlet {
 		Episode episode = service.findEpisodeById(episodeId);
 		
 		episode.setBound(bound);
+		episode.setContent(episode.getContentFromGit());
 		
 		if(!service.modifyEpisode(episode)) {
 			throw new RuntimeException("episode modify failed");

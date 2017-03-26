@@ -9,6 +9,7 @@ public interface BoardService {
 	public boolean registerBoard(Board board);
 	public boolean removeBoard(String id);
 	public List<Board> findAllBoards();
+	public List<Board> findTitles();
 	public boolean registerPost(Post post);
 	public boolean modifyPost(Post post);
 	public boolean removePost(String id);

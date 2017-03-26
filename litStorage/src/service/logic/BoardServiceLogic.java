@@ -34,6 +34,11 @@ public class BoardServiceLogic implements BoardService {
 	public List<Board> findAllBoards() {
 		return bStore.selectAll();
 	}
+	
+	@Override
+	public List<Board> findTitles() {
+		return bStore.selectTitles();
+	}
 
 	@Override
 	public boolean registerPost(Post post) {
