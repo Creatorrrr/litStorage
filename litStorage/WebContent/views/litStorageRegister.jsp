@@ -1,22 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<c:set var="ctx">${pageContext.request.contextPath }</c:set>
-<html lang="ko">
-<head>
-<title>작품 저장소 등록</title>
-<meta charset="utf-8">
-<link href="resources/css/bootstrap_modify.css" rel="stylesheet">
-<link href="resources/css/layout.css" rel="stylesheet">
-<script src="resources/js/jquery-2.1.3.js"></script>
-<!-- <script type="text/javascript">
-	var checkValidate = function() {
-		// name must be not empty
-	}
-</script> -->
-</head>
-<body>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>작품 저장소 등록 - 소설 공동작업</title>
+
+<%@ include file="header.jspf"%>
+
+
+
 	<form action="${ctx }/litStorage/register.do" method="post"
 		name="litRegister" onsubmit="return checkIt()">
 		<input type="hidden" name="userId" value="${loginId }">
@@ -56,5 +48,5 @@
 	</script>
 
 
-</body>
-</html>
+
+<%@ include file="footer.jspf"%>

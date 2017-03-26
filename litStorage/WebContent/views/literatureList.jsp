@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
@@ -7,9 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>작품 목록</title>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
+
+
+
+
+
 <script type="text/javascript"
 	src="${ctx }/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -40,10 +41,7 @@ div {
  </c:otherwise>
  </c:choose>
 <%@ include file="header.jspf"%>
- <jsp:include page="litStorageSideNav.jsp">
- <jsp:param name="litStorage" value="${litStorage.id }"/>
- <jsp:param name="isMaster" value="${isMaster }"/>
-</jsp:include>
+
 	<!-- <input type="button" id="deleteEpisode"
 		onclick="location.href='../episode/list' "> -->
 	<div class="container">
@@ -80,11 +78,12 @@ div {
 		</div>
 		<div class="col-xs-12 col-md-12">
 			<div class="col-xs-6 col-md-4">
-				<h1>${litStorage.name }</h1>
 				<div>
-					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
-						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
-						href="javascript:;">회원 초대</a>
+좌측 메뉴부분 <h1>${litStorage.name }</h1>
+ <jsp:include page="litStorageSideNav.jsp">
+ <jsp:param name="litStorage" value="${litStorage.id }"/>
+ <jsp:param name="isMaster" value="${isMaster }"/>
+</jsp:include>
 				</div>
 			</div>
 			<div class="col-xs-12 col-md-8">
