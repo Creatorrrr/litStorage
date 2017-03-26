@@ -7,56 +7,29 @@
 
 <%@ include file="header.jspf"%>
 
-
-
+<c:choose>
+ <c:when test="${episode.literature.creator.id eq loginId}">
+ <c:set var="isMaster" value="true" />
+ </c:when>
+ <c:otherwise>
+ <c:set var="isMaster" value="false" />
+ </c:otherwise>
+ </c:choose>
 
 <style type="text/css">
 div {
 	border: 1px solid #ccc;
 }
 </style>
-
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-md-12">
-				<div class="row">
-					<div class="col-md-6">
-						<h1>제목</h1>
-					</div>
-					<!-- <div class="text-right">
-						<button>로그인</button>
-						<button>회원 정보 수정</button>
-					</div> -->
-				</div>
-				<div class="row">
-					<%-- <div class="col-md-6">
-						<a href="javascript:;">자유게시판</a>
-						<a href="${ctx }/litStorage/allList.do;">직품 저장소</a>
-						<a href="javascript:;">작품 목록</a>
-					</div> --%>
-					<form action="${ctx }/episode/list.do" method="post">
-						<div class="text-right">
-							<select name="selectContents">
-								<option value="writerId">작가 아이디</option>
-								<option value="writerName">작가명</option>
-								<option value="memberName">회원 이름</option>
-							</select> <input type="text" name="search" placeholder="검색 내용을 입력해주세요.">
-							<button type="submit">검색</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
 		<div class="col-xs-12 col-md-12">
 			<div class="col-xs-6 col-md-4">
-				<h1>${episode.literature.name }</h1>
 				<div>
-					<a href="${ctx }/views/litStorageProfile.jsp">프로필</a> <a
-						href="${ctx }/views/litStorageList.jsp">작품 목록</a> <a
-						href="${ctx }/views/discussionPlaceList.jsp">토론장</a> <a
-						href="${ctx }/litStorage/memberList.do?id=">참가 회원 목록</a> <a
-						href="${ctx }/member/search.do?litStorageId=${litStorageId }">회원초대</a>
+				<h1>${episode.literature.litStorage.name}</h1>
+				<h3>${episode.literature.name } - ${episode.title }</h3>
+				<jsp:include page="litStorageSideNav.jsp">
+					 <jsp:param name="litStorage" value="${episode.literature.litStorage.id }"/>
+					 <jsp:param name="isMaster" value="${isMaster }"/>
+				</jsp:include>
 				</div>
 			</div>
 			<div class="col-xs-12 col-md-8">
@@ -95,7 +68,6 @@ div {
 				</div>
 			</div>
 		</div>
-	</div>
 	
 	
 	

@@ -7,7 +7,14 @@
 
 <%@ include file="header.jspf"%>
 
-
+<c:choose>
+ <c:when test="${literature.creator.id eq loginId}">
+ <c:set var="isMaster" value="true" />
+ </c:when>
+ <c:otherwise>
+ <c:set var="isMaster" value="false" />
+ </c:otherwise>
+ </c:choose>
 
 <style type="text/css">
 div {
@@ -18,13 +25,13 @@ div {
 
 			<div class="col-xs-12 col-md-12">
 				<div class="col-xs-6 col-md-4">
-					<h1>작품이름</h1>
 					<div>
-						<a href="${ctx }/views/litStorageProfile.jsp">프로필</a> <a
-							href="${ctx }/views/litStorageList.jsp">작품 목록</a> <a
-							href="${ctx }/views/discussionPlaceList.jsp">토론장</a> <a
-							href="${ctx }/litStorage/memberList.do?id=">참가 회원 목록</a> <a
-							href="${ctx }/member/search.do?litStorageId=${litStorageId }">회원초대</a>
+					<h1>${literature.litStorage.name}</h1>
+					<h2>${literature.name }</h2>
+					<jsp:include page="litStorageSideNav.jsp">
+						 <jsp:param name="litStorage" value="${literature.litStorage.id }"/>
+						 <jsp:param name="isMaster" value="${isMaster }"/>
+					</jsp:include>
 					</div>
 				</div>
 				<div class="col-xs-12 col-md-8">
