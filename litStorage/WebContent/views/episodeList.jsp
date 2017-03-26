@@ -141,31 +141,35 @@ div {
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${literature.episodes}" var="episode" varStatus="status">
-											<tr>
-												<td>${status.count }</td>
-												<td>
-													<a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a>
-												</td>
-												<td>${episode.writer.id }</td>
-												<td>
-													<form action="${ctx }/episode/bound.do" method="post">
-														<input type="hidden" name="episodeId" value="${episode.id }">
-														<select name="bound">
-															<c:choose>
-																<c:when test="${episode.bound.charAt(0) eq 'M'.charAt(0) }">
-																	<option value="M">저장소 협업 작가만 공개</option>
-																	<option value="A">모두 공개</option>
-																</c:when>
-																<c:otherwise>
-																	<option value="A">모두 공개</option>
-																	<option value="M">저장소 협업 작가만 공개</option>
-																</c:otherwise>
-															</c:choose>
-														</select>
-														<button type="submit">공개 선택</button>
-													</form>
-												</td>
-											</tr>
+											<c:if test="${episode.bound.charAt(0) eq 'A'.charAt(0) || onGroup || sessionScope.isAdmin}">
+												<tr>
+													<td>${status.count }</td>
+													<td>
+														<a href="${ctx }/episode/detail.do?episodeId=${episode.id }">${episode.title }</a>
+													</td>
+													<td>${episode.writer.id }</td>
+													<td>
+														<form action="${ctx }/episode/bound.do" method="post">
+															<input type="hidden" name="episodeId" value="${episode.id }">
+															<select name="bound">
+																<c:choose>
+																	<c:when test="${episode.bound.charAt(0) eq 'M'.charAt(0) }">
+																		<option value="M">저장소 협업 작가만 공개</option>
+																		<option value="A">모두 공개</option>
+																	</c:when>
+																	<c:otherwise>
+																		<option value="A">모두 공개</option>
+																		<option value="M">저장소 협업 작가만 공개</option>
+																	</c:otherwise>
+																</c:choose>
+															</select>
+															<c:if test="${episode.writer.id eq sessionScope.loginId }">
+																<button type="submit">공개 선택</button>
+															</c:if>
+														</form>
+													</td>
+												</tr>
+											</c:if>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>

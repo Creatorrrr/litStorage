@@ -29,7 +29,9 @@
 <div style="border: 1px solid #ccc;">
 	No: ${discussionContent.id }
 	아이디: ${ discussionContent.writer.name }
-	 (<a href="${ctx }/discussionContent/delete.do?cid=${discussionContent.id}&pid=${discussionPlace.id }">삭제하기</a>)
+	<c:if test="${discussionContent.writer.id eq sessionScope.loginId || sessionScope.isAdmin}">
+	 (<a href="${ctx }/discussionContent/delete.do?cid=${discussionContent.id}&pid=${discussionPlace.id }">삭제하기</a>)	
+	</c:if>
 	<br>
 	내용: ${discussionContent.content } 
 	

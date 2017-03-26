@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.Episode;
 import domain.Literature;
+import domain.Member;
 import service.facade.LiteratureService;
 import service.logic.LiteratureServiceLogic;
 
@@ -19,6 +20,7 @@ public class EpisodeBoundController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String episodeId = request.getParameter("episodeId");
 		String bound = request.getParameter("bound");
+		String loginId = (String)request.getSession().getAttribute("loginId");
 		
 		LiteratureService service = new LiteratureServiceLogic();
 		
@@ -31,6 +33,16 @@ public class EpisodeBoundController extends HttpServlet {
 		}
 		
 		Literature literature = service.findLiteratureById(episode.getLiterature().getId());
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : literature.getLitStorage().getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("literature", literature);
 		request.getRequestDispatcher("/views/episodeList.jsp").forward(request, response);

@@ -42,6 +42,7 @@ public class EpisodeRegisterController extends HttpServlet {
 
 		LiteratureService service = new LiteratureServiceLogic();
 
+		String loginId = (String)request.getSession().getAttribute("loginId");
 		String literatureId = request.getParameter("literatureId");
 		String episodeName = request.getParameter("episodeName");
 		String episodeContents = request.getParameter("episodeContents");
@@ -67,6 +68,16 @@ public class EpisodeRegisterController extends HttpServlet {
 		}
 		
 		Literature registeredLiterature = service.findLiteratureById(literatureId);
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : literature.getLitStorage().getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("literature", registeredLiterature);
 		

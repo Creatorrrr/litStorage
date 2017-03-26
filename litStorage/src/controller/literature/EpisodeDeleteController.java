@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.Episode;
 import domain.Literature;
+import domain.Member;
 import service.facade.LiteratureService;
 import service.logic.LiteratureServiceLogic;
 
@@ -21,6 +22,7 @@ public class EpisodeDeleteController extends HttpServlet {
 			throws ServletException, IOException {
 		// 1. recevice episodeId to episodeDetail.jsp
 		// 2. delete episode
+		String loginId = (String)request.getSession().getAttribute("loginId");
 
 		LiteratureService Lservice = new LiteratureServiceLogic();
 		
@@ -32,6 +34,16 @@ public class EpisodeDeleteController extends HttpServlet {
 		
 		// 전 연재글 목록으로 이동
 		Literature literature = Lservice.findLiteratureById(episode.getLiterature().getId());
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : literature.getLitStorage().getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("literature", literature);
 
