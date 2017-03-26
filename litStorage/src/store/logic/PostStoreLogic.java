@@ -87,6 +87,39 @@ public class PostStoreLogic implements PostStore{
 		}
 		return list;
 	}
+	
+	@Override
+	public String selectRowsByBoardId(String boardId) {
+		SqlSession session = factory.openSession();
+		String rows = null;
+		
+		try{
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			rows = mapper.selectRowsByBoardId(boardId);
+		}finally{
+			session.close();
+		}
+		return rows;
+	}
+	
+	@Override
+	public List<Post> selectPostsByBoardIdWithPage(String boardId, String begin, String end) {         
+		SqlSession session = factory.openSession();
+		List<Post> list = null;
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("boardId", boardId);
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		try{
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			list = mapper.selectPostsByBoardIdWithPage(map);
+		}finally{
+			session.close();
+		}
+		return list;
+	}
 
 	@Override
 	public Post selectPostById(String id) {

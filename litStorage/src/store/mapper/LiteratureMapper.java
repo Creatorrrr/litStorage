@@ -1,5 +1,6 @@
 package store.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import domain.Literature;
@@ -20,6 +21,10 @@ public interface LiteratureMapper {
 	public List<Literature> selectLiteraturesByGenreOrderByHits(String genre);
 
 	public List<Literature> selectLiteraturesByGenreOrderById(String genre);
+	
+	public List<Literature> selectLiteraturesByGenreWithPage(HashMap<String, String> map);
+	
+	public String selectRowsByGenre(String genre);
 	
 	public List<Literature> selectLiteraturesByGenreOrderByHitsForMain(String genre);
 

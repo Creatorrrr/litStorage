@@ -123,6 +123,9 @@ public class ChangeHistory {
 			throw new RuntimeException("Can not get previous file from history");
 		} catch (IOException e) {
 			throw new RuntimeException("Can not get previous file from history");
+		} catch (NullPointerException e) {
+			strBuilder = new StringBuilder();
+			strBuilder.append("git의 정보를 읽어오는 과정에서 문제가 발생하였습니다.\r\n원인이 된 트리의 SHA-1 : " + this.content + "\r\n복구를 진행하지 말고 뒤로 가기를 눌러주세요.");
 		} finally {
 			AutoCloser.close(git);
 		}

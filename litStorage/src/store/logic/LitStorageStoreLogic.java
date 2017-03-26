@@ -2,6 +2,7 @@ package store.logic;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -180,5 +181,38 @@ public class LitStorageStoreLogic implements LitStorageStore {
 		
 		return litStorageList;
 	}
+	
+	@Override
+	public List<LitStorage> selectAllWithPage(String begin, String end) {
+		SqlSession session = factory.openSession();
+		List<LitStorage> litStorageList = null;
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("begin", begin);
+		map.put("end", end);
 
+		try {
+			LitStorageMapper mapper = session.getMapper(LitStorageMapper.class);
+			litStorageList = mapper.selectAllWithPage(map);
+		} finally {
+			session.close();
+		}
+		
+		return litStorageList;
+	}
+
+	@Override
+	public String selectRows() {
+		SqlSession session = factory.openSession();
+		String rows = null;
+
+		try {
+			LitStorageMapper mapper = session.getMapper(LitStorageMapper.class);
+			rows = mapper.selectRows();
+		} finally {
+			session.close();
+		}
+		
+		return rows;
+	}
 }

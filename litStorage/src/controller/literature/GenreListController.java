@@ -52,7 +52,6 @@ public class GenreListController extends HttpServlet {
 			}
 		}
 		
-
 		try {
 			context = JAXBContext.newInstance(Wrapper.class, Literature.class);
 			Marshaller m = context.createMarshaller();

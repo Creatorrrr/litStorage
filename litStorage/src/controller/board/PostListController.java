@@ -24,8 +24,13 @@ public class PostListController extends HttpServlet {
 		BoardService service = new BoardServiceLogic();
 		
 		String boardId = request.getParameter("boardId");
+		String pageNum = request.getParameter("pageNum");
 		
-		List<Board> boardList = service.findAllBoards();
+		if(pageNum == null || pageNum.isEmpty()) {
+			pageNum = "1";
+		}
+		
+		List<Board> boardList = service.findTitles();
 		List<Post> postList = null;
 
 		if(boardId == null) {
@@ -34,13 +39,19 @@ public class PostListController extends HttpServlet {
 			}
 		}
 		
+//		if(boardId != null) {
+//			postList = service.findPostsByBoardId(boardId);
+//		}
+		String rows = null;
 		if(boardId != null) {
-			postList = service.findPostsByBoardId(boardId);
+			postList = service.findPostsByBoardIdWithPage(boardId, pageNum);
+			rows = service.findRowsByBoardId(boardId);
 		}
 		
 		request.setAttribute("boards", boardList);
 		request.setAttribute("posts", postList);
 		request.setAttribute("boardId", boardId);
+		request.setAttribute("rows", rows);
 		
 		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);
 	}

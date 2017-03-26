@@ -47,6 +47,18 @@
 		WHERE boardId = #{board}
 	</select>
 	
+	<select id="selectRowsByBoardId" parameterType="String" resultType="String">
+		SELECT COUNT(*)
+		FROM post
+		WHERE boardId = #{board}
+	</select>
+	
+	<select id="selectPostsByBoardIdWithPage" parameterType="HashMap" resultMap="postMap">
+		SELECT id, name, content, hashTag, writer, boardid 
+		FROM (SELECT rownum rnum, id, name, content, hashTag, writer, boardid FROM Post WHERE boardId = #{boardId})
+		WHERE rnum BETWEEN #{begin} AND #{end}
+	</select>
+	
 	<select id="selectPostById" parameterType="String" resultMap="postMap">
 		<include refid="selectPost"/>
 		WHERE id=#{id}

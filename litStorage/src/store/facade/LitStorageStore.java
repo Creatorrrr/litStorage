@@ -13,4 +13,6 @@ public interface LitStorageStore {
 	public List<LitStorage> selectLitStoragesByMemberId(String id);
 	public List<LitStorage> selectLitStoragesByName(String name);
 	public List<LitStorage> selectAll();
+	public List<LitStorage> selectAllWithPage(String begin, String end);
+	public String selectRows();
 }

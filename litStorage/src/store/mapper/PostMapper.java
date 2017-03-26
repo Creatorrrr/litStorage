@@ -11,6 +11,8 @@ public interface PostMapper {
 	int updatePost(Post post);
 	int deletePost(String id);
 	List<Post>selectPostsByBoardId(String boardId);
+	String selectRowsByBoardId(String boardId);
+	List<Post>selectPostsByBoardIdWithPage(HashMap<String, String> map);
 	Post selectPostById(String id);
 	List<Post>selectPostsByContent(HashMap<String, String> map);
 	List<Post>selectPostsByHashtag(HashMap<String, String> map);

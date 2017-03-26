@@ -2,6 +2,7 @@ package service.logic;
 
 import java.util.List;
 
+import constants.Constants;
 import domain.ChangeHistory;
 import domain.Episode;
 import domain.LitStorage;
@@ -85,6 +86,19 @@ public class LitStorageServiceLogic implements LitStorageService {
 	@Override
 	public List<LitStorage> findAll() {
 		return lsStore.selectAll();
+	}
+	
+	@Override
+	public List<LitStorage> findAllWithPage(String page) {
+		String begin = (Integer.parseInt(page) - 1) * Constants.LITSTORAGE_ROW_SIZE + 1 + "";
+		String end = Integer.parseInt(page) * Constants.LITSTORAGE_ROW_SIZE + "";
+		
+		return lsStore.selectAllWithPage(begin, end);
+	}
+	
+	@Override
+	public String findRows() {
+		return lsStore.selectRows();
 	}
 
 	@Override

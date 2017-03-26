@@ -14,6 +14,8 @@ public interface BoardService {
 	public boolean modifyPost(Post post);
 	public boolean removePost(String id);
 	public List<Post> findPostsByBoardId(String id);
+	public String findRowsByBoardId(String boardId);
+	public List<Post> findPostsByBoardIdWithPage(String boardId, String page);
 	public Post findPostById(String id);
 	public List<Post> findPostsByTitle(String title, String boardId);
 	public List<Post> findPostsByContent(String content, String boardId);

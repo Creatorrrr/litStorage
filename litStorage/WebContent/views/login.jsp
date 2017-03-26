@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>로그인 - 소설 공동작업</title>
+
+<%@ include file="header.jspf"%>
 <title>로그인</title>
-</head>
-<body>
-    <a href="${ctx }/views/main.jsp" class="btn">메인으로</a> <!-- UI에서 삭제해도 ok -->
+	<div class="alert alert-dismissible alert-warning">
+	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+	  <h4>알림!</h4>
+	  <p>로그인 하셔야 작품 저장소를 사용하실수 있습니다.</p>
+	</div>
+	<h1>로그인</h1>
 	<form action="${ctx }/login.do" method="post">
 		<table class="table">
 			<tr>
@@ -28,5 +32,8 @@
 				class="btn btn-success" type="submit" value="로그인">
 		</div>
 	</form>
-</body>
-</html>
+
+
+
+
+<%@ include file="footer.jspf"%>
