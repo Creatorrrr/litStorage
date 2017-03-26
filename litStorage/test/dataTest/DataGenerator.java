@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 import org.junit.Test;
 
 import domain.Board;
+import domain.Episode;
 import domain.LitStorage;
 import domain.Literature;
 import domain.Member;
@@ -137,5 +138,18 @@ public class DataGenerator {
 		
 		
 		assertEquals(true, true);
+	}
+	
+	@Test
+	public void makeEpisode(){
+		Episode ep = new Episode();
+//		ep.setBound(bound);
+//		ep.setContent(content);
+//		ep.setLiterature(literature);
+//		ep.setTitle(title);
+//		ep.setWriter(writer);
+		
+		
+		assertEquals(true,true);
 	}
 }
