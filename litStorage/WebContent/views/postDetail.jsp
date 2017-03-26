@@ -6,6 +6,7 @@
 <title>게시글 상세 - 소설 공동작업</title>
 
 
+<%@ include file="header.jspf"%>
 
 
 	<a href="${ctx }/post/list.do?boardId=${post.board.id}">게시글 목록</a>
