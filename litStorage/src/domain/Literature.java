@@ -12,7 +12,7 @@ import com.sun.xml.internal.txw2.annotation.XmlAttribute;
 
 
 @XmlRootElement(name="literature")
-@XmlType(propOrder = {"id","name","genre","introduce","creator","hits"})
+@XmlType(propOrder = {"id","name","genre","imagePath","introduce","creator","hits"})
 @XmlSeeAlso({ArrayList.class,Member.class})
 public class Literature {
 	private String id;
@@ -58,7 +58,7 @@ public class Literature {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	@XmlTransient
+	
 	public String getImagePath() {
 		return imagePath;
 	}

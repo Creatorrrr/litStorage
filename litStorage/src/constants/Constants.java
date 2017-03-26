@@ -1,8 +1,8 @@
 package constants;
 
 public class Constants {
-	public static final String ROOT = "C:/Users/Creator";
-	
+//	public static final String ROOT = "C:/Users/Creator";
+	public static final String ROOT = "C:/Users/ma ju hwan/Documents";
 	public static final String ROOT_PATH = ROOT + "/litStorageGit";
 	public static final String IMAGE_PATH = ROOT + "/litStorageImgs";
 	

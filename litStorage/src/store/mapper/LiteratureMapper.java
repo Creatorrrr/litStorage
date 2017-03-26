@@ -20,6 +20,10 @@ public interface LiteratureMapper {
 	public List<Literature> selectLiteraturesByGenreOrderByHits(String genre);
 
 	public List<Literature> selectLiteraturesByGenreOrderById(String genre);
+	
+	public List<Literature> selectLiteraturesByGenreOrderByHitsForMain(String genre);
+
+	public List<Literature> selectLiteraturesByGenreOrderByIdForMain(String genre);
 
 	public List<Literature> selectLiteraturesByMemberId(String memberId);
 }

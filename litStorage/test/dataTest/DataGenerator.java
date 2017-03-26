@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 import org.junit.Test;
 
 import domain.Board;
+import domain.Episode;
 import domain.LitStorage;
 import domain.Literature;
 import domain.Member;
