@@ -1,5 +1,6 @@
 package store.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import domain.Post;
@@ -10,8 +11,10 @@ public interface PostMapper {
 	int updatePost(Post post);
 	int deletePost(String id);
 	List<Post>selectPostsByBoardId(String boardId);
+	String selectRowsByBoardId(String boardId);
+	List<Post>selectPostsByBoardIdWithPage(HashMap<String, String> map);
 	Post selectPostById(String id);
-	List<Post>selectPostsByContent(String content);
-	List<Post>selectPostsByHashtag(String hashtag);
-	List<Post> selectPostsByTitle(String title);
+	List<Post>selectPostsByContent(HashMap<String, String> map);
+	List<Post>selectPostsByHashtag(HashMap<String, String> map);
+	List<Post> selectPostsByTitle(HashMap<String, String> map);
 }

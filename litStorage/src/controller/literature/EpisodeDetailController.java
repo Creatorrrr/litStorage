@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Episode;
+import domain.Member;
 import service.facade.LiteratureService;
 import service.logic.LiteratureServiceLogic;
 
@@ -22,8 +23,19 @@ public class EpisodeDetailController extends HttpServlet {
 		LiteratureService service = new LiteratureServiceLogic();
 
 		String episodeId = request.getParameter("episodeId");
+		String loginId = (String)request.getSession().getAttribute("loginId");
 
 		Episode episode = service.findEpisodeById(episodeId);
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : episode.getLiterature().getLitStorage().getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 
 		request.setAttribute("episode", episode);
 

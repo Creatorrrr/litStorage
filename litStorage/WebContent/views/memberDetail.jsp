@@ -1,24 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원정보</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>회원정보 - 소설 공동작업</title>
 
-
-
-</head>
-
-<body>
 <%@ include file="header.jspf"%>
 
 
-	<form method="post" action="${ctx }/modifyPro.do" name="userinput"
-		onsubmit="return checkIt()">
-		<table width="600" border="1" cellspacing="0" cellpadding="3" align="center">
+
+
+	<form method="post" action="${ctx }/modifyPro.do" name="userinput" onsubmit="return checkIt()">
+		<table class="table  table-striped table-hover " >
 			<tr>
 				<td colspan="2" height="39" align="center"><b>회원정보</b></td>
 			</tr>
@@ -40,8 +33,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-				<a href="${ctx }/member/modify.do" class="btn">정보수정</a> 
-				<a href="${ctx }/views" class="btn">메인으로</a> 
+				<a href="${ctx }/member/modify.do" class="btn btn-success">정보수정</a> 
 				</td>
 			</tr>
 		</table>
@@ -67,5 +59,4 @@
 	
 	
 	
-</body>
-</html>
+<%@ include file="footer.jspf"%>

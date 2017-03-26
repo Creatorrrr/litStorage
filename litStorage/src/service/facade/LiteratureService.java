@@ -10,8 +10,10 @@ public interface LiteratureService {
 	public boolean registerLiterature(Literature literature);
 
 	public boolean removeLiterature(String Id);
+	
+	public boolean increaseLiteratureHitByLiteratureId(String id);
 
-	public Literature findLiteratureById(String Id);
+	public Literature findLiteratureById(String id);
 
 	public List<Literature> findLiteratureByName(String name);
 
@@ -20,8 +22,16 @@ public interface LiteratureService {
 	public List<Literature> findLiteraturesByMemberId(String id);
 
 	public List<Literature> findLiteraturesByGenreOrderByHits(String genre);
+	
+	public List<Literature> findLiteraturesByGenreOrderByHitsForMain(String genre);
 
 	public List<Literature> findLiteraturesByGenreOrderById(String genre);
+	
+	public List<Literature> findLiteraturesByGenreOrderByIdForMain(String genre);
+	
+	public List<Literature> findLiteraturesByGenreWithPage(String genre, String page);
+	
+	public String findRowsByGenre(String genre);
 
 	public boolean registerEpisode(Episode episode);
 
@@ -32,8 +42,6 @@ public interface LiteratureService {
 	public Episode findEpisodeById(String Id);
 
 	public List<Episode> findEpisodeByLiteratureId(String literatureId);
-
-	public boolean modifyBoundById(String Id);
 
 //	public boolean registerChangeHistory(ChangeHistory changeHistory);
 

@@ -1,32 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>연재글 목록</title>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	function deleteLitFunction() {
-		var deleteLit = confirm("삭제하시겠습니까?");
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>연재글 목록 - 소설 공동작업</title>
 
-	}
-</script>
+<%@ include file="header.jspf"%>
+
+
 
 <style type="text/css">
 div {
 	border: 1px solid #ccc;
 }
 </style>
-</head>
-<body>
-<%@ include file="header.jspf"%>
+
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
@@ -75,7 +64,8 @@ div {
 			</div>
 			<div class="panel panel-default">
 				<div class="row">
-					<form action="${ctx }/literature/register.do" method="post" enctype="multipart/form-data">
+					<form action="${ctx }/literature/register.do" method="post" 
+						name="literatureRegister" enctype="multipart/form-data" onsubmit="return checkIt()">
 						<input type="hidden" name="litStorageId" value="${litStorageId }">
 						<div>
 							<h4>이미지 업로드</h4>
@@ -85,7 +75,7 @@ div {
 							<h4>장르</h4>
 							<select name="selectGenre">
 								<c:forEach items="${boards}" var="board">
-									<option value="${board.id }">${board.title }</option>
+									<option value="${board.title }">${board.title }</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -98,7 +88,7 @@ div {
 							<textarea rows="10" cols="75" name="introduce"></textarea>
 						</div>
 						<div class="text-right">
-							<button type="reset">취소하기</button>
+							<button type="reset" onclick="location.href='${ctx }/literature/list.do?id=${litStorageId }'">취소하기</button>
 							<button type="submit">작품 등록</button>
 						</div>
 					</form>
@@ -110,19 +100,29 @@ div {
 	<script type="text/javaScript">
 		function checkIt() {
 
-			var litRegister = document.litRegister;
+			var literatureRegister = document.literatureRegister;
 
-			if (!litRegister.inputName.value) {
-				alert("이름을 입력하세요");
+			if (!literatureRegister.name.value) {
+				alert("제목을 입력하세요");
 				return false;
 			}
 
-			if (!litRegister.inputIntroduce.value) {
-				alert("내용을 입력하세요");
+			if (!literatureRegister.introduce.value) {
+				alert("소개를 입력하세요");
 				return false;
 			}
 			return true;
 		}
 	</script>
-</body>
-</html>
+
+<script type="text/javascript">
+	function deleteLitFunction() {
+		var deleteLit = confirm("삭제하시겠습니까?");
+
+	}
+</script>
+
+
+
+	
+<%@ include file="footer.jspf"%>

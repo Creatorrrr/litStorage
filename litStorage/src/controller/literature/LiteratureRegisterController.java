@@ -34,7 +34,7 @@ public class LiteratureRegisterController extends HttpServlet {
 			throws ServletException, IOException {
 		BoardService service = new BoardServiceLogic();
 		
-		List<Board> boardList = service.findAllBoards();
+		List<Board> boardList = service.findTitles();
 		List<Board> bListRemoved = new ArrayList<>();
 
 		/* 장르 dropdownlist를 만들기 위해 게시판 이름을 싹 보내줌(신고 빼고) */
@@ -86,7 +86,11 @@ public class LiteratureRegisterController extends HttpServlet {
 		
 		literature.setName(name);
 		literature.setGenre(genre);
-		literature.setImagePath(image.getCanonicalPath());
+		if(image == null) {
+			literature.setImagePath(Constants.DEFAULT_IMAGE);
+		} else {
+			literature.setImagePath(image.getCanonicalPath());
+		}
 		literature.setIntroduce(introduce);
 		literature.setCreator(creator);
 		literature.setHits(0);
@@ -97,6 +101,16 @@ public class LiteratureRegisterController extends HttpServlet {
 		}
 		
 		litStorage = lsService.findLitStorageById(litStorageId);
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : litStorage.getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("litStorage", litStorage);
 		

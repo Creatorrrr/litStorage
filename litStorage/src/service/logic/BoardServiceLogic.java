@@ -2,6 +2,7 @@ package service.logic;
 
 import java.util.List;
 
+import constants.Constants;
 import domain.Board;
 import domain.Post;
 import service.facade.BoardService;
@@ -34,6 +35,11 @@ public class BoardServiceLogic implements BoardService {
 	public List<Board> findAllBoards() {
 		return bStore.selectAll();
 	}
+	
+	@Override
+	public List<Board> findTitles() {
+		return bStore.selectTitles();
+	}
 
 	@Override
 	public boolean registerPost(Post post) {
@@ -54,6 +60,19 @@ public class BoardServiceLogic implements BoardService {
 	public List<Post> findPostsByBoardId(String id) {
 		return pStore.selectPostsByBoardId(id);
 	}
+	
+	@Override
+	public String findRowsByBoardId(String boardId) {
+		return pStore.selectRowsByBoardId(boardId);
+	}
+	
+	@Override
+	public List<Post> findPostsByBoardIdWithPage(String boardId, String page) {
+		String begin = (Integer.parseInt(page) - 1) * Constants.POST_ROW_SIZE + 1 + "";
+		String end = Integer.parseInt(page) * Constants.POST_ROW_SIZE + "";
+
+		return pStore.selectPostsByBoardIdWithPage(boardId, begin, end);
+	}
 
 	@Override
 	public Post findPostById(String id) {
@@ -61,18 +80,18 @@ public class BoardServiceLogic implements BoardService {
 	}
 
 	@Override
-	public List<Post> findPostsByTitle(String title) {
-		return pStore.selectPostsByTitle(title);
+	public List<Post> findPostsByTitle(String title, String boardId) {
+		return pStore.selectPostsByTitle(title, boardId);
 	}
 
 	@Override
-	public List<Post> findPostsByContent(String content) {
-		return pStore.selectPostsByContent(content);
+	public List<Post> findPostsByContent(String content, String boardId) {
+		return pStore.selectPostsByContent(content, boardId);
 	}
 
 	@Override
-	public List<Post> findPostsByHashTag(String hashTag) {
-		return pStore.selectPostsByHashtag(hashTag);
+	public List<Post> findPostsByHashTag(String hashTag, String boardId) {
+		return pStore.selectPostsByHashtag(hashTag, boardId);
 	}
 	
 

@@ -1,29 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>연재글 목록</title>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>연재글 목록 - 소설 공동작업</title>
 
-</script>
+<%@ include file="header.jspf"%>
+
 
 <style type="text/css">
 div {
 	border: 1px solid #ccc;
 }
 </style>
-</head>
-<body>
-<%@ include file="header.jspf"%>
+
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
@@ -59,9 +50,11 @@ div {
 			<div class="col-xs-6 col-md-4">
 				<h1>작품이름</h1>
 				<div>
-					<a href="javascript:;">프로필</a> <a href="javascript:;">작품 목록</a> <a
-						href="javascript:;">토론장</a> <a href="javascript:;">참가 회원 목록</a> <a
-						href="javascript:;">회원 초대</a>
+						<a href="${ctx }/views/litStorageProfile.jsp">프로필</a> <a
+							href="${ctx }/views/litStorageList.jsp">작품 목록</a> <a
+							href="${ctx }/views/discussionPlaceList.jsp">토론장</a> <a
+							href="${ctx }/litStorage/memberList.do?id=">참가 회원 목록</a> <a
+							href="${ctx }/member/search.do?litStorageId=${litStorageId }">회원초대</a>
 				</div>
 			</div>
 			<div class="col-xs-12 col-md-8">
@@ -82,7 +75,7 @@ div {
 								</div>
 							</div>
 							<div class="text-right">
-								<button type="reset">취소하기</button>
+								<button type="reset" >취소하기</button>
 								<button type="submit">연재글 등록</button>
 							</div>
 						</form>
@@ -109,6 +102,6 @@ div {
 			return true;
 		}
 	</script>
+
 	
-</body>
-</html>
+<%@ include file="footer.jspf"%>

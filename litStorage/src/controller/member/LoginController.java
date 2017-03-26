@@ -1,8 +1,6 @@
 	package controller.member;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,7 +42,7 @@ public class LoginController extends HttpServlet {
 			}else{
 				HttpSession session = request.getSession();
 				session.setAttribute("loginId", loginId);
-				if(loginId == "admin"){
+				if(loginId.equals("admin")){
 					session.setAttribute("isAdmin", true);
 				}
 				request.setAttribute("message", "로그인 되었습니다.");

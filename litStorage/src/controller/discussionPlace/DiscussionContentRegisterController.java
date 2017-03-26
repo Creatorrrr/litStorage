@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.DiscussionContent;
 import domain.DiscussionPlace;
+import domain.LitStorage;
 import domain.Member;
 import service.facade.DiscussionPlaceService;
+import service.facade.LitStorageService;
 import service.logic.DiscussionPlaceServiceLogic;
+import service.logic.LitStorageServiceLogic;
 
 
 @WebServlet("/discussionContent/register.do")
@@ -23,21 +26,24 @@ public class DiscussionContentRegisterController extends HttpServlet {
 		
 		String content = request.getParameter("discussionContentText");
 		String discussionPlaceId = request.getParameter("discussionPlaceId");
+		String litStorageId = request.getParameter("litStorageId");
+		
 		DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
 
 		DiscussionContent discussionContent = new DiscussionContent();
 		discussionContent.setContent(content);
 		
 		Member member = new Member();
-		member.setId("test");
+		member.setId((String)request.getSession().getAttribute("loginId"));
 		discussionContent.setWriter(member);
 		
 		DiscussionPlace discussionPlace = new DiscussionPlace();
 		discussionPlace.setId(discussionPlaceId);
 		discussionContent.setDiscussionPlace(discussionPlace);
 		boolean check = service.registerDiscussionContent(discussionContent);
+		
 		//if(check ){
-		response.sendRedirect(request.getContextPath()+"/discussionPlace/detail.do?id="+discussionPlaceId);
+		response.sendRedirect(request.getContextPath()+"/discussionPlace/detail.do?id="+discussionPlaceId+"&litStorageId="+litStorageId);
 		//}
 		
 	}

@@ -2,6 +2,7 @@ package service.logic;
 
 import java.util.List;
 
+import constants.Constants;
 import domain.ChangeHistory;
 import domain.Episode;
 import domain.Literature;
@@ -54,6 +55,11 @@ public class LiteratureServiceLogic implements LiteratureService {
 		
 		return checkLiterature && checkGit;
 	}
+	
+	@Override
+	public boolean increaseLiteratureHitByLiteratureId(String id) {
+		return lStore.updateLiteratureHitByLiteratureId(id);
+	}
 
 	@Override
 	public Literature findLiteratureById(String Id) {
@@ -81,10 +87,33 @@ public class LiteratureServiceLogic implements LiteratureService {
 	public List<Literature> findLiteraturesByGenreOrderByHits(String genre) {
 		return lStore.selectLiteraturesByGenreOrderByHits(genre);
 	}
+	
+	@Override
+	public List<Literature> findLiteraturesByGenreOrderByHitsForMain(String genre) {
+		return lStore.selectLiteraturesByGenreOrderByHitsForMain(genre);
+	}
 
 	@Override
 	public List<Literature> findLiteraturesByGenreOrderById(String genre) {
 		return lStore.selectLiteraturesByGenreOrderById(genre);
+	}
+	
+	@Override
+	public List<Literature> findLiteraturesByGenreOrderByIdForMain(String genre) {
+		return lStore.selectLiteraturesByGenreOrderByIdForMain(genre);
+	}
+	
+	@Override
+	public List<Literature> findLiteraturesByGenreWithPage(String genre, String page) {
+		String begin = (Integer.parseInt(page) - 1) * Constants.LITERATURE_ROW_SIZE + 1 + "";
+		String end = Integer.parseInt(page) * Constants.LITERATURE_ROW_SIZE + "";
+		
+		return lStore.selectLiteraturesByGenreWithPage(genre, begin, end);
+	}
+	
+	@Override
+	public String findRowsByGenre(String genre) {
+		return lStore.selectRowsByGenre(genre);
 	}
 	
 	@Override
@@ -143,11 +172,6 @@ public class LiteratureServiceLogic implements LiteratureService {
 	@Override
 	public List<Episode> findEpisodeByLiteratureId(String literatureId) {
 		return epStore.selectEpisodesByLiteratureId(literatureId);
-	}
-
-	@Override
-	public boolean modifyBoundById(String Id) {
-		return epStore.updateBound(Id);
 	}
 
 //	@Override

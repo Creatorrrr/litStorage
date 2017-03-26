@@ -7,14 +7,16 @@ import domain.Literature;
 import domain.MemberLitStorage;
 
 public interface LitStorageService {
-	boolean registerLitStorage(LitStorage litStorage);
-	boolean removeLitStorage(String litStorageId);
-	List<LitStorage> findAll();
-	LitStorage findLitStorageById(String id);
-	List<LitStorage> findLitStoragesByMemberId(String id);
-	List<LitStorage> findLitStoragesByName(String name);
-	boolean registerMemberLitStorage(MemberLitStorage memberLitStorage);
-	List<MemberLitStorage> findMemberLitStoragesByMemberId(String id);
-	List<MemberLitStorage> findMemberLitStorageByLitStorageId(String id);
-	List<Literature> findLiteraturesByMemberId(String id);
+	public boolean registerLitStorage(LitStorage litStorage);
+	public boolean removeLitStorage(String litStorageId);
+	public List<LitStorage> findAll();
+	public List<LitStorage> findAllWithPage(String page);
+	public String findRows();
+	public LitStorage findLitStorageById(String id);
+	public List<LitStorage> findLitStoragesByMemberId(String id);
+	public List<LitStorage> findLitStoragesByName(String name);
+	public boolean registerMemberLitStorage(MemberLitStorage memberLitStorage);
+	public List<MemberLitStorage> findMemberLitStoragesByMemberId(String id);
+	public List<MemberLitStorage> findMemberLitStorageByLitStorageId(String id);
+	public List<Literature> findLiteraturesByMemberId(String id);
 }

@@ -58,4 +58,15 @@
   		SELECT id, introduce, name, writer
   		FROM litstorage
   	</select>
+  	
+  	<select id="selectAllWithPage" parameterType="HashMap" resultMap="litStorageMap">
+  		SELECT id, introduce, name, writer 
+		FROM (SELECT rownum rnum, id, introduce, name, writer FROM litstorage)
+		WHERE rnum BETWEEN #{begin} AND #{end}
+  	</select>
+  	
+  	<select id="selectRows" resultType="String">
+  		SELECT COUNT(*)
+		FROM litstorage
+  	</select>
   </mapper>

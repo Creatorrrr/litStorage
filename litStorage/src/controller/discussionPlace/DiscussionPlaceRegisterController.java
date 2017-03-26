@@ -38,7 +38,7 @@ public class DiscussionPlaceRegisterController extends HttpServlet {
 		d.setLitStorage(l);
 
 		boolean check = service.registerDiscussionPlace(d);
-			response.sendRedirect(request.getContextPath() + "/discussionPlace/list.do?litStorageId="+litStorageId);
+		response.sendRedirect(request.getContextPath() + "/discussionPlace/list.do?litStorageId="+litStorageId);
 
 
 

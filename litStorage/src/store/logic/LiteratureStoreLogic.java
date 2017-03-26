@@ -1,6 +1,7 @@
 package store.logic;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -100,6 +101,23 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		
 		return true;
 	}
+	
+	public boolean updateLiteratureHitByLiteratureId(String literatureId) {
+		SqlSession session = factory.openSession();
+		boolean check = false;
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			
+			if(check = mapper.updateLiteratureHitByLiteratureId(literatureId) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return check;
+	}
 
 	@Override
 	public Literature selectLiteraturesById(String literatureId) {
@@ -157,6 +175,21 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		}
 		return list;
 	}
+	
+	@Override
+	public List<Literature> selectLiteraturesByGenreOrderByHitsForMain(String genre) {
+		SqlSession session = factory.openSession();
+		List<Literature> list = null;
+		
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			list = mapper.selectLiteraturesByGenreOrderByHitsForMain(genre);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
 
 	@Override
 	public List<Literature> selectLiteraturesByGenreOrderById(String genre) {
@@ -166,6 +199,21 @@ public class LiteratureStoreLogic implements LiteratureStore{
 		try {
 			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
 			list = mapper.selectLiteraturesByGenreOrderById(genre);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	@Override
+	public List<Literature> selectLiteraturesByGenreOrderByIdForMain(String genre) {
+		SqlSession session = factory.openSession();
+		List<Literature> list = null;
+		
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			list = mapper.selectLiteraturesByGenreOrderByIdForMain(genre);
 			session.commit();
 		} finally {
 			session.close();
@@ -185,6 +233,39 @@ public class LiteratureStoreLogic implements LiteratureStore{
 			session.close();
 		}
 		return list;
+	}
+	
+	@Override
+	public List<Literature> selectLiteraturesByGenreWithPage(String genre, String begin, String end) {
+		SqlSession session = factory.openSession();
+		List<Literature> list = null;
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("genre", genre);
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			list = mapper.selectLiteraturesByGenreWithPage(map);
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	@Override
+	public String selectRowsByGenre(String genre) {
+		SqlSession session = factory.openSession();
+		String rows = null;
+		
+		try {
+			LiteratureMapper mapper = session.getMapper(LiteratureMapper.class);
+			rows = mapper.selectRowsByGenre(genre);
+		} finally {
+			session.close();
+		}
+		return rows;
 	}
 
 }

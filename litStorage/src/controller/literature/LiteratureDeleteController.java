@@ -29,6 +29,7 @@ public class LiteratureDeleteController extends HttpServlet {
 		LitStorageService lsService = new LitStorageServiceLogic();
 
 		String literatureId = request.getParameter("literatureId");
+		String loginId = (String)request.getSession().getAttribute("loginId");
 		
 		Literature literature = lService.findLiteratureById(literatureId);
 		
@@ -42,6 +43,16 @@ public class LiteratureDeleteController extends HttpServlet {
 		}
 		
 		LitStorage litStorage = lsService.findLitStorageById(literature.getLitStorage().getId());
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : litStorage.getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("litStorage", litStorage);
 

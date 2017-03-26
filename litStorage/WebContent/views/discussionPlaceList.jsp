@@ -1,19 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>토론장 목록</title>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>토론장 목록 - 소설 공동작업</title>
 
-<script type="text/javascript" src="${ctx }/resources/js/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
 
-</head>
-<body>
 
 <c:choose>
  <c:when test="${litStorage.creator.id eq loginId}">
@@ -108,7 +100,7 @@
 				<tr>
 					<td>${ status.count }</td>
 					<td><a
-						href="${ctx }/discussionPlace/detail.do?id=${discussionPlace.id }">${discussionPlace.title }</a></td>
+						href="${ctx }/discussionPlace/detail.do?id=${discussionPlace.id }&litStorageId=${litStorage.id}">${discussionPlace.title }</a></td>
 					<td>${ discussionPlace.creator.id}(${discussionPlace.creator.name })</td>
 			
 				</tr>
@@ -117,5 +109,5 @@
 	</div>
 
 
-</body>
-</html>
+	
+<%@ include file="footer.jspf"%>

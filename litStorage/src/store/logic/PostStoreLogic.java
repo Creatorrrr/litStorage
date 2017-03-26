@@ -1,5 +1,6 @@
 package store.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -86,6 +87,39 @@ public class PostStoreLogic implements PostStore{
 		}
 		return list;
 	}
+	
+	@Override
+	public String selectRowsByBoardId(String boardId) {
+		SqlSession session = factory.openSession();
+		String rows = null;
+		
+		try{
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			rows = mapper.selectRowsByBoardId(boardId);
+		}finally{
+			session.close();
+		}
+		return rows;
+	}
+	
+	@Override
+	public List<Post> selectPostsByBoardIdWithPage(String boardId, String begin, String end) {         
+		SqlSession session = factory.openSession();
+		List<Post> list = null;
+		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("boardId", boardId);
+		map.put("begin", begin);
+		map.put("end", end);
+		
+		try{
+			PostMapper mapper = session.getMapper(PostMapper.class);
+			list = mapper.selectPostsByBoardIdWithPage(map);
+		}finally{
+			session.close();
+		}
+		return list;
+	}
 
 	@Override
 	public Post selectPostById(String id) {
@@ -101,13 +135,17 @@ public class PostStoreLogic implements PostStore{
 	}
 
 	@Override
-	public List<Post> selectPostsByContent(String content) {
+	public List<Post> selectPostsByContent(String content, String boardId) {
 		SqlSession session = factory.openSession();
 		List<Post> list = null;
 		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("content", content);
+		map.put("boardId", boardId);
+		
 		try{
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			list=mapper.selectPostsByContent(content);
+			list=mapper.selectPostsByContent(map);
 		}finally{
 			session.close();
 		}
@@ -115,13 +153,17 @@ public class PostStoreLogic implements PostStore{
 	}
 
 	@Override
-	public List<Post> selectPostsByHashtag(String hashtag) {
+	public List<Post> selectPostsByHashtag(String hashTag, String boardId) {
 		SqlSession session = factory.openSession();
 		List<Post> list = null;
 		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("hashTag", hashTag);
+		map.put("boardId", boardId);
+		
 		try{
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			list=mapper.selectPostsByHashtag(hashtag);
+			list=mapper.selectPostsByHashtag(map);
 		}finally{
 			session.close();
 		}
@@ -129,13 +171,17 @@ public class PostStoreLogic implements PostStore{
 	}
 	
 	@Override
-	public List<Post> selectPostsByTitle(String title) {
+	public List<Post> selectPostsByTitle(String title, String boardId) {
 		SqlSession session = factory.openSession();
 		List<Post> list = null;
 		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("title", title);
+		map.put("boardId", boardId);
+		
 		try{
 			PostMapper mapper = session.getMapper(PostMapper.class);
-			list=mapper.selectPostsByTitle(title);
+			list=mapper.selectPostsByTitle(map);
 		}finally{
 			session.close();
 		}

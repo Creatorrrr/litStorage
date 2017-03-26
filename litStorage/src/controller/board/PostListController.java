@@ -14,7 +14,7 @@ import domain.Post;
 import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
 
-@WebServlet("/post/postList.do") // /post/postList.do /board/freeBoard.do
+@WebServlet("/post/list.do") // /post/postList.do /board/freeBoard.do
 public class PostListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,30 +22,38 @@ public class PostListController extends HttpServlet {
 			throws ServletException, IOException {
 
 		BoardService service = new BoardServiceLogic();
-
-		/*
-		 * String post = request.getParameter("post");
-		 * List<Post>list = service.findPostsByBoardId(post);
-		 * String board = request.getParameter("board");
-		 * Post po = service.findPostById(post);
-		 * request.setAttribute("posts", list); //5줄 수정부분
-		 */
-		String boardId = request.getParameter("boardId");
 		
-		List<Board> boardList = service.findAllBoards();
-
-		if(boardId == null) {
-			boardId = boardList.get(0).getId();
+		String boardId = request.getParameter("boardId");
+		String pageNum = request.getParameter("pageNum");
+		
+		if(pageNum == null || pageNum.isEmpty()) {
+			pageNum = "1";
 		}
 		
-		List<Post> postList = service.findPostsByBoardId(boardId);
+		List<Board> boardList = service.findTitles();
+		List<Post> postList = null;
 
+		if(boardId == null) {
+			if(boardList.size() > 0) {
+				boardId = boardList.get(0).getId();
+			}
+		}
+		
+//		if(boardId != null) {
+//			postList = service.findPostsByBoardId(boardId);
+//		}
+		String rows = null;
+		if(boardId != null) {
+			postList = service.findPostsByBoardIdWithPage(boardId, pageNum);
+			rows = service.findRowsByBoardId(boardId);
+		}
+		
 		request.setAttribute("boards", boardList);
 		request.setAttribute("posts", postList);
 		request.setAttribute("boardId", boardId);
+		request.setAttribute("rows", rows);
 		
-		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);// /views/boardList.jsp
+		request.getRequestDispatcher("/views/postList.jsp").forward(request, response);
 	}
-
 	
 }

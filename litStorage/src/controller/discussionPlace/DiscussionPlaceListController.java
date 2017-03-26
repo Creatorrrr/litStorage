@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.DiscussionPlace;
 import domain.LitStorage;
-import domain.Member;
 import service.facade.DiscussionPlaceService;
+import service.facade.LitStorageService;
 import service.logic.DiscussionPlaceServiceLogic;
 import service.logic.LitStorageServiceLogic;
 
@@ -25,13 +25,15 @@ public class DiscussionPlaceListController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
+		DiscussionPlaceService dpService = new DiscussionPlaceServiceLogic();
+		LitStorageService lsService = new LitStorageServiceLogic();
+		
 		String litStorageId = request.getParameter("litStorageId");
-		List<DiscussionPlace> list=service.findDiscussionPlacesByLitStorageId(litStorageId);
+		List<DiscussionPlace> list = dpService.findDiscussionPlacesByLitStorageId(litStorageId);
 		request.setAttribute("discussionPlaces", list);
 		
 		//sideNav를 위해 litStorage 재포함
-		LitStorage ls = new LitStorageServiceLogic().findLitStorageById(litStorageId);
+		LitStorage ls = lsService.findLitStorageById(litStorageId);
 		request.setAttribute("litStorage", ls);
 		
 		request.getRequestDispatcher("/views/discussionPlaceList.jsp").forward(request, response);

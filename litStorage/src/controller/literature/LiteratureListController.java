@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.LitStorage;
+import domain.Member;
 import service.facade.LitStorageService;
 import service.logic.LitStorageServiceLogic;
 
@@ -23,8 +24,19 @@ public class LiteratureListController extends HttpServlet {
 		LitStorageService service = new LitStorageServiceLogic();
 
 		String litStorageId = request.getParameter("id");
+		String loginId = (String)request.getSession().getAttribute("loginId");
 
 		LitStorage litStorage = service.findLitStorageById(litStorageId);
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : litStorage.getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("litStorage", litStorage);
 		

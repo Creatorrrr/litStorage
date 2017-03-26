@@ -295,24 +295,6 @@ public class EpisodeStoreLogic implements EpisodeStore {
 		}
 		return list;
 	}
-
-	@Override
-	public boolean updateBound(String bound) {
-		SqlSession session = factory.openSession();
-		boolean check = false;
-		try {
-			EpisodeMapper mapper = session.getMapper(EpisodeMapper.class);
-			check = mapper.updateBound(bound);
-			if (check) {
-				session.commit();
-			} else {
-				session.rollback();
-			}
-		} finally {
-			session.close();
-		}
-		return check;
-	}
 	
 	@Override
 	public boolean insertChangeHistory(ChangeHistory history) {
