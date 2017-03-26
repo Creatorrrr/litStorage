@@ -16,11 +16,14 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.namespace.QName;
 
+import domain.Board;
 import domain.LitStorage;
 import domain.Literature;
 import domain.wrapper.Wrapper;
+import service.facade.BoardService;
 import service.facade.LitStorageService;
 import service.facade.LiteratureService;
+import service.logic.BoardServiceLogic;
 import service.logic.LitStorageServiceLogic;
 import service.logic.LiteratureServiceLogic;
 
@@ -42,7 +45,22 @@ public class LiteratureSearchController extends HttpServlet {
 		}
 		//request에 list 담아서 literatureList.jsp로 보내줌
 		request.setAttribute("literatures", list);
-		request.getRequestDispatcher("/views/literatureSearch.jsp").forward(request, response);
+		
+		BoardService bService = new BoardServiceLogic();
+		List<Board> bList = bService.findAllBoards();
+		
+		List<Board> bListRemoved = new ArrayList<>();
+
+		/* 장르 dropdownlist를 만들기 위해 게시판 이름을 싹 보내줌(신고 빼고) */
+		for (Board b : bList) {
+			if (!b.getTitle().equals("신고")) {
+				bListRemoved.add(b);
+			}
+		}
+
+		request.setAttribute("genreList", bListRemoved);
+		
+		request.getRequestDispatcher("/views/literatureAllList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

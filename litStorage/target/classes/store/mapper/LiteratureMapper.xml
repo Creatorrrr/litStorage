@@ -65,8 +65,8 @@
 	<select id="selectLiteraturesByGenreOrderByHitsForMain"
 		parameterType="string" resultMap="literatureMap">
 		
-		select rnum, T.* FROM(SELECT s.*, ROW_NUMBER() OVER(ORDER BY hits
-		desc)as rnum from literature S)T
+		select rnum, T.* FROM(SELECT S.*, ROW_NUMBER() OVER(ORDER BY hits
+		desc)as rnum from literature S WHERE genre = #{genre})T
 		WHERE rnum BETWEEN 1 and 6
 	</select>
 
@@ -74,7 +74,7 @@
 		parameterType="string" resultMap="literatureMap">
 		
 		select rnum, T.* FROM(SELECT s.*, ROW_NUMBER() OVER(ORDER BY id
-		desc)as rnum from literature S)T
+		desc)as rnum from literature S WHERE genre = #{genre})T
 		WHERE rnum BETWEEN 1 and 6
 	</select>
 

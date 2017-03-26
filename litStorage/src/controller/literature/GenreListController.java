@@ -29,7 +29,7 @@ public class GenreListController extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/xml;charset=utf-8");
 		OutputStream out = response.getOutputStream();
-		
+
 		JAXBContext context;
 
 		String type = request.getParameter("type");
@@ -38,23 +38,20 @@ public class GenreListController extends HttpServlet {
 		LiteratureService service = new LiteratureServiceLogic();
 
 		List<Literature> list = new ArrayList<>();
-		if (type.equals("newGenre")) {
-			list = service.findLiteraturesByGenreOrderById(genre);
-		} else {
-			list = service.findLiteraturesByGenreOrderByHits(genre);
-		}
-
-		if (request.getParameter("from").equals("main")) {
-			List<Literature> cutList = new ArrayList<>();
-			for (int i = 0; i < 6; i++) {
-				try {
-					cutList.add(list.get(i));
-				} catch (Exception e) {}
-				
+		if (!request.getParameter("from").equals("main")) {
+			if (type.equals("newGenre")) {
+				list = service.findLiteraturesByGenreOrderById(genre);
+			} else {
+				list = service.findLiteraturesByGenreOrderByHits(genre);
 			}
-			list.clear();
-			list = cutList;
+		} else {
+			if (type.equals("newGenre")) {
+				list = service.findLiteraturesByGenreOrderByIdForMain(genre);
+			} else {
+				list = service.findLiteraturesByGenreOrderByHitsForMain(genre);
+			}
 		}
+		
 
 		try {
 			context = JAXBContext.newInstance(Wrapper.class, Literature.class);

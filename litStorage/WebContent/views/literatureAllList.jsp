@@ -12,7 +12,7 @@
 	<!-- 장르 선택 버튼들 -->
 	<h3>장르</h3>
 	<c:forEach items="${genreList }" var="genre">
-		<button onclick="getList('${genre.title}')" value="${genre.title }">${genre.title }</button><br>
+		<button onclick="getList('${genre.title}')" value="${genre.title }" class="btn btn-success">${genre.title }</button>
 	</c:forEach>
 	<!-- 작품 목록. 처음엔 게시판 첫번째 이름 장르의 작품 목록이 보이고 검색하면 검색결과 보임-->
 	<div id="result">
@@ -25,7 +25,7 @@
 			<tr>
 						<td>작품명</td>
 						<td><a
-							href="${ctx}/literature/profile.do?id=${literature.id}">${literature.name }</a></td>
+							href="${ctx}/episode/list.do?literatureId=${literature.id}">${literature.name }</a></td>
 					</tr>
 					<tr>
 						<td>작가</td>
@@ -67,8 +67,8 @@
 				if (listLength) {
 					var contentStr = "";
 					$(xmlData).each(function() {
-						contentStr += "<div class='literatureBox'><table border='1'><tr><td><img src="+$(this).find("imagePath").text() + "'></td></tr>"
-						+"<tr><td>작품명</td><td><a href='${ctx}/episode/list.do?LiteratureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
+						contentStr += "<div class='literatureBox'><table border='1'><tr><img src='"+$(this).find("imagePath").text() + "'></tr>"
+						+"<tr><td>작품명</td><td><a href='${ctx}/episode/list.do?literatureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
 								+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
 								+"<td>장르</td><td>"+ $(this).find("genre").text()
 								+"</td></tr><tr><td>소개</td><td>"+$(this).find("introduce").text()
@@ -80,9 +80,9 @@
 		});
 };
 
-	$(document).ready(function() {
+	/* $(document).ready(function() {
 
-	/* ajax로 작품 다른거 검색하기*/
+	 ajax로 작품 다른거 검색하기
 						
 	$("input[name='search']").click(function() {
 		$.ajax({
@@ -98,8 +98,8 @@
 					if (listLength) {
 						var contentStr = "";
 						$(xmlData).each(function() {
-							contentStr += "<div class='literatureBox'><table border='1'><tr><td><img src="+$(this).find("imagePath").text() + "'></td></tr>"
-							+"<tr><td>작품명</td><td><a href='${ctx}/episode/list.do?LiteratureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
+							contentStr += "<div class='literatureBox'><table border='1'><tr><img src='"+$(this).find("imagePath").text() + "'></tr>"
+							+"<tr><td>작품명</td><td><a href='${ctx}/episode/list.do?literatureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
 									+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
 									+"<td>장르</td><td>"+ $(this).find("genre").text()
 									+"</td></tr><tr><td>소개</td><td>"+$(this).find("introduce").text()
@@ -112,7 +112,7 @@
 		});
 	
 		
-	});
+	}); */
 	</script>
 
 

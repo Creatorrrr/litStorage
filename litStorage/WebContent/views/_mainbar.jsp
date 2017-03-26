@@ -99,7 +99,7 @@
 			</div>
 		</form>
 		
-		<script>
+		<!-- <script>
 		$(document).ready(function() {
 	
 		/* ajax로 작품 다른거 검색하기*/
@@ -113,25 +113,24 @@
 				success : function(xml) {
 						var xmlData = $(xml).find("literature");
 						var listLength = xmlData.length;
-						//alert(listLength);
 						$("#searchResult").empty();			
 						if (listLength) {
 							var contentStr = "";
 							$(xmlData).each(function() {
-								contentStr += "<div class='literatureBox'><table class='table table-striped table-hover'><tr><td>이름</td><td><a href='/litStorage/litStorage/profile.do?id="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
-								+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
-								+"<td>소개</td><td>"+ $(this).find("introduce").text()
-								+"</td></tr><tr><td>장르</td><td>"+$(this).find("genre").text()
-								+ "</td></tr><tr><td>조회수</td><td>"+$(this).find("hits").text()+"</td></tr></table></div>";
+								contentStr += "<div class='literatureBox'><table border='1'><tr><img src='"+$(this).find("imagePath").text() + "'></tr>"
+								+"<tr><td>작품명</td><td><a href='${ctx}/episode/list.do?LiteratureId="+ $(this).find("id").text() + "'>"+ $(this).find("name:first").text()
+										+ "</a></td></tr><tr><td>작가</td><td>"+ $(this).find("creator").find("id").text() + "</td></tr><tr>"
+										+"<td>장르</td><td>"+ $(this).find("genre").text()
+										+"</td></tr><tr><td>소개</td><td>"+$(this).find("introduce").text()
+										+ "</td></tr><tr><td>조회수</td><td>"+$(this).find("hits").text()+"</td></tr></table></div>";
 							});
 							$("#searchResult").append(contentStr);
-							//alert(contentStr);
 						}
 					}
 				});
 			});
 		});
-		</script>
+		</script> -->
 		<!-- 메인 메뉴 검색바 끝 -->
 
       </div>
