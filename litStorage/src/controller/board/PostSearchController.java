@@ -26,7 +26,7 @@ public class PostSearchController extends HttpServlet {
 		
 		String boardId = request.getParameter("boardId");
 		String select = request.getParameter("select");
-		String search = request.getParameter("search");
+		String search = request.getParameter("searchside");
 		
 		List<Board> boardList = service.findAllBoards();
 		List<Post> postList = null;

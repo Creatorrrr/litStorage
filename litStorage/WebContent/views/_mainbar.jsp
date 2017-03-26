@@ -6,10 +6,9 @@
 <div class="jumbotron">
 
 	<div class="container text-center">
-		<h1>소설 공동 작업</h1>      
+		<h1>Author와~~</h1>
+		<h3>- 작가님들을 위한 문학작품 공동 생산 지원 서비스 -</h3>      
 		<p>Mission, Vission & Values</p>
-	
-	
 
 		<div class="nav  navbar-right" style="background: #ccc;">
 	  		<c:choose>

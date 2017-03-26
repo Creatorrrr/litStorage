@@ -17,7 +17,7 @@ div{border: 1px solid #ccc;}
 	<h3>자유게시판 목록</h3>
 	<c:if test="${sessionScope.isAdmin }">
 		<button class="btn" type="button" onclick="addBoard();">게시판추가</button>
-		<div class="container" id="boardRegisterDiv">
+		<div class="container" id="boardRegisterDiv" style="display:none;width:250px">
 			<form name="boardRegisterForm" action="${ctx }/board/boardRegister.do" method="post" onsubmit="return validate()">
 				<input id="boardName" name="boardName" class="form-control" type="text" value="">
 				<input class="btn" type="submit" value="추가">
@@ -34,7 +34,7 @@ div{border: 1px solid #ccc;}
 					<a class="btn btn-sm btn-success"
 						href="${ctx}/post/list.do?boardId=${board.id}">${board.title } 게시판</a>
 					<c:if test="${sessionScope.isAdmin}">
-						<a class="btn" href="${ctx }/boardDelete.do?boardId=${board.id }">삭제</a>
+						<a class="btn btn-sm btn-primary" href="${ctx }/boardDelete.do?boardId=${board.id }">삭제</a>
 					</c:if>
 				</div>
 			</c:forEach>
@@ -54,7 +54,7 @@ div{border: 1px solid #ccc;}
 								<option value="postContent">내용</option>
 								<option value="postHashtag">해시태그</option>
 							</select>
-							<input type="text" name="search" placeholder="검색 내용을 입력해주세요." class="form-control">
+							<input type="text" name="searchside" placeholder="검색 내용을 입력해주세요." class="form-control">
 							<button type="submit"  class="btn btn-default">검색</button>
 						</div>
 					</form>
