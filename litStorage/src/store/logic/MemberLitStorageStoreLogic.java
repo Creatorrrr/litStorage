@@ -35,6 +35,24 @@ public class MemberLitStorageStoreLogic implements MemberLitStorageStore {
 		}
 		return result;
 	}
+	
+	@Override
+	public boolean deleteMemberLitStorageByLitStorageId(String id) {
+		SqlSession session = factory.openSession();
+		boolean result = false;
+
+		try {
+			MemberLitStorageMapper mapper = session.getMapper(MemberLitStorageMapper.class);
+			if(result = mapper.deleteMemberLitStorageByLitStorageId(id) > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return result;
+	}
 
 	@Override
 	public List<MemberLitStorage> selectMemberLitStoragesByLitStorageId(String id) {

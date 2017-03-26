@@ -1,28 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>연재글 수정</title>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>연재글 수정 - 소설 공동작업</title>
 
-</script>
+<%@ include file="header.jspf"%>
+
 
 <style type="text/css">
 div {
 	border: 1px solid #ccc;
 }
 </style>
-</head>
-<body>
+
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
@@ -30,17 +22,17 @@ div {
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+					<!-- <div class="text-right">
 						<button>로그인</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+					<%-- 	<div class="col-md-6">
 						<a href="javascript:;">자유게시판</a> <a
 							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
-					</div>
+					</div> --%>
 					<form action="../episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
@@ -68,27 +60,47 @@ div {
 				<div class="text-right"></div>
 				<div class="panel panel-default">
 					<div class="row">
-					<form action="${ctx }/episode/modify.do" method="post">
-						<input type="hidden" name="episodeId" value="${episode.id }">
-						<div class="col-md-3">
-							<div>
-								<h4>제목</h4>
-								<textarea rows="1" cols="75" name="episodeTitle">${episode.title }</textarea>
+						<form action="${ctx }/episode/modify.do" method="post"
+							name="eModify" onsubmit="return checkIt()">
+							<input type="hidden" name="episodeId" value="${episode.id }">
+							<div class="col-md-3">
+								<div>
+									<h4>제목</h4>
+									<textarea rows="1" cols="75" name="episodeTitle">${episode.title }</textarea>
+								</div>
+								<div>
+									<h4>내용</h4>
+									<textarea rows="10" cols="75" name="episodeContent">${episode.contentFromGit }</textarea>
+								</div>
 							</div>
-							<div>
-								<h4>내용</h4>
-								<textarea rows="10" cols="75" name="episodeContent">${episode.contentFromGit }</textarea>
+							<div class="text-right">
+								<button type="reset" onclick="location.href='${ctx }/episode/detail.do?episodeId=${episode.id}'">취소하기</button>
+								<button type="submit">연재글 수정</button>
 							</div>
-						</div>
-						<div class="text-right">
-							<button type="reset">취소하기</button>
-							<button type="submit">연재글 수정</button>
-						</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+
+	<script type="text/javaScript">
+		function checkIt() {
+
+			var eModify = document.eModify;
+
+			if (!eModify.episodeTitle.value) {
+				alert("제목을 입력하세요");
+				return false;
+			}
+
+			if (!eModify.episodeContent.value) {
+				alert("내용을 입력하세요");
+				return false;
+			}
+			return true;
+		}
+	</script>
+
+
+<%@ include file="footer.jspf"%>

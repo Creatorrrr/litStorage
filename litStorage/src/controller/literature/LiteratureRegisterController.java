@@ -1,6 +1,9 @@
 package controller.literature;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,15 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import constants.Constants;
+import domain.Board;
 import domain.LitStorage;
 import domain.Literature;
 import domain.Member;
+import service.facade.BoardService;
 import service.facade.LitStorageService;
 import service.facade.LiteratureService;
-import service.facade.MemberService;
+import service.logic.BoardServiceLogic;
 import service.logic.LitStorageServiceLogic;
 import service.logic.LiteratureServiceLogic;
-import service.logic.MemberServiceLogic;
 
 @WebServlet("/literature/register.do")
 public class LiteratureRegisterController extends HttpServlet {
@@ -24,9 +32,21 @@ public class LiteratureRegisterController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String litStorageId = request.getParameter("litStorageId");
+		BoardService service = new BoardServiceLogic();
 		
+		List<Board> boardList = service.findAllBoards();
+		List<Board> bListRemoved = new ArrayList<>();
+
+		/* 장르 dropdownlist를 만들기 위해 게시판 이름을 싹 보내줌(신고 빼고) */
+		for (Board b : boardList) {
+			if (!b.getTitle().equals("신고")) {
+				bListRemoved.add(b);
+			}
+		}
+		
+		String litStorageId = request.getParameter("litStorageId");
+
+		request.setAttribute("boards", bListRemoved);
 		request.setAttribute("litStorageId", litStorageId);
 
 		request.getRequestDispatcher("/views/literatureRegister.jsp").forward(request, response);
@@ -34,43 +54,56 @@ public class LiteratureRegisterController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 작품 저장소 아이디를 작품
-
-		LiteratureService Lservice = new LiteratureServiceLogic();
-		LitStorageService LSservice = new LitStorageServiceLogic();
+		LitStorageService lsService = new LitStorageServiceLogic();
+		LiteratureService lService = new LiteratureServiceLogic();
 		
-		MemberService Mservice = new MemberServiceLogic();
+		String loginId = (String)request.getSession().getAttribute("loginId");
 		
-		String literatureName = request.getParameter("inputName");
-		String literatureGenre = request.getParameter("selectGenre");
-		String imagePath = "/resouce/image/aa";
-		String literatureIntroduce = request.getParameter("inputIntroduce");
+		String imagePath = Constants.IMAGE_PATH;
 
-		String loginId = (String) request.getSession().getAttribute("loginId");
-		Member creator = Mservice.findMemberById(loginId);
+		File dir = new File(imagePath);
+		if (!dir.exists()) {
+			// 폴더가 존재하지 않으면 폴더 생성
+			dir.mkdirs();
+		}
 
-		int hits = 0;
-
-		String litStorageId = request.getParameter("litStorageId");
-		LitStorage litstorageId = LSservice.findLitStorageById(litStorageId);
+		// MultipartRequest(request, 저장경로[, 최대허용크기, 인코딩케릭터셋, 동일한 파일명 보호 여부])
+		MultipartRequest mr = new MultipartRequest(request, imagePath, 5 * 1024 * 1024, "UTF-8", new DefaultFileRenamePolicy());
+		
+		String litStorageId = mr.getParameter("litStorageId");
+		String name = mr.getParameter("name");
+		String genre = mr.getParameter("selectGenre");
+		File image = mr.getFile("image");
+		String introduce = mr.getParameter("introduce");
+		
 		Literature literature = new Literature();
-		System.out.println(litStorageId);
-		literature.setName(literatureName);
-		literature.setGenre(literatureGenre);
-		literature.setImagePath(imagePath);
-		literature.setIntroduce(literatureIntroduce);
-		literature.setCreator(creator);
-		literature.setHits(hits);
-		literature.setLitStorage(litstorageId);
-
-		boolean check = Lservice.registerLiterature(literature);
 		
-		LitStorage litStorage = LSservice.findLitStorageById(litStorageId);
+		Member creator = new Member();
+		creator.setId(loginId);
+		
+		LitStorage litStorage = new LitStorage();
+		litStorage.setId(litStorageId);
+		
+		literature.setName(name);
+		literature.setGenre(genre);
+		if(image == null) {
+			literature.setImagePath(Constants.DEFAULT_IMAGE);
+		} else {
+			literature.setImagePath(image.getCanonicalPath());
+		}
+		literature.setIntroduce(introduce);
+		literature.setCreator(creator);
+		literature.setHits(0);
+		literature.setLitStorage(litStorage);
+		
+		if(!lService.registerLiterature(literature)) {
+			throw new RuntimeException("literature register failed");
+		}
+		
+		litStorage = lsService.findLitStorageById(litStorageId);
 		
 		request.setAttribute("litStorage", litStorage);
-
+		
 		request.getRequestDispatcher("/views/literatureList.jsp").forward(request, response);
-
 	}
-
 }

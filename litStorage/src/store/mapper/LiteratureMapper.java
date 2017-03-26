@@ -8,6 +8,8 @@ public interface LiteratureMapper {
 	public int insertLiterature(Literature literature);
 
 	public int deleteLiterature(String literatureId);
+	
+	public int updateLiteratureHitByLiteratureId(String literatureId);
 
 	public Literature selectLiteraturesById(String literatureId);
 

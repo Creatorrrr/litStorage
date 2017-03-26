@@ -18,7 +18,7 @@ public class DiscussionContentDeleteController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+response.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("loginId");
 		if(!loginId.isEmpty()){//로그인 했을때

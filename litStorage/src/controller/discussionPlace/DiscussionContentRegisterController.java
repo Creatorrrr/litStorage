@@ -29,7 +29,7 @@ public class DiscussionContentRegisterController extends HttpServlet {
 		discussionContent.setContent(content);
 		
 		Member member = new Member();
-		member.setId("test");
+		member.setId((String)request.getSession().getAttribute("loginId"));
 		discussionContent.setWriter(member);
 		
 		DiscussionPlace discussionPlace = new DiscussionPlace();

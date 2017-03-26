@@ -45,11 +45,13 @@ public class EpisodeModifyController extends HttpServlet {
 		String episodeId = request.getParameter("episodeId");
 		String title = request.getParameter("episodeTitle");
 		String content = request.getParameter("episodeContent");
+		String boundSelect = request.getParameter("openSelect");
+		String loginId = (String)request.getSession().getAttribute("loginId");
 		
 		Episode episode = Lservice.findEpisodeById(episodeId);
 		episode.setTitle(title);
 		episode.setContent(content);
-		
+		episode.setBound(boundSelect);
 		Member writer = new Member();
 		writer.setId((String)request.getSession().getAttribute("loginId"));
 		
@@ -60,6 +62,16 @@ public class EpisodeModifyController extends HttpServlet {
 		}
 		
 		Literature literature = Lservice.findLiteratureById(episode.getLiterature().getId());
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : literature.getLitStorage().getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("literature", literature);
 		

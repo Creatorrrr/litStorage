@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원가입</title>
-<script type="text/javascript" src="${ctx }/resources/js/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/jquery.validate.min.js"></script>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>회원가입 - 소설 공동작업</title>
 
+<%@ include file="header.jspf"%>
+
+
+<script type="text/javascript">
 
 $(function() {
 	
@@ -71,9 +69,7 @@ $(function() {
 	}
 
 	</style>
-</head>
-<body>
- 
+
 
     <h3>회원가입</h3>
 	
@@ -103,11 +99,10 @@ $(function() {
 		</table><br>
 		<div align="center"><input class="btn" type="reset" value="취소"> <input class="btn btn-success" type="submit" value="회원가입"></div>
 	</form>
-	<br>
-        
+
         
         
         
  
-</body>
-</html>
+	
+<%@ include file="footer.jspf"%>

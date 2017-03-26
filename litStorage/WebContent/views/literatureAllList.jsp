@@ -1,37 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>작품 검색 - 소설 공동작업</title>
 
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
-
-<title>작품 검색</title>
-<style>
-		.literatureBox {
-			display: inline-block;
-		    margin: 10px;
-		    border: 3px solid #73AD21;
-		}
-</style>
-</head>
-<body>
 <%@ include file="header.jspf"%>
-<!-- 작품 검색창 -->
-		<select name="type" id="type">
-			<option value="id">작가 아이디</option>
-			<option value="name">작품 이름</option>
-		</select> <input type="text" name="keyword"> <input type="button"
-			name="search" id="btn" value="검색">
+
+
+
 	<!-- 장르 선택 버튼들 -->
 	<h3>장르</h3>
 	<c:forEach items="${genreList }" var="genre">
@@ -68,11 +45,6 @@
 	</c:forEach>
 	</div>
 
-
-	<!-- script area -->
-
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 	<script>
 	/* 장르선택 스크립트 */
@@ -137,8 +109,6 @@
 		
 	});
 	</script>
-	<script>
-		
-	</script>
-</body>
-</html>
+
+
+<%@ include file="footer.jspf"%>

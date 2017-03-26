@@ -1,18 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원정보</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>회원정보 - 소설 공동작업</title>
+
+<%@ include file="header.jspf"%>
 
 
-
-</head>
-
-<body>
 
 
 	<form method="post" action="${ctx }/modifyPro.do" name="userinput"
@@ -40,7 +35,7 @@
 			<tr>
 				<td colspan="2" align="center">
 				<a href="${ctx }/member/modify.do" class="btn">정보수정</a> 
-				<a href="${ctx }/views/main.jsp" class="btn">메인으로</a> 
+				<a href="${ctx }/views" class="btn">메인으로</a> 
 				</td>
 			</tr>
 		</table>
@@ -66,5 +61,4 @@
 	
 	
 	
-</body>
-</html>
+<%@ include file="footer.jspf"%>

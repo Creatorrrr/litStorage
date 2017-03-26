@@ -11,7 +11,7 @@ import domain.Post;
 import service.facade.BoardService;
 import service.logic.BoardServiceLogic;
 
-@WebServlet("/postModify.do")
+@WebServlet("/post/modify.do")
 public class PostModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -19,9 +19,11 @@ public class PostModifyController extends HttpServlet {
 			throws ServletException, IOException {
 	
 		BoardService service = new BoardServiceLogic();
-		String id= request.getParameter("id");
-		Post post = new Post();
-		post=service.findPostById(id);
+		
+		String postId= request.getParameter("postId");
+		
+		Post post = service.findPostById(postId);
+		
 		request.setAttribute("post", post);
 		request.getRequestDispatcher("/views/postModify.jsp").forward(request, response);
 	}
@@ -31,27 +33,22 @@ public class PostModifyController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String id = request.getParameter("modifyPostId");
-		String title = request.getParameter("modifyPostTitle");
-		String content=request.getParameter("modifyPostContent");
-		String hashTag = request.getParameter("modifyPostHashtag");
+		String id = request.getParameter("postId");
+		String title = request.getParameter("title");
+		String content=request.getParameter("content");
+		String hashTag = request.getParameter("hashtag");
 	
 		BoardService service = new BoardServiceLogic();
 		
-		
-		Post post = new Post();
-		post = service.findPostById(id);
-		
+		Post post = service.findPostById(id);
 		post.setTitle(title);
 		post.setContent(content);
 		post.setHashTag(hashTag);
-
-//		boolean check = service.modifyPost(post);
-//		
-//		if(check){
-//			response.sendRedirect(request.getContextPath()+"/post/postDetail.do");
-//		}
-		service.modifyPost(post);
+		
+		if(!service.modifyPost(post)) {
+			throw new RuntimeException("post modify failed");
+		}
+		
 		request.setAttribute("post", post);
 		request.getRequestDispatcher("/views/postDetail.jsp").forward(request, response);
 	}

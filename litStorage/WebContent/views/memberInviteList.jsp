@@ -1,26 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>초대 확인 목록</title>
-<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css" rel="stylesheet">
-<script type="text/javascript" src="${ctx }/resources/js/bootstrap.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>초대 확인 목록 - 소설 공동작업</title>
+
+<%@ include file="header.jspf"%>
+
+
+
 <style type="text/css">
 div{border: 1px solid #ccc; }
 </style> 
 
-</head>
-<body>
 
 <div class="container">
 
-<%@ include file="./header.jspf" %>
 
 <div class="col-xs-12 col-md-12">
 
@@ -74,5 +69,7 @@ var confirm = function(senderId, receiverId, litStorageId){
 		});
 	}
 </script>
-</body>
-</html>
+
+
+
+<%@ include file="footer.jspf"%>

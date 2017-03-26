@@ -71,15 +71,18 @@
 			SELECT LITERATURE_SEQ.nextval FROM dual
 		</selectKey>
 		INSERT INTO
-		literature(id, name, genre, imagepath, introduce, writer,
-		hits, litstorageid)
-		VALUES (#{id}, #{name}, #{genre}, #{imagePath},
-		#{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
+		literature(id, name, genre, imagepath, introduce, writer, hits, litstorageid)
+		VALUES (#{id}, #{name}, #{genre}, #{imagePath}, #{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
 	</insert>
 
 	<delete id="deleteLiterature" parameterType="string">
 		DELETE FROM
 		literature WHERE id = #{id}
-
 	</delete>
+	
+	<update id="updateLiteratureHitByLiteratureId" parameterType="String">
+		UPDATE literature
+		SET hits = (SELECT hits FROM literature WHERE id = #{id}) + 1
+		WHERE id = #{id}
+	</update>
 </mapper>

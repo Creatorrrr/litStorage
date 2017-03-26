@@ -61,18 +61,18 @@ public class BoardServiceLogic implements BoardService {
 	}
 
 	@Override
-	public List<Post> findPostsByTitle(String title) {
-		return pStore.selectPostsByTitle(title);
+	public List<Post> findPostsByTitle(String title, String boardId) {
+		return pStore.selectPostsByTitle(title, boardId);
 	}
 
 	@Override
-	public List<Post> findPostsByContent(String content) {
-		return pStore.selectPostsByContent(content);
+	public List<Post> findPostsByContent(String content, String boardId) {
+		return pStore.selectPostsByContent(content, boardId);
 	}
 
 	@Override
-	public List<Post> findPostsByHashTag(String hashTag) {
-		return pStore.selectPostsByHashtag(hashTag);
+	public List<Post> findPostsByHashTag(String hashTag, String boardId) {
+		return pStore.selectPostsByHashtag(hashTag, boardId);
 	}
 	
 

@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>토론장 Detail</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>토론장 상세페이지 - 소설 공동작업</title>
 
-</head>
-<body>
+
+
+
 <c:choose>
  <c:when test="${litStorage.creator.id eq loginId}">
  <c:set var="isMaster" value="true" />
@@ -29,7 +28,9 @@
 <div style="border: 1px solid #ccc;">
 	No: ${discussionContent.id }
 	아이디: ${ discussionContent.writer.name }
-	 (<a href="${ctx }/discussionContent/delete.do?cid=${discussionContent.id}&pid=${discussionPlace.id }">삭제하기</a>)
+	<c:if test="${discussionContent.writer.id eq sessionScope.loginId || sessionScope.isAdmin}">
+	 (<a href="${ctx }/discussionContent/delete.do?cid=${discussionContent.id}&pid=${discussionPlace.id }">삭제하기</a>)	
+	</c:if>
 	<br>
 	내용: ${discussionContent.content } 
 	
@@ -43,8 +44,9 @@
 <textarea name="discussionContentText" rows="4" cols="50"></textarea>
 <input type="hidden" name="discussionPlaceId" value="${discussionPlace.id }">
 <button id="discussionContentBtn">작성</button>
-</div>
 </form>
+</div>
 
-</body>
-</html>
+
+	
+<%@ include file="footer.jspf"%>

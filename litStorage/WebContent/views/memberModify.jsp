@@ -1,17 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>회원정보수정</title>
-<script type="text/javascript" src="${ctx }/resources/js/jquery-3.2.0.min.js"></script>
-<script type="text/javascript" src="${ctx }/resources/js/jquery.validate.min.js"></script>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>회원정보수정 - 소설 공동작업</title>
 
+<%@ include file="header.jspf"%>
+
+	<style>
+
+	#registerForm {
+		width: 670px;
+	}
+
+	#registerForm label.error {
+		margin-left: 10px;
+		width: auto;
+		display: inline;
+		color: red;
+	}
+
+	</style>
+
+	<form id="registerForm" action="${ctx }/member/modify.do"  method="post">
+		<table width="600" border="1" cellspacing="0" cellpadding="3" align="center">
+			<tr>
+				<td colspan="2" height="39" align="center"><b>회원정보수정</b></td>
+			</tr>
+			<tr>
+				<td width="200">사용자 ID</td>
+				<td width="400">${member.id}</td>
+			</tr>
+			<tr>
+				<td width="200">비밀번호</td>
+				<td width="400"><input type="password" name="password" size="10"maxlength="10" value="${member.password}"></td>
+			</tr>
+			<tr>
+				<td width="200">이름</td>
+				<td width="400"><input type="text" name="name" size="15" maxlength="10" value="${member.name}"></td>
+			</tr>
+			<tr>
+				<td width="200">E-Mail</td>
+				<td width="400"><input type="text" name="email" size="40" maxlength="30" value="${member.email}"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+				<input type="submit" value="수정" class="btn btn-success" /> 
+				<button type="button" onclick="backBtn();" class="btn btn-default">취소</button>
+				<button type="button" onclick="deleteBtn();" class="btn btn-warning">탈퇴하기</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	
+	<script type="text/javascript">
 
 $(function() {
 	
@@ -58,54 +101,7 @@ $(function() {
 });
 
 </script>
-	<style>
 
-	#registerForm {
-		width: 670px;
-	}
-
-	#registerForm label.error {
-		margin-left: 10px;
-		width: auto;
-		display: inline;
-		color: red;
-	}
-
-	</style>
-</head>
-
-<body>
-
-	<form id="registerForm" action="${ctx }/member/modify.do"  method="post">
-		<table width="600" border="1" cellspacing="0" cellpadding="3" align="center">
-			<tr>
-				<td colspan="2" height="39" align="center"><b>회원정보수정</b></td>
-			</tr>
-			<tr>
-				<td width="200">사용자 ID</td>
-				<td width="400">${member.id}</td>
-			</tr>
-			<tr>
-				<td width="200">비밀번호</td>
-				<td width="400"><input type="password" name="password" size="10"maxlength="10" value="${member.password}"></td>
-			</tr>
-			<tr>
-				<td width="200">이름</td>
-				<td width="400"><input type="text" name="name" size="15" maxlength="10" value="${member.name}"></td>
-			</tr>
-			<tr>
-				<td width="200">E-Mail</td>
-				<td width="400"><input type="text" name="email" size="40" maxlength="30" value="${member.email}"></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center">
-				<input type="submit" value="수정" class="btn btn-success" /> 
-				<button type="button" onclick="backBtn();" class="btn btn-default">취소</button>
-				<button type="button" onclick="deleteBtn();" class="btn btn-warning">탈퇴하기</button>
-				</td>
-			</tr>
-		</table>
-	</form>
 	
 	<script type="text/javaScript">
 	
@@ -124,5 +120,6 @@ $(function() {
 	
 	</script>
 	
-</body>
-</html>
+
+<%@ include file="footer.jspf"%>
+	

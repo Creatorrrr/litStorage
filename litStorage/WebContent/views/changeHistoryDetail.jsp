@@ -1,36 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>연재글 상세</title>
-<link href="${ctx }/resources/css/bootstrap.min.css" rel="stylesheet">
-<link href="${ctx }/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<script type="text/javascript"
-	src="${ctx }/resources/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	function deleteEpisodeFunction() {
-		var deleteEpisode = confirm("삭제하시겠습니까");
+<%@ include file="_var.jsp"%>
+<%@ include file="_html.jsp"%>
+<title>연재글 상세 - 소설 공동작업</title>
 
-		if (deleteEpisode == true) {
-			document.getElementId("deleteEpisode").click();
-		}
+<%@ include file="header.jspf"%>
 
-	}
-</script>
+
 
 <style type="text/css">
 div {
 	border: 1px solid #ccc;
 }
 </style>
-</head>
 
-<body>
+
 	<!-- <input type="button" id="deleteEpisode"
 		onclick="location.href='../episode/list' "> -->
 	<form action="../episode/deteil.do" method="post">
@@ -45,17 +29,17 @@ div {
 					<div class="col-md-6">
 						<h1>제목</h1>
 					</div>
-					<div class="text-right">
+					<!-- <div class="text-right">
 						<button>로그인</button>
 						<button>회원 정보 수정</button>
-					</div>
+					</div> -->
 				</div>
 				<div class="row">
-					<div class="col-md-6">
+				<%-- 	<div class="col-md-6">
 						<a href="javascript:;">자유게시판</a> <a
 							href="${ctx }/litStorage/allList.do;">직품 저장소</a> <a
 							href="javascript:;">작품 목록</a>
-					</div>
+					</div> --%>
 					<form action="../episode/list.do" method="post">
 						<div class="text-right">
 							<select name="selectContents">
@@ -99,7 +83,7 @@ div {
 				<div class="panel panel-default">
 					<div class="text-right">
 						<button type="button"
-							onclick="location.href='${ctx }/episode/list.do?episodeId=${history.episode.literature.id}'">이전상태</button>
+							onclick="location.href='${ctx }/episode/detail.do?episodeId=${history.episode.id}'">이전상태</button>
 						<button type="button"
 							onclick="location.href='${ctx }/episode/rollback.do?historyId=${history.id}'">복구하기</button>
 					</div>
@@ -122,5 +106,17 @@ div {
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+
+	
+	<script type="text/javascript">
+	function deleteEpisodeFunction() {
+		var deleteEpisode = confirm("삭제하시겠습니까");
+
+		if (deleteEpisode == true) {
+			document.getElementId("deleteEpisode").click();
+		}
+
+	}
+	</script>
+	
+<%@ include file="footer.jspf"%>

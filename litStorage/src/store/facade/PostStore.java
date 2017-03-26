@@ -10,7 +10,7 @@ public interface PostStore {
 	boolean deletePost(String id);
 	List<Post> selectPostsByBoardId(String boardId);
 	Post selectPostById(String id);
-	List<Post> selectPostsByContent(String content);
-	List<Post> selectPostsByHashtag(String hashtag);
-	List<Post> selectPostsByTitle(String title);
+	List<Post> selectPostsByContent(String content, String boardId);
+	List<Post> selectPostsByHashtag(String hashTag, String boardId);
+	List<Post> selectPostsByTitle(String title, String boardId);
 }

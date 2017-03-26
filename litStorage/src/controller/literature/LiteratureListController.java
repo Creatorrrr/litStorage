@@ -13,7 +13,7 @@ import service.facade.LitStorageService;
 import service.logic.LitStorageServiceLogic;
 
 @WebServlet("/literature/list.do")
-public class LiteratureLIstController extends HttpServlet {
+public class LiteratureListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -22,12 +22,12 @@ public class LiteratureLIstController extends HttpServlet {
 		// 작품 리스트로 이동
 		LitStorageService service = new LitStorageServiceLogic();
 
-		String litstorageId = request.getParameter("id");
+		String litStorageId = request.getParameter("id");
 
-		LitStorage litStorage = service.findLitStorageById(litstorageId);
+		LitStorage litStorage = service.findLitStorageById(litStorageId);
 		
 		request.setAttribute("litStorage", litStorage);
-
+		
 		request.getRequestDispatcher("/views/literatureList.jsp").forward(request, response);
 	}
 

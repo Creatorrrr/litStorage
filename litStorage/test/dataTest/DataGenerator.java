@@ -46,43 +46,43 @@ public class DataGenerator {
 		}
 	}
 
-	// @Test
-	// public void makeLitStorage() {
-	// List<String> nameList = new ArrayList<>();
-	// try {
-	// BufferedReader in = new BufferedReader(new
-	// FileReader("litStorageName.txt"));
-	// String str;
-	//
-	// while ((str = in.readLine()) != null) {
-	// nameList.add(str);
-	// }
-	//
-	// int nameRand;
-	// int introRand;
-	// int writerRand;
-	// for(int i = 0 ; i < nameList.size(); i++){
-	// nameRand = (int)(Math.random() * (nameList.size()));
-	// introRand = (int)(Math.random() * (nameList.size()));
-	// writerRand = (int)(Math.random() * (nameList.size()));
-	// LitStorage lit = new LitStorage();
-	// lit.setName(nameList.get(nameRand));
-	// lit.setIntroduce(nameList.get(introRand));
-	// lit.setCreator(memberList.get(writerRand));
-	// lsService.registerLitStorage(lit);
-	// }
-	//
-	//
-	// in.close();
-	// } catch (FileNotFoundException e) {
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	//
-	//
-	// assertEquals(true,true);
-	// }
+	 @Test
+	 public void makeLitStorage() {
+	 List<String> nameList = new ArrayList<>();
+	 try {
+	 BufferedReader in = new BufferedReader(new
+	 FileReader("litStorageName.txt"));
+	 String str;
+	
+	 while ((str = in.readLine()) != null) {
+	 nameList.add(str);
+	 }
+	
+	 int nameRand;
+	 int introRand;
+	 int writerRand;
+	 for(int i = 0 ; i < nameList.size(); i++){
+	 nameRand = (int)(Math.random() * (nameList.size()));
+	 introRand = (int)(Math.random() * (nameList.size()));
+	 writerRand = (int)(Math.random() * (nameList.size()));
+	 LitStorage lit = new LitStorage();
+	 lit.setName(nameList.get(nameRand));
+	 lit.setIntroduce(nameList.get(introRand));
+	 lit.setCreator(memberList.get(writerRand));
+	 lsService.registerLitStorage(lit);
+	 }
+	
+	
+	 in.close();
+	 } catch (FileNotFoundException e) {
+	 e.printStackTrace();
+	 } catch (IOException e) {
+	 e.printStackTrace();
+	 }
+	
+	
+	 assertEquals(true,true);
+	 }
 
 	@Test
 	public void makeLiterature() {
@@ -152,4 +152,5 @@ public class DataGenerator {
 		
 		assertEquals(true,true);
 	}
+
 }

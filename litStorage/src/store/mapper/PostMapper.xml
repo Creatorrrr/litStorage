@@ -27,8 +27,6 @@
 		<selectKey keyProperty="id" resultType="String" order="BEFORE">
     		SELECT post_seq.NEXTVAL FROM dual
  		</selectKey>
-		<!-- INSERT INTO post(id,name, content, hashTag)
-		VALUES (#{id},#{title}, #{content}, #{hashTag})  -->
 		INSERT INTO post(id, name, content, hashTag, writer, boardid)
 		VALUES (#{id}, #{title}, #{content}, #{hashTag}, #{writer.id}, #{board.id}) 
 	</insert>
@@ -50,25 +48,23 @@
 	</select>
 	
 	<select id="selectPostById" parameterType="String" resultMap="postMap">
-		<!-- <include refid="selectPost"/> -->
-		SELECT id,name,content,hashtag
-		FROM post
+		<include refid="selectPost"/>
 		WHERE id=#{id}
 	</select>
 	
-	<select id="selectPostsByContent" parameterType="String" resultMap="postMap">
+	<select id="selectPostsByContent" parameterType="HashMap" resultMap="postMap">
 		<include refid="selectPost"/>
-		WHERE content LIKE '%${value}%'
+		WHERE content LIKE '%${content}%' AND boardid = #{boardId}
 	</select>
 	
-	<select id="selectPostsByHashtag" parameterType="String" resultMap="postMap">
+	<select id="selectPostsByHashtag" parameterType="HashMap" resultMap="postMap">
 		<include refid="selectPost"/>
-		WHERE hashtag LIKE '%${value}%'
+		WHERE hashtag LIKE '%${hashTag}%' AND boardid = #{boardId}
 	</select>	
 	
-	<select id="selectPostsByTitle" parameterType="String" resultMap="postMap">
+	<select id="selectPostsByTitle" parameterType="HashMap" resultMap="postMap">
 		<include refid="selectPost"/>
-		WHERE name LIKE '%${value}%'
+		WHERE name LIKE '%${title}%' AND boardid = #{boardId}
 	</select>	
 	
   </mapper>
