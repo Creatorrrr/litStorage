@@ -100,7 +100,7 @@
 				<tr>
 					<td>${ status.count }</td>
 					<td><a
-						href="${ctx }/discussionPlace/detail.do?id=${discussionPlace.id }">${discussionPlace.title }</a></td>
+						href="${ctx }/discussionPlace/detail.do?id=${discussionPlace.id }&litStorageId=${litStorage.id}">${discussionPlace.title }</a></td>
 					<td>${ discussionPlace.creator.id}(${discussionPlace.creator.name })</td>
 			
 				</tr>

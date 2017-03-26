@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import domain.LitStorage;
 import service.facade.DiscussionPlaceService;
+import service.facade.LitStorageService;
 import service.logic.DiscussionPlaceServiceLogic;
+import service.logic.LitStorageServiceLogic;
 
 
 @WebServlet("/discussionContent/delete.do")
@@ -18,7 +21,7 @@ public class DiscussionContentDeleteController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String loginId = (String) session.getAttribute("loginId");
 		if(!loginId.isEmpty()){//로그인 했을때
@@ -26,14 +29,23 @@ response.setCharacterEncoding("UTF-8");
 			//삭제
 			String pid = request.getParameter("pid");//discussion place id
 			String cid = request.getParameter("cid");//discussion content id
+			String litStorageId = request.getParameter("litStorageId");
+			
+			LitStorageService lsService = new LitStorageServiceLogic();
 			DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
+			
 			boolean check = service.removeDiscussionContent(cid);
 			if(check){
 				request.setAttribute("message", "삭제 되었습니다.");
 			}else{
 				request.setAttribute("message", "실패 했습니다.");
 			}
-			request.getRequestDispatcher("/discussionPlace/detail.do?id="+pid).forward(request, response);
+			
+			//sideNav를 위해 litStorage 재포함
+			LitStorage ls = lsService.findLitStorageById(litStorageId);
+			request.setAttribute("litStorage", ls);
+			
+			request.getRequestDispatcher("/discussionPlace/detail.do?id="+pid+"&litStorageId="+litStorageId).forward(request, response);
 				
 		}else{
 			request.setAttribute("message", "정상적인 접근이 아닙니다.");

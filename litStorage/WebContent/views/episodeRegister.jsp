@@ -75,7 +75,7 @@ div {
 								</div>
 							</div>
 							<div class="text-right">
-								<button type="reset">취소하기</button>
+								<button type="reset" >취소하기</button>
 								<button type="submit">연재글 등록</button>
 							</div>
 						</form>

@@ -29,7 +29,7 @@
 	No: ${discussionContent.id }
 	아이디: ${ discussionContent.writer.name }
 	<c:if test="${discussionContent.writer.id eq sessionScope.loginId || sessionScope.isAdmin}">
-	 (<a href="${ctx }/discussionContent/delete.do?cid=${discussionContent.id}&pid=${discussionPlace.id }">삭제하기</a>)	
+	 (<a href="${ctx }/discussionContent/delete.do?cid=${discussionContent.id}&pid=${discussionPlace.id }&litStorageId=${litStorage.id}">삭제하기</a>)	
 	</c:if>
 	<br>
 	내용: ${discussionContent.content } 
@@ -43,6 +43,7 @@
 <form action="${ctx }/discussionContent/register.do" method="post">
 <textarea name="discussionContentText" rows="4" cols="50"></textarea>
 <input type="hidden" name="discussionPlaceId" value="${discussionPlace.id }">
+<input type="hidden" name="litStorageId" value="${litStorage.id }">
 <button id="discussionContentBtn">작성</button>
 </form>
 </div>
