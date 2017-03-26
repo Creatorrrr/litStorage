@@ -152,7 +152,7 @@ div {
 																	</c:otherwise>
 																</c:choose>
 															</select>
-															<c:if test="${episode.writer.id eq sessionScope.loginId }">
+															<c:if test="${episode.writer.id eq sessionScope.loginId || sessionScope.isAdmin}">
 																<button type="submit">공개 선택</button>
 															</c:if>
 														</form>
