@@ -24,7 +24,7 @@
   	
   	<insert id="insertMemberLitStorage" parameterType="MemberLitStorage">
   		INSERT INTO memberlitstorage(memberid, litstorageid, jointime)
-  		VALUES(#{member.id}, #{litStorage.id}, TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'))
+  		VALUES(#{member.id}, #{litStorage.id}, SYSDATE)
   	</insert>
   	
   	<delete id="deleteMemberLitStorageByLitStorageId" parameterType="String">
