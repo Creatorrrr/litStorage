@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/controller/MainController.java=UTF-8
 encoding//src/controller/board/PostListController.java=UTF-8
 encoding//src/controller/discussionPlace/DiscussionPlaceListController.java=UTF-8
 encoding//src/controller/literature/LiteratureListController.java=UTF-8

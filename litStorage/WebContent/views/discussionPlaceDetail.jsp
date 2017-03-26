@@ -42,8 +42,8 @@
 <textarea name="discussionContentText" rows="4" cols="50"></textarea>
 <input type="hidden" name="discussionPlaceId" value="${discussionPlace.id }">
 <button id="discussionContentBtn">작성</button>
-</div>
 </form>
+</div>
 
 </body>
 </html>
