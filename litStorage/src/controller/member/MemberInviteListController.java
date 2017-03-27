@@ -28,6 +28,7 @@ public class MemberInviteListController extends HttpServlet {
 		/*make new ArrayList and add ir instance which form is I only*/
 		List<InviteRequest> inviteList = new ArrayList<>();
 		for(InviteRequest ir :list){
+			System.out.println(ir.getForm() + "        asfalskfjasldfjas\r\n\r\n\r\n\r\n\r\nsfasdfasdfasfsadf");
 			if(ir.getForm().equals("I")){
 				inviteList.add(ir);
 			}

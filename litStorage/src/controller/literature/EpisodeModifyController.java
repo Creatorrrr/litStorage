@@ -31,9 +31,21 @@ public class EpisodeModifyController extends HttpServlet {
 		// 1. before episodeDetail.jsp 
 		// 2. recevice episodeId
 		// 3. show modify detail
+		String loginId = (String)request.getSession().getAttribute("loginId");
 		
 		String episodeId = request.getParameter("episodeId");
 		Episode episode = Lservice.findEpisodeById(episodeId);
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : episode.getLiterature().getLitStorage().getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
+		
 		request.setAttribute("episode", episode);
 		
 		request.getRequestDispatcher("/views/episodeModify.jsp").forward(request, response);

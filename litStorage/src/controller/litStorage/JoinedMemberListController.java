@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.LitStorage;
+import domain.Member;
 import service.facade.LitStorageService;
 import service.logic.LitStorageServiceLogic;
 
@@ -22,6 +23,17 @@ public class JoinedMemberListController extends HttpServlet {
 		/*if we call this memberlist method then method type is get and must contain
 		 * parameter named "id", which represent litStorage */
 		LitStorage ls = service.findLitStorageById(request.getParameter("id"));
+		String loginId = (String)request.getSession().getAttribute("loginId");
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : ls.getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("litStorage", ls);
 		

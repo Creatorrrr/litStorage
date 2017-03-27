@@ -62,7 +62,7 @@ public class MemberSearchController extends HttpServlet {
 		String type = request.getParameter("type");
 		// get search keyword
 		String keyword = request.getParameter("keyword");
-		System.out.println(keyword);
+		System.out.println(keyword + "Adsfasdfasdfasdfasdfasdfasdfasdfasdfasdfas\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n");
 		List<Member> list = new ArrayList<>();
 		if (type.equals("id")) {
 			Member member = service.findMemberById(keyword);

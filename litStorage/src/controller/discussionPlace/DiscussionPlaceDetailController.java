@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.DiscussionPlace;
 import domain.LitStorage;
+import domain.Member;
 import service.facade.DiscussionPlaceService;
 import service.facade.LitStorageService;
 import service.logic.DiscussionPlaceServiceLogic;
@@ -23,14 +24,25 @@ public class DiscussionPlaceDetailController extends HttpServlet {
 		
 		String id = request.getParameter("id");
 		String litStorageId = request.getParameter("litStorageId");
+		String loginId = (String)request.getSession().getAttribute("loginId");
 		
 		LitStorageService lsService = new LitStorageServiceLogic();
 		DiscussionPlaceService service = new DiscussionPlaceServiceLogic();
 		DiscussionPlace discussionPlace = service.findDiscussionPlaceById(id);
 		
-		//sideNav¸¦ À§ÇØ litStorage ÀçÆ÷ÇÔ
+		//sideNavï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ litStorage ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		LitStorage ls = lsService.findLitStorageById(litStorageId);
 		request.setAttribute("litStorage", ls);
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : ls.getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		
 		request.setAttribute("discussionPlace", discussionPlace);
 		request.getRequestDispatcher("/views/discussionPlaceDetail.jsp").forward(request, response);

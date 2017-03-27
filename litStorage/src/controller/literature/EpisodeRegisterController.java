@@ -28,8 +28,21 @@ public class EpisodeRegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 1. receive LiteratureId
-		
+		String loginId = (String)req.getSession().getAttribute("loginId");
 		String literatureId = req.getParameter("literatureId"); 
+		
+		Literature literature = Lservice.findLiteratureById(literatureId);
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : literature.getLitStorage().getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		req.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
+		req.setAttribute("literature", literature);
 		req.setAttribute("literatureId", literatureId);
 		
 		req.getRequestDispatcher("/views/episodeRegister.jsp").forward(req, resp);

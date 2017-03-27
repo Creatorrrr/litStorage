@@ -10,6 +10,7 @@ encoding//WebContent/views/index2.jsp=UTF-8
 encoding//src/controller/MainController.java=UTF-8
 encoding//src/controller/board/PostListController.java=UTF-8
 encoding//src/controller/discussionPlace/DiscussionContentDeleteController.java=UTF-8
+encoding//src/controller/discussionPlace/DiscussionPlaceDetailController.java=UTF-8
 encoding//src/controller/discussionPlace/DiscussionPlaceListController.java=UTF-8
 encoding//src/controller/literature/EpisodeDeleteController.java=UTF-8
 encoding//src/controller/literature/LiteratureAllListController.java=UTF-8

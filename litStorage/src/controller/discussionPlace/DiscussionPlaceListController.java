@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.DiscussionPlace;
 import domain.LitStorage;
+import domain.Member;
 import service.facade.DiscussionPlaceService;
 import service.facade.LitStorageService;
 import service.logic.DiscussionPlaceServiceLogic;
@@ -27,6 +28,7 @@ public class DiscussionPlaceListController extends HttpServlet {
 		
 		DiscussionPlaceService dpService = new DiscussionPlaceServiceLogic();
 		LitStorageService lsService = new LitStorageServiceLogic();
+		String loginId = (String)request.getSession().getAttribute("loginId");
 		
 		String litStorageId = request.getParameter("litStorageId");
 		List<DiscussionPlace> list = dpService.findDiscussionPlacesByLitStorageId(litStorageId);
@@ -34,6 +36,16 @@ public class DiscussionPlaceListController extends HttpServlet {
 		
 		//sideNav를 위해 litStorage 재포함
 		LitStorage ls = lsService.findLitStorageById(litStorageId);
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : ls.getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
 		request.setAttribute("litStorage", ls);
 		
 		request.getRequestDispatcher("/views/discussionPlaceList.jsp").forward(request, response);

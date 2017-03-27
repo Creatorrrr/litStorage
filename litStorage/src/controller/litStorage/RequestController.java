@@ -40,15 +40,15 @@ public class RequestController extends HttpServlet {
 		ls.setId(litStorageId);
 
 		InviteRequest ir = new InviteRequest();
-		ir.setForm("R");
+		ir.setForm("I");
 		ir.setMessage(message);
 		ir.setReceiver(receiver);
 		ir.setSender(sender);
 		ir.setLitStorage(ls);
 
-		mService.registerInviteRequest(ir);
-		
-		request.setAttribute("litStorage", ls);
+		if(!mService.registerInviteRequest(ir)) {
+			throw new RuntimeException("invite request failed");
+		}
 		
 		response.sendRedirect(request.getContextPath() + "/litStorage/profile.do?id=" + litStorageId);
 	}

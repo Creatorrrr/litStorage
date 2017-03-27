@@ -42,6 +42,17 @@ public class LitStorageProfileController extends HttpServlet {
 		}else{
 			flag = false;
 		}
+		
+		boolean onGroupFlag = false;
+		
+		for(Member m : ls.getParticipants()) {
+			if(m.getId().equals(loginId)) {
+				onGroupFlag = true;
+			}
+		}
+		
+		request.setAttribute("onGroup", onGroupFlag);	// set user is on group or not
+		
 		request.setAttribute("litStorage", ls);
 		request.setAttribute("isNotJoined", flag);
 		request.getRequestDispatcher("/views/litStorageProfile.jsp").forward(request, response);

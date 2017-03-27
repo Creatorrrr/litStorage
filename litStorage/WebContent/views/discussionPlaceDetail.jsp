@@ -20,6 +20,7 @@
  <jsp:include page="litStorageSideNav.jsp">
  <jsp:param name="litStorage" value="${litStorage.id }"/>
  <jsp:param name="isMaster" value="${isMaster }"/>
+ <jsp:param name="onGroup" value="${onGroup }"/>
 </jsp:include>
 <p>토론장</p>
 <div>

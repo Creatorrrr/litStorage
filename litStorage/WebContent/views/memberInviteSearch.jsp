@@ -116,8 +116,9 @@ textarea {
 		<select name="type" id="type">
 			<option value="id">아이디</option>
 			<option value="name">이름</option>
-		</select> <input type="text" name="keyword"> <input type="button"
-			name="search" id="btn" value="검색">
+		</select>
+		<input type="text" name="keyword" id="keywordId">
+		<input type="button" name="searchbutton" id="btn" value="검색">
 	</form>
 	<table id="result" class="table table-hover table-condensed">
 		<colgroup>
@@ -197,15 +198,15 @@ textarea {
 
 	/* search ajax */
 						
-	$("input[name='search']").click(function() {
+	$("input[name='searchbutton']").click(function() {
 		$.ajax({
 			url : "${ctx}/member/search.do",
 			data : {type : $("#type option:selected").val(),
-					keyword : $("input[name='keyword']").val()},
+					keyword : $("#keywordId").val()},
 			type : "post",
 			dataType : "xml",
 			success : function(xml) {
-					var xmlData = $(xml).find("member");
+					var xmlData = $(xml).find("members");
 					var listLength = xmlData.length;
 					$("#result > tbody").empty();			
 					if (listLength) {

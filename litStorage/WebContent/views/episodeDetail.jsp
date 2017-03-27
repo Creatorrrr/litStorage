@@ -29,6 +29,7 @@ div {
 				<jsp:include page="litStorageSideNav.jsp">
 					 <jsp:param name="litStorage" value="${episode.literature.litStorage.id }"/>
 					 <jsp:param name="isMaster" value="${isMaster }"/>
+					 <jsp:param name="onGroup" value="${onGroup }"/>
 				</jsp:include>
 				</div>
 			</div>
