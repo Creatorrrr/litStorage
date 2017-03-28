@@ -45,7 +45,7 @@ public class DataGenerator {
 			memberIdList.add(m.getId());
 		}
 	}
-
+//
 //	 @Test
 //	 public void makeLitStorage() {
 //	 List<String> nameList = new ArrayList<>();
