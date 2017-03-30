@@ -5,11 +5,16 @@
 <%@ include file="_html.jsp"%>
 <title>게시글 수정 - 소설 공동작업</title>
 
+
 <%@ include file="header.jspf"%>
 
 
+${box1 }
+	<a href="${ctx }/post/list.do?boardId=${post.board.id}" class="btn-primary">게시글 목록</a>
+	
+${box2 }
 
-	<a href="${ctx }/post/list.do?boardId=${post.board.id}">게시글 목록</a>
+
 	<div class="col-xs-12 col-md-8">
 		<h3>게시글 수정</h3>
 		<div class="text-right"></div>
@@ -38,6 +43,6 @@
 			</div>
 		</div>
 	</div>
-
+${box3 }
 
 <%@ include file="footer.jspf"%>
