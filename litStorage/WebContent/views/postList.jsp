@@ -7,13 +7,9 @@
 <title>자유게시판 - 소설 공동작업</title>
 
 <%@ include file="header.jspf"%>
-<style>
-div{border: 1px solid #ccc;}
-</style>
-<div id="result" class="row">
 
-<!-- 좌측 영역 시작 -->
-<div class="col-lg-3 col-md-3 col-sm-4">
+<div id="result" >
+${box1 }
 	<h3>자유게시판 목록</h3>
 	<c:if test="${sessionScope.isAdmin }">
 		<button class="btn" type="button" onclick="addBoard();">게시판추가</button>
@@ -63,74 +59,69 @@ div{border: 1px solid #ccc;}
 			</c:if>
 		</c:forEach>
 	</c:if>	
-			
-		</div>
-		<!-- 좌측 영역 끝 -->
 		
-		<!-- 우측 영역 시작 -->
-		<div class="col-lg-9 col-md-9 col-sm-8">
-		
-		
-		
-		<c:if test="${boards ne null && fn:length(boards) > 0}">
-			<c:forEach items="${boards }" var="board">
-				<c:if test="${board.id eq boardId }">
-							
-					
-					<h1>${board.title } 게시판</h1>	
-					<table class="table table-hover table-condensed">
-						<colgroup>
-							<col width="80" align="center">
-							<col width="100">
-							<col width="30%">
-							<col width="*">
-							<col width="100">
-							<col width="100">
-						</colgroup>
-						<thead>
-							<tr>
-								<th>No</th>
-								<th>제목</th>
-								<th>작성자</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:choose>
-								<c:when test="${posts eq null || fn:length(posts) == 0}">
+${box2 }
+	
+	<c:if test="${boards ne null && fn:length(boards) > 0}">
+		<c:forEach items="${boards }" var="board">
+			<c:if test="${board.id eq boardId }">
+						
+				<div style="text-align: center;">
+				<h1>${board.title } 게시판</h1>	
+				<table class="table table-hover ">
+					<colgroup>
+						<col width="80" align="center">
+						<col width="100">
+						<col width="30%">
+						<col width="*">
+						<col width="100">
+						<col width="100">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>No</th>
+							<th>제목</th>
+							<th>작성자</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${posts eq null || fn:length(posts) == 0}">
+								<tr>
+									<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${posts }" var="post">
 									<tr>
-										<td colspan="6" align="center">등록된 게시물이 없습니다.</td>
+										<td>${post.id }</td>
+										<td><a href="${ctx }/post/detail.do?postId=${post.id }">${post.title }</a></td>
+										<td>${post.writer.id}</td>
 									</tr>
-								</c:when>
-								<c:otherwise>
-									<c:forEach items="${posts }" var="post">
-										<tr>
-											<td>${post.id }</td>
-											<td><a href="${ctx }/post/detail.do?postId=${post.id }">${post.title }</a></td>
-											<td>${post.writer.id}</td>
-										</tr>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>
-					<div>
-						<fmt:parseNumber var="pages" integerOnly="true" value="${rows / 20 }"/>
-						<c:forEach var="i" begin="1" end="${pages + 1 }" step="1">
-							<a href="${ctx }/post/list.do?boardId=${boardId}&pageNum=${i}">${i}</a>
-						</c:forEach>
-					</div>
-				</c:if>
-			</c:forEach>
-		</c:if>
-		
-		</div>
-		<!-- 우측 영역 끝 -->
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+				
+				<ul class="pagination">
+					<fmt:parseNumber var="pages" integerOnly="true" value="${rows / 20 }"/>
+					<c:forEach var="i" begin="1" end="${pages + 1 }" step="1">
+						<li><a href="${ctx }/post/list.do?boardId=${boardId}&pageNum=${i}">${i}</a></li>
+					</c:forEach>
+				</ul>
+				</div>
+			</c:if>
+		</c:forEach>
+	</c:if>
+	
+	<c:if test="${sessionScope.loginId ne null && boardId ne null}">
+		<td><a class="btn btn-sm btn-success" href="${ctx}/post/register.do?boardId=${boardId}">게시물등록</a></td>
+	</c:if>
+	
+${box3 }
+</div>	
 
-		<c:if test="${sessionScope.loginId ne null && boardId ne null}">
-			<td><a class="btn btn-sm btn-success"
-				href="${ctx}/post/register.do?boardId=${boardId}">게시물등록</a></td>
-		</c:if>
-</div>
 
 
 	<script type="text/javascript">
@@ -155,6 +146,6 @@ div{border: 1px solid #ccc;}
 		}
 	</script>
 	
-	
+
 	
 <%@ include file="footer.jspf"%>
