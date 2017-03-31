@@ -8,62 +8,40 @@
 <%@ include file="header.jspf"%>
 
 <c:choose>
- <c:when test="${literature.creator.id eq loginId}">
- <c:set var="isMaster" value="true" />
- </c:when>
- <c:otherwise>
- <c:set var="isMaster" value="false" />
- </c:otherwise>
- </c:choose>
+	<c:when test="${literature.creator.id eq loginId}">
+		<c:set var="isMaster" value="true" />
+	</c:when>
+	<c:otherwise>
+		<c:set var="isMaster" value="false" />
+	</c:otherwise>
+</c:choose>
  
-<style type="text/css">
-div {
-	border: 1px solid #ccc;
-}
-</style>
 
 
-	<div class="container">
-		<div class="col-xs-12 col-md-12">
-			<div class="col-xs-6 col-md-4">
-				<div>
-				<h1>${episode.literature.litStorage.name}</h1>
-				<h3>${episode.literature.name } - ${episode.title }</h3>
-				<jsp:include page="litStorageSideNav.jsp">
-					 <jsp:param name="litStorage" value="${episode.literature.litStorage.id }"/>
-					 <jsp:param name="isMaster" value="${isMaster }"/>
-					 <jsp:param name="onGroup" value="${onGroup }"/>
-				</jsp:include>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-8">
-				<h1>연재 글 수정</h1>
-				<div class="text-right"></div>
-				<div class="panel panel-default">
-					<div class="row">
-						<form action="${ctx }/episode/modify.do" method="post"
-							name="eModify" onsubmit="return checkIt()">
-							<input type="hidden" name="episodeId" value="${episode.id }">
-							<div class="col-md-3">
-								<div>
-									<h4>제목</h4>
-									<textarea rows="1" cols="75" name="episodeTitle">${episode.title }</textarea>
-								</div>
-								<div>
-									<h4>내용</h4>
-									<textarea rows="10" cols="75" name="episodeContent">${episode.contentFromGit }</textarea>
-								</div>
-							</div>
-							<div class="text-right">
-								<button type="reset" onclick="location.href='${ctx }/episode/detail.do?episodeId=${episode.id}'">취소하기</button>
-								<button type="submit">연재글 수정</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+${box1 }
+	<jsp:include page="litStorageSideNav.jsp">
+		 <jsp:param name="litStorage" value="${episode.literature.litStorage.id }"/>
+		 <jsp:param name="isMaster" value="${isMaster }"/>
+		 <jsp:param name="onGroup" value="${onGroup }"/>
+	</jsp:include>
+
+${box2 }
+	<h3>[${literature.litStorage.name}] ${literature.name }의 연재글 수정</h3>
+	<form action="${ctx }/episode/modify.do" method="post" name="eModify" onsubmit="return checkIt()">
+		<input type="hidden" name="episodeId" value="${episode.id }">
+
+		<h4>제목</h4>
+		<textarea  class="form-control" name="episodeTitle">${episode.title }</textarea>
+
+		<h4>내용</h4>
+		<textarea  class="form-control" style="min-height:300px;" name="episodeContent">${episode.contentFromGit }</textarea>
+		<br>
+		<div class="text-center">
+			<button type="reset" onclick="location.href='${ctx }/episode/detail.do?episodeId=${episode.id}'" class="btn btn-sm">취소하기</button>
+			<button type="submit" class="btn btn-sm btn-success">연재글 수정</button>
 		</div>
-	</div>
+	</form>
+
 
 	<script type="text/javaScript">
 		function checkIt() {
@@ -82,6 +60,8 @@ div {
 			return true;
 		}
 	</script>
+
+${box3 }
 
 
 <%@ include file="footer.jspf"%>

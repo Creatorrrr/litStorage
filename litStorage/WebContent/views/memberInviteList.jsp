@@ -7,9 +7,9 @@
 
 <%@ include file="header.jspf"%>
 
+${box1 }
 
-
-
+${box2 }
 
 
 <h1>내게 온 초대 목록</h1>
@@ -56,6 +56,6 @@ var confirm = function(senderId, receiverId, litStorageId){
 	}
 </script>
 
-
+${box3 }
 
 <%@ include file="footer.jspf"%>

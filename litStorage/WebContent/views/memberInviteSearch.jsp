@@ -42,24 +42,6 @@ b {
 	float: left;
 }
 
-input {
-	width: 100%;
-	height: 35px;
-	margin-top: 5px;
-	border: 1px solid #999;
-	border-radius: 3px;
-	padding: 5px;
-}
-
-input[type=button], input[type=submit] {
-	background-color: #123456;
-	border: 1px solid white;
-	font-Weight: bold;
-	font-size: 18px;
-	color: white;
-	width: 49%;
-}
-
 textarea {
 	width: 100%;
 	height: 80px;
@@ -76,7 +58,6 @@ textarea {
 	left: 0px;
 	height: 100%;
 	width: 100%;
-	background: #000;
 	display: none;
 }
 
@@ -96,7 +77,7 @@ textarea {
 }
 </style>
 
-
+${box1 }
 <c:choose>
  <c:when test="${litStorage.creator.id eq loginId}">
  <c:set var="isMaster" value="true" />
@@ -106,12 +87,13 @@ textarea {
  </c:otherwise>
  </c:choose>
 
-
-
  <jsp:include page="litStorageSideNav.jsp">
  <jsp:param name="litStorage" value="${litStorage.id }"/>
  <jsp:param name="isMaster" value="${isMaster }"/>
 </jsp:include>
+
+
+${box2 }
 	<form method="post">
 		<select name="type" id="type">
 			<option value="id">아이디</option>
@@ -163,11 +145,8 @@ textarea {
 	</div>
 	<!-- request popup form div end -->
 
+
 	<!-- script area -->
-
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
 	<script>
  	var addReceiver = function(id){
 		var addContext = "<input type='hidden' name='receiverId' value='" + id + "'>";
@@ -225,6 +204,6 @@ textarea {
 	});
 	</script>
 
-
+${box3 }
 
 <%@ include file="footer.jspf"%>

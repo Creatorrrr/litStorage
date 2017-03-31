@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-	<div class="list-group">
-		<div class="list-group-item active">자유게시판 목록</div>
+	<div class="list-group-item active">자유게시판 목록</div>
 
 		<!-- 메뉴 시작 -->
 		<c:choose>
@@ -23,7 +21,6 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-	</div>
 	<!-- 메뉴 끝 -->
 	
 	
@@ -75,19 +72,3 @@
 	<!-- 게시판 추가 버튼 끝 -->
 	
 	
-	<!-- 검색바 시작 -->
-	<form action="${ctx }/post/searchList.do" method="post">
-		<div class="navbar-form text-center" style="background:#bbb;padding:1px;">
-			<select name="select" class="form-control" style="width:135px;">
-				<option value="postTitle">제목</option>
-				<option value="postContent">내용</option>
-				<option value="postHashtag">해시태그</option>
-			</select>
-			<button type="submit"  class="btn btn-default">검색</button>
-			
-			<input type="hidden" name="boardId" value="${boardId }" class="form-control">
-			<input type="text" name="searchside" placeholder="검색 내용을 입력해주세요." class="form-control">
-		</div>
-	</form>
-	<!-- 검색바 끝 -->
-		

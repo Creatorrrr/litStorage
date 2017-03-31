@@ -31,7 +31,7 @@ ${box2 }
 			<div >
 				<div style="float:right;">
 				<c:if test="${sessionScope.loginId ne null && boardId ne null}">
-					<a class="btn btn-success" href="${ctx}/post/register.do?boardId=${boardId}" >게시물등록</a>
+					<a class="btn btn-sm btn-success" href="${ctx}/post/register.do?boardId=${boardId}" >게시물등록</a>
 				</c:if>
 				</div>
 				<h2>${board.title } 게시판</h2>
@@ -76,7 +76,7 @@ ${box2 }
 					</tbody>
 				</table>
 				<div>
-					<ul class="pagination">
+					<ul class="pagination pagination-sm">
 						<fmt:parseNumber var="pages" integerOnly="true" value="${rows / 20 }"/>
 						<c:forEach var="i" begin="1" end="${pages + 1 }" step="1">
 							<li><a href="${ctx }/post/list.do?boardId=${boardId}&pageNum=${i}">${i}</a></li>
@@ -91,8 +91,23 @@ ${box2 }
 	</c:if>
 	
 
-
-					
+	<!-- 검색바 시작 -->
+	<form action="${ctx }/post/searchList.do" method="post">
+		<div class="navbar-form text-center" >
+			<select name="select" class="form-control" style="width:135px;">
+				<option value="postTitle">제목</option>
+				<option value="postContent">내용</option>
+				<option value="postHashtag">해시태그</option>
+			</select>
+			
+			
+			<input type="hidden" name="boardId" value="${boardId }" class="form-control">
+			<input type="text" name="searchside" placeholder="검색 내용을 입력해주세요." class="form-control">
+			<button type="submit"  class="btn btn-default">검색</button>
+		</div>
+	</form>
+	<!-- 검색바 끝 -->
+		
 	
 
 	

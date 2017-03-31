@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 </div>
 <footer class="container-fluid text-center">
-	<p>Footer Message</p>
+	<p>kosta 144기 6조(팀장:마주환, 팀원:차소익, 김희준, 엄재운, 이중오)</p>
 </footer>
 <style>    
 	footer {

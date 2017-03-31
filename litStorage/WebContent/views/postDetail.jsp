@@ -9,7 +9,7 @@
 <%@ include file="header.jspf"%>
 
 ${box1 }
-	<a href="${ctx }/post/list.do?boardId=${post.board.id}" class="form-control" >게시글 목록</a>
+	<a href="${ctx }/post/list.do?boardId=${post.board.id}" class="btn btn-primary">게시글 목록</a>
 
 	
 ${box2 }
@@ -36,10 +36,8 @@ ${box2 }
 	<c:if test="${sessionScope.loginId ne null}">
 		<c:if test="${post.writer.id eq sessionScope.loginId || sessionScope.isAdmin}">    <!--본인이 작성한 글만 수정 삭제 가능하도록   -->
 			<div align="center">
-				<input class="btn" type="button" value="삭제"
-					onclick="javascript:window.location='${ctx }/post/delete.do?postId=${post.id}'">
-				<input class="btn" type="button" value="수정"
-					onclick="javascript:window.location='${ctx}/post/modify.do?postId=${post.id }'">
+				<input class="btn btn-warning" type="button" value="삭제" onclick="javascript:window.location='${ctx }/post/delete.do?postId=${post.id}'">
+				<input class="btn btn-success" type="button" value="수정" onclick="javascript:window.location='${ctx}/post/modify.do?postId=${post.id }'">
 			</div>
 		 </c:if> 
 	</c:if>

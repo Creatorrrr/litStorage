@@ -7,7 +7,7 @@
 
 <%@ include file="header.jspf"%>
 
-
+${box1 }
 <c:choose>
  <c:when test="${litStorage.creator.id eq loginId}">
  <c:set var="isMaster" value="true" />
@@ -23,9 +23,14 @@
  <jsp:param name="isMaster" value="${isMaster }"/>
  <jsp:param name="onGroup" value="${onGroup }"/>
 </jsp:include>
+
+
+${box2 }
+
 	<!--  Main member table start-->
-	<table class="table table-hover table-condensed">
-		<caption>메인 작가</caption>
+	<h3>메인 작가</h3>
+	<table class="table table-hover table-condensed" style="border:1px solid #ccc;margin:4px;">
+		<caption></caption>
 		<colgroup>
 			<col width="80" align="center">
 			<col width="*">
@@ -45,14 +50,16 @@
 		</tr>
 	</table>
 	<!-- Main member table over -->
+	
 	<!-- Sub member table start-->
-	<table class="table table-hover table-condensed">
-		<caption>참여 작가</caption>
-		<colgroup>
-			<col width="80" align="center">
-			<col width="*">
-		</colgroup>
-		<c:forEach items="${ litStorage.participants}" var="member">
+	<h3>참여 작가</h3>
+	<c:forEach items="${ litStorage.participants}" var="member">
+		<table class="table table-hover table-condensed" style="border:1px solid #ccc;margin:4px;">
+			<colgroup>
+				<col width="80" align="center">
+				<col width="*">
+			</colgroup>
+	
 			<tr>
 				<td>아이디</td>
 				<td>${member.id }</td>
@@ -65,10 +72,10 @@
 				<td>이메일</td>
 				<td>${member.email }</td>
 			</tr>
-		</c:forEach>
-	</table>
+		</table>
+	</c:forEach>
 	<!-- sub member table over -->
 
-
+${box3 }
 
 <%@ include file="footer.jspf"%>

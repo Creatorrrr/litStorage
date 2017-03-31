@@ -8,86 +8,78 @@
 <%@ include file="header.jspf"%>
 
 
+${box1 }
+	<c:choose>
+		<c:when test="${litStorage.creator.id eq loginId}">
+			<c:set var="isMaster" value="true" />
+		</c:when>
+		<c:otherwise>
+			<c:set var="isMaster" value="false" />
+		</c:otherwise>
+	</c:choose>
 
-<c:choose>
- <c:when test="${litStorage.creator.id eq loginId}">
- <c:set var="isMaster" value="true" />
- </c:when>
- <c:otherwise>
- <c:set var="isMaster" value="false" />
- </c:otherwise>
- </c:choose>
+
+	
+	
+	<jsp:include page="litStorageSideNav.jsp">
+		 <jsp:param name="litStorage" value="${litStorage.id }"/>
+		 <jsp:param name="isMaster" value="${isMaster }"/>
+		 <jsp:param name="onGroup" value="${onGroup }"/>
+	</jsp:include>
 
 
+${box2 }
 
-	<div class="container">
-
-		<div class="col-xs-12 col-md-12">
-			<div class="col-xs-6 col-md-4">
-				<div>
-				<h1>${litStorage.name }</h1>
-				<jsp:include page="litStorageSideNav.jsp">
-					 <jsp:param name="litStorage" value="${litStorage.id }"/>
-					 <jsp:param name="isMaster" value="${isMaster }"/>
-					 <jsp:param name="onGroup" value="${onGroup }"/>
-				</jsp:include>
-				</div>
+	
+	<div>
+		<c:if test="${onGroup || sessionScope.isAdmin }">
+			<div style="float:right">
+				<a href="${ctx }/literature/register.do?litStorageId=${litStorage.id}" class="btn btn-sm btn-success">작품 등록</a>
 			</div>
-			<div class="col-xs-12 col-md-8">
-				<h1>작품 목록</h1>
-				<c:if test="${onGroup || sessionScope.isAdmin }">
-					<div class="text-right">
-						<a href="${ctx }/literature/register.do?litStorageId=${litStorage.id}">작품 등록</a>
-					</div>
-				</c:if>
-				<div class="panel panel-default">
-					<div>
-						<table border="1">
-							<colgroup>
-								<col width="50">
-								<col width="100">
-								<col width="500">
-								<col width="100">
-							</colgroup>
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>장르</th>
-									<th>제목</th>
-									<th>작성자</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${litStorage.literatures }" var="literature" varStatus="status">
-									<tr>
-										<td>${status.count }</td>
-										<td>${literature.genre }</td>
-										<td>
-											<a href="${ctx}/episode/list.do?literatureId=${literature.id}">${literature.name }</a>
-										</td>
-										<td>${literature.creator.name }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+		</c:if>
+		<h1>${litStorage.name } 저장소의 작품 목록</h1>
 	</div>
+	
+	<table class="table table-hover table-condensed" style="border:1px solid #ccc;margin:4px;">
+		<colgroup>
+			<col width="50">
+			<col width="100">
+			<col width="500">
+			<col width="100">
+		</colgroup>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>장르</th>
+				<th>제목</th>
+				<th>작성자</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${litStorage.literatures }" var="literature" varStatus="status">
+				<tr>
+					<td>${status.count }</td>
+					<td>${literature.genre }</td>
+					<td>
+						<a href="${ctx}/episode/list.do?literatureId=${literature.id}">${literature.name }</a>
+					</td>
+					<td>${literature.creator.name }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 
-
-<script type="text/javascript">
-	function deleteEpisodeFunction() {
-		var deleteEpisode = confirm("삭제하시겠습니까");
-
-		if (deleteEpisode == true) {
-			document.getElementId("deleteEpisode").click();
+	<script type="text/javascript">
+		function deleteEpisodeFunction() {
+			var deleteEpisode = confirm("삭제하시겠습니까");
+	
+			if (deleteEpisode == true) {
+				document.getElementId("deleteEpisode").click();
+			}
+	
 		}
-
-	}
-</script>
-
+	</script>
+${box3 }
 
 
 <%@ include file="footer.jspf"%>

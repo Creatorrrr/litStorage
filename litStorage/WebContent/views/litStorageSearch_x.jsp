@@ -7,7 +7,9 @@
 
 <%@ include file="header.jspf"%>
 
+${box1 }
 
+${box2 }
 	<form method="post">
 		<select name="type" id="type">
 			<option value="id">생성자 아이디</option>
@@ -50,5 +52,6 @@
 		});
 	});
 	</script>
+${box3 }
 
 <%@ include file="footer.jspf"%>

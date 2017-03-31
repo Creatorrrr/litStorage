@@ -44,24 +44,6 @@ b {
 	float: left;
 }
 
-input {
-	width: 100%;
-	height: 35px;
-	margin-top: 5px;
-	border: 1px solid #999;
-	border-radius: 3px;
-	padding: 5px;
-}
-
-input[type=button], input[type=submit] {
-	background-color: #123456;
-	border: 1px solid white;
-	font-Weight: bold;
-	font-size: 18px;
-	color: white;
-	width: 49%;
-}
-
 textarea {
 	width: 100%;
 	height: 80px;
@@ -78,7 +60,6 @@ textarea {
 	left: 0px;
 	height: 100%;
 	width: 100%;
-	background: #000;
 	display: none;
 }
 
@@ -99,28 +80,32 @@ textarea {
 </style>
 
 
- <c:choose>
- <c:when test="${litStorage.creator.id eq loginId}">
- <c:set var="isMaster" value="true" />
- </c:when>
- <c:otherwise>
- <c:set var="isMaster" value="false" />
- </c:otherwise>
- </c:choose>
 
- <jsp:include page="litStorageSideNav.jsp">
- <jsp:param name="litStorage" value="${litStorage.id }"/>
- <jsp:param name="isMaster" value="${isMaster }"/>
- <jsp:param name="onGroup" value="${onGroup }"/>
+${box1 }
+
+<c:choose>
+	<c:when test="${litStorage.creator.id eq loginId}">
+		<c:set var="isMaster" value="true" />
+	</c:when>
+	<c:otherwise>
+		<c:set var="isMaster" value="false" />
+	</c:otherwise>
+</c:choose>
+
+<jsp:include page="litStorageSideNav.jsp">
+	<jsp:param name="litStorage" value="${litStorage.id }"/>
+	<jsp:param name="isMaster" value="${isMaster }"/>
+	<jsp:param name="onGroup" value="${onGroup }"/>
 </jsp:include>
+
+
+${box2 }
+	<h3 class="text-left">프로필</h3>
 	<table class="table table-hover table-condensed">
 		<colgroup>
-			<col width="80" align="center">
+			<col width="150" align="center">
 			<col width="*">
 		</colgroup>
-		
-		
-
 		<tr>
 			<td>작품 저장소 이름</td>
 			<td>${litStorage.name }</td>
@@ -142,7 +127,7 @@ textarea {
 	<button id="onclick" type="button">참가 요청</button>
 	</c:if>
 	<c:if test="${litStorage.creator.id eq sessionScope.loginId }">
-		<a href="${ctx }/litStorage/delete.do?litStorageId=${litStorage.id }">작품 저장소 삭제</a>
+		<a href="${ctx }/litStorage/delete.do?litStorageId=${litStorage.id }" class="btn btn-sm btn-warning">작품 저장소 삭제</a>
 	</c:if>
 	<!-- request popup form div start-->
 	<div id="sendRequest">
@@ -178,7 +163,8 @@ textarea {
 			});
 		});
 	</script>
-
+	
+${box3 }
 	
 	
 <%@ include file="footer.jspf"%>
