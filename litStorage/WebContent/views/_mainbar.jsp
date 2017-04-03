@@ -5,7 +5,7 @@
 
 <div class="jumbotron">
 
-	<div class="container text-center">
+	<div class="container text-center" style="background-image: url(https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F27907008%2F154066151295%2F1%2Foriginal.jpg?w=1000&rect=24%2C0%2C672%2C336&s=ed960c772492e473c8a6824058f6fde0);background-size: 100% 100%">
 		<h1>Author와~~</h1>
 		<h3>- 작가님들을 위한 문학작품 공동 생산 지원 서비스 -</h3>      
 		<p>Mission, Vission & Values</p>
