@@ -7,9 +7,9 @@
 
 <%@ include file="header.jspf"%>
 
+${box1 }
 
-
-
+${box2 }
 	<form method="post" action="${ctx }/modifyPro.do" name="userinput" onsubmit="return checkIt()">
 		<table class="table  table-striped table-hover " >
 			<tr>
@@ -57,6 +57,6 @@
 	}
 	</script>
 	
-	
+${box3 }
 	
 <%@ include file="footer.jspf"%>

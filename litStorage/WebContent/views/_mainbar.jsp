@@ -2,15 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 
-
-<div class="jumbotron">
-
-	<div class="container text-center" style="background-image: url(https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F27907008%2F154066151295%2F1%2Foriginal.jpg?w=1000&rect=24%2C0%2C672%2C336&s=ed960c772492e473c8a6824058f6fde0);background-size: 100% 100%">
-		<h1>Author와~~</h1>
-		<h3>- 작가님들을 위한 문학작품 공동 생산 지원 서비스 -</h3>      
-		<p>Mission, Vission & Values</p>
-
-		<div class="nav  navbar-right" style="background: #ccc;">
+	<div class="nav  navbar-right" style="margin-right:20px;">
 	  		<c:choose>
 				<c:when test="${loginId eq null }">
 						<!-- 로그인 버튼 -->
@@ -50,17 +42,58 @@
 				
 				</c:when>
 				<c:otherwise>
-					<span class="glyphicon glyphicon-user"></span>
-					<b>${loginId}</b>님!! 환영합니다. [<a href="${ctx }/logout.do">로그아웃</a>]
-					<ul >
-						<li><a href="${ctx}/member/detail.do">회원정보</a></li>
-						<li><a href="${ctx}/member/inviteList.do">초대 온 목록</a></li>
-					</ul>
+					<h4><span class="glyphicon glyphicon-user"></span><b>${loginId}</b>님!! 환영합니다. </h4>
+				
+					<a href="${ctx}/member/detail.do" class="btn btn-sm btn-primary">회원정보</a>
+					<a href="${ctx}/member/inviteList.do" class="btn btn-sm btn-primary">초대 온 목록</a>
+					<a href="${ctx }/logout.do" class="btn btn-sm btn-info">로그아웃</a>
+					
 				</c:otherwise>
 			</c:choose>
 	   </div>
+
+
+<!-- 페이지 로딩때 깜박임 - 테마 바꿈 
+<script type="text/javascript" src="/litStorage/resources/js/jquery.cookie.js"></script>
+
+<button id="themeBtn">darkly theme</button>
+<script>
+$(document).ready(function(){
+	if($.cookie('theme') !='cosmo'){
+		themeChange();
+	}
+})
+
+
+function themeChange(){
+	$('#theme').remove();
+	$('<link id="theme" rel="stylesheet" href="${ctx}/resources/css/'+ $.cookie('theme') +'/bootstrap.min.css"/>').appendTo('head');
+}
+$('#styleBtn').click(function(){
+	$.cookie('theme', 'darkly');
+	themeChange();
+});
+
+</script>
+ -->
+ 
+<!-- logo부분 시작 -->
+<div class="text-context" style="height:120px;">
+	<div style="padding:10px;background-image:url('${ctx }/resources/img/MainBackground.jpg');background-size:repet-x;">
+		<img src="${ctx }/resources/img/logoT.png" style="width:300px;height:70px;" />
+		<div style="margin-top:6px;background:#fff; opacity:0.9;font-size:21px;">- 작가님들을 위한 문학작품 공동 생산 지원 서비스 -</div> 
 	</div>
 </div>
+<!-- logo부분 끝 -->
+
+<!-- logo부분 시작 --><!--
+<div class="text-context"  style="background-image:url('${ctx }/resources/img/background.jpg');background-size:100% 100%;">
+	<div style="padding:10px;background-image:url('${ctx }/resources/img/banner.jpg');background-size:contain;background-repeat:no-repeat;background-position: right top;">
+		<img src="${ctx }/resources/img/logoT.png" style="width:300px;height:70px;" />
+		<h3>- 작가님들을 위한 문학작품 공동 생산 지원 서비스 -</h3> 
+	</div>
+</div>-->
+<!-- logo부분 끝 -->
 
 
 <!-- 메인메뉴 시작 -->

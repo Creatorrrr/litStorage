@@ -13,9 +13,8 @@ div {
 </style>
 
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12">
+${box1 }
+${box2 }
 				<h3>자유게시판 목록</h3>
 
 				<br>
@@ -53,19 +52,18 @@ div {
 						<col width="100">
 						<col width="100">
 					</colgroup>
-					<div class="container">
 
-						<form action="${ctx }/post/searchList.do" method="post">
-							<div class="text-right">
-								<select name="selectContents">
-									<option value="title">제목</option>
-									<option value="content">내용</option>
-									<option value="hashtag">해시태그</option>
-								</select> <input type="text" name="search" placeholder="검색 내용을 입력해주세요.">
-								<button type="submit">검색</button>
-							</div>
-						</form>
-					</div>
+					<form action="${ctx }/post/searchList.do" method="post">
+						<div class="text-right">
+							<select name="selectContents">
+								<option value="title">제목</option>
+								<option value="content">내용</option>
+								<option value="hashtag">해시태그</option>
+							</select> <input type="text" name="search" placeholder="검색 내용을 입력해주세요.">
+							<button type="submit">검색</button>
+						</div>
+					</form>
+			
 					<thead>
 						<tr>
 							<th>No</th>
@@ -113,11 +111,10 @@ div {
 					</tbody>
 				</table>
 				<%-- <c:if test = "${isAdmin }">  --%>
-				<td><a class="btn btn-sm btn-success"
-					href="${ctx}/views/postRegister.jsp?boardId=${board.id}">게시물등록</a></td>
+				<a class="btn btn-sm btn-success" href="${ctx}/views/postRegister.jsp?boardId=${board.id}">게시물등록</a>
 				<%-- </c:if>	 --%>
-			</div>
-		</div>
-	</div>
-	
+
+${box3 }
+
+
 <%@ include file="footer.jspf"%>

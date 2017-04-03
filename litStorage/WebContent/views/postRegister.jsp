@@ -7,8 +7,10 @@
 
 <%@ include file="header.jspf"%>
 
+${box1 }
+	<a href="${ctx }/post/list.do" class="btn btn-primary">게시글 목록</a>
 
-	<a href="${ctx }/post/list.do">게시글 목록</a>
+${box2 }
 	<h3>게시글 등록</h3>
 
 	<br>
@@ -41,9 +43,8 @@
 		</table>
 		<br>
 		<div align="center">
-			<input class="btn" type="reset" value="취소하기"
-				onclick="javascript:window.location='${ctx }/post/list.do?boardId=${boardId }'">
-			<input class="btn" type="submit" value="등록하기"">
+			<input class="btn" type="reset" value="취소하기" onclick="javascript:window.location='${ctx }/post/list.do?boardId=${boardId }'">
+			<input class="btn btn-success" type="submit" value="등록하기"">
 		</div>
 	</form>
 	<br>
@@ -64,6 +65,6 @@
 			return true;
 		}
 	</script>
-
+${box3 }
 	
 <%@ include file="footer.jspf"%>

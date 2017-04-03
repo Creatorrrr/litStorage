@@ -9,11 +9,14 @@
 <%@ include file="header.jspf"%>
 
 
-	<!-- 사이드 네비게이션 링크 목록 -->
-	<a href="${ctx }/litStorage/myList.do">내 작품 저장소</a><br>
-	<a href="${ctx }/litStorage/allList.do">작품 저장소 전체 목록</a><hr>
-	
-	
+${box1 }	
+	<%@ include file="_litStorageNav.jsp" %>
+
+		
+		
+${box2 }
+
+		<h3>작품 저장소 전체 목록</h3>
 		<c:choose>
 			<c:when test="${litStorages eq null || empty litStorages }">
 				<table border="1">
@@ -47,10 +50,12 @@
 						</div>
 					</c:forEach>
 				</div>
-				<fmt:parseNumber var="pages" integerOnly="true" value="${rows / 50 }"/>
-				<c:forEach var="i" begin="1" end="${pages + 1 }" step="1">
-					<a href="${ctx }/litStorage/allList.do?pageNum=${i}">${i}</a>
-				</c:forEach>
+				<ul class="pagination pagination-sm">
+					<fmt:parseNumber var="pages" integerOnly="true" value="${rows / 50 }"/>
+					<c:forEach var="i" begin="1" end="${pages + 1 }" step="1">
+						<li><a href="${ctx }/litStorage/allList.do?pageNum=${i}">${i}</a></li>
+					</c:forEach>
+				</ul>
 			</c:otherwise>
 		</c:choose>
 		<!-- 검색 ajax script 영역 -->
@@ -87,6 +92,6 @@
 	});
 	</script>
 
-
+${box3 }
 
 <%@ include file="footer.jspf"%>
