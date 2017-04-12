@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="litstorage.store.mapper.DiscussionContentMapper">
+	<resultMap type="DiscussionContent" id="discussionContentMap">
+		<id column="id" property="id" />
+		<result property="content" column="content" />
+		<association property="writer" column="writer"
+			select="litstorage.store.mapper.MemberMapper.selectMemberById" javaType="Member"
+			jdbcType="VARCHAR" />
+		<association property="discussionPlace" column="discussionplaceid"
+			select="litstorage.store.mapper.DiscussionPlaceMapper.selectDiscussionPlaceById"
+			javaType="DiscussionPlace" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="insertDiscussionContent" parameterType="DiscussionContent">
+		<selectKey keyProperty="id" resultType="String" order="BEFORE">
+			select DISCUSSION_CONTENT_SEQ.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO discussionContent(id, writer, content, discussionPlaceId)
+		VALUES(#{id},#{writer.id},#{content},#{discussionPlace.id})
+	</insert>
+	
+	<select id="selectDiscussionContentsByDiscussionPlaceId" parameterType="String" resultMap="discussionContentMap">
+		SELECT id, writer, content, discussionPlaceId
+		FROM discussionContent
+		WHERE discussionplaceid = #{id}
+	</select>
+	
+	<delete id="deleteDiscussionContentById" parameterType="String">
+		DELETE FROM discussionContent
+		WHERE id = #{id}
+	</delete>
+
+</mapper>

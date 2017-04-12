@@ -1,0 +1,13 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/zun0326
+eclipse.preferences.version=1
+encoding//WebContent/views/_episodeNav.jsp=UTF-8
+encoding//WebContent/views/_mainbar.jsp=UTF-8
+encoding//WebContent/views/_var.jsp=UTF-8
+encoding//WebContent/views/header.jspf=UTF-8
+encoding//WebContent/views/index2.jsp=UTF-8
+encoding//src/litstorage/controller/MainController.java=UTF-8
+encoding//test/test/store/logic/EpisodeStoreLogicTest.java=UTF-8
+encoding//test/test/store/logic/LiteratureLogicTest.java=UTF-8
+encoding//test/test/store/logic/PostStoreLogicTest.java=UTF-8

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="litstorage.store.mapper.BoardMapper">
+  	<resultMap type="Board" id="boardMap">
+		<id column="id" property="id" />
+		<result column="name" property="title" />
+		<result column="author_name" property="name" />
+		<collection property="posts" column="id" ofType="Post"
+			select="litstorage.store.mapper.PostMapper.selectPostsByBoardId" javaType="ArrayList"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="Board" id="titleMap">
+		<id column="id" property="id" />
+		<result column="name" property="title" />
+	</resultMap>
+	
+	<sql id="selectBoard">
+  		SELECT id, name
+		FROM Board
+	</sql>
+	
+	<insert id="insertBoard" parameterType="Board">
+		<selectKey keyProperty="id" resultType="String" order="BEFORE">
+			select BOARD_SEQ.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO board(id, name)
+		VALUES(#{id},#{title})
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="String">
+		DELETE FROM board
+		WHERE id = #{id}
+	</delete>
+	
+	<select id="selectAll" resultMap="boardMap">
+		<include refid="selectBoard"/>
+	</select>
+	
+	<select id="selectTitles" resultMap="titleMap">
+		SELECT id, name
+		FROM Board
+	</select>
+	
+	<select id="selectBoardById" parameterType="String" resultMap="boardMap">
+		<include refid="selectBoard"/>
+		WHERE id=#{id}
+	</select>
+  </mapper>

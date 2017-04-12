@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="litstorage.store.mapper.LiteratureMapper">
+
+	<resultMap type="Literature" id="literatureMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="genre" column="genre" />
+		<result property="imagePath" column="imagepath" />
+		<result property="introduce" column="introduce" />
+		<result property="hits" column="hits" jdbcType="NUMERIC" />
+		<association property="creator" column="writer"
+			select="litstorage.store.mapper.MemberMapper.selectMemberById" javaType="Member"
+			jdbcType="VARCHAR" />
+		<association property="litStorage" column="litstorageid"
+			select="litstorage.store.mapper.LitStorageMapper.selectLitStorageById" javaType="LitStorage"
+			jdbcType="VARCHAR" />
+		<collection property="episodes" column="id"
+			select="litstorage.store.mapper.EpisodeMapper.selectEpisodesByLiteratureId"
+			javaType="ArrayList" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="selectLiterature">
+		SELECT id, name, genre, imagepath, introduce, writer, hits,
+		litstorageid
+		FROM literature
+	</sql>
+
+	<select id="selectLiteraturesById" parameterType="string"
+		resultMap="literatureMap">
+		<include refid="selectLiterature" />
+		WHERE id = #{id}
+	</select>
+
+	<select id="selectLiteraturesByLitStorageId" parameterType="string"
+		resultMap="literatureMap">
+		<include refid="selectLiterature" />
+		WHERE litstorageid = #{litStorage.id}
+	</select>
+
+	<select id="selectLiteraturesByName" parameterType="string"
+		resultMap="literatureMap">
+		<include refid="selectLiterature" />
+		WHERE name LIKE '%'||#{name}||'%'
+	</select>
+
+	<select id="selectLiteraturesByGenreOrderByHits" parameterType="string"
+		resultMap="literatureMap">
+		<include refid="selectLiterature" />
+		WHERE genre = #{genre}
+		ORDER BY hits DESC
+	</select>
+
+	<select id="selectLiteraturesByGenreOrderById" parameterType="string"
+		resultMap="literatureMap">
+		<include refid="selectLiterature" />
+		WHERE genre = #{genre}
+		ORDER BY id DESC
+	</select>
+	
+	<select id="selectLiteraturesByGenreWithPage" parameterType="HashMap"
+		resultMap="literatureMap">
+		SELECT id, name, genre, imagepath, introduce, writer, hits, litstorageid
+		FROM (SELECT rownum rnum, id, name, genre, imagepath, introduce, writer, hits, litstorageid FROM literature WHERE genre = #{genre})
+		WHERE rnum BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="selectRowsByGenre" parameterType="String" resultType="String">
+		SELECT COUNT(*)
+		FROM literature
+		WHERE genre = #{genre}
+	</select>
+
+	<select id="selectLiteraturesByGenreOrderByHitsForMain"
+		parameterType="string" resultMap="literatureMap">
+		
+		select rnum, T.* FROM(SELECT S.*, ROW_NUMBER() OVER(ORDER BY hits
+		desc)as rnum from literature S WHERE genre = #{genre})T
+		WHERE rnum BETWEEN 1 and 6
+	</select>
+
+	<select id="selectLiteraturesByGenreOrderByIdForMain"
+		parameterType="string" resultMap="literatureMap">
+		
+		select rnum, T.* FROM(SELECT s.*, ROW_NUMBER() OVER(ORDER BY id
+		desc)as rnum from literature S WHERE genre = #{genre})T
+		WHERE rnum BETWEEN 1 and 6
+	</select>
+
+	<select id="selectLiteraturesByMemberId" parameterType="string"
+		resultMap="literatureMap">
+		<include refid="selectLiterature" />
+		WHERE writer = #{creater}
+	</select>
+
+	<insert id="insertLiterature" parameterType="literature">
+		<selectKey keyProperty="id" resultType="string" order="BEFORE">
+			SELECT LITERATURE_SEQ.nextval FROM dual
+		</selectKey>
+		INSERT INTO literature(id, name, genre, imagepath, introduce, writer,
+		hits, litstorageid)
+		VALUES (#{id}, #{name}, #{genre}, #{imagePath},
+		#{introduce}, #{creator.id}, #{hits}, #{litStorage.id})
+	</insert>
+
+	<delete id="deleteLiterature" parameterType="string">
+		DELETE FROM
+		literature WHERE id = #{id}
+	</delete>
+
+	<update id="updateLiteratureHitByLiteratureId" parameterType="String">
+		UPDATE literature
+		SET hits = (SELECT hits FROM literature WHERE id =
+		#{id}) + 1
+		WHERE id = #{id}
+	</update>
+</mapper>
