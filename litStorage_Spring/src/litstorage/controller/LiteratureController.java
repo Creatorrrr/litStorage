@@ -1,12 +1,17 @@
 package litstorage.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -23,16 +28,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import domain.wrapper.Wrapper;
 import litstorage.constants.Constants;
 import litstorage.domain.Board;
 import litstorage.domain.LitStorage;
 import litstorage.domain.Literature;
 import litstorage.domain.Member;
+import litstorage.domain.wrapper.Wrapper;
 import litstorage.service.facade.BoardService;
 import litstorage.service.facade.LitStorageService;
 import litstorage.service.facade.LiteratureService;
-import service.logic.LiteratureServiceLogic;
+import litstorage.utils.AutoCloser;
 
 @Controller
 @RequestMapping("literature")
@@ -252,36 +257,67 @@ public class LiteratureController {
 	}
 	
 	@RequestMapping(value="search.do", method=RequestMethod.POST)
-	public String searchLiterature(String type, String keyword, Model model, HttpSession session) {
+	public void searchLiterature(String type, String keyword, Model model, HttpSession session, HttpServletResponse response) {
 		response.setContentType("text/xml;charset=utf-8");
-		OutputStream out = response.getOutputStream();
-
-		JAXBContext context;
+		OutputStream out;
 		
-		LiteratureService service = new LiteratureServiceLogic();
-
-		// check option whether selected condition is id or name
-		String type = request.getParameter("type");
-		// get search keyword
-		String keyword = request.getParameter("keyword");
-		System.out.println(keyword);
-		List<Literature> list = new ArrayList<>();
-		if (type.equals("id")) {
-			list = service.findLiteraturesByMemberId(keyword);
-		} else {
-			list = service.findLiteratureByName(keyword);
-		}
-		// send memberSearchResult as list to memberInviteSearch.jsp using AJAX
 		try {
-			context = JAXBContext.newInstance(Wrapper.class, Literature.class);
-			Marshaller m = context.createMarshaller();
-			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-			QName qname = new QName("literatures");
-			Wrapper<Literature> wrapper = new Wrapper<>(list);
-			JAXBElement<Wrapper> element = new JAXBElement<Wrapper>(qname, Wrapper.class, wrapper);
-			m.marshal(element, out);
-		} catch (JAXBException e) {
+			out = response.getOutputStream();
+
+			JAXBContext context;
+	
+			List<Literature> list = new ArrayList<>();
+			if (type.equals("id")) {
+				list = lService.findLiteraturesByMemberId(keyword);
+			} else {
+				list = lService.findLiteratureByName(keyword);
+			}
+			// send memberSearchResult as list to memberInviteSearch.jsp using AJAX
+			try {
+				context = JAXBContext.newInstance(Wrapper.class, Literature.class);
+				Marshaller m = context.createMarshaller();
+				m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+				QName qname = new QName("literatures");
+				Wrapper<Literature> wrapper = new Wrapper<>(list);
+				JAXBElement<Wrapper> element = new JAXBElement<Wrapper>(qname, Wrapper.class, wrapper);
+				m.marshal(element, out);
+			} catch (JAXBException e) {
+				e.printStackTrace();
+			}
+
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="image.do", method=RequestMethod.GET)
+	public void searchLiterature(String literatureId, Model model, HttpServletResponse response) {
+		Literature literature = lService.findLiteratureById(literatureId);
+		
+		File image = new File(literature.getImagePath());
+		
+		if(!image.exists()) {
+			throw new RuntimeException("no literature image");
+		}
+		
+		InputStream in = null;
+		OutputStream out = null;
+		
+		try {
+			in = new BufferedInputStream(new FileInputStream(image));
+			out = response.getOutputStream();
+			
+			byte[] buf = new byte[8096];
+			int readByte = 0;
+			while((readByte = in.read(buf)) > -1) {
+				out.write(buf, 0, readByte);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		AutoCloser.close(in,out);
 	}
 }
