@@ -52,7 +52,7 @@
 
 			$('#recoGenre').change(function() {
 				$.ajax({
-					url : "${ctx}/genreList.do",
+					url : "${ctx}/literature/genreList.do",
 					data : {type : "recoGenre",
 							genre : $("#recoGenre option:selected").val(),
 							from : "main"},
@@ -65,7 +65,7 @@
 			});
 			$('#newGenre').change(function() {
 				$.ajax({
-					url : "${ctx}/genreList.do",
+					url : "${ctx}/literature/genreList.do",
 					data : {type : "newGenre",
 							genre : $("#newGenre option:selected").val(),
 							from : "main"},

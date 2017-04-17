@@ -320,4 +320,46 @@ public class LiteratureController {
 		
 		AutoCloser.close(in,out);
 	}
+	
+	@RequestMapping(value="genreList.do", method=RequestMethod.GET)
+	public void showGenreList(String type, String genre, String from, Model model, HttpServletResponse response) {
+		response.setContentType("text/xml;charset=utf-8");
+		OutputStream out;
+		
+		try {
+			out = response.getOutputStream();
+
+			JAXBContext context;
+	
+			List<Literature> list = new ArrayList<>();
+			if (!from.equals("main")) {
+				if (type.equals("newGenre")) {
+					list = lService.findLiteraturesByGenreOrderById(genre);
+				} else {
+					list = lService.findLiteraturesByGenreOrderByHits(genre);
+				}
+			} else {
+				if (type.equals("newGenre")) {
+					list = lService.findLiteraturesByGenreOrderByIdForMain(genre);
+				} else {
+					list = lService.findLiteraturesByGenreOrderByHitsForMain(genre);
+				}
+			}
+			
+			try {
+				context = JAXBContext.newInstance(Wrapper.class, Literature.class);
+				Marshaller m = context.createMarshaller();
+				m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+				QName qname = new QName("literatures");
+				Wrapper<Literature> wrapper = new Wrapper<>(list);
+				JAXBElement<Wrapper> element = new JAXBElement<Wrapper>(qname, Wrapper.class, wrapper);
+				m.marshal(element, out);
+			} catch (JAXBException e) {
+				e.printStackTrace();
+			}
+		
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 }

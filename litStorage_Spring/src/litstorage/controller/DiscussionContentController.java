@@ -59,7 +59,7 @@ public class DiscussionContentController {
 			LitStorage ls = lsService.findLitStorageById(litStorageId);
 			model.addAttribute("litStorage", ls);
 			
-			return "/discussionPlace/detail.do?id=" + pid + "&litStorageId=" + litStorageId;
+			return "redirect:/discussionPlace/detail.do?id=" + pid + "&litStorageId=" + litStorageId;
 		} else{
 			model.addAttribute("message", "정상적인 접근이 아닙니다.");
 			
